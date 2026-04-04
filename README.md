@@ -65,7 +65,7 @@ fp-ineq/
 
 When the commands are run locally, ignored runtime directories are generated for private composed decks and run artifacts.
 
-## Published Bundle
+## Results Site
 
 The checked-in `docs/` bundle contains the published results explorer:
 
@@ -80,6 +80,9 @@ The explorer is intentionally broader than the nine scenario runs alone:
 - every variable in the bundle has a definition if one exists in the stock dictionary, the model-runs dictionary, or the local inequality overlay dictionary
 - every variable links to its relevant equations in the Equation Explorer
 - equation and variable records are built for the bundle so they point to the matching run family
+
+<details>
+<summary>Developer commands used to rebuild the data and site</summary>
 
 ## Build and Publish Workflow
 
@@ -99,6 +102,8 @@ Environment notes:
 - `fp-wraptr` is discovered from a sibling checkout or the `FP_WRAPTR_ROOT` environment variable
 - the runtime backend is `fpexe`
 - `compose-phase1-ui` and `run-phase1-ui` exist as narrower smoke-test commands, not as the main publication path
+
+</details>
 
 ## Scope
 
@@ -216,7 +221,8 @@ Interpretation notes:
 - The SNAP scenarios should be read as SNAP-style transfer probes through the broader household transfer channel (`TRGH`).
 - The transfer-package scenarios should be read as combined transfer probes, not as final package designs.
 
-## Baseline Comparability Rule
+<details>
+<summary>Why all nine scenarios are compared to one baseline</summary>
 
 All 9 runs share one baseline. The shared baseline is valid because baseline and scenario runs all use:
 
@@ -232,6 +238,8 @@ If a future family changes structure rather than just shock level, it must eithe
 
 1. install the new mechanism neutrally in the shared baseline too, or
 2. get a family-specific baseline
+
+</details>
 
 ## Distribution Block
 
@@ -265,7 +273,8 @@ Interpretation:
 - Real disposable income per capita (`RYDPC`) is the preferred household-resource headline.
 - The household Gini coefficient (`IGINIHH`) and median real income proxy (`IMEDRINC`) are reduced-form diagnostics, not headline measures.
 
-## Coefficient Protocol
+<details>
+<summary>How the poverty and income measures are fit to data</summary>
 
 The coefficient delivery is explicit and limited:
 
@@ -278,6 +287,8 @@ The coefficients are model-conditional:
 
 - Regressors come from the transfer-core baseline solve.
 - Targets come from the checked-in public snapshots in `data/series/`.
+
+</details>
 
 ## Data Provenance
 
@@ -334,7 +345,8 @@ These series are refreshed into `data/` for staging, reference, or future use:
 
 For more detail, see [reference/data-sources.md](reference/data-sources.md).
 
-## Validation Rules
+<details>
+<summary>Checks used to confirm the scenarios behave as intended</summary>
 
 ### Transfer-core validation
 
@@ -368,7 +380,9 @@ For each non-baseline run:
 
 The household Gini coefficient (`IGINIHH`) and median real income proxy (`IMEDRINC`) are tracked but excluded from hard validation gates.
 
-## Variable Status
+</details>
+
+## How To Read The Published Measures
 
 | Variable | Status | Reason |
 | --- | --- | --- |
@@ -379,7 +393,7 @@ The household Gini coefficient (`IGINIHH`) and median real income proxy (`IMEDRI
 | Household Gini coefficient (`IGINIHH`) | provisional diagnostic | Useful but too reduced-form to carry headline welfare claims. |
 | Median real income proxy (`IMEDRINC`) | provisional diagnostic | Median-style household resource proxy, not a validated median-income forecast. |
 
-## Out of Scope
+## What This Repository Does Not Include
 
 The following areas are not part of the published model scope:
 
@@ -414,10 +428,11 @@ The published site reflects the run bundle and dictionary:
 - [reference/data-sources.md](reference/data-sources.md)
 - [docs/shareable-overlay-architecture.md](docs/shareable-overlay-architecture.md)
 
-## Summary
+## In Short
 
-- 9 solved scenario runs probing transfer-side policy channels in the stock Fair model
-- Headline outputs: overall poverty rate, child poverty rate, real disposable income per capita
+- The model runs nine transfer-policy scenarios through the Fair model.
+- The main published results are overall poverty, child poverty, and real disposable income per person.
+- The site also includes equation links, variable definitions, and supporting distribution measures for readers who want the technical detail.
 - Provisional diagnostics: household Gini coefficient, median real income proxy
 - Distribution outputs are one-way (macro drives distribution; no feedback into the macro block)
 - The published bundle is derived from solved model output only
