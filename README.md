@@ -2,7 +2,7 @@
 
 **[Explore the published results](https://smkwray.github.io/fp-ineq/)**
 
-`fp-ineq` is a phase-1 inequality overlay for the stock [Fair US quarterly macroeconomic model](https://fairmodel.econ.yale.edu/). It adds distributional outputs — poverty rates, inequality measures, and household-resource indicators — on top of the stock macro solve, using transfer-program policy scenarios routed through channels already present in the stock model.
+`fp-ineq` adds distributional analysis to the stock [Fair US quarterly macroeconomic model](https://fairmodel.econ.yale.edu/). It runs transfer-policy scenarios through the Fair model, then produces poverty, inequality, and household-resource outputs from the solved macro path.
 
 The overlay is built using the [fp-wraptr](https://github.com/smkwray/fp-wraptr) scenario tooling.
 
@@ -10,17 +10,24 @@ The repository is designed to be shareable without redistributing the stock Fair
 
 - the shareable overlay source that modifies a user-local stock Fair checkout
 - checked-in public data snapshots and provenance reports under `data/`
-- the phase-1 scenario definitions and solve/export code under `src/fp_ineq/`
+- the scenario definitions and solve/export code under `src/fp_ineq/`
 - the static results explorer bundle under `docs/`
 
 It does not publish stock Fair files or fully composed private decks.
 
+## What This Project Does
+
+The project has two jobs:
+
+1. modify the stock Fair model in a shareable way, without redistributing the stock model itself
+2. publish a browsable results site showing how transfer-policy scenarios affect macro outcomes, poverty, and household resources
+
 ## Architecture
 
-The phase-1 system is a one-way macro-to-distribution wrapper around stock Fair:
+The model is a one-way macro-to-distribution wrapper around stock Fair:
 
 - stock Fair provides the macro backbone
-- phase-1 policy scenarios enter the solve through real stock Fair transfer channels
+- policy scenarios enter the solve through real stock Fair transfer channels
 - a separate solved identity block produces distribution outputs inside the solve
 - those distribution outputs do not feed back into the stock macro block
 - the published site is built from solved `LOADFORMAT.DAT` output, not reconstructed after the fact
@@ -53,14 +60,14 @@ fp-ineq/
 ├── reference/              # methodology and source notes
 ├── scripts/                # convenience wrappers
 ├── src/fp_ineq/            # compose / run / export code
-└── tests/                  # regression tests for the phase-1 path
+└── tests/                  # regression tests for the published model path
 ```
 
 When the commands are run locally, ignored runtime directories are generated for private composed decks and run artifacts.
 
 ## Published Bundle
 
-The checked-in `docs/` bundle contains the phase-1 results explorer:
+The checked-in `docs/` bundle contains the published results explorer:
 
 - 9 solved runs
 - 450 available solved series
@@ -93,9 +100,9 @@ Environment notes:
 - the runtime backend is `fpexe`
 - `compose-phase1-ui` and `run-phase1-ui` exist as narrower smoke-test commands, not as the main publication path
 
-## Phase-1 Scope
+## Scope
 
-The phase-1 system has one scenario family built around transfer-side channels already present in stock Fair:
+The model centers on transfer-side scenarios built around channels already present in stock Fair:
 
 - unemployment insurance, through the stock unemployment benefits variable (`UB`)
 - SNAP-style household transfers, through the stock government-to-household transfer variable (`TRGH`)
@@ -115,14 +122,14 @@ The following outputs are also produced but are treated as provisional diagnosti
 
 ## Stock-Model Modifications
 
-All modifications to the stock Fair model are documented in `overlay/stock_fm/stock_patch_manifest.phase1.yaml`.
+All modifications to the stock Fair model are documented in the stock patch manifest under `overlay/stock_fm/`.
 
 At a high level, the composer does four things:
 
-1. installs the neutral phase-1 policy constants
+1. installs the neutral policy constants
 2. installs the shareable identity include hook
 3. patches three stock Fair transfer transmission points
-4. leaves experimental credit and wealth paths out of the phase-1 solve
+4. leaves experimental credit and wealth paths out of the published solve
 
 <details>
 <summary>Exact stock-deck modifications</summary>
@@ -183,7 +190,7 @@ CREATE CRWEDGE=0;
 CREATE HPEQW=0;
 ```
 
-Only `UIFAC`, `SNAPDELTAQ`, and `SSFAC` are part of the phase-1 family. `CRWEDGE` and `HPEQW` are neutral placeholders for experimental or deferred paths.
+Only `UIFAC`, `SNAPDELTAQ`, and `SSFAC` are used in the published scenario family. `CRWEDGE` and `HPEQW` are neutral placeholders for experimental or deferred paths.
 
 </details>
 
@@ -215,7 +222,7 @@ All 9 runs share one baseline. The shared baseline is valid because baseline and
 
 - the same composed stock deck
 - the same installed overlay files
-- the same phase-1 distribution block
+- the same distribution block
 - the same coefficient-delivery path
 - the same closure and endogeneity structure
 
@@ -226,12 +233,12 @@ If a future family changes structure rather than just shock level, it must eithe
 1. install the new mechanism neutrally in the shared baseline too, or
 2. get a family-specific baseline
 
-## Phase-1 Distribution Block
+## Distribution Block
 
 The distribution path adds a separate solved identity block on top of the stock Fair macro solve. The identity file is `overlay/stock_fm/idist_phase1_block.txt`.
 
 <details>
-<summary>Exact phase-1 identities</summary>
+<summary>Exact identities used for the distribution block</summary>
 
 ```text
 GENR LGDPR=LOG(GDPR);
@@ -253,7 +260,7 @@ IDENT IMEDRINC=EXP(LMEDINC);
 
 Interpretation:
 
-- The overall poverty rate (`IPOVALL`) and child poverty rate (`IPOVCH`) are the strongest phase-1 distribution outputs. Both are logit-transformed identities driven by the unemployment rate (`UR`) and the low-income transfer bridge (`TRLOWZ`).
+- The overall poverty rate (`IPOVALL`) and child poverty rate (`IPOVCH`) are the strongest distribution outputs. Both are logit-transformed identities driven by the unemployment rate (`UR`) and the low-income transfer bridge (`TRLOWZ`).
 - The low-income transfer bridge (`TRLOWZ`) aggregates stock transfer flows — unemployment benefits, household transfers, and Social Security — scaled by population and prices.
 - Real disposable income per capita (`RYDPC`) is the preferred household-resource headline.
 - The household Gini coefficient (`IGINIHH`) and median real income proxy (`IMEDRINC`) are reduced-form diagnostics, not headline measures.
@@ -291,7 +298,7 @@ Each provenance report records:
 
 ### Distribution calibration targets
 
-These series are used directly in the phase-1 distribution identity calibration:
+These series are used directly in the distribution identity calibration:
 
 | Variable | Role | Source | Notes |
 | --- | --- | --- | --- |
@@ -306,14 +313,14 @@ These series are refreshed into `data/` for staging, reference, or future use:
 
 | Variable | Role | Source | Notes |
 | --- | --- | --- | --- |
-| UI benefits index (`IUIBEN`) | staged input | [U.S. Department of Labor — OUI Data Dashboard](https://oui.doleta.gov/unemploy/DataDashboard.asp) | Public unemployment insurance benefits snapshot. Phase-1 runs enter through the stock unemployment benefits channel rather than this series directly. |
+| UI benefits index (`IUIBEN`) | staged input | [U.S. Department of Labor — OUI Data Dashboard](https://oui.doleta.gov/unemploy/DataDashboard.asp) | Public unemployment insurance benefits snapshot. The model scenarios enter through the stock unemployment benefits channel rather than this series directly. |
 | Social Security benefits index (`ISSBEN`) | staged input | [Social Security Administration — Benefit Tables](https://www.ssa.gov/oact/cola/Benefits.html) | Public Social Security benefit-level snapshot. |
 | SNAP participation index (`ISNAP`) | staged input | [USDA — SNAP Data](https://www.fns.usda.gov/pd/supplemental-nutrition-assistance-program-snap) | Public SNAP participation snapshot. |
 | Household net worth index (`IHHNW`) | staged input | [Federal Reserve — Financial Accounts (Z.1)](https://www.federalreserve.gov/releases/z1/) | Household net worth series retained for deferred wealth work. |
 | Home equity index (`IHOMEQ`) | staged input | [Federal Reserve — Financial Accounts (Z.1)](https://www.federalreserve.gov/releases/z1/) | Home equity series retained for deferred housing/wealth work. |
 | Federal funds rate (`IFFUNDS`) | staged input | [FRED — Federal Funds Rate](https://fred.stlouisfed.org/series/FEDFUNDS) | Federal funds rate series retained for deferred credit work. |
-| Transfer composite index (`ITRCOMP`) | derived input | Derived from UI benefits, Social Security benefits, and SNAP participation | Legacy transfer composite, not part of the phase-1 bundle. |
-| Credit composite index (`ICRDCMP`) | derived input | Derived from home equity and inverse federal funds rate | Legacy credit composite, not part of the phase-1 bundle. |
+| Transfer composite index (`ITRCOMP`) | derived input | Derived from UI benefits, Social Security benefits, and SNAP participation | Legacy transfer composite, not part of the published scenario bundle. |
+| Credit composite index (`ICRDCMP`) | derived input | Derived from home equity and inverse federal funds rate | Legacy credit composite, not part of the published scenario bundle. |
 | Top-10 vs. bottom-50 wealth-share gap (`IWGAP1050`) | staged output target | [Federal Reserve — Distributional Financial Accounts](https://www.federalreserve.gov/releases/z1/dataviz/dfa/distribute/chart/) | Retained for deferred wealth-distribution work. |
 | Top-1 vs. bottom-50 wealth-share gap (`IWGAP150`) | staged output target | [Federal Reserve — Distributional Financial Accounts](https://www.federalreserve.gov/releases/z1/dataviz/dfa/distribute/chart/) | Retained for deferred wealth-distribution work. |
 
@@ -374,7 +381,7 @@ The household Gini coefficient (`IGINIHH`) and median real income proxy (`IMEDRI
 
 ## Out of Scope
 
-The following areas are not part of the phase-1 system:
+The following areas are not part of the published model scope:
 
 - credit-condition scenario families
 - housing, home-equity, or wealth scenario families
@@ -384,7 +391,7 @@ The following areas are not part of the phase-1 system:
 - publication-grade interpretation of the median real income proxy (`IMEDRINC`)
 - matched-scale policy calibration for the scenario shock sizes
 
-Some older overlay files are present as legacy references but are not used in the phase-1 path.
+Some older overlay files are present as legacy references but are not used in the published path.
 
 ## Tests
 
@@ -414,4 +421,4 @@ The published site reflects the run bundle and dictionary:
 - Provisional diagnostics: household Gini coefficient, median real income proxy
 - Distribution outputs are one-way (macro drives distribution; no feedback into the macro block)
 - The published bundle is derived from solved model output only
-- Credit, wealth, and experimental paths are not part of the phase-1 system
+- Credit, wealth, and experimental paths are not part of the published model scope

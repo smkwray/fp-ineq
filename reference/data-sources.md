@@ -11,7 +11,7 @@ The project uses checked-in public data so the overlay can be shared and rerun w
 
 ## Coverage and normalization
 
-The phase-1 output targets use annual anchor values that begin in `2015`.
+The published output targets use annual anchor values that begin in `2015`.
 
 `refresh-data` writes those output targets only across their observed quarterly span. It does not publish synthetic pre-2015 target history.
 
@@ -20,7 +20,7 @@ The staged series used by the broader overlay project are:
 - outputs: `IPOVALL`, `IPOVCH`, `IGINIHH`, `IMEDRINC`, `IWGAP1050`, `IWGAP150`
 - inputs: `ITRCOMP`, `IUIBEN`, `ISSBEN`, `ISNAP`, `ICRDCMP`, `IHHNW`, `IHOMEQ`, `IFFUNDS`
 
-The public results explorer is narrower than the full staged data surface. It excludes dormant composite, wealth, and neutral credit-shadow series that are not part of the published phase-1 run bundle.
+The public results explorer is narrower than the full staged data surface. It excludes dormant composite, wealth, and neutral credit-shadow series that are not part of the published run bundle.
 
 ## What each provenance report includes
 

@@ -52,11 +52,11 @@ The repository publishes:
 
 A shared baseline is valid only when the baseline already contains the same installed mechanisms as the scenario runs.
 
-For the phase-1 transfer family, that means:
+For the published transfer family, that means:
 
 - `UIFAC`, `SNAPDELTAQ`, and `SSFAC` are present in the baseline with neutral settings
 - the same stock patch manifest is applied in the baseline and in every shocked run
-- the same phase-1 distribution identity block is installed in the baseline and in every shocked run
+- the same distribution identity block is installed in the baseline and in every shocked run
 
 Under that design, the UI, SNAP-style, Social Security, and transfer-package runs are comparable to one shared baseline because they differ only by neutral-versus-shocked lever settings.
 
