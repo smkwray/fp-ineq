@@ -1,0 +1,4 @@
+@ LEGACY / NON-CANONICAL FOR CURRENT PHASE-1 PUBLICATION.
+@ Informational preview coefficients written by the older `fp-ineq fit` path.
+@ The live phase-1 runtime uses `runtime/phase1_distribution_block/overlay/idcoef.txt`
+@ instead. This file is retained only as historical context.

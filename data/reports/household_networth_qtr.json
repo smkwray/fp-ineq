@@ -1,0 +1,16 @@
+{
+  "coverage_end": "2029.4",
+  "coverage_start": "1990.1",
+  "csv_name": "household_networth_qtr.csv",
+  "description": "Household net worth overlay input.",
+  "n_observed_periods": 160,
+  "n_periods": 160,
+  "note": "",
+  "observed_end": "2029.4",
+  "observed_start": "1990.1",
+  "refreshed_at": "2026-04-04T21:29:30.029396+00:00",
+  "source_name": "public_snapshot_fed_z1",
+  "source_url": "https://www.federalreserve.gov/releases/z1/",
+  "units": "index",
+  "variable": "IHHNW"
+}

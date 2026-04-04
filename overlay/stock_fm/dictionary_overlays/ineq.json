@@ -1,0 +1,202 @@
+{
+  "variables": {
+    "IPOVALL": {
+      "short_name": "Overall Poverty Rate",
+      "description": "Phase-1 solved overall poverty rate from the in-model distribution identity block. It responds to unemployment and the transfer-resource bridge inside the composed stock run.",
+      "units": "share",
+      "category": "overlay"
+    },
+    "IPOVCH": {
+      "short_name": "Child Poverty Rate",
+      "description": "Phase-1 solved child poverty rate from the in-model distribution identity block. It is built from the overall poverty state plus a child-specific gap identity.",
+      "units": "share",
+      "category": "overlay"
+    },
+    "IGINIHH": {
+      "short_name": "Household Gini",
+      "description": "Phase-1 solved household Gini from the in-model distribution identity block. It is currently a provisional reduced-form inequality diagnostic rather than a publication-ready headline, and in the current relief runs it can move differently from poverty outcomes.",
+      "units": "share",
+      "category": "overlay"
+    },
+    "IMEDRINC": {
+      "short_name": "Median-style Household Resource Proxy",
+      "description": "Phase-1 solved median-style household resource proxy from the in-model distribution identity block. It is currently a provisional disposable-resource-and-unemployment diagnostic rather than a validated median-income forecast; prefer `RYDPC` for phase-1 headline household resources.",
+      "units": "level",
+      "category": "overlay"
+    },
+    "UB": {
+      "short_name": "Unemployment Benefits",
+      "description": "Stock Fair unemployment-benefit transfer flow used as the UI transmission channel in phase-1 runs.",
+      "units": "level",
+      "category": "policy"
+    },
+    "TRGH": {
+      "short_name": "Government Transfers to Households",
+      "description": "Stock Fair household transfer flow used as the SNAP-side transmission channel in phase-1 runs.",
+      "units": "level",
+      "category": "policy"
+    },
+    "TRSH": {
+      "short_name": "Social Security Transfers",
+      "description": "Stock Fair Social Security transfer flow used as the Social Security transmission channel in phase-1 runs.",
+      "units": "level",
+      "category": "policy"
+    },
+    "YD": {
+      "short_name": "Disposable Income",
+      "description": "Stock Fair disposable income used as a key household-resource bridge in the phase-1 export.",
+      "units": "level",
+      "category": "macro"
+    },
+    "TRLOWZ": {
+      "short_name": "Low-Income Transfer Bridge",
+      "description": "Derived transfer-resource bridge equal to household transfer flows scaled by population and prices. Used in the phase-1 poverty and Gini identities.",
+      "units": "level",
+      "category": "distribution"
+    },
+    "RYDPC": {
+      "short_name": "Real Disposable Income Per Capita",
+      "description": "Derived real disposable-income-per-capita resource measure. This is the preferred phase-1 public household-resource signal.",
+      "units": "level",
+      "category": "distribution"
+    },
+    "LGDPR": {
+      "short_name": "Log Real GDP",
+      "description": "Derived log real GDP state retained for expert inspection and historical comparison. It is no longer the preferred phase-1 household-resource driver.",
+      "units": "log level",
+      "category": "distribution"
+    },
+    "LRYDPC": {
+      "short_name": "Log Real Disposable Income Per Capita",
+      "description": "Latent log real disposable-income-per-capita state used in the provisional phase-1 median-style resource identity.",
+      "units": "log level",
+      "category": "distribution"
+    },
+    "LPOVALL": {
+      "short_name": "Latent Overall Poverty",
+      "description": "Latent overall-poverty state solved inside the phase-1 identity block before logistic transformation to `IPOVALL`.",
+      "units": "logit",
+      "category": "distribution"
+    },
+    "LPOVCHGAP": {
+      "short_name": "Latent Child Poverty Gap",
+      "description": "Latent child-poverty gap state solved inside the phase-1 identity block before combination with `LPOVALL`.",
+      "units": "logit",
+      "category": "distribution"
+    },
+    "LGINIHH": {
+      "short_name": "Latent Household Gini",
+      "description": "Latent household-inequality state solved inside the phase-1 identity block before logistic transformation to `IGINIHH`.",
+      "units": "logit",
+      "category": "distribution"
+    },
+    "LMEDINC": {
+      "short_name": "Latent Median-style Resource State",
+      "description": "Latent median-style household resource state solved inside the phase-1 identity block before exponentiation to `IMEDRINC`.",
+      "units": "log level",
+      "category": "distribution"
+    },
+    "IWGAP1050": {
+      "short_name": "Top 10 / Bottom 50 Wealth Gap",
+      "description": "Estimated wealth-share gap between the top 10 percent and the bottom 50 percent. Higher values imply greater wealth concentration.",
+      "units": "ratio",
+      "category": "overlay"
+    },
+    "IWGAP150": {
+      "short_name": "Top 1 / Bottom 50 Wealth Gap",
+      "description": "Estimated wealth-share gap between the top 1 percent and the bottom 50 percent. Higher values imply greater wealth concentration at the top.",
+      "units": "ratio",
+      "category": "overlay"
+    },
+    "ITRCOMP": {
+      "short_name": "Transfer Composite",
+      "description": "Composite transfer-policy input used by the inequality overlay. It summarizes the net support signal from transfer-side policy channels.",
+      "units": "index",
+      "category": "overlay"
+    },
+    "IUIBEN": {
+      "short_name": "UI Benefits",
+      "description": "Unemployment-insurance benefits input for the inequality overlay. Higher values indicate more generous UI support in the scenario path.",
+      "units": "index",
+      "category": "overlay"
+    },
+    "ISSBEN": {
+      "short_name": "Social Security",
+      "description": "Social Security benefits input for the inequality overlay. This series shifts the policy support path used in scenario comparisons.",
+      "units": "index",
+      "category": "overlay"
+    },
+    "ISNAP": {
+      "short_name": "SNAP Support",
+      "description": "SNAP support input for the inequality overlay. Higher values represent stronger food-assistance support in the scenario path.",
+      "units": "index",
+      "category": "overlay"
+    },
+    "ICRDCMP": {
+      "short_name": "Credit Composite",
+      "description": "Composite credit-conditions input for the inequality overlay. It summarizes credit-side pressure and support conditions in the scenario path.",
+      "units": "index",
+      "category": "overlay"
+    },
+    "IHHNW": {
+      "short_name": "Household Net Worth",
+      "description": "Household net worth input for the inequality overlay. It is mainly used to shape wealth-distribution outcomes in scenario comparisons.",
+      "units": "index",
+      "category": "overlay"
+    },
+    "IHOMEQ": {
+      "short_name": "Home Equity",
+      "description": "Home equity input for the inequality overlay. It captures the housing-wealth channel used by the wealth-gap equations.",
+      "units": "index",
+      "category": "overlay"
+    },
+    "IFFUNDS": {
+      "short_name": "Fed Funds Rate",
+      "description": "Federal funds rate input used by the inequality overlay as a monetary-policy sensitivity channel.",
+      "units": "percent",
+      "category": "overlay"
+    },
+    "UR": {
+      "short_name": "Unemployment Rate",
+      "description": "Stock Fair unemployment rate series used as a macro driver and shown for bridge context in the public explorer.",
+      "units": "percent",
+      "category": "macro"
+    },
+    "GDPR": {
+      "short_name": "Real GDP",
+      "description": "Stock Fair real GDP series used as a macro driver and shown as context in the public explorer.",
+      "units": "level",
+      "category": "macro"
+    },
+    "PCY": {
+      "short_name": "Real GDP Growth",
+      "description": "Stock Fair real GDP growth rate shown for macro context in the public explorer.",
+      "units": "percent",
+      "category": "macro"
+    },
+    "PIEF": {
+      "short_name": "Private Fixed Investment",
+      "description": "Stock Fair private fixed investment series shown for macro context in the public explorer.",
+      "units": "level",
+      "category": "macro"
+    }
+  },
+  "equations": {
+    "9": {
+      "label": "Overall poverty identity",
+      "formula": "LPOVALL = PV0 + PVU*UR + PVT*TRLOWZ; IPOVALL = EXP(LPOVALL)/(1+EXP(LPOVALL))"
+    },
+    "19": {
+      "label": "Child poverty identity",
+      "formula": "LPOVCHGAP = CG0 + CGU*UR + CGT*TRLOWZ; IPOVCH = EXP(LPOVALL+LPOVCHGAP)/(1+EXP(LPOVALL+LPOVCHGAP))"
+    },
+    "20": {
+      "label": "Household Gini identity",
+      "formula": "LGINIHH = GN0 + GNU*UR + GNT*TRLOWZ; IGINIHH = EXP(LGINIHH)/(1+EXP(LGINIHH))"
+    },
+    "21": {
+      "label": "Median-style resource proxy identity",
+      "formula": "LRYDPC = LOG(RYDPC); LMEDINC = MD0 + MDR*LRYDPC + MDU*UR; IMEDRINC = EXP(LMEDINC)"
+    }
+  }
+}

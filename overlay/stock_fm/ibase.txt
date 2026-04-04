@@ -1,0 +1,6 @@
+@ Public inequality overlay entrypoint.
+@ A private runtime builder composes these overlay files with a user-local
+@ stock Fair fminput.txt and writes the assembled deck only under runtime/.
+INPUT FILE=ipbase.txt;
+INPUT FILE=idata.txt;
+INPUT FILE=iinputs.txt;

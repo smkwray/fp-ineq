@@ -1,0 +1,19 @@
+@ Phase-1 prototype distribution block identities.
+@ This file is intended for the separate offline-estimated distribution
+@ prototype path only. Coefficients are supplied privately through idcoef.txt.
+
+GENR LGDPR=LOG(GDPR);
+GENR TRLOWZ=(UB+TRGH+TRSH)/(POP*PH);
+GENR LRYDPC=LOG(RYDPC);
+
+IDENT LPOVALL=PV0+PVU*UR+PVT*TRLOWZ;
+IDENT LPOVCHGAP=CG0+CGU*UR+CGT*TRLOWZ;
+IDENT LGINIHH=GN0+GNU*UR+GNT*TRLOWZ;
+IDENT LMEDINC=MD0+MDR*LRYDPC+MDU*UR;
+
+IDENT IPOVALL=EXP(LPOVALL)/(1+EXP(LPOVALL));
+IDENT IPOVCH=EXP(LPOVALL+LPOVCHGAP)/(1+EXP(LPOVALL+LPOVCHGAP));
+IDENT IGINIHH=EXP(LGINIHH)/(1+EXP(LGINIHH));
+IDENT IMEDRINC=EXP(LMEDINC);
+
+RETURN;

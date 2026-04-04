@@ -1,0 +1,16 @@
+{
+  "coverage_end": "2025.4",
+  "coverage_start": "2015.1",
+  "csv_name": "wealth_share_gap_top10_bottom50_qtr.csv",
+  "description": "Top-10 vs bottom-50 wealth-share gap overlay target.",
+  "n_observed_periods": 44,
+  "n_periods": 44,
+  "note": "Output targets are written only for the observed annual-anchor span; no synthetic pre-observation history is published.",
+  "observed_end": "2025.4",
+  "observed_start": "2015.1",
+  "refreshed_at": "2026-04-04T21:29:30.022596+00:00",
+  "source_name": "public_snapshot_fed_dfa",
+  "source_url": "https://www.federalreserve.gov/releases/z1/dataviz/dfa/distribute/chart/",
+  "units": "ratio",
+  "variable": "IWGAP1050"
+}

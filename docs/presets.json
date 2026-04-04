@@ -1,0 +1,130 @@
+{
+  "presets": [
+    {
+      "id": "headline-poverty-resources",
+      "label": "Headline Poverty and Resources",
+      "variables": [
+        "IPOVALL",
+        "IPOVCH",
+        "RYDPC",
+        "TRLOWZ",
+        "UR",
+        "YD"
+      ]
+    },
+    {
+      "id": "transfer-channels",
+      "label": "Transfer Channels",
+      "variables": [
+        "UB",
+        "TRGH",
+        "TRSH",
+        "YD",
+        "POP",
+        "PH",
+        "GDPD"
+      ]
+    },
+    {
+      "id": "household-resources",
+      "label": "Household Resources",
+      "variables": [
+        "YD",
+        "RYDPC",
+        "TRLOWZ",
+        "UB",
+        "TRGH",
+        "TRSH"
+      ]
+    },
+    {
+      "id": "provisional-distribution-diagnostics",
+      "label": "Provisional Distribution Diagnostics",
+      "variables": [
+        "IGINIHH",
+        "IMEDRINC",
+        "LGINIHH",
+        "LMEDINC",
+        "LRYDPC"
+      ]
+    },
+    {
+      "id": "labor-market",
+      "label": "Labor Market",
+      "variables": [
+        "U",
+        "UR",
+        "L1",
+        "L2",
+        "L3",
+        "LM",
+        "WF",
+        "PF",
+        "WR"
+      ]
+    },
+    {
+      "id": "macro-output-demand",
+      "label": "Macro Output and Demand",
+      "variables": [
+        "Y",
+        "GDP",
+        "GDPR",
+        "PCY",
+        "PIEF",
+        "CS",
+        "CN",
+        "CD",
+        "IHH"
+      ]
+    },
+    {
+      "id": "prices-rates",
+      "label": "Prices and Rates",
+      "variables": [
+        "RS",
+        "RB",
+        "RM",
+        "RSA",
+        "RMA"
+      ]
+    },
+    {
+      "id": "fiscal-closure",
+      "label": "Fiscal Closure",
+      "variables": [
+        "SG",
+        "EXPG",
+        "RECG",
+        "INTG",
+        "SR",
+        "AS",
+        "SGP",
+        "SSP"
+      ]
+    },
+    {
+      "id": "housing-balance-sheet",
+      "label": "Housing and Balance Sheet",
+      "variables": [
+        "SH",
+        "AH",
+        "HN",
+        "PH",
+        "RNT"
+      ]
+    },
+    {
+      "id": "expert-distribution-states",
+      "label": "Expert Distribution States",
+      "variables": [
+        "TRLOWZ",
+        "RYDPC",
+        "LRYDPC",
+        "LPOVALL",
+        "LGINIHH",
+        "LMEDINC"
+      ]
+    }
+  ]
+}

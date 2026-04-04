@@ -1,0 +1,16 @@
+{
+  "coverage_end": "2025.4",
+  "coverage_start": "2015.1",
+  "csv_name": "median_real_income_qtr.csv",
+  "description": "Median real income overlay target.",
+  "n_observed_periods": 44,
+  "n_periods": 44,
+  "note": "Output targets are written only for the observed annual-anchor span; no synthetic pre-observation history is published.",
+  "observed_end": "2025.4",
+  "observed_start": "2015.1",
+  "refreshed_at": "2026-04-04T21:29:30.021806+00:00",
+  "source_name": "public_snapshot_census",
+  "source_url": "https://www.census.gov/library/publications/2024/demo/p60-282.html",
+  "units": "index",
+  "variable": "IMEDRINC"
+}

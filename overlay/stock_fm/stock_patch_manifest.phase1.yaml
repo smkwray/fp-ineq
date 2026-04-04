@@ -1,0 +1,63 @@
+schema_version: 1
+id: fp_ineq_phase1_transfer_core
+description: >
+  Shareable patch manifest for the phase-1 integrated fp-ineq wrapper.
+  This manifest describes how a private composer should modify a user-local
+  stock Fair deck without redistributing the stock deck itself.
+source_model:
+  family: stock_fair_quarterly
+  redistributed: false
+entry_overlay_files:
+  - ipolicy_base.txt
+  - idist_identities.txt
+patches:
+  - id: include_shareable_policy_layer
+    kind: literal_replace
+    search: "CREATE C=1;"
+    replace: |
+      CREATE C=1;
+      INPUT FILE=ipolicy_base.txt;
+      INPUT FILE=idist_identities.txt;
+  - id: ui_multiplier_on_ub
+    kind: literal_replace
+    search: "LHS UB=EXP(LUB);"
+    replace: "LHS UB=EXP(LUB)*UIFAC;"
+  - id: snap_increment_into_trgh
+    kind: literal_replace
+    search: "GENR TRGH=TRGHQ*GDPD;"
+    replace: "GENR TRGH=(TRGHQ+SNAPDELTAQ)*GDPD;"
+  - id: social_security_multiplier_into_trsh
+    kind: literal_replace
+    search: "GENR TRSH=TRSHQ*GDPD;"
+    replace: "GENR TRSH=(TRSHQ*SSFAC)*GDPD;"
+experimental_patches:
+  - id: credit_effective_rates
+    kind: literal_replace_group
+    notes: >
+      This should stay out of phase 1 until the transfer channels are stable.
+      It requires defining RSAEFF and RMAEFF and then replacing RSA/RMA in the
+      household demand equations and current-account equation.
+    replacements:
+      - search: "EQ 1 LCSZ  CNST2CS C AG1 AG2 AG3 LCSZ(-1) LYDZ RSA LAAZ(-1) RHO=1;"
+        replace: "EQ 1 LCSZ  CNST2CS C AG1 AG2 AG3 LCSZ(-1) LYDZ RSAEFF LAAZ(-1) RHO=1;"
+      - search: "EQ 2 LCNZ  C AG1 AG2 AG3 LCNZ(-1) LAAZ(-1) LYDZ RMA RHO=1;"
+        replace: "EQ 2 LCNZ  C AG1 AG2 AG3 LCNZ(-1) LAAZ(-1) LYDZ RMAEFF RHO=1;"
+      - search: "EQ 3 LCDZ C AG1 AG2 AG3 LCDZ(-1) LYDZ RMA ;"
+        replace: "EQ 3 LCDZ C AG1 AG2 AG3 LCDZ(-1) LYDZ RMAEFF ;"
+      - search: "EQ 4 LIHHZ C AG1 AG2 AG3 LIHHZ(-1) LYDZ RMA(-1) RHO=1;"
+        replace: "EQ 4 LIHHZ C AG1 AG2 AG3 LIHHZ(-1) LYDZ RMAEFF(-1) RHO=1;"
+      - search: "EQ 26 LCURZ  C LCURZ(-1) LXMFAZ RSA ;"
+        replace: "EQ 26 LCURZ  C LCURZ(-1) LXMFAZ RSAEFF ;"
+publication_boundary:
+  safe_to_share:
+    - overlay/stock_fm/ipolicy_base.txt
+    - overlay/stock_fm/idist_identities.txt
+    - overlay/stock_fm/stock_patch_manifest.phase1.yaml
+    - scenario definitions
+    - estimation code and methodology
+  do_not_share:
+    - stock fminput.txt
+    - stock fmdata.txt
+    - stock fmage.txt
+    - stock fmexog.txt
+    - fully composed private decks

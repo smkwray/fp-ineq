@@ -1,0 +1,11 @@
+@ Shareable policy constants for stock-Fair integration overlays.
+@ These constants are safe to publish because they describe only the
+@ additional policy layer, not the stock Fair deck itself.
+
+CREATE UIFAC=1;
+CREATE SNAPDELTAQ=0;
+CREATE SSFAC=1;
+CREATE CRWEDGE=0;
+CREATE HPEQW=0;
+
+RETURN;

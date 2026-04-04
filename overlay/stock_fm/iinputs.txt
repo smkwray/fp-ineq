@@ -1,0 +1,3 @@
+@ Scenario-specific overlay input hooks.
+@ Variant bundles usually switch `*.DAT` files by patching `idata.txt`.
+RETURN;

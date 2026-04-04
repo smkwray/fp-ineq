@@ -1,0 +1,8 @@
+@ Shareable phase-1 identities for the integrated inequality wrapper.
+@ These are intended to be included into a private composed stock deck.
+
+GENR RYDPC=YD/(POP*PH);
+GENR RSAEFF=RSA+CRWEDGE;
+GENR RMAEFF=RMA+CRWEDGE;
+
+RETURN;

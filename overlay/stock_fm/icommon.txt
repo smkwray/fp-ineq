@@ -1,0 +1,23 @@
+@ LEGACY / NON-CANONICAL FOR CURRENT PHASE-1 PUBLICATION.
+@ Documentary mirror of the older stock placeholder replacements applied by
+@ `fp_ineq.overlay_builder`. The live phase-1 path uses `idist_phase1_block.txt`
+@ and the shared composer instead. This file remains only as historical context;
+@ do not treat it as the current publication path.
+
+EQ 9 LIPOVALL C LIPOVALL(-1) UR ITRCOMP IUIBEN ISSBEN
+ ISNAP ICRDCMP IFFUNDS ;
+
+EQ 19 LIPOVCH C LIPOVCH(-1) UR ITRCOMP IUIBEN ISSBEN
+ ISNAP ICRDCMP IFFUNDS ;
+
+EQ 20 LIGINIHH C LIGINIHH(-1) UR ITRCOMP IUIBEN ISSBEN
+ IHHNW IFFUNDS ;
+
+EQ 21 LMEDINC C LMEDINC(-1) LGDPR UR ITRCOMP IUIBEN
+ ISSBEN ICRDCMP IFFUNDS ;
+
+EQ 22 LWG1050 C LWG1050(-1) UR ITRCOMP IHHNW IHOMEQ
+ IFFUNDS ;
+
+EQ 25 LWG150 C LWG150(-1) UR ITRCOMP ICRDCMP IHHNW
+ IHOMEQ IFFUNDS ;
