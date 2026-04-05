@@ -31,6 +31,14 @@ patches:
     search: "GENR TRSH=TRSHQ*GDPD;"
     replace: "GENR TRSH=(TRSHQ*SSFAC)*GDPD;"
 experimental_patches:
+  - id: ui_matching_offset_on_private_employment
+    kind: literal_replace
+    notes: >
+      Private-only UI offset stress patch. This installs a matching penalty on
+      private employment so the current UI channel can be stress-tested
+      against a countervailing labor-market response.
+    search: "LHS JF=EXP(LJF1)*JF(-1);"
+    replace: "LHS JF=EXP(LJF1)*(1-UIMATCH)*JF(-1);"
   - id: credit_effective_rates
     kind: literal_replace_group
     notes: >

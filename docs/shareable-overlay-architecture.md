@@ -58,7 +58,7 @@ For the published transfer family, that means:
 - the same stock patch manifest is applied in the baseline and in every shocked run
 - the same distribution identity block is installed in the baseline and in every shocked run
 
-Under that design, the UI, SNAP-style, Social Security, and transfer-package runs are comparable to one shared baseline because they differ only by neutral-versus-shocked lever settings.
+Under that design, the UI, broad federal-transfer, state/local-transfer, and transfer-package runs are comparable to one shared baseline because they differ only by neutral-versus-shocked lever settings.
 
 If a future family adds a new structural patch, new identity block, different closure, or different coefficient path that the baseline does not also contain neutrally, that family should either:
 

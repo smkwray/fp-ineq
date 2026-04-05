@@ -2,8 +2,16 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from types import SimpleNamespace
 
-from fp_ineq.export import _phase1_solved_dictionary, _visible_export_series, export_phase1_full_bundle
+import pytest
+
+from fp_ineq.export import (
+    _phase1_solved_dictionary,
+    _safe_dictionary_payload,
+    _visible_export_series,
+    export_phase1_full_bundle,
+)
 
 
 def test_visible_export_series_filters_controls_and_duplicate_public_names() -> None:
@@ -44,6 +52,53 @@ def test_phase1_solved_dictionary_backfills_unknown_variable_metadata() -> None:
     assert "83" in payload["equations"]
 
 
+def test_safe_dictionary_payload_falls_back_to_checked_in_docs_dictionary(
+    tmp_path: Path, monkeypatch
+) -> None:
+    docs_root = tmp_path / "docs"
+    docs_root.mkdir(parents=True, exist_ok=True)
+    (docs_root / "dictionary.json").write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "variables": {
+                    "GDPR": {
+                        "code": "GDPR",
+                        "short_name": "Real GDP",
+                        "description": "Fallback dictionary payload",
+                        "defined_by_equation": "83",
+                    }
+                },
+                "equations": {
+                    "83": {
+                        "lhs": "GDPR",
+                        "formula": "GDPR=GDPR(-1);",
+                    }
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+    overlay_root = tmp_path / "overlay" / "stock_fm"
+    overlay_root.mkdir(parents=True, exist_ok=True)
+
+    monkeypatch.setattr(
+        "fp_ineq.export.repo_paths",
+        lambda: SimpleNamespace(
+            overlay_source_root=overlay_root,
+            docs_root=docs_root,
+        ),
+    )
+    monkeypatch.setattr("fp_ineq.export._stock_dictionary_path", lambda: tmp_path / "missing-stock.json")
+    monkeypatch.setattr("fp_ineq.export._dictionary_base_path", lambda: tmp_path / "missing-base.json")
+
+    payload = _safe_dictionary_payload()
+
+    assert payload["variables"]["GDPR"]["short_name"] == "Real GDP"
+    assert payload["variables"]["GDPR"]["description"] == "Fallback dictionary payload"
+    assert payload["equations"]["83"]["lhs_expr"] == "GDPR"
+
+
 def test_export_phase1_full_bundle_writes_broad_solved_payloads(
     tmp_path: Path, monkeypatch
 ) -> None:
@@ -81,25 +136,40 @@ def test_export_phase1_full_bundle_writes_broad_solved_payloads(
                         "output_dir": "/tmp/ineq_phase1_distribution_ui_shock_20260404_150007",
                         "loadformat_path": "/tmp/ui_shock/LOADFORMAT.DAT",
                     },
-                    "snap-relief": {
-                        "scenario_name": "ineq_phase1_distribution_snap_relief",
-                        "output_dir": "/tmp/ineq_phase1_distribution_snap_relief_20260404_150008",
-                        "loadformat_path": "/tmp/snap_relief/LOADFORMAT.DAT",
+                    "ui-small": {
+                        "scenario_name": "ineq_phase1_distribution_ui_small",
+                        "output_dir": "/tmp/ineq_phase1_distribution_ui_small_20260404_150006",
+                        "loadformat_path": "/tmp/ui_small/LOADFORMAT.DAT",
                     },
-                    "snap-shock": {
-                        "scenario_name": "ineq_phase1_distribution_snap_shock",
-                        "output_dir": "/tmp/ineq_phase1_distribution_snap_shock_20260404_150009",
-                        "loadformat_path": "/tmp/snap_shock/LOADFORMAT.DAT",
+                    "ui-medium": {
+                        "scenario_name": "ineq_phase1_distribution_ui_medium",
+                        "output_dir": "/tmp/ineq_phase1_distribution_ui_medium_20260404_150006",
+                        "loadformat_path": "/tmp/ui_medium/LOADFORMAT.DAT",
                     },
-                    "social-security-relief": {
-                        "scenario_name": "ineq_phase1_distribution_social_security_relief",
-                        "output_dir": "/tmp/ineq_phase1_distribution_social_security_relief_20260404_150011",
-                        "loadformat_path": "/tmp/ss_relief/LOADFORMAT.DAT",
+                    "ui-large": {
+                        "scenario_name": "ineq_phase1_distribution_ui_large",
+                        "output_dir": "/tmp/ineq_phase1_distribution_ui_large_20260404_150006",
+                        "loadformat_path": "/tmp/ui_large/LOADFORMAT.DAT",
                     },
-                    "social-security-shock": {
-                        "scenario_name": "ineq_phase1_distribution_social_security_shock",
-                        "output_dir": "/tmp/ineq_phase1_distribution_social_security_shock_20260404_150012",
-                        "loadformat_path": "/tmp/ss_shock/LOADFORMAT.DAT",
+                    "federal-transfer-relief": {
+                        "scenario_name": "ineq_phase1_distribution_federal_transfer_relief",
+                        "output_dir": "/tmp/ineq_phase1_distribution_federal_transfer_relief_20260404_150008",
+                        "loadformat_path": "/tmp/federal_transfer_relief/LOADFORMAT.DAT",
+                    },
+                    "federal-transfer-shock": {
+                        "scenario_name": "ineq_phase1_distribution_federal_transfer_shock",
+                        "output_dir": "/tmp/ineq_phase1_distribution_federal_transfer_shock_20260404_150009",
+                        "loadformat_path": "/tmp/federal_transfer_shock/LOADFORMAT.DAT",
+                    },
+                    "state-local-transfer-relief": {
+                        "scenario_name": "ineq_phase1_distribution_state_local_transfer_relief",
+                        "output_dir": "/tmp/ineq_phase1_distribution_state_local_transfer_relief_20260404_150011",
+                        "loadformat_path": "/tmp/state_local_transfer_relief/LOADFORMAT.DAT",
+                    },
+                    "state-local-transfer-shock": {
+                        "scenario_name": "ineq_phase1_distribution_state_local_transfer_shock",
+                        "output_dir": "/tmp/ineq_phase1_distribution_state_local_transfer_shock_20260404_150012",
+                        "loadformat_path": "/tmp/state_local_transfer_shock/LOADFORMAT.DAT",
                     },
                     "transfer-package-relief": {
                         "scenario_name": "ineq_phase1_distribution_transfer_package_relief",
@@ -110,6 +180,21 @@ def test_export_phase1_full_bundle_writes_broad_solved_payloads(
                         "scenario_name": "ineq_phase1_distribution_transfer_package_shock",
                         "output_dir": "/tmp/ineq_phase1_distribution_transfer_package_shock_20260404_150020",
                         "loadformat_path": "/tmp/shock/LOADFORMAT.DAT",
+                    },
+                    "transfer-composite-small": {
+                        "scenario_name": "ineq_phase1_distribution_transfer_composite_small",
+                        "output_dir": "/tmp/ineq_phase1_distribution_transfer_composite_small_20260404_150021",
+                        "loadformat_path": "/tmp/transfer_composite_small/LOADFORMAT.DAT",
+                    },
+                    "transfer-composite-medium": {
+                        "scenario_name": "ineq_phase1_distribution_transfer_composite_medium",
+                        "output_dir": "/tmp/ineq_phase1_distribution_transfer_composite_medium_20260404_150022",
+                        "loadformat_path": "/tmp/transfer_composite_medium/LOADFORMAT.DAT",
+                    },
+                    "transfer-composite-large": {
+                        "scenario_name": "ineq_phase1_distribution_transfer_composite_large",
+                        "output_dir": "/tmp/ineq_phase1_distribution_transfer_composite_large_20260404_150023",
+                        "loadformat_path": "/tmp/transfer_composite_large/LOADFORMAT.DAT",
                     },
                 },
             }
@@ -130,12 +215,18 @@ def test_export_phase1_full_bundle_writes_broad_solved_payloads(
             "baseline": 0.0,
             "ui_relief": 0.25,
             "ui_shock": -0.25,
-            "snap_relief": 0.5,
-            "snap_shock": -0.5,
-            "ss_relief": 0.75,
-            "ss_shock": -0.75,
+            "ui_small": 0.125,
+            "ui_medium": 0.25,
+            "ui_large": 0.375,
+            "federal_transfer_relief": 0.5,
+            "federal_transfer_shock": -0.5,
+            "state_local_transfer_relief": 0.75,
+            "state_local_transfer_shock": -0.75,
             "relief": 1.0,
             "shock": -1.0,
+            "transfer_composite_small": 1.125,
+            "transfer_composite_medium": 1.25,
+            "transfer_composite_large": 1.375,
         }
         delta = deltas[label]
         periods = [forecast_start, "2026.2", forecast_end]
@@ -159,6 +250,7 @@ def test_export_phase1_full_bundle_writes_broad_solved_payloads(
             "ITRCOMP",
             "RSAEFF",
             "IHOMEQ",
+            "LWGAP150",
         ]
         series = {
             name: [10.0 + delta, 11.0 + delta, 12.0 + delta]
@@ -172,23 +264,41 @@ def test_export_phase1_full_bundle_writes_broad_solved_payloads(
     out_dir = tmp_path / "bundle"
     payload = export_phase1_full_bundle(report_path=report_path, out_dir=out_dir)
 
-    assert payload["run_count"] == 9
+    assert payload["run_count"] == 14
     assert payload["variable_count"] == 16
 
     manifest = json.loads((out_dir / "manifest.json").read_text(encoding="utf-8"))
     assert manifest["default_run_ids"] == [
         "ineq-phase1-baseline-observed",
-        "ineq-phase1-ui-relief",
-        "ineq-phase1-ui-shock",
-        "ineq-phase1-snap-relief",
-        "ineq-phase1-snap-shock",
-        "ineq-phase1-social-security-relief",
-        "ineq-phase1-social-security-shock",
-        "ineq-phase1-transfer-package-relief",
-        "ineq-phase1-transfer-package-shock",
+        "ineq-phase1-transfer-composite-small",
+        "ineq-phase1-transfer-composite-medium",
+        "ineq-phase1-transfer-composite-large",
     ]
     assert manifest["default_preset_ids"] == ["headline-poverty-resources"]
-    assert [item["run_id"] for item in manifest["runs"]] == manifest["default_run_ids"]
+    assert [item["run_id"] for item in manifest["runs"]] != manifest["default_run_ids"]
+    ui_relief_manifest = next(item for item in manifest["runs"] if item["run_id"] == "ineq-phase1-ui-relief")
+    assert ui_relief_manifest["group"] == "Phase-1 UI Ladder"
+    assert ui_relief_manifest["label"] == "UI Medium"
+    assert ui_relief_manifest["family_id"] == "ui"
+    assert ui_relief_manifest["family_maturity"] == "public"
+    assert manifest["included_family_maturities"] == ["public"]
+    assert manifest["included_family_ids"] == [
+        "baseline",
+        "ui",
+        "federal-transfers",
+        "state-local-transfers",
+        "transfer-package",
+        "transfer-composite",
+    ]
+    assert [item["family_id"] for item in manifest["families"]] == manifest["included_family_ids"]
+    ui_family = next(item for item in manifest["families"] if item["family_id"] == "ui")
+    assert ui_family["maturity"] == "public"
+    assert ui_family["run_ids"] == [
+        "ineq-phase1-ui-relief",
+        "ineq-phase1-ui-shock",
+        "ineq-phase1-ui-small",
+        "ineq-phase1-ui-large",
+    ]
     assert "AS" in manifest["available_variables"]
     assert "SGP" in manifest["available_variables"]
     assert "TRLOWZ" in manifest["available_variables"]
@@ -196,6 +306,7 @@ def test_export_phase1_full_bundle_writes_broad_solved_payloads(
     assert "ITRCOMP" not in manifest["available_variables"]
     assert "RSAEFF" not in manifest["available_variables"]
     assert "IHOMEQ" not in manifest["available_variables"]
+    assert "LWGAP150" not in manifest["available_variables"]
 
     presets = json.loads((out_dir / "presets.json").read_text(encoding="utf-8"))
     preset_ids = [item["id"] for item in presets["presets"]]
@@ -221,14 +332,103 @@ def test_export_phase1_full_bundle_writes_broad_solved_payloads(
     assert run_payload["timestamp"] == "20260404_150010"
 
     dictionary = json.loads((out_dir / "dictionary.json").read_text(encoding="utf-8"))
+    bundle_run_ids = [item["run_id"] for item in manifest["runs"]]
     assert dictionary["variables"]["AS"]["short_name"] == "State Local Net Assets"
     assert dictionary["variables"]["GDPR"]["defined_by_equation"] == 83
-    assert dictionary["variables"]["GDPR"]["source_runs"] == manifest["default_run_ids"]
+    assert dictionary["variables"]["GDPR"]["source_runs"] == bundle_run_ids
     assert str(dictionary["variables"]["PCPF"]["defined_by_equation"]).startswith("genr:PCPF:")
     assert "PF" in dictionary["variables"]["PCPF"]["description"]
-    assert dictionary["equations"]["83"]["source_runs"] == manifest["default_run_ids"]
+    assert dictionary["equations"]["83"]["source_runs"] == bundle_run_ids
     pcpf_eq_id = str(dictionary["variables"]["PCPF"]["defined_by_equation"])
-    assert dictionary["equations"][pcpf_eq_id]["source_runs"] == manifest["default_run_ids"]
+    assert dictionary["equations"][pcpf_eq_id]["source_runs"] == bundle_run_ids
     assert all("pse2025_" not in run_id for run_id in dictionary["equations"][pcpf_eq_id]["source_runs"])
     assert "83" in dictionary["equations"]
     assert "ITRCOMP" in dictionary["variables"]
+
+
+def test_export_phase1_full_bundle_supports_family_filtering(
+    tmp_path: Path, monkeypatch
+) -> None:
+    report_path = tmp_path / "run_phase1_distribution_block.json"
+    report_path.write_text(
+        json.dumps(
+            {
+                "scenarios": {
+                    "baseline-observed": {
+                        "scenario_name": "ineq_phase1_distribution_baseline_observed",
+                        "output_dir": "/tmp/ineq_phase1_distribution_baseline_observed_20260404_150000",
+                        "loadformat_path": "/tmp/baseline/LOADFORMAT.DAT",
+                    },
+                    "ui-relief": {
+                        "scenario_name": "ineq_phase1_distribution_ui_relief",
+                        "output_dir": "/tmp/ineq_phase1_distribution_ui_relief_20260404_150005",
+                        "loadformat_path": "/tmp/ui_relief/LOADFORMAT.DAT",
+                    },
+                    "ui-shock": {
+                        "scenario_name": "ineq_phase1_distribution_ui_shock",
+                        "output_dir": "/tmp/ineq_phase1_distribution_ui_shock_20260404_150007",
+                        "loadformat_path": "/tmp/ui_shock/LOADFORMAT.DAT",
+                    },
+                    "ui-small": {
+                        "scenario_name": "ineq_phase1_distribution_ui_small",
+                        "output_dir": "/tmp/ineq_phase1_distribution_ui_small_20260404_150006",
+                        "loadformat_path": "/tmp/ui_small/LOADFORMAT.DAT",
+                    },
+                    "ui-large": {
+                        "scenario_name": "ineq_phase1_distribution_ui_large",
+                        "output_dir": "/tmp/ineq_phase1_distribution_ui_large_20260404_150006",
+                        "loadformat_path": "/tmp/ui_large/LOADFORMAT.DAT",
+                    },
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    def fake_loadformat_window(
+        loadformat_path: Path,
+        *,
+        variables: list[str] | None,
+        forecast_start: str,
+        forecast_end: str,
+    ) -> tuple[list[str], dict[str, list[float]]]:
+        assert variables is None
+        return [forecast_start, forecast_end], {"IPOVALL": [1.0, 2.0], "TRLOWZ": [3.0, 4.0]}
+
+    monkeypatch.setattr("fp_ineq.export._loadformat_window", fake_loadformat_window)
+    monkeypatch.setattr("fp_ineq.export._copy_static_shell", lambda out_dir: None)
+
+    out_dir = tmp_path / "bundle"
+    payload = export_phase1_full_bundle(
+        report_path=report_path,
+        out_dir=out_dir,
+        family_ids=("ui",),
+    )
+
+    assert payload["family_ids"] == ["ui"]
+    manifest = json.loads((out_dir / "manifest.json").read_text(encoding="utf-8"))
+    assert manifest["included_family_ids"] == ["ui"]
+    assert manifest["default_run_ids"] == [
+        "ineq-phase1-ui-relief",
+        "ineq-phase1-ui-shock",
+        "ineq-phase1-ui-small",
+        "ineq-phase1-ui-large",
+    ]
+    assert [item["run_id"] for item in manifest["runs"]] == [
+        "ineq-phase1-ui-relief",
+        "ineq-phase1-ui-shock",
+        "ineq-phase1-ui-small",
+        "ineq-phase1-ui-large",
+    ]
+
+
+def test_export_phase1_full_bundle_rejects_unknown_family_filter(tmp_path: Path) -> None:
+    report_path = tmp_path / "run_phase1_distribution_block.json"
+    report_path.write_text(json.dumps({"scenarios": {}}, indent=2), encoding="utf-8")
+
+    with pytest.raises(ValueError, match="No public phase-1 scenarios matched"):
+        export_phase1_full_bundle(
+            report_path=report_path,
+            out_dir=tmp_path / "bundle",
+            family_ids=("not-a-family",),
+        )

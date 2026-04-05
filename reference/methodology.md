@@ -21,25 +21,37 @@ The private runtime flow is:
 
 The model has three main components:
 
-- a stock-Fair policy patch layer for unemployment insurance, SNAP-style transfers, and Social Security
+- a stock-Fair policy patch layer for unemployment insurance, broad federal household transfers, and state/local household transfers
 - a solved distribution identity block for overall poverty, child poverty, the household Gini coefficient, and a median-style income proxy
 - a one-way macro-to-distribution wrapper in which Fair macro states drive distribution identities without feeding back into the stock macro block
 
 ## Published scenario scope
 
-The published solved bundle contains 9 runs:
+The published solved bundle contains 14 runs:
 
 - `baseline-observed`
 - `ui-relief`
 - `ui-shock`
-- `snap-relief`
-- `snap-shock`
-- `social-security-relief`
-- `social-security-shock`
+- `ui-small`
+- `ui-large`
+- `federal-transfer-relief`
+- `federal-transfer-shock`
+- `state-local-transfer-relief`
+- `state-local-transfer-shock`
 - `transfer-package-relief`
 - `transfer-package-shock`
+- `transfer-composite-small`
+- `transfer-composite-medium`
+- `transfer-composite-large`
 
 These runs belong to one model system and are intended to be compared to a shared baseline.
+
+The published manifest is now family-aware:
+
+- each run is tagged with a `family_id` and `family_maturity`
+- the top-level manifest groups public runs into explicit family records
+- the current published maturity tier is `public`
+- private families such as the credit wedge probes and the shadow wealth block remain outside the published manifest
 
 ## Baseline comparability rule
 
@@ -62,9 +74,11 @@ For the published transfer family, that condition holds:
 The family interpretations are therefore:
 
 - UI: move `UIFAC` away from `1`
-- SNAP-style transfers: move `SNAPDELTAQ` away from `0`
-- Social Security: move `SSFAC` away from `1`
+- UI ladder: move `UIFAC` to matched first-year `ΔTRLOWZ` bins
+- federal household transfers: move `SNAPDELTAQ` away from `0`
+- state/local household transfers: move `SSFAC` away from `1`
 - transfer package: move several already-installed levers at once
+- transfer-composite ladder: move several already-installed levers together to matched first-year `ΔTRLOWZ` bins
 
 ## When a family needs its own baseline
 
@@ -80,34 +94,61 @@ If a future family does any of those things, it must either:
 1. install the new mechanism neutrally in the shared baseline too, or
 2. use a family-specific baseline
 
+Current credit-family decision:
+
+- the `credit_effective_rates` patch group is installed neutrally in its own private family baseline
+- a private `CRWEDGE` scale sweep over magnitudes `1`, `5`, and `10` does not produce a strong enough demand signal for publication
+- the best observed absolute demand move is about `4.01e-05` at `|CRWEDGE|=10`, below the current `1e-4` adequacy threshold
+- the credit family therefore remains private and does not yet justify a published ladder
+
+Current wealth-family decision:
+
+- the shadow `IWGAP150` block passes the current diagnostic gates well enough to stay as a serious expert-only candidate
+- the current integrated transfer scenarios produce nontrivial `IWGAP150` movement, with a best observed absolute delta of about `0.0997`
+- the block is not yet promoted to a public wealth family because there is still no dedicated public wealth-family baseline or wealth shock family
+- the current recommendation is `candidate_for_expert_only_preset_keep_public_wealth_family_deferred`
+- current reassessment call: keep `IWGAP150` fully private for now and defer any expert-only governance/export work
+
 ## Interpretation limits
 
 The shock sizes are channel probes, not calibrated policy packages with matched fiscal scale:
 
 - UI runs move `UIFAC` to `1.02` or `0.98`
-- SNAP runs move `SNAPDELTAQ` to `+2` or `-2`
-- Social Security runs move `SSFAC` to `1.02` or `0.99`
+- UI ladder runs move `UIFAC` to calibrated matched-bin levels (`1.0141888330491307`, `1.02`, `1.023625843049206`)
+- federal-transfer runs move `SNAPDELTAQ` to `+2` or `-2`
+- state/local-transfer runs move `SSFAC` to `1.02` or `0.99`
 - transfer-package runs move several already-installed levers together
+- transfer-composite ladder runs move all three installed transfer levers together to matched-bin levels recorded in the private ladder calibration report
 
 These settings are intended to test whether the transmission channels move the stock macro block and the distribution identities in coherent directions.
 
-`IGINIHH` and `IMEDRINC` are solved outputs in all 9 runs, but they remain provisional diagnostics rather than headline measures.
+The matched-ladder normalization convention is the mean first-year `ΔTRLOWZ` over `2026.1` to `2026.4`.
 
+The published UI family still does **not** include a dedicated labor-supply, labor-force-participation, or matching-offset block. A private `ui-matching-offset` stress family now exists as a bounded two-point sensitivity envelope: one run claws back about 25% of the medium UI rung's first-year `ΔUR` improvement and another claws back about 50%, while both keep first-year `ΔTRLOWZ` nearly unchanged. Neither private stress lowers final `GDPR`, so those runs remain interpretation checks rather than grounds for a new public UI family. The public UI results should therefore still be read as demand-dominant probes with a small private sensitivity envelope, not as a fully balanced policy package.
+
+The new contrary-channel audit is descriptive rather than structural. It reads the integrated 14-run public family and flags endogenous countervailing movement already present in solved Fair outputs for `UR`, `GDPR`, `YD`, and rates. In the current release, the consistent countervailing signal is higher rates across the public transfer families, while the dedicated omitted-channel stress remains confined to the private UI offset family. That is why the project does not add extra synthetic contrary public scenarios at this stage.
+
+The current reassessment decision is to keep that wording in place rather than promote the private offset family into a public scenario family or stronger public interpretation.
+
+`IGINIHH` and `IMEDRINC` are solved outputs in all 14 published runs, but they remain provisional diagnostics rather than headline measures.
+
+- `IPOVALL` and `IPOVCH` keep the validated aggregate transfer bridge on `TRLOWZ` and add two shrunken internal transfer-mix deviation terms (`UIDEV`, `GHSHDV`) built from standardized `UB`, `TRGH`, and `TRSH`
 - `IGINIHH` is a reduced-form identity driven by `UR` and `TRLOWZ`
 - `IMEDRINC` is a reduced-form identity driven by `LRYDPC` and `UR`
 - `RYDPC` remains the stronger household-resource headline
 
 The strongest outputs are:
 
-- baseline comparability across the 9-run family
+- baseline comparability across the 14-run published family
 - coherent macro and transfer-channel movement
-- directional poverty movement in response to transfer-side relief and shock scenarios
+- directional poverty movement in response to transfer-side relief, shock, and matched-ladder scenarios
 
 The weaker outputs are:
 
 - headline interpretation of `IGINIHH`
 - headline interpretation of `IMEDRINC`
 - final policy calibration of shock magnitudes
+- any public claim that the checked-in UI family already includes a dedicated adverse labor-market channel
 
 ## Calibration window
 
@@ -116,5 +157,6 @@ The checked-in output target snapshots do not provide a true `1990` to `2025` hi
 - the checked-in annual anchors for `IPOVALL`, `IPOVCH`, `IGINIHH`, and `IMEDRINC` begin in `2015`
 - `refresh-data` writes only the observed quarterly span implied by those anchors
 - the distribution coefficient fit therefore uses the actual observed target/regressor overlap, which is `2015` to `2025` in the checked-in data surface
+- the poverty add-on deviation terms are fit with residual ridge shrinkage over that same `2015` to `2025` overlap, while preserving the base `UR` + `TRLOWZ` fit
 
 If longer historical target coverage is added later, the coefficient report can widen the main sample accordingly.

@@ -1,0 +1,8 @@
+@ Phase-2 runtime wealth block.
+@ This block is installed into the integrated private runtime path but remains
+@ shadow-only until a dedicated wealth family is promoted.
+
+IDENT LWGAP150=WG0+WGU*UR+WGT*TRLOWZ+WGA*LAAZ;
+IDENT IWGAP150=EXP(LWGAP150);
+
+RETURN;

@@ -1,0 +1,331 @@
+from __future__ import annotations
+
+from dataclasses import dataclass
+
+__all__ = [
+    "PHASE1_FAMILIES",
+    "PHASE1_SCENARIOS",
+    "Phase1FamilySpec",
+    "Phase1ScenarioSpec",
+    "phase1_family_by_id",
+    "phase1_family_specs",
+    "phase1_distribution_specs",
+    "phase1_public_bundle_specs",
+    "phase1_scenario_by_variant",
+    "phase1_transfer_core_specs",
+]
+
+
+@dataclass(frozen=True)
+class Phase1FamilySpec:
+    family_id: str
+    label: str
+    summary: str
+    maturity: str
+    include_in_public_bundle: bool = True
+
+
+@dataclass(frozen=True)
+class Phase1ScenarioSpec:
+    variant_id: str
+    family_id: str
+    ui_factor: float
+    trgh_delta_q: float
+    trsh_factor: float
+    transfer_description: str
+    distribution_description: str
+    group: str
+    label: str
+    summary: str
+    include_in_transfer_core: bool = True
+    include_in_distribution_block: bool = True
+    include_in_public_bundle: bool = True
+
+
+PHASE1_FAMILIES = (
+    Phase1FamilySpec(
+        family_id="baseline",
+        label="Phase-1 Baseline",
+        summary="Observed integrated baseline path used as the public comparison anchor.",
+        maturity="public",
+    ),
+    Phase1FamilySpec(
+        family_id="ui",
+        label="Phase-1 UI",
+        summary="Unemployment-insurance shock probes and matched ladder runs on the stock UB channel.",
+        maturity="public",
+    ),
+    Phase1FamilySpec(
+        family_id="federal-transfers",
+        label="Phase-1 Federal Transfers",
+        summary="Broad federal household-transfer probes on the stock TRGH channel.",
+        maturity="public",
+    ),
+    Phase1FamilySpec(
+        family_id="state-local-transfers",
+        label="Phase-1 State/Local Transfers",
+        summary="State/local household-transfer probes on the stock TRSH channel.",
+        maturity="public",
+    ),
+    Phase1FamilySpec(
+        family_id="transfer-package",
+        label="Phase-1 Transfer Package",
+        summary="Combined relief and shock runs across the installed transfer channels.",
+        maturity="public",
+    ),
+    Phase1FamilySpec(
+        family_id="transfer-composite",
+        label="Phase-1 Transfer Composite Ladder",
+        summary="Matched-bin composite ladder runs across UI, federal, and state/local transfer channels.",
+        maturity="public",
+    ),
+    Phase1FamilySpec(
+        family_id="credit-effective-rates",
+        label="Phase-2 Credit Effective Rates",
+        summary="Private credit-family runs on a shared neutral baseline using the experimental effective-rate wedge patch.",
+        maturity="private-experimental",
+        include_in_public_bundle=False,
+    ),
+    Phase1FamilySpec(
+        family_id="wealth-shadow",
+        label="Phase-2 Wealth Shadow",
+        summary="Private shadow wealth block built on endogenous FAIR bridges pending a public-family decision.",
+        maturity="private-shadow",
+        include_in_public_bundle=False,
+    ),
+)
+
+
+PHASE1_SCENARIOS = (
+    Phase1ScenarioSpec(
+        variant_id="baseline-observed",
+        family_id="baseline",
+        ui_factor=1.00,
+        trgh_delta_q=0.0,
+        trsh_factor=1.00,
+        transfer_description="Baseline integrated transfer-core prototype.",
+        distribution_description="Baseline transfer-core scenario with integrated distribution identities.",
+        group="Phase-1 Baseline",
+        label="Baseline Observed",
+        summary="Solved baseline path with integrated distribution outputs.",
+    ),
+    Phase1ScenarioSpec(
+        variant_id="ui-relief",
+        family_id="ui",
+        ui_factor=1.02,
+        trgh_delta_q=0.0,
+        trsh_factor=1.00,
+        transfer_description="Higher UI generosity through the stock UB channel.",
+        distribution_description="Higher UI generosity with integrated distribution identities.",
+        group="Phase-1 UI Ladder",
+        label="UI Medium",
+        summary="Solved matched UI ladder medium rung with integrated distribution outputs.",
+    ),
+    Phase1ScenarioSpec(
+        variant_id="ui-shock",
+        family_id="ui",
+        ui_factor=0.98,
+        trgh_delta_q=0.0,
+        trsh_factor=1.00,
+        transfer_description="Lower UI generosity through the stock UB channel.",
+        distribution_description="Lower UI generosity with integrated distribution identities.",
+        group="Phase-1 UI",
+        label="UI Shock",
+        summary="Solved UI transfer-channel probe with integrated distribution outputs.",
+    ),
+    Phase1ScenarioSpec(
+        variant_id="ui-small",
+        family_id="ui",
+        ui_factor=1.0141888330491307,
+        trgh_delta_q=0.0,
+        trsh_factor=1.00,
+        transfer_description="Smaller matched UI ladder rung through the stock UB channel.",
+        distribution_description="Smaller matched UI ladder rung with integrated distribution identities.",
+        group="Phase-1 UI Ladder",
+        label="UI Small",
+        summary="Solved matched UI ladder rung with integrated distribution outputs.",
+        include_in_transfer_core=False,
+    ),
+    Phase1ScenarioSpec(
+        variant_id="ui-medium",
+        family_id="ui",
+        ui_factor=1.02,
+        trgh_delta_q=0.0,
+        trsh_factor=1.00,
+        transfer_description="Medium matched UI ladder rung through the stock UB channel.",
+        distribution_description="Medium matched UI ladder rung with integrated distribution identities.",
+        group="Phase-1 UI Ladder",
+        label="UI Medium",
+        summary="Solved matched UI ladder medium rung with integrated distribution outputs.",
+        include_in_transfer_core=False,
+        include_in_distribution_block=False,
+        include_in_public_bundle=False,
+    ),
+    Phase1ScenarioSpec(
+        variant_id="ui-large",
+        family_id="ui",
+        ui_factor=1.023625843049206,
+        trgh_delta_q=0.0,
+        trsh_factor=1.00,
+        transfer_description="Larger matched UI ladder rung through the stock UB channel.",
+        distribution_description="Larger matched UI ladder rung with integrated distribution identities.",
+        group="Phase-1 UI Ladder",
+        label="UI Large",
+        summary="Solved matched UI ladder rung with integrated distribution outputs.",
+        include_in_transfer_core=False,
+    ),
+    Phase1ScenarioSpec(
+        variant_id="federal-transfer-relief",
+        family_id="federal-transfers",
+        ui_factor=1.00,
+        trgh_delta_q=2.0,
+        trsh_factor=1.00,
+        transfer_description="Higher federal household transfers through the stock TRGH channel.",
+        distribution_description="Higher federal household transfers with integrated distribution identities.",
+        group="Phase-1 Federal Transfers",
+        label="Federal Transfer Relief",
+        summary="Solved broad federal household-transfer probe with integrated distribution outputs.",
+    ),
+    Phase1ScenarioSpec(
+        variant_id="federal-transfer-shock",
+        family_id="federal-transfers",
+        ui_factor=1.00,
+        trgh_delta_q=-2.0,
+        trsh_factor=1.00,
+        transfer_description="Lower federal household transfers through the stock TRGH channel.",
+        distribution_description="Lower federal household transfers with integrated distribution identities.",
+        group="Phase-1 Federal Transfers",
+        label="Federal Transfer Shock",
+        summary="Solved broad federal household-transfer probe with integrated distribution outputs.",
+    ),
+    Phase1ScenarioSpec(
+        variant_id="state-local-transfer-relief",
+        family_id="state-local-transfers",
+        ui_factor=1.00,
+        trgh_delta_q=0.0,
+        trsh_factor=1.02,
+        transfer_description="Higher state/local household transfers through the stock TRSH channel.",
+        distribution_description="Higher state/local household transfers with integrated distribution identities.",
+        group="Phase-1 State/Local Transfers",
+        label="State Local Transfer Relief",
+        summary="Solved state/local household-transfer probe with integrated distribution outputs.",
+    ),
+    Phase1ScenarioSpec(
+        variant_id="state-local-transfer-shock",
+        family_id="state-local-transfers",
+        ui_factor=1.00,
+        trgh_delta_q=0.0,
+        trsh_factor=0.99,
+        transfer_description="Lower state/local household transfers through the stock TRSH channel.",
+        distribution_description="Lower state/local household transfers with integrated distribution identities.",
+        group="Phase-1 State/Local Transfers",
+        label="State Local Transfer Shock",
+        summary="Solved state/local household-transfer probe with integrated distribution outputs.",
+    ),
+    Phase1ScenarioSpec(
+        variant_id="transfer-package-relief",
+        family_id="transfer-package",
+        ui_factor=1.02,
+        trgh_delta_q=2.0,
+        trsh_factor=1.02,
+        transfer_description="Combined transfer relief through the stock UB, TRGH, and TRSH channels.",
+        distribution_description="Combined transfer relief with offline-estimated in-model distribution identities.",
+        group="Phase-1 Transfer Package",
+        label="Transfer Package Relief",
+        summary="Solved combined transfer-channel probe with integrated distribution outputs.",
+    ),
+    Phase1ScenarioSpec(
+        variant_id="transfer-package-shock",
+        family_id="transfer-package",
+        ui_factor=0.98,
+        trgh_delta_q=-2.0,
+        trsh_factor=0.99,
+        transfer_description="Combined transfer shock through the stock UB, TRGH, and TRSH channels.",
+        distribution_description="Combined transfer shock with offline-estimated in-model distribution identities.",
+        group="Phase-1 Transfer Package",
+        label="Transfer Package Shock",
+        summary="Solved combined transfer-channel probe with integrated distribution outputs.",
+    ),
+    Phase1ScenarioSpec(
+        variant_id="transfer-composite-small",
+        family_id="transfer-composite",
+        ui_factor=1.0125839776982168,
+        trgh_delta_q=1.2583977698216835,
+        trsh_factor=1.0125839776982168,
+        transfer_description="Smaller matched transfer-composite rung through the stock UB, TRGH, and TRSH channels.",
+        distribution_description="Smaller matched transfer-composite rung with offline-estimated in-model distribution identities.",
+        group="Phase-1 Transfer Composite Ladder",
+        label="Transfer Composite Small",
+        summary="Solved matched transfer-composite ladder rung with integrated distribution outputs.",
+        include_in_transfer_core=False,
+    ),
+    Phase1ScenarioSpec(
+        variant_id="transfer-composite-medium",
+        family_id="transfer-composite",
+        ui_factor=1.018637285379202,
+        trgh_delta_q=1.8637285379202133,
+        trsh_factor=1.018637285379202,
+        transfer_description="Medium matched transfer-composite rung through the stock UB, TRGH, and TRSH channels.",
+        distribution_description="Medium matched transfer-composite rung with offline-estimated in-model distribution identities.",
+        group="Phase-1 Transfer Composite Ladder",
+        label="Transfer Composite Medium",
+        summary="Solved matched transfer-composite ladder rung with integrated distribution outputs.",
+        include_in_transfer_core=False,
+    ),
+    Phase1ScenarioSpec(
+        variant_id="transfer-composite-large",
+        family_id="transfer-composite",
+        ui_factor=1.0225154841560722,
+        trgh_delta_q=2.2515484156072145,
+        trsh_factor=1.0225154841560722,
+        transfer_description="Larger matched transfer-composite rung through the stock UB, TRGH, and TRSH channels.",
+        distribution_description="Larger matched transfer-composite rung with offline-estimated in-model distribution identities.",
+        group="Phase-1 Transfer Composite Ladder",
+        label="Transfer Composite Large",
+        summary="Solved matched transfer-composite ladder rung with integrated distribution outputs.",
+        include_in_transfer_core=False,
+    ),
+)
+
+
+def phase1_family_specs() -> list[Phase1FamilySpec]:
+    return list(PHASE1_FAMILIES)
+
+
+def phase1_family_by_id() -> dict[str, Phase1FamilySpec]:
+    return {spec.family_id: spec for spec in PHASE1_FAMILIES}
+
+
+def phase1_transfer_core_specs() -> list[Phase1ScenarioSpec]:
+    return [spec for spec in PHASE1_SCENARIOS if spec.include_in_transfer_core]
+
+
+def phase1_distribution_specs() -> list[Phase1ScenarioSpec]:
+    return [spec for spec in PHASE1_SCENARIOS if spec.include_in_distribution_block]
+
+
+def phase1_public_bundle_specs(
+    *,
+    family_maturities: tuple[str, ...] = ("public",),
+    family_ids: tuple[str, ...] | None = None,
+) -> list[Phase1ScenarioSpec]:
+    allowed_maturities = {str(item) for item in family_maturities}
+    allowed_families = {str(item) for item in family_ids} if family_ids is not None else None
+    families = phase1_family_by_id()
+    public_specs: list[Phase1ScenarioSpec] = []
+    for spec in PHASE1_SCENARIOS:
+        if not spec.include_in_public_bundle:
+            continue
+        family = families[spec.family_id]
+        if not family.include_in_public_bundle:
+            continue
+        if family.maturity not in allowed_maturities:
+            continue
+        if allowed_families is not None and spec.family_id not in allowed_families:
+            continue
+        public_specs.append(spec)
+    return public_specs
+
+
+def phase1_scenario_by_variant() -> dict[str, Phase1ScenarioSpec]:
+    return {spec.variant_id: spec for spec in PHASE1_SCENARIOS}

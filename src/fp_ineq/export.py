@@ -10,7 +10,7 @@ from pathlib import Path
 from .bridge import ensure_fp_wraptr_importable, locate_fp_wraptr_root
 from .names import to_public_name
 from .paths import repo_paths
-from .phase1_distribution_block import PHASE1_DISTRIBUTION_SCENARIOS
+from .phase1_catalog import phase1_family_by_id, phase1_public_bundle_specs
 
 __all__ = ["export_phase1_full_bundle", "publish_phase1_bundle_to_docs"]
 
@@ -28,19 +28,34 @@ _SOLVED_EXPORT_DENYLIST = {
     "PV0",
     "PVU",
     "PVT",
+    "PVUI",
+    "PVGH",
     "CG0",
     "CGU",
     "CGT",
+    "CGUI",
+    "CGGH",
     "GN0",
     "GNU",
     "GNT",
     "MD0",
     "MDR",
     "MDU",
+    "WG0",
+    "WGU",
+    "WGT",
+    "WGA",
+    "UBBAR",
+    "UBSTD",
+    "TRGHBAR",
+    "TRGHSTD",
+    "TRSHBAR",
+    "TRSHSTD",
     "UIFAC",
     "SNAPDELTAQ",
     "SSFAC",
     "CRWEDGE",
+    "UIMATCH",
     "HPEQW",
 }
 _PHASE1_PUBLIC_SUPPRESSION = {
@@ -54,8 +69,14 @@ _PHASE1_PUBLIC_SUPPRESSION = {
     "IFFUNDS",
     "IWGAP1050",
     "IWGAP150",
+    "LWGAP150",
     "RSAEFF",
     "RMAEFF",
+    "UBZ",
+    "TRGHZ",
+    "TRSHZ",
+    "UIDEV",
+    "GHSHDV",
 }
 _PHASE1_FULL_PRESETS = [
     {
@@ -110,6 +131,7 @@ _PHASE1_FULL_PRESETS = [
     },
 ]
 _PHASE1_DEFAULT_PRESET_IDS = ["headline-poverty-resources"]
+_PHASE1_DEFAULT_HEADLINE_FAMILY_ID = "transfer-composite"
 _EQUATION_FUNCTION_NAMES = {"ABS", "EXP", "LOG", "MAX", "MIN"}
 
 
@@ -389,37 +411,44 @@ def _enrich_dictionary_payload(payload: dict[str, object]) -> dict[str, object]:
 
 def _safe_dictionary_payload() -> dict[str, object]:
     paths = repo_paths()
-    stock_dictionary_path = _stock_dictionary_path()
-    base_dictionary_path = _dictionary_base_path()
     overlay_path = paths.overlay_source_root / "dictionary_overlays" / "ineq.json"
-    stock_payload = json.loads(stock_dictionary_path.read_text(encoding="utf-8"))
-    base_payload = json.loads(base_dictionary_path.read_text(encoding="utf-8"))
-    overlay_payload = json.loads(overlay_path.read_text(encoding="utf-8"))
-    merged_variables = {
-        name: _merge_record_fields(
-            stock_payload.get("variables", {}).get(name, {}) or {},
-            base_payload.get("variables", {}).get(name, {}) or {},
-            overlay_payload.get("variables", {}).get(name, {}) or {},
-        )
-        for name in set(stock_payload.get("variables", {}))
-        | set(base_payload.get("variables", {}))
-        | set(overlay_payload.get("variables", {}))
-    }
-    merged_equations = {
-        str(eq_id): _merge_record_fields(
-            stock_payload.get("equations", {}).get(str(eq_id), {}) or {},
-            base_payload.get("equations", {}).get(str(eq_id), {}) or {},
-            overlay_payload.get("equations", {}).get(str(eq_id), {}) or {},
-        )
-        for eq_id in set(stock_payload.get("equations", {}))
-        | set(base_payload.get("equations", {}))
-        | set(overlay_payload.get("equations", {}))
-    }
-    return _enrich_dictionary_payload({
-        "schema_version": 1,
-        "variables": merged_variables,
-        "equations": merged_equations,
-    })
+    fallback_dictionary_path = paths.docs_root / "dictionary.json"
+    try:
+        stock_dictionary_path = _stock_dictionary_path()
+        base_dictionary_path = _dictionary_base_path()
+        stock_payload = json.loads(stock_dictionary_path.read_text(encoding="utf-8"))
+        base_payload = json.loads(base_dictionary_path.read_text(encoding="utf-8"))
+        overlay_payload = json.loads(overlay_path.read_text(encoding="utf-8"))
+        merged_variables = {
+            name: _merge_record_fields(
+                stock_payload.get("variables", {}).get(name, {}) or {},
+                base_payload.get("variables", {}).get(name, {}) or {},
+                overlay_payload.get("variables", {}).get(name, {}) or {},
+            )
+            for name in set(stock_payload.get("variables", {}))
+            | set(base_payload.get("variables", {}))
+            | set(overlay_payload.get("variables", {}))
+        }
+        merged_equations = {
+            str(eq_id): _merge_record_fields(
+                stock_payload.get("equations", {}).get(str(eq_id), {}) or {},
+                base_payload.get("equations", {}).get(str(eq_id), {}) or {},
+                overlay_payload.get("equations", {}).get(str(eq_id), {}) or {},
+            )
+            for eq_id in set(stock_payload.get("equations", {}))
+            | set(base_payload.get("equations", {}))
+            | set(overlay_payload.get("equations", {}))
+        }
+        payload = {
+            "schema_version": 1,
+            "variables": merged_variables,
+            "equations": merged_equations,
+        }
+    except FileNotFoundError:
+        if not fallback_dictionary_path.exists():
+            raise
+        payload = json.loads(fallback_dictionary_path.read_text(encoding="utf-8"))
+    return _enrich_dictionary_payload(payload)
 
 
 def _bundle_input_equations(bundle_run_ids: list[str]) -> dict[str, dict[str, object]]:
@@ -484,6 +513,11 @@ def _phase1_solved_dictionary(
         for eq_id, record in base_equations.items()
         if str(eq_id).isdigit()
     }
+    supporting_equations = {
+        str(eq_id): _normalize_equation_record(str(eq_id), dict(record or {}), source_runs=bundle_run_ids)
+        for eq_id, record in base_equations.items()
+        if not str(eq_id).isdigit()
+    }
     numeric_lhs_names = {
         lhs_name
         for record in numeric_equations.values()
@@ -498,7 +532,7 @@ def _phase1_solved_dictionary(
         {
             "schema_version": 1,
             "variables": base_variables,
-            "equations": {**numeric_equations, **bundle_equations},
+            "equations": {**numeric_equations, **supporting_equations, **bundle_equations},
         }
     )
     merged_variables = dict(merged_payload.get("variables", {}))
@@ -519,6 +553,37 @@ def _phase1_solved_dictionary(
         record["source_runs"] = variable_run_ids.get(name, [])
     merged_payload["variables"] = merged_variables
     return merged_payload
+
+
+def _default_manifest_run_ids(manifest_runs: list[dict[str, object]]) -> list[str]:
+    runs_by_family: dict[str, list[str]] = {}
+    for item in manifest_runs:
+        family_id = str(item.get("family_id", "") or "").strip()
+        run_id = str(item.get("run_id", "") or "").strip()
+        if family_id and run_id:
+            runs_by_family.setdefault(family_id, []).append(run_id)
+
+    baseline_run_ids = runs_by_family.get("baseline", [])
+    headline_family_id = ""
+    if _PHASE1_DEFAULT_HEADLINE_FAMILY_ID in runs_by_family:
+        headline_family_id = _PHASE1_DEFAULT_HEADLINE_FAMILY_ID
+    else:
+        for item in manifest_runs:
+            family_id = str(item.get("family_id", "") or "").strip()
+            if family_id and family_id != "baseline":
+                headline_family_id = family_id
+                break
+
+    selected: list[str] = []
+    for run_id in baseline_run_ids:
+        if run_id not in selected:
+            selected.append(run_id)
+    for run_id in runs_by_family.get(headline_family_id, []):
+        if run_id not in selected:
+            selected.append(run_id)
+    if selected:
+        return selected
+    return [str(item["run_id"]) for item in manifest_runs]
 
 
 def _copy_static_shell(out_dir: Path) -> None:
@@ -598,54 +663,47 @@ def _run_id_for_variant(variant_id: str) -> str:
     return f"ineq-phase1-{variant_id}"
 
 
-def _group_for_variant(variant_id: str) -> str:
-    if variant_id == "baseline-observed":
-        return "Phase-1 Baseline"
-    if variant_id.startswith("ui-"):
-        return "Phase-1 UI"
-    if variant_id.startswith("snap-"):
-        return "Phase-1 SNAP"
-    if variant_id.startswith("social-security-"):
-        return "Phase-1 Social Security"
-    if variant_id.startswith("transfer-package-"):
-        return "Phase-1 Transfer Package"
-    return "Phase-1 Other"
-
-
-def _label_for_variant(variant_id: str) -> str:
-    parts = variant_id.split("-")
-    return " ".join(part.capitalize() for part in parts)
-
-
-def _summary_for_variant(variant_id: str) -> str:
-    if variant_id == "baseline-observed":
-        return "Solved baseline path with integrated distribution outputs."
-    if variant_id.startswith("ui-"):
-        return "Solved UI transfer-channel probe with integrated distribution outputs."
-    if variant_id.startswith("snap-"):
-        return "Solved SNAP-style transfer-channel probe with integrated distribution outputs."
-    if variant_id.startswith("social-security-"):
-        return "Solved Social Security transfer-channel probe with integrated distribution outputs."
-    if variant_id.startswith("transfer-package-"):
-        return "Solved combined transfer-channel probe with integrated distribution outputs."
-    return f"Solved {variant_id} path with integrated distribution outputs."
-
-
 def _phase1_solved_runs() -> list[dict[str, str]]:
+    families = phase1_family_by_id()
     return [
         {
-            "variant_id": str(variant_id),
-            "run_id": _run_id_for_variant(str(variant_id)),
-            "label": _label_for_variant(str(variant_id)),
-            "summary": _summary_for_variant(str(variant_id)),
-            "group": _group_for_variant(str(variant_id)),
+            "variant_id": spec.variant_id,
+            "run_id": _run_id_for_variant(spec.variant_id),
+            "label": spec.label,
+            "summary": spec.summary,
+            "group": spec.group,
+            "family_id": spec.family_id,
+            "family_label": families[spec.family_id].label,
+            "family_maturity": families[spec.family_id].maturity,
         }
-        for variant_id, *_rest in PHASE1_DISTRIBUTION_SCENARIOS
+        for spec in phase1_public_bundle_specs()
     ]
 
 
 def _phase1_solved_spec_by_variant() -> dict[str, dict[str, str]]:
     return {str(item["variant_id"]): dict(item) for item in _phase1_solved_runs()}
+
+
+def _phase1_manifest_families(run_specs: list[dict[str, str]]) -> list[dict[str, object]]:
+    families_by_id = phase1_family_by_id()
+    run_ids_by_family: dict[str, list[str]] = {}
+    for spec in run_specs:
+        family_id = str(spec["family_id"])
+        run_ids_by_family.setdefault(family_id, []).append(str(spec["run_id"]))
+
+    manifest_families: list[dict[str, object]] = []
+    for family_id, run_ids in run_ids_by_family.items():
+        family = families_by_id[family_id]
+        manifest_families.append(
+            {
+                "family_id": family.family_id,
+                "label": family.label,
+                "summary": family.summary,
+                "maturity": family.maturity,
+                "run_ids": run_ids,
+            }
+        )
+    return manifest_families
 
 
 def _visible_export_series(series: dict[str, list[float]]) -> list[str]:
@@ -710,6 +768,8 @@ def export_phase1_full_bundle(
     out_dir: Path | None = None,
     forecast_start: str = "2026.1",
     forecast_end: str = "2029.4",
+    family_maturities: tuple[str, ...] = ("public",),
+    family_ids: tuple[str, ...] | None = None,
 ) -> dict[str, object]:
     paths = repo_paths()
     report_path = report_path or (paths.runtime_distribution_reports_root / "run_phase1_distribution_block.json")
@@ -721,8 +781,26 @@ def export_phase1_full_bundle(
 
     payload = json.loads(report_path.read_text(encoding="utf-8"))
     scenarios = dict(payload.get("scenarios", {}))
-    run_specs = _phase1_solved_spec_by_variant()
-    required_variants = [item["variant_id"] for item in _phase1_solved_runs()]
+    selected_specs = phase1_public_bundle_specs(
+        family_maturities=family_maturities,
+        family_ids=family_ids,
+    )
+    if not selected_specs:
+        raise ValueError("No public phase-1 scenarios matched the requested family filters")
+    run_specs = {
+        str(spec.variant_id): {
+            "variant_id": spec.variant_id,
+            "run_id": _run_id_for_variant(spec.variant_id),
+            "label": spec.label,
+            "summary": spec.summary,
+            "group": spec.group,
+            "family_id": spec.family_id,
+            "family_label": phase1_family_by_id()[spec.family_id].label,
+            "family_maturity": phase1_family_by_id()[spec.family_id].maturity,
+        }
+        for spec in selected_specs
+    }
+    required_variants = [spec.variant_id for spec in selected_specs]
     missing_variants = [variant_id for variant_id in required_variants if variant_id not in scenarios]
     if missing_variants:
         raise ValueError(f"Phase-1 solved report is missing scenarios: {', '.join(missing_variants)}")
@@ -778,6 +856,9 @@ def export_phase1_full_bundle(
                 "data_path": f"runs/{run_id}.json",
                 "forecast_end": forecast_end,
                 "forecast_start": forecast_start,
+                "family_id": str(run_spec["family_id"]),
+                "family_label": str(run_spec["family_label"]),
+                "family_maturity": str(run_spec["family_maturity"]),
                 "group": str(run_spec["group"]),
                 "label": str(run_spec["label"]),
                 "run_id": run_id,
@@ -818,9 +899,12 @@ def export_phase1_full_bundle(
         "default_preset_ids": [
             preset_id for preset_id in _PHASE1_DEFAULT_PRESET_IDS if any(p["id"] == preset_id for p in presets)
         ],
-        "default_run_ids": [item["run_id"] for item in manifest_runs],
+        "default_run_ids": _default_manifest_run_ids(manifest_runs),
         "dictionary_path": "dictionary.json",
+        "families": _phase1_manifest_families(list(run_specs.values())),
         "generated_at": datetime.now(UTC).isoformat(),
+        "included_family_ids": [family["family_id"] for family in _phase1_manifest_families(list(run_specs.values()))],
+        "included_family_maturities": list(family_maturities),
         "presets_path": "presets.json",
         "runs": manifest_runs,
         "schema_version": 1,
@@ -836,6 +920,8 @@ def export_phase1_full_bundle(
         "report_path": str(report_path),
         "run_count": len(manifest_runs),
         "variable_count": len(available_variables),
+        "family_ids": [family["family_id"] for family in manifest["families"]],
+        "family_maturities": list(family_maturities),
         "run_ids": [item["run_id"] for item in manifest_runs],
     }
     (out_dir / "export_report.json").write_text(

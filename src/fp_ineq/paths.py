@@ -31,6 +31,16 @@ class RepoPaths:
     runtime_distribution_scenarios_root: Path
     runtime_distribution_artifacts_root: Path
     runtime_distribution_reports_root: Path
+    runtime_credit_root: Path
+    runtime_credit_overlay_root: Path
+    runtime_credit_scenarios_root: Path
+    runtime_credit_artifacts_root: Path
+    runtime_credit_reports_root: Path
+    runtime_ui_offset_root: Path
+    runtime_ui_offset_overlay_root: Path
+    runtime_ui_offset_scenarios_root: Path
+    runtime_ui_offset_artifacts_root: Path
+    runtime_ui_offset_reports_root: Path
     runtime_solved_public_root: Path
     docs_root: Path
     specs_root: Path
@@ -44,6 +54,8 @@ def repo_paths() -> RepoPaths:
     phase1_root = runtime_root / "phase1_ui"
     transfer_root = runtime_root / "phase1_transfer_core"
     distribution_root = runtime_root / "phase1_distribution_block"
+    credit_root = runtime_root / "phase2_credit_family"
+    ui_offset_root = runtime_root / "phase2_ui_offset_family"
     solved_public_root = runtime_root / "phase1_solved_public"
     return RepoPaths(
         repo_root=repo_root,
@@ -69,6 +81,16 @@ def repo_paths() -> RepoPaths:
         runtime_distribution_scenarios_root=distribution_root / "scenarios",
         runtime_distribution_artifacts_root=distribution_root / "artifacts",
         runtime_distribution_reports_root=distribution_root / "reports",
+        runtime_credit_root=credit_root,
+        runtime_credit_overlay_root=credit_root / "overlay",
+        runtime_credit_scenarios_root=credit_root / "scenarios",
+        runtime_credit_artifacts_root=credit_root / "artifacts",
+        runtime_credit_reports_root=credit_root / "reports",
+        runtime_ui_offset_root=ui_offset_root,
+        runtime_ui_offset_overlay_root=ui_offset_root / "overlay",
+        runtime_ui_offset_scenarios_root=ui_offset_root / "scenarios",
+        runtime_ui_offset_artifacts_root=ui_offset_root / "artifacts",
+        runtime_ui_offset_reports_root=ui_offset_root / "reports",
         runtime_solved_public_root=solved_public_root,
         docs_root=repo_root / "docs",
         specs_root=repo_root / "specs",

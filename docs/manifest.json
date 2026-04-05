@@ -445,32 +445,101 @@
     "D3",
     "T1",
     "T2",
-    "BETA1",
-    "BETA2",
-    "DELTA1",
-    "LWFQZ",
-    "LPFZ"
+    "BETA1"
   ],
   "default_preset_ids": [
     "headline-poverty-resources"
   ],
   "default_run_ids": [
     "ineq-phase1-baseline-observed",
-    "ineq-phase1-ui-relief",
-    "ineq-phase1-ui-shock",
-    "ineq-phase1-snap-relief",
-    "ineq-phase1-snap-shock",
-    "ineq-phase1-social-security-relief",
-    "ineq-phase1-social-security-shock",
-    "ineq-phase1-transfer-package-relief",
-    "ineq-phase1-transfer-package-shock"
+    "ineq-phase1-transfer-composite-small",
+    "ineq-phase1-transfer-composite-medium",
+    "ineq-phase1-transfer-composite-large"
   ],
   "dictionary_path": "dictionary.json",
-  "generated_at": "2026-04-04T21:28:58.401799+00:00",
+  "families": [
+    {
+      "family_id": "baseline",
+      "label": "Phase-1 Baseline",
+      "maturity": "public",
+      "run_ids": [
+        "ineq-phase1-baseline-observed"
+      ],
+      "summary": "Observed integrated baseline path used as the public comparison anchor."
+    },
+    {
+      "family_id": "ui",
+      "label": "Phase-1 UI",
+      "maturity": "public",
+      "run_ids": [
+        "ineq-phase1-ui-relief",
+        "ineq-phase1-ui-shock",
+        "ineq-phase1-ui-small",
+        "ineq-phase1-ui-large"
+      ],
+      "summary": "Unemployment-insurance shock probes and matched ladder runs on the stock UB channel."
+    },
+    {
+      "family_id": "federal-transfers",
+      "label": "Phase-1 Federal Transfers",
+      "maturity": "public",
+      "run_ids": [
+        "ineq-phase1-federal-transfer-relief",
+        "ineq-phase1-federal-transfer-shock"
+      ],
+      "summary": "Broad federal household-transfer probes on the stock TRGH channel."
+    },
+    {
+      "family_id": "state-local-transfers",
+      "label": "Phase-1 State/Local Transfers",
+      "maturity": "public",
+      "run_ids": [
+        "ineq-phase1-state-local-transfer-relief",
+        "ineq-phase1-state-local-transfer-shock"
+      ],
+      "summary": "State/local household-transfer probes on the stock TRSH channel."
+    },
+    {
+      "family_id": "transfer-package",
+      "label": "Phase-1 Transfer Package",
+      "maturity": "public",
+      "run_ids": [
+        "ineq-phase1-transfer-package-relief",
+        "ineq-phase1-transfer-package-shock"
+      ],
+      "summary": "Combined relief and shock runs across the installed transfer channels."
+    },
+    {
+      "family_id": "transfer-composite",
+      "label": "Phase-1 Transfer Composite Ladder",
+      "maturity": "public",
+      "run_ids": [
+        "ineq-phase1-transfer-composite-small",
+        "ineq-phase1-transfer-composite-medium",
+        "ineq-phase1-transfer-composite-large"
+      ],
+      "summary": "Matched-bin composite ladder runs across UI, federal, and state/local transfer channels."
+    }
+  ],
+  "generated_at": "2026-04-05T13:03:39.514305+00:00",
+  "included_family_ids": [
+    "baseline",
+    "ui",
+    "federal-transfers",
+    "state-local-transfers",
+    "transfer-package",
+    "transfer-composite"
+  ],
+  "included_family_maturities": [
+    "public"
+  ],
   "presets_path": "presets.json",
   "runs": [
     {
       "data_path": "runs/ineq-phase1-baseline-observed.json",
+      "family_id": "baseline",
+      "family_label": "Phase-1 Baseline",
+      "family_maturity": "public",
       "forecast_end": "2029.4",
       "forecast_start": "2026.1",
       "group": "Phase-1 Baseline",
@@ -478,76 +547,125 @@
       "run_id": "ineq-phase1-baseline-observed",
       "scenario_name": "ineq_phase1_distribution_baseline_observed",
       "summary": "Solved baseline path with integrated distribution outputs.",
-      "timestamp": "20260404_212721"
+      "timestamp": "20260405_124256"
     },
     {
       "data_path": "runs/ineq-phase1-ui-relief.json",
+      "family_id": "ui",
+      "family_label": "Phase-1 UI",
+      "family_maturity": "public",
       "forecast_end": "2029.4",
       "forecast_start": "2026.1",
-      "group": "Phase-1 UI",
-      "label": "Ui Relief",
+      "group": "Phase-1 UI Ladder",
+      "label": "UI Medium",
       "run_id": "ineq-phase1-ui-relief",
       "scenario_name": "ineq_phase1_distribution_ui_relief",
-      "summary": "Solved UI transfer-channel probe with integrated distribution outputs.",
-      "timestamp": "20260404_212731"
+      "summary": "Solved matched UI ladder medium rung with integrated distribution outputs.",
+      "timestamp": "20260405_124307"
     },
     {
       "data_path": "runs/ineq-phase1-ui-shock.json",
+      "family_id": "ui",
+      "family_label": "Phase-1 UI",
+      "family_maturity": "public",
       "forecast_end": "2029.4",
       "forecast_start": "2026.1",
       "group": "Phase-1 UI",
-      "label": "Ui Shock",
+      "label": "UI Shock",
       "run_id": "ineq-phase1-ui-shock",
       "scenario_name": "ineq_phase1_distribution_ui_shock",
       "summary": "Solved UI transfer-channel probe with integrated distribution outputs.",
-      "timestamp": "20260404_212741"
+      "timestamp": "20260405_124317"
     },
     {
-      "data_path": "runs/ineq-phase1-snap-relief.json",
+      "data_path": "runs/ineq-phase1-ui-small.json",
+      "family_id": "ui",
+      "family_label": "Phase-1 UI",
+      "family_maturity": "public",
       "forecast_end": "2029.4",
       "forecast_start": "2026.1",
-      "group": "Phase-1 SNAP",
-      "label": "Snap Relief",
-      "run_id": "ineq-phase1-snap-relief",
-      "scenario_name": "ineq_phase1_distribution_snap_relief",
-      "summary": "Solved SNAP-style transfer-channel probe with integrated distribution outputs.",
-      "timestamp": "20260404_212751"
+      "group": "Phase-1 UI Ladder",
+      "label": "UI Small",
+      "run_id": "ineq-phase1-ui-small",
+      "scenario_name": "ineq_phase1_distribution_ui_small",
+      "summary": "Solved matched UI ladder rung with integrated distribution outputs.",
+      "timestamp": "20260405_124327"
     },
     {
-      "data_path": "runs/ineq-phase1-snap-shock.json",
+      "data_path": "runs/ineq-phase1-ui-large.json",
+      "family_id": "ui",
+      "family_label": "Phase-1 UI",
+      "family_maturity": "public",
       "forecast_end": "2029.4",
       "forecast_start": "2026.1",
-      "group": "Phase-1 SNAP",
-      "label": "Snap Shock",
-      "run_id": "ineq-phase1-snap-shock",
-      "scenario_name": "ineq_phase1_distribution_snap_shock",
-      "summary": "Solved SNAP-style transfer-channel probe with integrated distribution outputs.",
-      "timestamp": "20260404_212801"
+      "group": "Phase-1 UI Ladder",
+      "label": "UI Large",
+      "run_id": "ineq-phase1-ui-large",
+      "scenario_name": "ineq_phase1_distribution_ui_large",
+      "summary": "Solved matched UI ladder rung with integrated distribution outputs.",
+      "timestamp": "20260405_124347"
     },
     {
-      "data_path": "runs/ineq-phase1-social-security-relief.json",
+      "data_path": "runs/ineq-phase1-federal-transfer-relief.json",
+      "family_id": "federal-transfers",
+      "family_label": "Phase-1 Federal Transfers",
+      "family_maturity": "public",
       "forecast_end": "2029.4",
       "forecast_start": "2026.1",
-      "group": "Phase-1 Social Security",
-      "label": "Social Security Relief",
-      "run_id": "ineq-phase1-social-security-relief",
-      "scenario_name": "ineq_phase1_distribution_social_security_relief",
-      "summary": "Solved Social Security transfer-channel probe with integrated distribution outputs.",
-      "timestamp": "20260404_212811"
+      "group": "Phase-1 Federal Transfers",
+      "label": "Federal Transfer Relief",
+      "run_id": "ineq-phase1-federal-transfer-relief",
+      "scenario_name": "ineq_phase1_distribution_federal_transfer_relief",
+      "summary": "Solved broad federal household-transfer probe with integrated distribution outputs.",
+      "timestamp": "20260405_124357"
     },
     {
-      "data_path": "runs/ineq-phase1-social-security-shock.json",
+      "data_path": "runs/ineq-phase1-federal-transfer-shock.json",
+      "family_id": "federal-transfers",
+      "family_label": "Phase-1 Federal Transfers",
+      "family_maturity": "public",
       "forecast_end": "2029.4",
       "forecast_start": "2026.1",
-      "group": "Phase-1 Social Security",
-      "label": "Social Security Shock",
-      "run_id": "ineq-phase1-social-security-shock",
-      "scenario_name": "ineq_phase1_distribution_social_security_shock",
-      "summary": "Solved Social Security transfer-channel probe with integrated distribution outputs.",
-      "timestamp": "20260404_212820"
+      "group": "Phase-1 Federal Transfers",
+      "label": "Federal Transfer Shock",
+      "run_id": "ineq-phase1-federal-transfer-shock",
+      "scenario_name": "ineq_phase1_distribution_federal_transfer_shock",
+      "summary": "Solved broad federal household-transfer probe with integrated distribution outputs.",
+      "timestamp": "20260405_124407"
+    },
+    {
+      "data_path": "runs/ineq-phase1-state-local-transfer-relief.json",
+      "family_id": "state-local-transfers",
+      "family_label": "Phase-1 State/Local Transfers",
+      "family_maturity": "public",
+      "forecast_end": "2029.4",
+      "forecast_start": "2026.1",
+      "group": "Phase-1 State/Local Transfers",
+      "label": "State Local Transfer Relief",
+      "run_id": "ineq-phase1-state-local-transfer-relief",
+      "scenario_name": "ineq_phase1_distribution_state_local_transfer_relief",
+      "summary": "Solved state/local household-transfer probe with integrated distribution outputs.",
+      "timestamp": "20260405_124417"
+    },
+    {
+      "data_path": "runs/ineq-phase1-state-local-transfer-shock.json",
+      "family_id": "state-local-transfers",
+      "family_label": "Phase-1 State/Local Transfers",
+      "family_maturity": "public",
+      "forecast_end": "2029.4",
+      "forecast_start": "2026.1",
+      "group": "Phase-1 State/Local Transfers",
+      "label": "State Local Transfer Shock",
+      "run_id": "ineq-phase1-state-local-transfer-shock",
+      "scenario_name": "ineq_phase1_distribution_state_local_transfer_shock",
+      "summary": "Solved state/local household-transfer probe with integrated distribution outputs.",
+      "timestamp": "20260405_124426"
     },
     {
       "data_path": "runs/ineq-phase1-transfer-package-relief.json",
+      "family_id": "transfer-package",
+      "family_label": "Phase-1 Transfer Package",
+      "family_maturity": "public",
       "forecast_end": "2029.4",
       "forecast_start": "2026.1",
       "group": "Phase-1 Transfer Package",
@@ -555,10 +673,13 @@
       "run_id": "ineq-phase1-transfer-package-relief",
       "scenario_name": "ineq_phase1_distribution_transfer_package_relief",
       "summary": "Solved combined transfer-channel probe with integrated distribution outputs.",
-      "timestamp": "20260404_212830"
+      "timestamp": "20260405_124436"
     },
     {
       "data_path": "runs/ineq-phase1-transfer-package-shock.json",
+      "family_id": "transfer-package",
+      "family_label": "Phase-1 Transfer Package",
+      "family_maturity": "public",
       "forecast_end": "2029.4",
       "forecast_start": "2026.1",
       "group": "Phase-1 Transfer Package",
@@ -566,7 +687,49 @@
       "run_id": "ineq-phase1-transfer-package-shock",
       "scenario_name": "ineq_phase1_distribution_transfer_package_shock",
       "summary": "Solved combined transfer-channel probe with integrated distribution outputs.",
-      "timestamp": "20260404_212840"
+      "timestamp": "20260405_124446"
+    },
+    {
+      "data_path": "runs/ineq-phase1-transfer-composite-small.json",
+      "family_id": "transfer-composite",
+      "family_label": "Phase-1 Transfer Composite Ladder",
+      "family_maturity": "public",
+      "forecast_end": "2029.4",
+      "forecast_start": "2026.1",
+      "group": "Phase-1 Transfer Composite Ladder",
+      "label": "Transfer Composite Small",
+      "run_id": "ineq-phase1-transfer-composite-small",
+      "scenario_name": "ineq_phase1_distribution_transfer_composite_small",
+      "summary": "Solved matched transfer-composite ladder rung with integrated distribution outputs.",
+      "timestamp": "20260405_124456"
+    },
+    {
+      "data_path": "runs/ineq-phase1-transfer-composite-medium.json",
+      "family_id": "transfer-composite",
+      "family_label": "Phase-1 Transfer Composite Ladder",
+      "family_maturity": "public",
+      "forecast_end": "2029.4",
+      "forecast_start": "2026.1",
+      "group": "Phase-1 Transfer Composite Ladder",
+      "label": "Transfer Composite Medium",
+      "run_id": "ineq-phase1-transfer-composite-medium",
+      "scenario_name": "ineq_phase1_distribution_transfer_composite_medium",
+      "summary": "Solved matched transfer-composite ladder rung with integrated distribution outputs.",
+      "timestamp": "20260405_124506"
+    },
+    {
+      "data_path": "runs/ineq-phase1-transfer-composite-large.json",
+      "family_id": "transfer-composite",
+      "family_label": "Phase-1 Transfer Composite Ladder",
+      "family_maturity": "public",
+      "forecast_end": "2029.4",
+      "forecast_start": "2026.1",
+      "group": "Phase-1 Transfer Composite Ladder",
+      "label": "Transfer Composite Large",
+      "run_id": "ineq-phase1-transfer-composite-large",
+      "scenario_name": "ineq_phase1_distribution_transfer_composite_large",
+      "summary": "Solved matched transfer-composite ladder rung with integrated distribution outputs.",
+      "timestamp": "20260405_124516"
     }
   ],
   "schema_version": 1,

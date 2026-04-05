@@ -2,13 +2,13 @@
   "variables": {
     "IPOVALL": {
       "short_name": "Overall Poverty Rate",
-      "description": "Phase-1 solved overall poverty rate from the in-model distribution identity block. It responds to unemployment and the transfer-resource bridge inside the composed stock run.",
+      "description": "Phase-1 solved overall poverty rate from the in-model distribution identity block. It responds to unemployment, the aggregate transfer-resource bridge, and a parsimonious deviation basis that separates UI-heavy support from federal-versus-state/local transfer mix shifts.",
       "units": "share",
       "category": "overlay"
     },
     "IPOVCH": {
       "short_name": "Child Poverty Rate",
-      "description": "Phase-1 solved child poverty rate from the in-model distribution identity block. It is built from the overall poverty state plus a child-specific gap identity.",
+      "description": "Phase-1 solved child poverty rate from the in-model distribution identity block. It is built from the overall poverty state plus a child-specific gap identity that now shares the aggregate transfer bridge and the same parsimonious transfer-mix deviation basis.",
       "units": "share",
       "category": "overlay"
     },
@@ -31,14 +31,14 @@
       "category": "policy"
     },
     "TRGH": {
-      "short_name": "Government Transfers to Households",
-      "description": "Stock Fair household transfer flow used as the SNAP-side transmission channel in phase-1 runs.",
+      "short_name": "Federal Transfers to Households",
+      "description": "Stock Fair federal household-transfer flow used as the broad federal-transfer transmission channel in phase-1 runs.",
       "units": "level",
       "category": "policy"
     },
     "TRSH": {
-      "short_name": "Social Security Transfers",
-      "description": "Stock Fair Social Security transfer flow used as the Social Security transmission channel in phase-1 runs.",
+      "short_name": "State/Local Household Transfers",
+      "description": "Stock Fair state/local household-transfer flow used as the state/local transfer transmission channel in phase-1 runs. In stock construction it is tied to state/local social-benefit payments rather than a clean Social Security-only series.",
       "units": "level",
       "category": "policy"
     },
@@ -184,11 +184,11 @@
   "equations": {
     "9": {
       "label": "Overall poverty identity",
-      "formula": "LPOVALL = PV0 + PVU*UR + PVT*TRLOWZ; IPOVALL = EXP(LPOVALL)/(1+EXP(LPOVALL))"
+      "formula": "UBZ = (UB-UBBAR)/UBSTD; TRGHZ = (TRGH-TRGHBAR)/TRGHSTD; TRSHZ = (TRSH-TRSHBAR)/TRSHSTD; UIDEV = UBZ - 0.5*(TRGHZ+TRSHZ); GHSHDV = TRGHZ - TRSHZ; LPOVALL = PV0 + PVU*UR + PVT*TRLOWZ + PVUI*UIDEV + PVGH*GHSHDV; IPOVALL = EXP(LPOVALL)/(1+EXP(LPOVALL))"
     },
     "19": {
       "label": "Child poverty identity",
-      "formula": "LPOVCHGAP = CG0 + CGU*UR + CGT*TRLOWZ; IPOVCH = EXP(LPOVALL+LPOVCHGAP)/(1+EXP(LPOVALL+LPOVCHGAP))"
+      "formula": "LPOVCHGAP = CG0 + CGU*UR + CGT*TRLOWZ + CGUI*UIDEV + CGGH*GHSHDV; IPOVCH = EXP(LPOVALL+LPOVCHGAP)/(1+EXP(LPOVALL+LPOVCHGAP))"
     },
     "20": {
       "label": "Household Gini identity",

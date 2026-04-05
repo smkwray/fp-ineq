@@ -8,7 +8,7 @@
   "note": "Output targets are written only for the observed annual-anchor span; no synthetic pre-observation history is published.",
   "observed_end": "2025.4",
   "observed_start": "2015.1",
-  "refreshed_at": "2026-04-04T21:29:30.023316+00:00",
+  "refreshed_at": "2026-04-05T22:56:17.992059+00:00",
   "source_name": "public_snapshot_fed_dfa",
   "source_url": "https://www.federalreserve.gov/releases/z1/dataviz/dfa/distribute/chart/",
   "units": "ratio",

@@ -69,13 +69,14 @@ When the commands are run locally, ignored runtime directories are generated for
 
 The checked-in `docs/` bundle contains the published results explorer:
 
-- 9 solved runs
-- 450 available solved series
-- 633 variable dictionary records
-- 279 equation records
+- 14 solved runs
+- 446 available solved series
+- 648 variable dictionary records
+- 655 equation records
 - default preset: `headline-poverty-resources`
+- manifest-level family metadata with maturity tags for the published run families
 
-The explorer is intentionally broader than the nine scenario runs alone:
+The explorer is intentionally broader than the 14 public run files:
 
 - every variable in the bundle has a definition if one exists in the stock dictionary, the model-runs dictionary, or the local inequality overlay dictionary
 - every variable links to its relevant equations in the Equation Explorer
@@ -96,6 +97,37 @@ The explorer is intentionally broader than the nine scenario runs alone:
 7. fp-ineq publish-phase1-full
 ```
 
+`export-phase1-full` now accepts optional family filters:
+
+```text
+fp-ineq export-phase1-full --family-maturity public
+fp-ineq export-phase1-full --family-id ui --family-id transfer-composite
+```
+
+For the private UI ladder calibration workflow:
+
+```text
+fp-ineq run-phase1-ui-ladder --fp-home /path/to/FM
+```
+
+For the private matched transfer-composite ladder calibration workflow:
+
+```text
+fp-ineq run-phase1-transfer-composite-ladder --fp-home /path/to/FM
+```
+
+For the private credit-family scale decision workflow:
+
+```text
+fp-ineq run-phase2-credit-scale-sweep --fp-home /path/to/FM
+```
+
+For the private UI matching-offset stress workflow:
+
+```text
+fp-ineq run-phase2-ui-offset --fp-home /path/to/FM
+```
+
 Environment notes:
 
 - stock Fair is supplied through `--fp-home` or the `FP_HOME` environment variable
@@ -110,8 +142,8 @@ Environment notes:
 The model centers on transfer-side scenarios built around channels already present in stock Fair:
 
 - unemployment insurance, through the stock unemployment benefits variable (`UB`)
-- SNAP-style household transfers, through the stock government-to-household transfer variable (`TRGH`)
-- Social Security, through the stock Social Security transfer variable (`TRSH`)
+- broad federal household transfers, through the stock government-to-household transfer variable (`TRGH`)
+- state/local household transfers, through the stock `TRSH` transfer variable
 - a combined transfer package that moves all three levers together
 
 The headline output variables are:
@@ -134,7 +166,7 @@ At a high level, the composer does four things:
 1. installs the neutral policy constants
 2. installs the shareable identity include hook
 3. patches three stock Fair transfer transmission points
-4. leaves experimental credit and wealth paths out of the published solve
+4. keeps experimental credit and private UI-offset families out of the published family set and keeps the shadow wealth block suppressed from the public bundle even though the private distribution solve installs it neutrally
 
 <details>
 <summary>Exact stock-deck modifications</summary>
@@ -161,7 +193,7 @@ becomes:
 LHS UB=EXP(LUB)*UIFAC;
 ```
 
-3. Add the SNAP-style quarterly transfer increment (`SNAPDELTAQ`) into stock household transfers:
+3. Add the federal household-transfer quarterly increment (`SNAPDELTAQ`) into stock household transfers:
 
 ```text
 GENR TRGH=TRGHQ*GDPD;
@@ -173,7 +205,7 @@ becomes:
 GENR TRGH=(TRGHQ+SNAPDELTAQ)*GDPD;
 ```
 
-4. Multiply stock Social Security transfers by the Social Security scaling factor (`SSFAC`):
+4. Multiply stock `TRSH` transfers by the `SSFAC` scaling factor:
 
 ```text
 GENR TRSH=TRSHQ*GDPD;
@@ -192,39 +224,76 @@ CREATE UIFAC=1;
 CREATE SNAPDELTAQ=0;
 CREATE SSFAC=1;
 CREATE CRWEDGE=0;
+CREATE UIMATCH=0;
 CREATE HPEQW=0;
 ```
 
-Only `UIFAC`, `SNAPDELTAQ`, and `SSFAC` are used in the published scenario family. `CRWEDGE` and `HPEQW` are neutral placeholders for experimental or deferred paths.
+Only `UIFAC`, `SNAPDELTAQ`, and `SSFAC` are used in the published scenario family. `CRWEDGE`, `UIMATCH`, and `HPEQW` are neutral placeholders for private or deferred paths.
+
+Current private credit-family status:
+
+- `run-phase2-credit-scale-sweep` probes `CRWEDGE` magnitudes `1`, `5`, and `10`
+- even at `|CRWEDGE|=10`, the best observed demand move is only about `4.01e-05`
+- the current private recommendation is `keep_private_and_do_not_build_credit_ladder_yet`
+
+Current private wealth-family status:
+
+- `fp-ineq assess-phase2-wealth-maturity` evaluates the shadow `IWGAP150` block using the current coefficient diagnostics and integrated public-scenario responses
+- the current recommendation is `candidate_for_expert_only_preset_keep_public_wealth_family_deferred`
+- the wealth block is strong enough to remain a serious expert-only candidate, but there is still no dedicated public wealth-family baseline or wealth shock family
+- current reassessment call: keep `IWGAP150` fully private for now rather than adding expert-only export governance in this tranche
+
+Current private UI-offset status:
+
+- `fp-ineq run-phase2-ui-offset` installs a private matching-offset patch on `JF` under its own neutral family baseline
+- the latest private run calibrates `UIMATCH` to about `0.000065965955`
+- that offset claws back about 25% of the medium UI rung's first-year `ΔUR` improvement while keeping first-year `ΔTRLOWZ` within about `0.006%` of the no-offset UI case
+- the same stress run lowers `YD`, but it does not lower final `GDPR`, so it is currently best read as a private sensitivity check rather than a replacement public UI interpretation
+- current reassessment call: keep the public UI family wording at the existing demand-dominant caveat rather than promoting the offset family into the public release story
 
 </details>
 
 ## Scenarios
 
-The published bundle contains exactly 9 runs:
+The published bundle contains exactly 14 runs:
 
-| Run ID | UI factor (`UIFAC`) | SNAP increment (`SNAPDELTAQ`) | SS factor (`SSFAC`) | Interpretation |
+| Run ID | UI factor (`UIFAC`) | Federal-transfer increment (`SNAPDELTAQ`) | `TRSH` factor (`SSFAC`) | Interpretation |
 | --- | ---: | ---: | ---: | --- |
 | `baseline-observed` | `1.00` | `0.0` | `1.00` | Shared neutral baseline with the same installed mechanisms as every other run. |
-| `ui-relief` | `1.02` | `0.0` | `1.00` | Higher unemployment insurance generosity through the stock unemployment benefits channel. |
+| `ui-relief` | `1.02` | `0.0` | `1.00` | Published medium UI ladder rung; same policy level as the original UI relief probe. |
 | `ui-shock` | `0.98` | `0.0` | `1.00` | Lower unemployment insurance generosity through the stock unemployment benefits channel. |
-| `snap-relief` | `1.00` | `2.0` | `1.00` | Higher SNAP-style household transfers through the stock government-to-household transfer channel. |
-| `snap-shock` | `1.00` | `-2.0` | `1.00` | Lower SNAP-style household transfers through the stock government-to-household transfer channel. |
-| `social-security-relief` | `1.00` | `0.0` | `1.02` | Higher Social Security benefits through the stock Social Security transfer channel. |
-| `social-security-shock` | `1.00` | `0.0` | `0.99` | Lower Social Security benefits through the stock Social Security transfer channel. |
-| `transfer-package-relief` | `1.02` | `2.0` | `1.02` | Combined transfer-channel relief across unemployment benefits, household transfers, and Social Security. |
-| `transfer-package-shock` | `0.98` | `-2.0` | `0.99` | Combined transfer-channel shock across unemployment benefits, household transfers, and Social Security. |
+| `ui-small` | `1.0141888330491307` | `0.0` | `1.00` | Small matched UI ladder rung normalized to the shared first-year `ΔTRLOWZ` bin. |
+| `ui-large` | `1.023625843049206` | `0.0` | `1.00` | Large matched UI ladder rung normalized to the shared first-year `ΔTRLOWZ` bin. |
+| `federal-transfer-relief` | `1.00` | `2.0` | `1.00` | Higher federal household transfers through the stock government-to-household transfer channel. |
+| `federal-transfer-shock` | `1.00` | `-2.0` | `1.00` | Lower federal household transfers through the stock government-to-household transfer channel. |
+| `state-local-transfer-relief` | `1.00` | `0.0` | `1.02` | Higher state/local household transfers through the stock `TRSH` transfer channel. |
+| `state-local-transfer-shock` | `1.00` | `0.0` | `0.99` | Lower state/local household transfers through the stock `TRSH` transfer channel. |
+| `transfer-package-relief` | `1.02` | `2.0` | `1.02` | Combined transfer-channel relief across unemployment benefits, federal household transfers, and state/local household transfers. |
+| `transfer-package-shock` | `0.98` | `-2.0` | `0.99` | Combined transfer-channel shock across unemployment benefits, federal household transfers, and state/local household transfers. |
+| `transfer-composite-small` | `1.0125839776982168` | `1.2583977698216835` | `1.0125839776982168` | Small matched transfer-composite ladder rung normalized to the shared first-year `ΔTRLOWZ` bin. |
+| `transfer-composite-medium` | `1.018637285379202` | `1.8637285379202133` | `1.018637285379202` | Medium matched transfer-composite ladder rung normalized to the shared first-year `ΔTRLOWZ` bin. |
+| `transfer-composite-large` | `1.0225154841560722` | `2.2515484156072145` | `1.0225154841560722` | Large matched transfer-composite ladder rung normalized to the shared first-year `ΔTRLOWZ` bin. |
 
 Interpretation notes:
 
 - These are channel probes, not calibrated policy packages with matched fiscal scale.
-- The SNAP scenarios should be read as SNAP-style transfer probes through the broader household transfer channel (`TRGH`).
+- `TRGH` is interpreted publicly as a broad federal household-transfer channel, not as SNAP specifically.
+- `TRSH` is interpreted publicly as a state/local household-transfer channel. In the checked stock construction it is not treated as a clean Social Security-only series.
+- The matched ladders normalize on the mean first-year `ΔTRLOWZ` over `2026.1` to `2026.4`.
+- The federal-transfer scenarios should be read as broad federal household-transfer probes through `TRGH`.
+- The state/local-transfer scenarios should be read as broad state/local household-transfer probes through `TRSH`.
 - The transfer-package scenarios should be read as combined transfer probes, not as final package designs.
+- The current shared bins were verified privately against the stock FM path and are anchored to the observed `ui-relief` response: `0.5x`, `1.0x`, and `1.5x` of that first-year `ΔTRLOWZ`.
+- `ui-relief` is the published medium UI ladder rung, and the fresh integrated private distribution solve now uses that rung directly rather than carrying a separate `ui-medium` alias.
+- The private calibration reports live under `runtime/phase1_ui/ladder/reports/` and `runtime/phase1_transfer_core/ladder/reports/`.
+- The public 14-run UI family still has no dedicated adverse labor-supply or matching-offset block installed.
+- The private `ui-matching-offset` family should be read as a bounded sensitivity check on that asymmetry, not as part of the published release. The current two-point private envelope hits about 25% and 50% first-year `ΔUR` clawback while keeping first-year `ΔTRLOWZ` nearly unchanged, but neither stress lowers final `GDPR`.
+- The descriptive contrary-channel audit shows endogenous rate counter-moves across all current public transfer families, so no additional synthetic contrary public families are added at this stage.
 
 <details>
-<summary>Why all nine scenarios are compared to one baseline</summary>
+<summary>Why all 14 published scenarios are compared to one baseline</summary>
 
-All 9 runs share one baseline. The shared baseline is valid because baseline and scenario runs all use:
+All 14 published runs share one baseline. The shared baseline is valid because baseline and scenario runs all use:
 
 - the same composed stock deck
 - the same installed overlay files
@@ -252,9 +321,14 @@ The distribution path adds a separate solved identity block on top of the stock 
 GENR LGDPR=LOG(GDPR);
 GENR TRLOWZ=(UB+TRGH+TRSH)/(POP*PH);
 GENR LRYDPC=LOG(RYDPC);
+GENR UBZ=(UB-UBBAR)/UBSTD;
+GENR TRGHZ=(TRGH-TRGHBAR)/TRGHSTD;
+GENR TRSHZ=(TRSH-TRSHBAR)/TRSHSTD;
+GENR UIDEV=UBZ-0.5*(TRGHZ+TRSHZ);
+GENR GHSHDV=TRGHZ-TRSHZ;
 
-IDENT LPOVALL=PV0+PVU*UR+PVT*TRLOWZ;
-IDENT LPOVCHGAP=CG0+CGU*UR+CGT*TRLOWZ;
+IDENT LPOVALL=PV0+PVU*UR+PVT*TRLOWZ+PVUI*UIDEV+PVGH*GHSHDV;
+IDENT LPOVCHGAP=CG0+CGU*UR+CGT*TRLOWZ+CGUI*UIDEV+CGGH*GHSHDV;
 IDENT LGINIHH=GN0+GNU*UR+GNT*TRLOWZ;
 IDENT LMEDINC=MD0+MDR*LRYDPC+MDU*UR;
 
@@ -268,8 +342,8 @@ IDENT IMEDRINC=EXP(LMEDINC);
 
 Interpretation:
 
-- The overall poverty rate (`IPOVALL`) and child poverty rate (`IPOVCH`) are the strongest distribution outputs. Both are logit-transformed identities driven by the unemployment rate (`UR`) and the low-income transfer bridge (`TRLOWZ`).
-- The low-income transfer bridge (`TRLOWZ`) aggregates stock transfer flows — unemployment benefits, household transfers, and Social Security — scaled by population and prices.
+- The overall poverty rate (`IPOVALL`) and child poverty rate (`IPOVCH`) are the strongest distribution outputs. Both are logit-transformed identities anchored on the unemployment rate (`UR`) and the low-income transfer bridge (`TRLOWZ`), with an additional internal deviation basis that separates UI-heavy support from federal-versus-state/local transfer mix shifts.
+- The low-income transfer bridge (`TRLOWZ`) aggregates stock transfer flows — unemployment benefits, federal household transfers, and state/local household transfers — scaled by population and prices.
 - Real disposable income per capita (`RYDPC`) is the preferred household-resource headline.
 - The household Gini coefficient (`IGINIHH`) and median real income proxy (`IMEDRINC`) are reduced-form diagnostics, not headline measures.
 
@@ -282,6 +356,7 @@ The coefficient delivery is explicit and limited:
 - The fit uses annual observations.
 - The checked-in target history begins in 2015.
 - The coefficient report uses the observed overlap window from 2015 to 2025, giving an effective sample size of 11 annual observations.
+- For `IPOVALL` and `IPOVCH`, the validated base fit on `UR` and `TRLOWZ` is preserved and only the transfer-mix deviation terms are added with ridge shrinkage.
 
 The coefficients are model-conditional:
 
@@ -363,9 +438,9 @@ For each non-baseline run:
 Channel mapping:
 
 - UI runs must move unemployment benefits (`UB`).
-- SNAP runs must move household transfers (`TRGH`).
-- Social Security runs must move Social Security transfers (`TRSH`).
-- Transfer-package runs must move unemployment benefits (`UB`), household transfers (`TRGH`), and Social Security transfers (`TRSH`).
+- Federal-transfer runs must move household transfers (`TRGH`).
+- State/local-transfer runs must move `TRSH`.
+- Transfer-package runs must move unemployment benefits (`UB`), federal household transfers (`TRGH`), and state/local household transfers (`TRSH`).
 
 ### Distribution-block validation
 
@@ -430,10 +505,10 @@ The published site reflects the run bundle and dictionary:
 
 ## In Short
 
-- The model runs nine transfer-policy scenarios through the Fair model.
+- The published bundle contains 14 public transfer-family runs backed by one shared baseline.
 - The main published results are overall poverty, child poverty, and real disposable income per person.
 - The site also includes equation links, variable definitions, and supporting distribution measures for readers who want the technical detail.
 - Provisional diagnostics: household Gini coefficient, median real income proxy
 - Distribution outputs are one-way (macro drives distribution; no feedback into the macro block)
 - The published bundle is derived from solved model output only
-- Credit, wealth, and experimental paths are not part of the published model scope
+- Credit and the private `ui-matching-offset` family are outside the published model scope; the shadow wealth block is installed privately but suppressed from the public bundle

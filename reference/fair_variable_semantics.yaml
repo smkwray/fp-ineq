@@ -1,0 +1,137 @@
+UB:
+  kind: stock_fair_channel
+  public_label: unemployment benefits
+  allowed_public:
+    - unemployment benefits
+    - UI channel
+  avoid_public: []
+  notes: Program-specific UI language is acceptable for this channel.
+
+TRGH:
+  kind: stock_fair_channel
+  public_label: federal household transfers
+  allowed_public:
+    - federal household transfers
+    - broad federal household-transfer channel
+  avoid_public:
+    - SNAP
+    - SNAP benefits
+  notes: Use the broad federal-transfer label unless a narrower probe is separately justified.
+
+TRSH:
+  kind: stock_fair_channel
+  public_label: state/local household transfers
+  allowed_public:
+    - state/local household transfers
+  avoid_public:
+    - Social Security
+    - Social Security benefits
+  notes: Current stock mapping is state/local social benefits to persons, not a defensible Social Security-only channel.
+
+UIFAC:
+  kind: overlay_lever
+  public_label: UI factor
+  allowed_public:
+    - UI factor
+    - UI generosity multiplier
+  avoid_public: []
+  notes: Internal overlay lever used to scale the stock UB channel.
+
+SNAPDELTAQ:
+  kind: overlay_lever
+  public_label: federal household-transfer increment
+  allowed_public:
+    - federal household-transfer increment
+    - TRGH additive lever
+    - legacy SNAPDELTAQ lever
+  avoid_public:
+    - SNAP benefit amount
+    - SNAP dollars
+  notes: Keep the legacy lever name internal; public language should stay at the TRGH channel level.
+
+SSFAC:
+  kind: overlay_lever
+  public_label: state/local household-transfer multiplier
+  allowed_public:
+    - state/local household-transfer multiplier
+    - TRSH scaling lever
+    - legacy SSFAC lever
+  avoid_public:
+    - Social Security factor
+  notes: Keep the legacy lever name internal; public language should stay at the TRSH channel level.
+
+RSA:
+  kind: stock_fair_variable
+  public_label: household after-tax short rate
+  allowed_public:
+    - household after-tax short rate
+  avoid_public:
+    - Fed funds rate
+  notes: This is a household borrowing/after-tax rate, not the policy rate itself.
+
+RMA:
+  kind: stock_fair_variable
+  public_label: household after-tax long rate
+  allowed_public:
+    - household after-tax long rate
+  avoid_public:
+    - Treasury yield
+  notes: This is a household borrowing/after-tax rate, not a Treasury series.
+
+AA:
+  kind: stock_fair_variable
+  public_label: household wealth
+  allowed_public:
+    - household wealth
+    - net household wealth
+  avoid_public:
+    - equity wealth only
+  notes: Broad household net-asset state.
+
+YD:
+  kind: stock_fair_variable
+  public_label: disposable income
+  allowed_public:
+    - disposable income
+  avoid_public:
+    - wage income
+    - GDP
+  notes: Do not collapse YD into labor income or output.
+
+GDPR:
+  kind: stock_fair_variable
+  public_label: real GDP
+  allowed_public:
+    - real GDP
+    - real output
+  avoid_public:
+    - GDP growth
+  notes: Treated as a level in this stack.
+
+UR:
+  kind: stock_fair_variable
+  public_label: unemployment rate
+  allowed_public:
+    - unemployment rate
+  avoid_public: []
+  notes: Safe to describe directly.
+
+POP:
+  kind: stock_fair_variable
+  public_label: population denominator
+  allowed_public:
+    - population denominator
+  avoid_public:
+    - households
+    - number of families
+  notes: Used as a denominator in transfer/resource bridges.
+
+PH:
+  kind: stock_fair_variable
+  public_label: household expenditure deflator
+  allowed_public:
+    - household expenditure deflator
+  avoid_public:
+    - GDP deflator
+    - CPI
+  notes: Use the household-price/deflator wording, not adjacent published indexes.

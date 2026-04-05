@@ -38,13 +38,36 @@ def _replace_once(text: str, search: str, replace: str) -> str:
     return text.replace(search, replace, 1)
 
 
-def _apply_manifest_patches(stock_text: str, manifest: dict[str, Any]) -> str:
+def _apply_manifest_patches(
+    stock_text: str,
+    manifest: dict[str, Any],
+    *,
+    experimental_patch_ids: list[str] | tuple[str, ...] = (),
+) -> str:
     text = stock_text
     for patch in manifest.get("patches", []):
         kind = str(patch.get("kind", "")).strip()
         if kind != "literal_replace":
             raise ValueError(f"Unsupported phase1 patch kind: {kind}")
         text = _replace_once(text, str(patch["search"]), str(patch["replace"]))
+    if experimental_patch_ids:
+        experimental_patches = {
+            str(patch.get("id", "")).strip(): patch for patch in manifest.get("experimental_patches", [])
+        }
+        missing = [patch_id for patch_id in experimental_patch_ids if patch_id not in experimental_patches]
+        if missing:
+            raise ValueError(f"Unknown experimental phase1 patch ids: {', '.join(missing)}")
+        for patch_id in experimental_patch_ids:
+            patch = experimental_patches[patch_id]
+            kind = str(patch.get("kind", "")).strip()
+            if kind == "literal_replace_group":
+                for replacement in patch.get("replacements", []):
+                    text = _replace_once(text, str(replacement["search"]), str(replacement["replace"]))
+                continue
+            if kind == "literal_replace":
+                text = _replace_once(text, str(patch["search"]), str(patch["replace"]))
+                continue
+            raise ValueError(f"Unsupported experimental phase1 patch kind: {kind}")
     return text
 
 
@@ -68,6 +91,7 @@ def compose_phase1_overlay(
     runtime_name_overrides: dict[str, str] | None = None,
     runtime_text_files: dict[str, str] | None = None,
     post_patches: list[dict[str, str]] | tuple[dict[str, str], ...] = (),
+    experimental_patch_ids: list[str] | tuple[str, ...] = (),
 ) -> dict[str, object]:
     paths = repo_paths()
     manifest = copy.deepcopy(_load_phase1_manifest())
@@ -99,7 +123,11 @@ def compose_phase1_overlay(
         target.write_text(text, encoding="utf-8")
 
     stock_input = (fp_home / "fminput.txt").read_text(encoding="utf-8", errors="replace")
-    composed = _apply_manifest_patches(stock_input, manifest)
+    composed = _apply_manifest_patches(
+        stock_input,
+        manifest,
+        experimental_patch_ids=experimental_patch_ids,
+    )
     for source_name, runtime_name in source_to_runtime.items():
         composed = composed.replace(source_name, runtime_name)
     for patch in post_patches:
@@ -109,6 +137,9 @@ def compose_phase1_overlay(
     return {
         "overlay_root": str(overlay_root),
         "entry_files": staged_entries,
-        "patch_ids": [str(item.get("id", "")) for item in manifest.get("patches", [])],
+        "patch_ids": [
+            *[str(item.get("id", "")) for item in manifest.get("patches", [])],
+            *[str(item) for item in experimental_patch_ids],
+        ],
         "runtime_text_files": sorted(runtime_text_files),
     }

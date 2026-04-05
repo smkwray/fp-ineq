@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from pathlib import Path
-
 from fp_ineq.data_pipeline import refresh_data
 from fp_ineq.paths import repo_paths
 
