@@ -128,12 +128,13 @@ The following outputs are also produced but are treated as provisional diagnosti
 
 All modifications to the stock Fair model are documented in the stock patch manifest under `overlay/stock_fm/`.
 
-At a high level, the composer does four things:
+At a high level, the composer does five things:
 
 1. installs the neutral policy constants
 2. installs the shareable identity include hook
 3. patches three stock Fair transfer transmission points
-4. keeps experimental credit and private UI-offset families out of the published family set and keeps the shadow wealth block suppressed from the public bundle even though the private distribution solve installs it neutrally
+4. patches financing back into the household tax identities used by the financed transfer-composite package
+5. keeps experimental credit and private UI-offset families out of the published family set and keeps the shadow wealth block suppressed from the public bundle even though the private distribution solve installs it neutrally
 
 <details>
 <summary>Exact stock-deck modifications</summary>
@@ -184,18 +185,52 @@ becomes:
 GENR TRSH=(TRSHQ*SSFAC)*GDPD;
 ```
 
+5. Route financing into the federal and state/local household-tax identities:
+
+```text
+IDENT THG=D1G*YT;
+```
+
+becomes:
+
+```text
+IDENT THG=D1G*YT+TFEDSHR*(UB-(UB/UIFAC)+SNAPDELTAQ*GDPD);
+```
+
+and
+
+```text
+IDENT THS=D1S*YT;
+```
+
+becomes:
+
+```text
+IDENT THS=D1S*YT+TSLSHR*(TRSH-(TRSH/SSFAC));
+```
+
 The neutral policy constants published in `overlay/stock_fm/ipolicy_base.txt` are:
 
 ```text
 CREATE UIFAC=1;
 CREATE SNAPDELTAQ=0;
 CREATE SSFAC=1;
+CREATE TFEDSHR=0;
+CREATE TSLSHR=0;
 CREATE CRWEDGE=0;
 CREATE UIMATCH=0;
 CREATE HPEQW=0;
 ```
 
-Only `UIFAC`, `SNAPDELTAQ`, and `SSFAC` are used in the published scenario family. `CRWEDGE`, `UIMATCH`, and `HPEQW` are neutral placeholders for private or deferred paths.
+The published transfer-composite family uses five public policy-layer constants:
+
+- `UIFAC` for the UI channel
+- `SNAPDELTAQ` for the federal household-transfer increment
+- `SSFAC` for the state/local household-transfer multiplier
+- `TFEDSHR` for the federal financing share routed into `THG`
+- `TSLSHR` for the state/local financing share routed into `THS`
+
+`CRWEDGE`, `UIMATCH`, and `HPEQW` remain neutral placeholders for private or deferred paths.
 
 Current private credit-family status:
 
@@ -403,8 +438,9 @@ For each non-baseline run:
 - The overall poverty rate (`IPOVALL`) and child poverty rate (`IPOVCH`) must move.
 - Relief runs require the overall poverty rate down and the child poverty rate down.
 - Shock runs require the overall poverty rate up and the child poverty rate up.
-- The low-income transfer bridge (`TRLOWZ`), real disposable income per capita (`RYDPC`), disposable income (`YD`), and real GDP (`GDPR`) must move in the expected direction.
 - The relevant transfer channel must move in the expected direction.
+- UI, federal-transfer, state/local-transfer, and transfer-package runs require the low-income transfer bridge (`TRLOWZ`), real disposable income per capita (`RYDPC`), disposable income (`YD`), and real GDP (`GDPR`) to move in the expected direction.
+- Transfer-composite runs require the low-income transfer bridge (`TRLOWZ`), real disposable income per capita (`RYDPC`), and the three transfer channels to move in the expected direction. They do not currently require `YD` or `GDPR` sign checks, because the financed package screen is carried by the package-balance diagnostics instead.
 - At least one of the unemployment rate (`UR`) or per-capita income (`PCY`) must confirm direction.
 
 The household Gini coefficient (`IGINIHH`) and median real income proxy (`IMEDRINC`) are tracked but excluded from hard validation gates.
