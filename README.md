@@ -69,14 +69,16 @@ When the commands are run locally, ignored runtime directories are generated for
 
 The checked-in `docs/` bundle contains the published results explorer:
 
-- 14 solved runs
-- 445 available solved series
-- 633 variable dictionary records
+- 18 solved runs available in the explorer
+- 453 available solved series
+- 638 variable dictionary records
 - 655 equation records
 - default preset: `headline-poverty-resources`
 - manifest-level family metadata with maturity tags for the published run families
 
-The explorer is intentionally broader than the 14 public run files:
+The live site now exposes both bundles at once while starting on the repaired bundle by default: visitors initially see one shared baseline plus three financed `transfer-composite` rungs, and they can add the legacy Phase-1 bundle from the Runs panel. Local ignored `runtime/` directories may contain additional private calibration, audit, and smoke-test solves, but those caches are not part of the published model and can be deleted or rebuilt locally as needed.
+
+The explorer is intentionally broader than the default 4-run repaired selection:
 
 - every variable in the bundle has a definition if one exists in the stock dictionary, the model-runs dictionary, or the local inequality overlay dictionary
 - every variable links to its relevant equations in the Equation Explorer
@@ -110,7 +112,7 @@ For the private UI ladder calibration workflow:
 fp-ineq run-phase1-ui-ladder --fp-home /path/to/FM
 ```
 
-For the private matched transfer-composite ladder calibration workflow:
+For the private catalog-defined transfer-composite ladder workflow:
 
 ```text
 fp-ineq run-phase1-transfer-composite-ladder --fp-home /path/to/FM
@@ -247,53 +249,49 @@ Current private UI-offset status:
 
 - `fp-ineq run-phase2-ui-offset` installs a private matching-offset patch on `JF` under its own neutral family baseline
 - the latest private run calibrates `UIMATCH` to about `0.000065965955`
-- that offset claws back about 25% of the medium UI rung's first-year `ΔUR` improvement while keeping first-year `ΔTRLOWZ` within about `0.006%` of the no-offset UI case
-- the same stress run lowers `YD`, but it does not lower final `GDPR`, so it is currently best read as a private sensitivity check rather than a replacement public UI interpretation
-- current reassessment call: keep the public UI family wording at the existing demand-dominant caveat rather than promoting the offset family into the public release story
+- that offset claws back about 25% of the medium transfer-composite family's first-year `ΔUR` improvement while keeping first-year `ΔTRLOWZ` very close to the no-offset case
+- the same stress run lowers `YD`, but it does not lower final `GDPR`, so it is currently best read as a private sensitivity check rather than a replacement public interpretation
+- current reassessment call: keep the UI-offset family private rather than promoting it into the public release story
 
 </details>
 
 ## Scenarios
 
-The published bundle contains exactly 14 runs:
+The published explorer contains 18 public runs, but the default selected comparison set is 4 repaired runs:
 
 | Run ID | UI factor (`UIFAC`) | Federal-transfer increment (`SNAPDELTAQ`) | `TRSH` factor (`SSFAC`) | Interpretation |
 | --- | ---: | ---: | ---: | --- |
 | `baseline-observed` | `1.00` | `0.0` | `1.00` | Shared neutral baseline with the same installed mechanisms as every other run. |
-| `ui-relief` | `1.02` | `0.0` | `1.00` | Published medium UI ladder rung; same policy level as the original UI relief probe. |
-| `ui-shock` | `0.98` | `0.0` | `1.00` | Lower unemployment insurance generosity through the stock unemployment benefits channel. |
-| `ui-small` | `1.0141888330491307` | `0.0` | `1.00` | Small matched UI ladder rung normalized to the shared first-year `ΔTRLOWZ` bin. |
-| `ui-large` | `1.023625843049206` | `0.0` | `1.00` | Large matched UI ladder rung normalized to the shared first-year `ΔTRLOWZ` bin. |
-| `federal-transfer-relief` | `1.00` | `2.0` | `1.00` | Higher federal household transfers through the stock government-to-household transfer channel. |
-| `federal-transfer-shock` | `1.00` | `-2.0` | `1.00` | Lower federal household transfers through the stock government-to-household transfer channel. |
-| `state-local-transfer-relief` | `1.00` | `0.0` | `1.02` | Higher state/local household transfers through the stock `TRSH` transfer channel. |
-| `state-local-transfer-shock` | `1.00` | `0.0` | `0.99` | Lower state/local household transfers through the stock `TRSH` transfer channel. |
-| `transfer-package-relief` | `1.02` | `2.0` | `1.02` | Combined transfer-channel relief across unemployment benefits, federal household transfers, and state/local household transfers. |
-| `transfer-package-shock` | `0.98` | `-2.0` | `0.99` | Combined transfer-channel shock across unemployment benefits, federal household transfers, and state/local household transfers. |
 | `transfer-composite-small` | `1.0125839776982168` | `1.2583977698216835` | `1.0125839776982168` | Small matched transfer-composite ladder rung normalized to the shared first-year `ΔTRLOWZ` bin. |
 | `transfer-composite-medium` | `1.018637285379202` | `1.8637285379202133` | `1.018637285379202` | Medium matched transfer-composite ladder rung normalized to the shared first-year `ΔTRLOWZ` bin. |
 | `transfer-composite-large` | `1.0225154841560722` | `2.2515484156072145` | `1.0225154841560722` | Large matched transfer-composite ladder rung normalized to the shared first-year `ΔTRLOWZ` bin. |
 
+Other public families remain available in the live explorer:
+
+- Legacy Phase-1 baseline: `ineq-phase1-baseline-observed`
+- Legacy UI: `ineq-phase1-ui-relief`, `ineq-phase1-ui-shock`, `ineq-phase1-ui-small`, `ineq-phase1-ui-large`
+- Legacy federal transfers: `ineq-phase1-federal-transfer-relief`, `ineq-phase1-federal-transfer-shock`
+- Legacy state/local transfers: `ineq-phase1-state-local-transfer-relief`, `ineq-phase1-state-local-transfer-shock`
+- Legacy transfer package: `ineq-phase1-transfer-package-relief`, `ineq-phase1-transfer-package-shock`
+- Legacy transfer composite ladder: `ineq-phase1-transfer-composite-small`, `ineq-phase1-transfer-composite-medium`, `ineq-phase1-transfer-composite-large`
+
 Interpretation notes:
 
-- These are channel probes, not calibrated policy packages with matched fiscal scale.
+- These are financed transfer-composite package probes built on a shared installed mechanism, not free-standing one-channel shocks.
 - `TRGH` is interpreted publicly as a broad federal household-transfer channel, not as SNAP specifically.
 - `TRSH` is interpreted publicly as a state/local household-transfer channel. In the checked stock construction it is not treated as a clean Social Security-only series.
 - The matched ladders normalize on the mean first-year `ΔTRLOWZ` over `2026.1` to `2026.4`.
-- The federal-transfer scenarios should be read as broad federal household-transfer probes through `TRGH`.
-- The state/local-transfer scenarios should be read as broad state/local household-transfer probes through `TRSH`.
-- The transfer-package scenarios should be read as combined transfer probes, not as final package designs.
-- The current shared bins were verified privately against the stock FM path and are anchored to the observed `ui-relief` response: `0.5x`, `1.0x`, and `1.5x` of that first-year `ΔTRLOWZ`.
-- `ui-relief` is the published medium UI ladder rung, and the fresh integrated private distribution solve now uses that rung directly rather than carrying a separate `ui-medium` alias.
-- The private calibration reports live under `runtime/phase1_ui/ladder/reports/` and `runtime/phase1_transfer_core/ladder/reports/`.
-- The public 14-run UI family still does not include a dedicated labor-supply, labor-force-participation, or matching-offset block.
-- A private `ui-matching-offset` stress family exists as a bounded two-point sensitivity envelope: one run claws back about 25% of the medium UI rung's first-year `ΔUR` improvement and another claws back about 50%, while both keep first-year `ΔTRLOWZ` nearly unchanged. Neither private stress lowers final `GDPR`, so those runs remain interpretation checks rather than grounds for a new public UI family. The public UI results should therefore still be read as demand-dominant probes with a small private sensitivity envelope, not as a fully balanced policy package.
-- The descriptive contrary-channel audit shows endogenous rate counter-moves across all current public transfer families, so no additional synthetic contrary public families are added at this stage.
+- The current shared bins were verified privately against the stock FM path and remain anchored to matched first-year `ΔTRLOWZ` bins.
+- Public exports are forecast-window only. The distribution block seeds history through `2025.4` and solves `IPOVALL`, `IPOVCH`, `IGINIHH`, and `IMEDRINC` endogenously from `2026.1` onward.
+- Legacy Phase-1 families remain publicly visible for comparison, but the repaired baseline + transfer-composite bundle is the default interpretation path.
+- Credit and private UI-offset families remain internal for audit or sensitivity work and are not part of the public bundle.
+- The descriptive contrary-channel audit and the private UI-offset envelope remain supporting internal diagnostics rather than separate public families.
+- The eventual `fp-r` / R-solver port is a later project phase. The current public site documents and publishes the working stock-Fair plus Python export path only; ongoing `fp-r` work is not part of this public release surface.
 
 <details>
-<summary>Why all 14 published scenarios are compared to one baseline</summary>
+<summary>Why the default 4-run repaired bundle is compared to one baseline</summary>
 
-All 14 published runs share one baseline. The shared baseline is valid because baseline and scenario runs all use:
+The default 4-run repaired bundle shares one baseline. The shared baseline is valid because baseline and scenario runs all use:
 
 - the same composed stock deck
 - the same installed overlay files

@@ -142,6 +142,7 @@ const dom = {
   runPanel: document.querySelector("#runPanel"),
   runPanelBackdrop: document.querySelector("#runPanelBackdrop"),
   runSelect: document.querySelector("#runSelect"),
+  runSelectHint: document.querySelector("#runSelectHint"),
   runSelectToggle: document.querySelector("#runSelectToggle"),
   presetSelect: document.querySelector("#presetSelect"),
   applyPresetButton: document.querySelector("#applyPresetButton"),
@@ -1732,6 +1733,9 @@ async function initialize() {
   }
 
   dom.pageTitle.textContent = manifest.title || "Model Runs Explorer";
+  if (dom.runSelectHint) {
+    dom.runSelectHint.textContent = manifest.run_panel_note || "Select one or more exported runs to overlay.";
+  }
 
   syncRunSelectExpansion();
   syncRunSelect();

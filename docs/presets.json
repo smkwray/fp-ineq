@@ -44,8 +44,7 @@
         "IGINIHH",
         "IMEDRINC",
         "LGINIHH",
-        "LMEDINC",
-        "LRYDPC"
+        "LMEDINC"
       ]
     },
     {
@@ -120,7 +119,6 @@
       "variables": [
         "TRLOWZ",
         "RYDPC",
-        "LRYDPC",
         "LPOVALL",
         "LGINIHH",
         "LMEDINC"
