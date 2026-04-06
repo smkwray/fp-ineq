@@ -1,0 +1,37 @@
+{
+  "bridge_metadata_path": "/Users/shanewray/malus/proj/fp-ineq/reports/phase1_distribution_block/bridge_metadata.json",
+  "bridge_results_path": "/Users/shanewray/malus/proj/fp-ineq/reports/phase1_distribution_block/bridge_results.csv",
+  "bridge_row_count": 27,
+  "family_ids": [
+    "baseline",
+    "federal-transfers",
+    "state-local-transfers",
+    "transfer-composite",
+    "transfer-package",
+    "ui"
+  ],
+  "family_maturities": [
+    "public"
+  ],
+  "forecast_window_end": "2029.4",
+  "forecast_window_start": "2026.1",
+  "out_dir": "/Users/shanewray/malus/proj/fp-ineq/reports/phase1_distribution_block",
+  "report_path": "/Users/shanewray/malus/proj/fp-ineq/runtime/phase1_distribution_block/reports/run_phase1_distribution_block.json",
+  "run_count": 14,
+  "run_ids": [
+    "ineq-baseline-observed",
+    "ineq-ui-relief",
+    "ineq-ui-shock",
+    "ineq-ui-small",
+    "ineq-ui-large",
+    "ineq-federal-transfer-relief",
+    "ineq-federal-transfer-shock",
+    "ineq-state-local-transfer-relief",
+    "ineq-state-local-transfer-shock",
+    "ineq-transfer-package-relief",
+    "ineq-transfer-package-shock",
+    "ineq-transfer-composite-small",
+    "ineq-transfer-composite-medium",
+    "ineq-transfer-composite-large"
+  ]
+}

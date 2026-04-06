@@ -6,7 +6,7 @@ import typer
 
 from .bridge import locate_fp_home
 from .data_pipeline import refresh_data
-from .export import export_phase1_full_bundle, publish_phase1_bundle_to_docs
+from .export import export_phase1_bridge_artifacts, export_phase1_full_bundle, publish_phase1_bundle_to_docs
 from .phase1_contrary_audit import assess_phase1_contrary_channels
 from .phase1_distribution_block import (
     build_phase1_distribution_overlay,
@@ -341,6 +341,46 @@ def export_phase1_full_cmd(
         family_ids=tuple(family_id) if family_id else None,
     )
     typer.echo(f"phase1 full bundle -> {payload['out_dir']}")
+
+
+@app.command("export-phase1-bridge")
+def export_phase1_bridge_cmd(
+    report_path: Path = typer.Option(
+        None,
+        "--report-path",
+        help="Accepted phase-1 distribution-block report to export bridge rows from",
+    ),
+    out_dir: Path = typer.Option(
+        None,
+        "--out-dir",
+        help="Output directory for tracked bridge artifacts",
+    ),
+    family_maturity: list[str] = typer.Option(
+        ["public"],
+        "--family-maturity",
+        help="Include only families with these maturity tags",
+    ),
+    family_id: list[str] = typer.Option(
+        [],
+        "--family-id",
+        help="Optional family ids to export; defaults to all families in the selected maturity tier(s)",
+    ),
+) -> None:
+    payload = export_phase1_bridge_artifacts(
+        report_path=report_path,
+        out_dir=out_dir,
+        family_maturities=tuple(family_maturity),
+        family_ids=tuple(family_id) if family_id else None,
+    )
+    typer.echo(
+        " ".join(
+            [
+                f"bridge={payload['bridge_results_path']}",
+                f"metadata={payload['bridge_metadata_path']}",
+                f"rows={payload['bridge_row_count']}",
+            ]
+        )
+    )
 
 
 @app.command("publish-phase1-full")

@@ -7,7 +7,14 @@ from types import SimpleNamespace
 
 import pytest
 
-from fp_ineq.export import _phase1_solved_dictionary, _safe_dictionary_payload, _visible_export_series, export_phase1_full_bundle, publish_phase1_bundle_to_docs
+from fp_ineq.export import (
+    _phase1_solved_dictionary,
+    _safe_dictionary_payload,
+    _visible_export_series,
+    export_phase1_bridge_artifacts,
+    export_phase1_full_bundle,
+    publish_phase1_bundle_to_docs,
+)
 from fp_ineq.phase1_catalog import phase1_scenario_by_variant
 
 
@@ -523,6 +530,113 @@ def test_export_phase1_full_bundle_supports_family_filtering(
     ]
     assert manifest["bridge_results_path"] == "bridge_results.csv"
     assert payload["bridge_row_count"] == 0
+
+
+def test_export_phase1_bridge_artifacts_writes_tracked_bridge_files(
+    tmp_path: Path, monkeypatch
+) -> None:
+    report_path = tmp_path / "run_phase1_distribution_block.json"
+    report_path.write_text(
+        json.dumps(
+            {
+                "scenarios": {
+                    "baseline-observed": {
+                        "scenario_name": "ineq_phase1_distribution_baseline_observed",
+                        "output_dir": "/tmp/ineq_phase1_distribution_baseline_observed_20260404_150000",
+                        "loadformat_path": "/tmp/baseline/LOADFORMAT.DAT",
+                    },
+                    "transfer-composite-small": {
+                        "scenario_name": "ineq_phase1_distribution_transfer_composite_small",
+                        "output_dir": "/tmp/ineq_phase1_distribution_transfer_composite_small_20260404_150021",
+                        "loadformat_path": "/tmp/transfer_composite_small/LOADFORMAT.DAT",
+                    },
+                    "transfer-composite-medium": {
+                        "scenario_name": "ineq_phase1_distribution_transfer_composite_medium",
+                        "output_dir": "/tmp/ineq_phase1_distribution_transfer_composite_medium_20260404_150022",
+                        "loadformat_path": "/tmp/transfer_composite_medium/LOADFORMAT.DAT",
+                    },
+                    "transfer-composite-large": {
+                        "scenario_name": "ineq_phase1_distribution_transfer_composite_large",
+                        "output_dir": "/tmp/ineq_phase1_distribution_transfer_composite_large_20260404_150023",
+                        "loadformat_path": "/tmp/transfer_composite_large/LOADFORMAT.DAT",
+                    },
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    def fake_loadformat_window(
+        loadformat_path: Path,
+        *,
+        variables: list[str] | None,
+        forecast_start: str,
+        forecast_end: str,
+    ) -> tuple[list[str], dict[str, list[float]]]:
+        assert variables is None
+        periods = [forecast_start]
+        periods.extend(
+            [
+                "2026.2",
+                "2026.3",
+                "2026.4",
+                "2027.1",
+                "2027.2",
+                "2027.3",
+                "2027.4",
+                "2028.1",
+                "2028.2",
+                "2028.3",
+                "2028.4",
+                "2029.1",
+                "2029.2",
+                "2029.3",
+                forecast_end,
+            ]
+        )
+        label = loadformat_path.parts[-2]
+        delta = {
+            "baseline": 0.0,
+            "transfer_composite_small": 0.125,
+            "transfer_composite_medium": 0.25,
+            "transfer_composite_large": 0.375,
+        }[label]
+        names = ["TRLOWZ", "IPOVALL", "IPOVCH", "RYDPC", "IGINIHH", "IMEDRINC"]
+        series = {
+            name: [10.0 + delta + idx for idx, _period in enumerate(periods)]
+            for name in names
+        }
+        return periods, series
+
+    monkeypatch.setattr("fp_ineq.export._loadformat_window", fake_loadformat_window)
+
+    out_dir = tmp_path / "bridge"
+    payload = export_phase1_bridge_artifacts(
+        report_path=report_path,
+        out_dir=out_dir,
+        family_ids=("baseline", "transfer-composite"),
+    )
+
+    assert payload["run_count"] == 4
+    assert payload["bridge_row_count"] == 9
+    assert payload["family_ids"] == ["baseline", "transfer-composite"]
+    assert (out_dir / "bridge_results.csv").exists()
+    assert (out_dir / "bridge_metadata.json").exists()
+    assert (out_dir / "bridge_export_report.json").exists()
+    assert not (out_dir / "runs").exists()
+
+    with (out_dir / "bridge_results.csv").open(encoding="utf-8", newline="") as handle:
+        bridge_rows = list(csv.DictReader(handle))
+    assert len(bridge_rows) == 9
+    sample = next(
+        row
+        for row in bridge_rows
+        if row["scenario_id"] == "ineq-transfer-composite-medium" and row["h"] == "4"
+    )
+    assert sample["channel"] == "transfer_composite"
+    assert sample["baseline_id"] == "ineq-baseline-observed"
+    assert float(sample["dose_value"]) == pytest.approx(0.25)
+    assert float(sample["delta_ipovall"]) == pytest.approx(0.25)
 
 
 def test_export_phase1_full_bundle_rejects_unknown_family_filter(tmp_path: Path) -> None:

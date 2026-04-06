@@ -14,7 +14,7 @@ from .names import to_public_name
 from .paths import repo_paths
 from .phase1_catalog import phase1_family_by_id, phase1_public_bundle_specs
 
-__all__ = ["export_phase1_full_bundle", "publish_phase1_bundle_to_docs"]
+__all__ = ["export_phase1_bridge_artifacts", "export_phase1_full_bundle", "publish_phase1_bundle_to_docs"]
 
 
 _PERIOD_RE = re.compile(r"^(?P<year>\d{4})\.(?P<sub>\d+)$")
@@ -959,23 +959,14 @@ def _write_bridge_export(
     return bridge_path.name, metadata_path.name, len(rows)
 
 
-def export_phase1_full_bundle(
+def _phase1_export_inputs(
     *,
-    report_path: Path | None = None,
-    out_dir: Path | None = None,
-    forecast_start: str = "2026.1",
-    forecast_end: str = "2029.4",
-    family_maturities: tuple[str, ...] = ("public",),
-    family_ids: tuple[str, ...] | None = None,
+    report_path: Path,
+    forecast_start: str,
+    forecast_end: str,
+    family_maturities: tuple[str, ...],
+    family_ids: tuple[str, ...] | None,
 ) -> dict[str, object]:
-    paths = repo_paths()
-    report_path = report_path or (paths.runtime_distribution_reports_root / "run_phase1_distribution_block.json")
-    out_dir = out_dir or paths.runtime_solved_public_root
-    if not report_path.exists():
-        raise FileNotFoundError(
-            f"Phase-1 solved report not found: {report_path}. Run `fp-ineq run-phase1-distribution-block` first."
-        )
-
     payload = json.loads(report_path.read_text(encoding="utf-8"))
     scenarios = dict(payload.get("scenarios", {}))
     selected_specs = phase1_public_bundle_specs(
@@ -1001,11 +992,6 @@ def export_phase1_full_bundle(
     missing_variants = [variant_id for variant_id in required_variants if variant_id not in scenarios]
     if missing_variants:
         raise ValueError(f"Phase-1 solved report is missing scenarios: {', '.join(missing_variants)}")
-
-    if out_dir.exists():
-        shutil.rmtree(out_dir)
-    (out_dir / "runs").mkdir(parents=True, exist_ok=True)
-    _copy_static_shell(out_dir)
 
     manifest_runs: list[dict[str, object]] = []
     run_payloads: dict[str, dict[str, object]] = {}
@@ -1050,8 +1036,6 @@ def export_phase1_full_bundle(
             "series": public_series,
             "timestamp": _artifact_timestamp(str(scenario_payload.get("output_dir", ""))),
         }
-        run_path = out_dir / "runs" / f"{run_id}.json"
-        run_path.write_text(json.dumps(run_json, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         run_payloads[run_id] = run_json
         manifest_runs.append(
             {
@@ -1071,6 +1055,118 @@ def export_phase1_full_bundle(
                 "timestamp": run_json["timestamp"],
             }
         )
+
+    return {
+        "manifest_runs": manifest_runs,
+        "run_payloads": run_payloads,
+        "available_variables": available_variables,
+        "variable_run_ids": variable_run_ids,
+        "run_specs": run_specs,
+    }
+
+
+def export_phase1_bridge_artifacts(
+    *,
+    report_path: Path | None = None,
+    out_dir: Path | None = None,
+    forecast_start: str = "2026.1",
+    forecast_end: str = "2029.4",
+    family_maturities: tuple[str, ...] = ("public",),
+    family_ids: tuple[str, ...] | None = None,
+) -> dict[str, object]:
+    paths = repo_paths()
+    report_path = report_path or (paths.runtime_distribution_reports_root / "run_phase1_distribution_block.json")
+    out_dir = out_dir or (paths.repo_root / "reports" / "phase1_distribution_block")
+    if not report_path.exists():
+        raise FileNotFoundError(
+            f"Phase-1 solved report not found: {report_path}. Run `fp-ineq run-phase1-distribution-block` first."
+        )
+
+    export_inputs = _phase1_export_inputs(
+        report_path=report_path,
+        forecast_start=forecast_start,
+        forecast_end=forecast_end,
+        family_maturities=family_maturities,
+        family_ids=family_ids,
+    )
+    manifest_runs = list(export_inputs["manifest_runs"])
+    run_payloads = dict(export_inputs["run_payloads"])
+
+    out_dir.mkdir(parents=True, exist_ok=True)
+    bridge_results_path, bridge_metadata_path, bridge_row_count = _write_bridge_export(
+        out_dir=out_dir,
+        manifest_runs=manifest_runs,
+        run_payloads=run_payloads,
+        forecast_start=forecast_start,
+    )
+
+    bridge_export_report = {
+        "out_dir": str(out_dir),
+        "report_path": str(report_path),
+        "bridge_metadata_path": str(out_dir / bridge_metadata_path),
+        "bridge_results_path": str(out_dir / bridge_results_path),
+        "bridge_row_count": bridge_row_count,
+        "run_count": len(manifest_runs),
+        "family_ids": sorted({str(item["family_id"]) for item in manifest_runs}),
+        "family_maturities": list(family_maturities),
+        "forecast_window_start": forecast_start,
+        "forecast_window_end": forecast_end,
+        "run_ids": [str(item["run_id"]) for item in manifest_runs],
+    }
+    (out_dir / "bridge_export_report.json").write_text(
+        json.dumps(bridge_export_report, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    return bridge_export_report
+
+
+def export_phase1_full_bundle(
+    *,
+    report_path: Path | None = None,
+    out_dir: Path | None = None,
+    forecast_start: str = "2026.1",
+    forecast_end: str = "2029.4",
+    family_maturities: tuple[str, ...] = ("public",),
+    family_ids: tuple[str, ...] | None = None,
+) -> dict[str, object]:
+    paths = repo_paths()
+    report_path = report_path or (paths.runtime_distribution_reports_root / "run_phase1_distribution_block.json")
+    out_dir = out_dir or paths.runtime_solved_public_root
+    if not report_path.exists():
+        raise FileNotFoundError(
+            f"Phase-1 solved report not found: {report_path}. Run `fp-ineq run-phase1-distribution-block` first."
+        )
+
+    selected_specs = phase1_public_bundle_specs(
+        family_maturities=family_maturities,
+        family_ids=family_ids,
+    )
+    if not selected_specs:
+        raise ValueError("No public phase-1 scenarios matched the requested family filters")
+
+    if out_dir.exists():
+        shutil.rmtree(out_dir)
+    (out_dir / "runs").mkdir(parents=True, exist_ok=True)
+    _copy_static_shell(out_dir)
+
+    export_inputs = _phase1_export_inputs(
+        report_path=report_path,
+        forecast_start=forecast_start,
+        forecast_end=forecast_end,
+        family_maturities=family_maturities,
+        family_ids=family_ids,
+    )
+    manifest_runs = list(export_inputs["manifest_runs"])
+    run_payloads = dict(export_inputs["run_payloads"])
+    available_variables = list(export_inputs["available_variables"])
+    seen_variables = set(available_variables)
+    variable_run_ids = dict(export_inputs["variable_run_ids"])
+    run_specs = dict(export_inputs["run_specs"])
+
+    for run_json in run_payloads.values():
+        run_id = str(run_json["run_id"])
+        run_path = out_dir / "runs" / f"{run_id}.json"
+        run_path.write_text(json.dumps(run_json, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
     bridge_results_path, bridge_metadata_path, bridge_row_count = _write_bridge_export(
         out_dir=out_dir,
