@@ -151,7 +151,10 @@ _FORECAST_WINDOW_NOTE = (
     "Exported series are limited to the forecast window. "
     "The integrated distribution block seeds history through 2025.4 and solves these series endogenously from 2026.1 onward."
 )
-_RUN_PANEL_NOTE = "Default selection shows the published transfer-composite results set."
+_RUN_PANEL_NOTE = (
+    "Default selection shows the published transfer-composite results set. "
+    "Other published families remain available below for comparison."
+)
 
 
 def _dictionary_base_path() -> Path:

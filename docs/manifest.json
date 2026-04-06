@@ -475,6 +475,48 @@
       "summary": "Observed integrated baseline path used as the public comparison anchor."
     },
     {
+      "family_id": "ui",
+      "label": "UI",
+      "maturity": "public",
+      "run_ids": [
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large"
+      ],
+      "summary": "Unemployment-insurance shock probes and matched ladder runs on the stock UB channel."
+    },
+    {
+      "family_id": "federal-transfers",
+      "label": "Federal Transfers",
+      "maturity": "public",
+      "run_ids": [
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock"
+      ],
+      "summary": "Broad federal household-transfer probes on the stock TRGH channel."
+    },
+    {
+      "family_id": "state-local-transfers",
+      "label": "State/Local Transfers",
+      "maturity": "public",
+      "run_ids": [
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock"
+      ],
+      "summary": "State/local household-transfer probes on the stock TRSH channel."
+    },
+    {
+      "family_id": "transfer-package",
+      "label": "Transfer Package",
+      "maturity": "public",
+      "run_ids": [
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock"
+      ],
+      "summary": "Combined relief and shock runs across the installed transfer channels."
+    },
+    {
       "family_id": "transfer-composite",
       "label": "Transfer Composite",
       "maturity": "public",
@@ -495,17 +537,21 @@
   "forecast_window_end": "2029.4",
   "forecast_window_note": "Exported series are limited to the forecast window. The integrated distribution block seeds history through 2025.4 and solves these series endogenously from 2026.1 onward.",
   "forecast_window_start": "2026.1",
-  "generated_at": "2026-04-06T14:54:32.261175+00:00",
+  "generated_at": "2026-04-06T14:59:50.580472+00:00",
   "history_seeded_through": "2025.4",
   "included_family_ids": [
     "baseline",
+    "ui",
+    "federal-transfers",
+    "state-local-transfers",
+    "transfer-package",
     "transfer-composite"
   ],
   "included_family_maturities": [
     "public"
   ],
   "presets_path": "presets.json",
-  "run_panel_note": "Default selection shows the published transfer-composite results set.",
+  "run_panel_note": "Default selection shows the published transfer-composite results set. Other published families remain available below for comparison.",
   "runs": [
     {
       "data_path": "runs/ineq-baseline-observed.json",
@@ -522,6 +568,166 @@
       "scenario_name": "ineq_distribution_baseline_observed",
       "summary": "Solved baseline path with integrated distribution outputs.",
       "timestamp": "20260406_131416"
+    },
+    {
+      "data_path": "runs/ineq-ui-relief.json",
+      "family_id": "ui",
+      "family_label": "UI",
+      "family_maturity": "public",
+      "forecast_end": "2029.4",
+      "forecast_start": "2026.1",
+      "forecast_window_note": "Exported series are limited to the forecast window. The integrated distribution block seeds history through 2025.4 and solves these series endogenously from 2026.1 onward.",
+      "group": "UI",
+      "history_seeded_through": "2025.4",
+      "label": "UI Medium",
+      "run_id": "ineq-ui-relief",
+      "scenario_name": "ineq_distribution_ui_relief",
+      "summary": "Solved matched UI ladder medium rung with integrated distribution outputs.",
+      "timestamp": "20260406_131426"
+    },
+    {
+      "data_path": "runs/ineq-ui-shock.json",
+      "family_id": "ui",
+      "family_label": "UI",
+      "family_maturity": "public",
+      "forecast_end": "2029.4",
+      "forecast_start": "2026.1",
+      "forecast_window_note": "Exported series are limited to the forecast window. The integrated distribution block seeds history through 2025.4 and solves these series endogenously from 2026.1 onward.",
+      "group": "UI",
+      "history_seeded_through": "2025.4",
+      "label": "UI Shock",
+      "run_id": "ineq-ui-shock",
+      "scenario_name": "ineq_distribution_ui_shock",
+      "summary": "Solved UI transfer-channel probe with integrated distribution outputs.",
+      "timestamp": "20260406_131436"
+    },
+    {
+      "data_path": "runs/ineq-ui-small.json",
+      "family_id": "ui",
+      "family_label": "UI",
+      "family_maturity": "public",
+      "forecast_end": "2029.4",
+      "forecast_start": "2026.1",
+      "forecast_window_note": "Exported series are limited to the forecast window. The integrated distribution block seeds history through 2025.4 and solves these series endogenously from 2026.1 onward.",
+      "group": "UI",
+      "history_seeded_through": "2025.4",
+      "label": "UI Small",
+      "run_id": "ineq-ui-small",
+      "scenario_name": "ineq_distribution_ui_small",
+      "summary": "Solved matched UI ladder rung with integrated distribution outputs.",
+      "timestamp": "20260406_131446"
+    },
+    {
+      "data_path": "runs/ineq-ui-large.json",
+      "family_id": "ui",
+      "family_label": "UI",
+      "family_maturity": "public",
+      "forecast_end": "2029.4",
+      "forecast_start": "2026.1",
+      "forecast_window_note": "Exported series are limited to the forecast window. The integrated distribution block seeds history through 2025.4 and solves these series endogenously from 2026.1 onward.",
+      "group": "UI",
+      "history_seeded_through": "2025.4",
+      "label": "UI Large",
+      "run_id": "ineq-ui-large",
+      "scenario_name": "ineq_distribution_ui_large",
+      "summary": "Solved matched UI ladder rung with integrated distribution outputs.",
+      "timestamp": "20260406_131456"
+    },
+    {
+      "data_path": "runs/ineq-federal-transfer-relief.json",
+      "family_id": "federal-transfers",
+      "family_label": "Federal Transfers",
+      "family_maturity": "public",
+      "forecast_end": "2029.4",
+      "forecast_start": "2026.1",
+      "forecast_window_note": "Exported series are limited to the forecast window. The integrated distribution block seeds history through 2025.4 and solves these series endogenously from 2026.1 onward.",
+      "group": "Federal Transfers",
+      "history_seeded_through": "2025.4",
+      "label": "Federal Transfer Relief",
+      "run_id": "ineq-federal-transfer-relief",
+      "scenario_name": "ineq_distribution_federal_transfer_relief",
+      "summary": "Solved broad federal household-transfer probe with integrated distribution outputs.",
+      "timestamp": "20260406_131506"
+    },
+    {
+      "data_path": "runs/ineq-federal-transfer-shock.json",
+      "family_id": "federal-transfers",
+      "family_label": "Federal Transfers",
+      "family_maturity": "public",
+      "forecast_end": "2029.4",
+      "forecast_start": "2026.1",
+      "forecast_window_note": "Exported series are limited to the forecast window. The integrated distribution block seeds history through 2025.4 and solves these series endogenously from 2026.1 onward.",
+      "group": "Federal Transfers",
+      "history_seeded_through": "2025.4",
+      "label": "Federal Transfer Shock",
+      "run_id": "ineq-federal-transfer-shock",
+      "scenario_name": "ineq_distribution_federal_transfer_shock",
+      "summary": "Solved broad federal household-transfer probe with integrated distribution outputs.",
+      "timestamp": "20260406_131516"
+    },
+    {
+      "data_path": "runs/ineq-state-local-transfer-relief.json",
+      "family_id": "state-local-transfers",
+      "family_label": "State/Local Transfers",
+      "family_maturity": "public",
+      "forecast_end": "2029.4",
+      "forecast_start": "2026.1",
+      "forecast_window_note": "Exported series are limited to the forecast window. The integrated distribution block seeds history through 2025.4 and solves these series endogenously from 2026.1 onward.",
+      "group": "State/Local Transfers",
+      "history_seeded_through": "2025.4",
+      "label": "State Local Transfer Relief",
+      "run_id": "ineq-state-local-transfer-relief",
+      "scenario_name": "ineq_distribution_state_local_transfer_relief",
+      "summary": "Solved state/local household-transfer probe with integrated distribution outputs.",
+      "timestamp": "20260406_131526"
+    },
+    {
+      "data_path": "runs/ineq-state-local-transfer-shock.json",
+      "family_id": "state-local-transfers",
+      "family_label": "State/Local Transfers",
+      "family_maturity": "public",
+      "forecast_end": "2029.4",
+      "forecast_start": "2026.1",
+      "forecast_window_note": "Exported series are limited to the forecast window. The integrated distribution block seeds history through 2025.4 and solves these series endogenously from 2026.1 onward.",
+      "group": "State/Local Transfers",
+      "history_seeded_through": "2025.4",
+      "label": "State Local Transfer Shock",
+      "run_id": "ineq-state-local-transfer-shock",
+      "scenario_name": "ineq_distribution_state_local_transfer_shock",
+      "summary": "Solved state/local household-transfer probe with integrated distribution outputs.",
+      "timestamp": "20260406_131536"
+    },
+    {
+      "data_path": "runs/ineq-transfer-package-relief.json",
+      "family_id": "transfer-package",
+      "family_label": "Transfer Package",
+      "family_maturity": "public",
+      "forecast_end": "2029.4",
+      "forecast_start": "2026.1",
+      "forecast_window_note": "Exported series are limited to the forecast window. The integrated distribution block seeds history through 2025.4 and solves these series endogenously from 2026.1 onward.",
+      "group": "Transfer Package",
+      "history_seeded_through": "2025.4",
+      "label": "Transfer Package Relief",
+      "run_id": "ineq-transfer-package-relief",
+      "scenario_name": "ineq_distribution_transfer_package_relief",
+      "summary": "Solved combined transfer-channel probe with integrated distribution outputs.",
+      "timestamp": "20260406_131546"
+    },
+    {
+      "data_path": "runs/ineq-transfer-package-shock.json",
+      "family_id": "transfer-package",
+      "family_label": "Transfer Package",
+      "family_maturity": "public",
+      "forecast_end": "2029.4",
+      "forecast_start": "2026.1",
+      "forecast_window_note": "Exported series are limited to the forecast window. The integrated distribution block seeds history through 2025.4 and solves these series endogenously from 2026.1 onward.",
+      "group": "Transfer Package",
+      "history_seeded_through": "2025.4",
+      "label": "Transfer Package Shock",
+      "run_id": "ineq-transfer-package-shock",
+      "scenario_name": "ineq_distribution_transfer_package_shock",
+      "summary": "Solved combined transfer-channel probe with integrated distribution outputs.",
+      "timestamp": "20260406_131556"
     },
     {
       "data_path": "runs/ineq-transfer-composite-small.json",

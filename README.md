@@ -69,14 +69,14 @@ When the commands are run locally, ignored runtime directories are generated for
 
 The checked-in `docs/` bundle contains the published results explorer:
 
-- 4 solved runs available in the explorer
+- 14 solved runs available in the explorer
 - 453 available solved series
 - 638 variable dictionary records
 - 655 equation records
 - default preset: `headline-poverty-resources`
 - manifest-level family metadata with maturity tags for the published run families
 
-The live site starts on the published results set: one shared baseline plus three financed `transfer-composite` rungs. Local ignored `runtime/` directories may contain additional private calibration, audit, and smoke-test solves, but those caches are not part of the published model and can be deleted or rebuilt locally as needed.
+The live site starts on the published transfer-composite results set: one shared baseline plus three financed `transfer-composite` rungs. UI, federal-transfer, state/local-transfer, and transfer-package runs remain available in the explorer for comparison. Local ignored `runtime/` directories may contain additional private calibration, audit, and smoke-test solves, but those caches are not part of the published model and can be deleted or rebuilt locally as needed.
 
 The explorer is intentionally broader than the default 4-run repaired selection:
 
@@ -222,7 +222,7 @@ Current private UI-offset status:
 
 ## Scenarios
 
-The published explorer contains 4 runs:
+The published explorer contains 14 runs, but the default selected comparison set is 4 transfer-composite runs:
 
 | Run ID | UI factor (`UIFAC`) | Federal-transfer increment (`SNAPDELTAQ`) | `TRSH` factor (`SSFAC`) | Interpretation |
 | --- | ---: | ---: | ---: | --- |
@@ -456,7 +456,8 @@ The published site reflects the run bundle and dictionary:
 
 ## In Short
 
-- The published explorer contains four solved runs: one shared baseline plus three financed transfer-composite rungs.
+- The published explorer contains 14 solved runs.
+- The default selection is one shared baseline plus three financed transfer-composite rungs.
 - The main published results are overall poverty, child poverty, and real disposable income per person.
 - The site also includes equation links, variable definitions, and supporting distribution measures for readers who want the technical detail.
 - Provisional diagnostics: household Gini coefficient, median real income proxy

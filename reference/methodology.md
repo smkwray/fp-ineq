@@ -27,9 +27,19 @@ The model has three main components:
 
 ## Published scenario scope
 
-The published explorer exposes one public results family built around a shared baseline:
+The published explorer exposes 14 solved runs built around one shared baseline:
 
 - `baseline-observed`
+- `ui-relief`
+- `ui-shock`
+- `ui-small`
+- `ui-large`
+- `federal-transfer-relief`
+- `federal-transfer-shock`
+- `state-local-transfer-relief`
+- `state-local-transfer-shock`
+- `transfer-package-relief`
+- `transfer-package-shock`
 - `transfer-composite-small`
 - `transfer-composite-medium`
 - `transfer-composite-large`
@@ -119,7 +129,7 @@ The current reassessment decision is to keep that wording in place rather than p
 
 The repaired transfer-composite ladder is a financed package path rather than a free-standing one-channel shock. Internal package QA checks gross package size, financing flows, package balance, and acceptable net package behavior before the ladder is treated as publishable, but those detailed package artifacts remain private.
 
-`IGINIHH` and `IMEDRINC` are solved outputs in the published bundle, but they remain provisional diagnostics rather than headline measures.
+`IGINIHH` and `IMEDRINC` are solved outputs in the 14-run published bundle, but they remain provisional diagnostics rather than headline measures.
 
 - `IPOVALL` and `IPOVCH` keep the validated aggregate transfer bridge on `TRLOWZ` and add two shrunken internal transfer-mix deviation terms (`UIDEV`, `GHSHDV`) built from standardized `UB`, `TRGH`, and `TRSH`
 - `IGINIHH` is a reduced-form identity driven by `UR` and `TRLOWZ`

@@ -56,28 +56,24 @@ PHASE1_FAMILIES = (
         label="UI",
         summary="Unemployment-insurance shock probes and matched ladder runs on the stock UB channel.",
         maturity="public",
-        include_in_public_bundle=False,
     ),
     Phase1FamilySpec(
         family_id="federal-transfers",
         label="Federal Transfers",
         summary="Broad federal household-transfer probes on the stock TRGH channel.",
         maturity="public",
-        include_in_public_bundle=False,
     ),
     Phase1FamilySpec(
         family_id="state-local-transfers",
         label="State/Local Transfers",
         summary="State/local household-transfer probes on the stock TRSH channel.",
         maturity="public",
-        include_in_public_bundle=False,
     ),
     Phase1FamilySpec(
         family_id="transfer-package",
         label="Transfer Package",
         summary="Combined relief and shock runs across the installed transfer channels.",
         maturity="public",
-        include_in_public_bundle=False,
     ),
     Phase1FamilySpec(
         family_id="transfer-composite",

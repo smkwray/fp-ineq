@@ -262,7 +262,7 @@ def test_export_phase1_full_bundle_writes_broad_solved_payloads(
     out_dir = tmp_path / "bundle"
     payload = export_phase1_full_bundle(report_path=report_path, out_dir=out_dir)
 
-    assert payload["run_count"] == 4
+    assert payload["run_count"] == 14
     assert payload["variable_count"] == 16
 
     manifest = json.loads((out_dir / "manifest.json").read_text(encoding="utf-8"))
@@ -282,6 +282,10 @@ def test_export_phase1_full_bundle_writes_broad_solved_payloads(
     assert manifest["included_family_maturities"] == ["public"]
     assert manifest["included_family_ids"] == [
         "baseline",
+        "ui",
+        "federal-transfers",
+        "state-local-transfers",
+        "transfer-package",
         "transfer-composite",
     ]
     assert "published transfer-composite results set" in manifest["run_panel_note"]
@@ -291,7 +295,14 @@ def test_export_phase1_full_bundle_writes_broad_solved_payloads(
     assert manifest["forecast_only_series"] == ["IPOVALL", "IPOVCH", "IGINIHH", "IMEDRINC"]
     assert "seeds history through 2025.4" in manifest["forecast_window_note"]
     assert [item["family_id"] for item in manifest["families"]] == manifest["included_family_ids"]
+    ui_family = next(item for item in manifest["families"] if item["family_id"] == "ui")
     composite_family = next(item for item in manifest["families"] if item["family_id"] == "transfer-composite")
+    assert ui_family["run_ids"] == [
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+    ]
     assert composite_family["maturity"] == "public"
     assert composite_family["run_ids"] == [
         "ineq-transfer-composite-small",
@@ -547,8 +558,15 @@ def test_checked_in_public_docs_match_repaired_default_bundle() -> None:
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large",
     ]
-    assert [item["run_id"] for item in manifest["runs"]] == manifest["default_run_ids"]
-    assert manifest["included_family_ids"] == ["baseline", "transfer-composite"]
+    assert len(manifest["runs"]) == 14
+    assert manifest["included_family_ids"] == [
+        "baseline",
+        "ui",
+        "federal-transfers",
+        "state-local-transfers",
+        "transfer-package",
+        "transfer-composite",
+    ]
     assert manifest["included_family_maturities"] == ["public"]
     lowered_readme = readme.lower()
     lowered_methodology = methodology.lower()
