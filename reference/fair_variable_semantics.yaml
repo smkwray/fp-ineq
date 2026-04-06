@@ -43,11 +43,11 @@ SNAPDELTAQ:
   allowed_public:
     - federal household-transfer increment
     - TRGH additive lever
-    - legacy SNAPDELTAQ lever
+    - historical SNAPDELTAQ lever
   avoid_public:
     - SNAP benefit amount
     - SNAP dollars
-  notes: Keep the legacy lever name internal; public language should stay at the TRGH channel level.
+  notes: Keep the historical lever name internal; public language should stay at the TRGH channel level.
 
 SSFAC:
   kind: overlay_lever
@@ -55,10 +55,10 @@ SSFAC:
   allowed_public:
     - state/local household-transfer multiplier
     - TRSH scaling lever
-    - legacy SSFAC lever
+    - historical SSFAC lever
   avoid_public:
     - Social Security factor
-  notes: Keep the legacy lever name internal; public language should stay at the TRSH channel level.
+  notes: Keep the historical lever name internal; public language should stay at the TRSH channel level.
 
 RSA:
   kind: stock_fair_variable

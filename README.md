@@ -69,14 +69,14 @@ When the commands are run locally, ignored runtime directories are generated for
 
 The checked-in `docs/` bundle contains the published results explorer:
 
-- 18 solved runs available in the explorer
+- 4 solved runs available in the explorer
 - 453 available solved series
 - 638 variable dictionary records
 - 655 equation records
 - default preset: `headline-poverty-resources`
 - manifest-level family metadata with maturity tags for the published run families
 
-The live site now exposes both bundles at once while starting on the repaired bundle by default: visitors initially see one shared baseline plus three financed `transfer-composite` rungs, and they can add the legacy Phase-1 bundle from the Runs panel. Local ignored `runtime/` directories may contain additional private calibration, audit, and smoke-test solves, but those caches are not part of the published model and can be deleted or rebuilt locally as needed.
+The live site starts on the published results set: one shared baseline plus three financed `transfer-composite` rungs. Local ignored `runtime/` directories may contain additional private calibration, audit, and smoke-test solves, but those caches are not part of the published model and can be deleted or rebuilt locally as needed.
 
 The explorer is intentionally broader than the default 4-run repaired selection:
 
@@ -85,57 +85,22 @@ The explorer is intentionally broader than the default 4-run repaired selection:
 - equation and variable records are built for the bundle so they point to the matching run family
 
 <details>
-<summary>Developer commands used to rebuild the data and site</summary>
+<summary>Developer rebuild notes</summary>
 
-## Build and Publish Workflow
+The internal rebuild flow follows the same sequence as the published surface:
 
-```text
-1. fp-ineq refresh-data
-2. fp-ineq compose-phase1-transfer-core --fp-home /path/to/FM
-3. fp-ineq run-phase1-transfer-core --fp-home /path/to/FM
-4. fp-ineq compose-phase1-distribution-block --fp-home /path/to/FM
-5. fp-ineq run-phase1-distribution-block --fp-home /path/to/FM
-6. fp-ineq export-phase1-full
-7. fp-ineq publish-phase1-full
-```
-
-`export-phase1-full` now accepts optional family filters:
-
-```text
-fp-ineq export-phase1-full --family-maturity public
-fp-ineq export-phase1-full --family-id baseline --family-id transfer-composite
-```
-
-For the private UI ladder calibration workflow:
-
-```text
-fp-ineq run-phase1-ui-ladder --fp-home /path/to/FM
-```
-
-For the private catalog-defined transfer-composite ladder workflow:
-
-```text
-fp-ineq run-phase1-transfer-composite-ladder --fp-home /path/to/FM
-```
-
-For the private credit-family scale decision workflow:
-
-```text
-fp-ineq run-phase2-credit-scale-sweep --fp-home /path/to/FM
-```
-
-For the private UI matching-offset stress workflow:
-
-```text
-fp-ineq run-phase2-ui-offset --fp-home /path/to/FM
-```
+1. refresh checked-in data snapshots
+2. compose the stock transfer overlay
+3. run the transfer scenarios through stock Fair
+4. compose and solve the distribution block
+5. export the published bundle
+6. publish the static site
 
 Environment notes:
 
 - stock Fair is supplied through `--fp-home` or the `FP_HOME` environment variable
 - `fp-wraptr` is discovered from a sibling checkout or the `FP_WRAPTR_ROOT` environment variable
 - the runtime backend is `fpexe`
-- `compose-phase1-ui` and `run-phase1-ui` exist as narrower smoke-test commands, not as the main publication path
 
 </details>
 
@@ -257,7 +222,7 @@ Current private UI-offset status:
 
 ## Scenarios
 
-The published explorer contains 18 public runs, but the default selected comparison set is 4 repaired runs:
+The published explorer contains 4 runs:
 
 | Run ID | UI factor (`UIFAC`) | Federal-transfer increment (`SNAPDELTAQ`) | `TRSH` factor (`SSFAC`) | Interpretation |
 | --- | ---: | ---: | ---: | --- |
@@ -265,15 +230,6 @@ The published explorer contains 18 public runs, but the default selected compari
 | `transfer-composite-small` | `1.0125839776982168` | `1.2583977698216835` | `1.0125839776982168` | Small matched transfer-composite ladder rung normalized to the shared first-year `ΔTRLOWZ` bin. |
 | `transfer-composite-medium` | `1.018637285379202` | `1.8637285379202133` | `1.018637285379202` | Medium matched transfer-composite ladder rung normalized to the shared first-year `ΔTRLOWZ` bin. |
 | `transfer-composite-large` | `1.0225154841560722` | `2.2515484156072145` | `1.0225154841560722` | Large matched transfer-composite ladder rung normalized to the shared first-year `ΔTRLOWZ` bin. |
-
-Other public families remain available in the live explorer:
-
-- Legacy Phase-1 baseline: `ineq-phase1-baseline-observed`
-- Legacy UI: `ineq-phase1-ui-relief`, `ineq-phase1-ui-shock`, `ineq-phase1-ui-small`, `ineq-phase1-ui-large`
-- Legacy federal transfers: `ineq-phase1-federal-transfer-relief`, `ineq-phase1-federal-transfer-shock`
-- Legacy state/local transfers: `ineq-phase1-state-local-transfer-relief`, `ineq-phase1-state-local-transfer-shock`
-- Legacy transfer package: `ineq-phase1-transfer-package-relief`, `ineq-phase1-transfer-package-shock`
-- Legacy transfer composite ladder: `ineq-phase1-transfer-composite-small`, `ineq-phase1-transfer-composite-medium`, `ineq-phase1-transfer-composite-large`
 
 Interpretation notes:
 
@@ -284,7 +240,6 @@ Interpretation notes:
 - The matched ladders normalize on the mean first-year `ΔTRLOWZ` over `2026.1` to `2026.4`.
 - The current shared bins were verified privately against the stock FM path and remain anchored to matched first-year `ΔTRLOWZ` bins.
 - Public exports are forecast-window only. The distribution block seeds history through `2025.4` and solves `IPOVALL`, `IPOVCH`, `IGINIHH`, and `IMEDRINC` endogenously from `2026.1` onward.
-- Legacy Phase-1 families remain publicly visible for comparison, but the repaired baseline + transfer-composite bundle is the default interpretation path.
 - Credit and private UI-offset families remain internal for audit or sensitivity work and are not part of the public bundle.
 - The descriptive contrary-channel audit and the private UI-offset envelope remain supporting internal diagnostics rather than separate public families.
 - The eventual `fp-r` / R-solver port is a later project phase. The current public site documents and publishes the working stock-Fair plus Python export path only; ongoing `fp-r` work is not part of this public release surface.
@@ -311,7 +266,7 @@ If a future family changes structure rather than just shock level, it must eithe
 
 ## Distribution Block
 
-The distribution path adds a separate solved identity block on top of the stock Fair macro solve. The identity file is `overlay/stock_fm/idist_phase1_block.txt`.
+The distribution path adds a separate solved identity block on top of the stock Fair macro solve.
 
 <details>
 <summary>Exact identities used for the distribution block</summary>
@@ -404,8 +359,8 @@ These series are refreshed into `data/` for staging, reference, or future use:
 | Household net worth index (`IHHNW`) | staged input | [Federal Reserve — Financial Accounts (Z.1)](https://www.federalreserve.gov/releases/z1/) | Household net worth series retained for deferred wealth work. |
 | Home equity index (`IHOMEQ`) | staged input | [Federal Reserve — Financial Accounts (Z.1)](https://www.federalreserve.gov/releases/z1/) | Home equity series retained for deferred housing/wealth work. |
 | Federal funds rate (`IFFUNDS`) | staged input | [FRED — Federal Funds Rate](https://fred.stlouisfed.org/series/FEDFUNDS) | Federal funds rate series retained for deferred credit work. |
-| Transfer composite index (`ITRCOMP`) | derived input | Derived from UI benefits, Social Security benefits, and SNAP participation | Legacy transfer composite, not part of the published scenario bundle. |
-| Credit composite index (`ICRDCMP`) | derived input | Derived from home equity and inverse federal funds rate | Legacy credit composite, not part of the published scenario bundle. |
+| Transfer composite index (`ITRCOMP`) | derived input | Derived from UI benefits, Social Security benefits, and SNAP participation | Historical composite retained for reference, not part of the published scenario bundle. |
+| Credit composite index (`ICRDCMP`) | derived input | Derived from home equity and inverse federal funds rate | Historical composite retained for reference, not part of the published scenario bundle. |
 | Top-10 vs. bottom-50 wealth-share gap (`IWGAP1050`) | staged output target | [Federal Reserve — Distributional Financial Accounts](https://www.federalreserve.gov/releases/z1/dataviz/dfa/distribute/chart/) | Retained for deferred wealth-distribution work. |
 | Top-1 vs. bottom-50 wealth-share gap (`IWGAP150`) | staged output target | [Federal Reserve — Distributional Financial Accounts](https://www.federalreserve.gov/releases/z1/dataviz/dfa/distribute/chart/) | Retained for deferred wealth-distribution work. |
 
@@ -475,22 +430,17 @@ The following areas are not part of the published model scope:
 
 - credit-condition scenario families
 - housing, home-equity, or wealth scenario families
-- legacy `ITRCOMP` composite-index publication as a separate public scenario family
+- separate publication of `ITRCOMP` as a public scenario family
 - two-way feedback from the distribution block into the stock macro block
 - publication-grade interpretation of the household Gini coefficient (`IGINIHH`)
 - publication-grade interpretation of the median real income proxy (`IMEDRINC`)
 - matched-scale policy calibration for the scenario shock sizes
 
-Some older overlay files are present as legacy references but are not used in the published path.
+Some older overlay files are present as historical references but are not used in the published path.
 
 ## Tests
 
-The main regression test coverage is in:
-
-- `tests/test_data_pipeline.py`
-- `tests/test_phase1_transfer_core.py`
-- `tests/test_phase1_distribution_block.py`
-- `tests/test_export_phase1_solved.py`
+The main regression test coverage spans the data pipeline, transfer-core path, distribution block, and site export.
 
 The published site reflects the run bundle and dictionary:
 
@@ -506,8 +456,7 @@ The published site reflects the run bundle and dictionary:
 
 ## In Short
 
-- The published explorer contains 18 solved runs, but the default interpretation path is a repaired 4-run bundle: one shared baseline plus three financed transfer-composite rungs.
-- Legacy Phase-1 families remain in the explorer as comparison-only paths under separate legacy family metadata.
+- The published explorer contains four solved runs: one shared baseline plus three financed transfer-composite rungs.
 - The main published results are overall poverty, child poverty, and real disposable income per person.
 - The site also includes equation links, variable definitions, and supporting distribution measures for readers who want the technical detail.
 - Provisional diagnostics: household Gini coefficient, median real income proxy

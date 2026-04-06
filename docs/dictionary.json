@@ -17000,11 +17000,16 @@
       "used_in_equations": []
     },
     "CNST2L2": {
+      "_provenance": {
+        "table": "A.2"
+      },
+      "category": "exogenous",
       "code": "CNST2L2",
+      "construction": "Time varying constant term. See text.",
       "defined_by_equation": "create:CNST2L2:147015cf5e",
-      "description": "Model series defined by CREATE CNST2L2: D3+T1*D2/(T1-T2)-T*D2/(T1-T2)",
+      "description": "Time varying constant term, 1971.3-1989.4.",
       "name": "CNST2L2",
-      "short_name": "CNST2L2",
+      "short_name": "Female Labor Constant",
       "source_runs": [
         "ineq-baseline-observed",
         "ineq-transfer-composite-small",

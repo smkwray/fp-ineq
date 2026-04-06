@@ -6,13 +6,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from fp_ineq.export import (
-    _phase1_solved_dictionary,
-    _safe_dictionary_payload,
-    _visible_export_series,
-    export_phase1_full_bundle,
-    publish_phase1_bundle_to_docs,
-)
+from fp_ineq.export import _phase1_solved_dictionary, _safe_dictionary_payload, _visible_export_series, export_phase1_full_bundle, publish_phase1_bundle_to_docs
 from fp_ineq.phase1_catalog import phase1_scenario_by_variant
 
 
@@ -290,7 +284,7 @@ def test_export_phase1_full_bundle_writes_broad_solved_payloads(
         "baseline",
         "transfer-composite",
     ]
-    assert "repaired transfer-composite bundle" in manifest["run_panel_note"]
+    assert "published transfer-composite results set" in manifest["run_panel_note"]
     assert manifest["forecast_window_start"] == "2026.1"
     assert manifest["forecast_window_end"] == "2029.4"
     assert manifest["history_seeded_through"] == "2025.4"
@@ -455,9 +449,7 @@ def test_export_phase1_full_bundle_rejects_unknown_family_filter(tmp_path: Path)
         )
 
 
-def test_publish_phase1_bundle_to_docs_marks_legacy_runs_public_legacy(
-    tmp_path: Path, monkeypatch
-) -> None:
+def test_publish_phase1_bundle_to_docs_replaces_existing_docs_bundle(tmp_path: Path) -> None:
     source_dir = tmp_path / "source"
     docs_dir = tmp_path / "docs"
     source_dir.mkdir(parents=True, exist_ok=True)
@@ -469,6 +461,7 @@ def test_publish_phase1_bundle_to_docs_marks_legacy_runs_public_legacy(
                 "default_run_ids": ["ineq-baseline-observed", "ineq-transfer-composite-small"],
                 "included_family_ids": ["baseline", "transfer-composite"],
                 "included_family_maturities": ["public"],
+                "run_panel_note": "Default selection shows the published transfer-composite results set.",
                 "runs": [
                     {
                         "run_id": "ineq-baseline-observed",
@@ -512,41 +505,19 @@ def test_publish_phase1_bundle_to_docs_marks_legacy_runs_public_legacy(
     (source_dir / "runs").mkdir()
     (source_dir / "runs" / "ineq-baseline-observed.json").write_text("{}", encoding="utf-8")
     (source_dir / "runs" / "ineq-transfer-composite-small.json").write_text("{}", encoding="utf-8")
-
-    monkeypatch.setattr(
-        "fp_ineq.export._load_legacy_phase1_bundle",
-        lambda docs_dir: {
-            "runs": [
-                {
-                    "run_id": "ineq-phase1-ui-relief",
-                    "family_id": "legacy-ui",
-                    "family_label": "Legacy Phase-1 UI",
-                    "family_maturity": "public-legacy",
-                    "data_path": "runs/ineq-phase1-ui-relief.json",
-                    "group": "Legacy Phase-1 UI",
-                }
-            ],
-            "families": [
-                {
-                    "family_id": "legacy-ui",
-                    "label": "Legacy Phase-1 UI",
-                    "maturity": "public-legacy",
-                    "run_ids": ["ineq-phase1-ui-relief"],
-                }
-            ],
-            "run_files": {
-                "runs/ineq-phase1-ui-relief.json": "{}",
-            },
-        },
-    )
+    (docs_dir / "runs").mkdir()
+    (docs_dir / "runs" / "ineq-old-comparison.json").write_text("{}", encoding="utf-8")
 
     publish_phase1_bundle_to_docs(source_dir=source_dir, docs_dir=docs_dir)
 
     manifest = json.loads((docs_dir / "manifest.json").read_text(encoding="utf-8"))
-    assert manifest["included_family_ids"] == ["legacy-ui", "baseline", "transfer-composite"]
-    assert manifest["included_family_maturities"] == ["public-legacy", "public"]
-    assert manifest["families"][0]["maturity"] == "public-legacy"
-    assert manifest["runs"][0]["family_maturity"] == "public-legacy"
+    assert manifest["included_family_ids"] == ["baseline", "transfer-composite"]
+    assert manifest["included_family_maturities"] == ["public"]
+    assert [item["run_id"] for item in manifest["runs"]] == [
+        "ineq-baseline-observed",
+        "ineq-transfer-composite-small",
+    ]
+    assert not (docs_dir / "runs" / "ineq-old-comparison.json").exists()
 
 
 def test_checked_in_public_docs_match_repaired_default_bundle() -> None:
@@ -576,8 +547,18 @@ def test_checked_in_public_docs_match_repaired_default_bundle() -> None:
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large",
     ]
-    assert set(manifest["included_family_maturities"]) == {"public", "public-legacy"}
-    assert "14 public transfer-family runs" not in readme
-    assert "contains 14 runs" not in methodology
-    assert "14-run public family" not in methodology
-    assert "all 14 published runs" not in methodology
+    assert [item["run_id"] for item in manifest["runs"]] == manifest["default_run_ids"]
+    assert manifest["included_family_ids"] == ["baseline", "transfer-composite"]
+    assert manifest["included_family_maturities"] == ["public"]
+    lowered_readme = readme.lower()
+    lowered_methodology = methodology.lower()
+    manifest_text = (repo_root / "docs" / "manifest.json").read_text(encoding="utf-8").lower()
+    assert "legacy" not in lowered_readme
+    assert "phase-1" not in lowered_readme
+    assert "phase1" not in lowered_readme
+    assert "legacy" not in lowered_methodology
+    assert "phase-1" not in lowered_methodology
+    assert "phase1" not in lowered_methodology
+    assert "legacy" not in manifest_text
+    assert "phase-1" not in manifest_text
+    assert "phase1" not in manifest_text

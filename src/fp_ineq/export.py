@@ -151,11 +151,7 @@ _FORECAST_WINDOW_NOTE = (
     "Exported series are limited to the forecast window. "
     "The integrated distribution block seeds history through 2025.4 and solves these series endogenously from 2026.1 onward."
 )
-_RUN_PANEL_NOTE = (
-    "Default selection shows the repaired transfer-composite bundle. "
-    "Other public families remain available below for comparison."
-)
-_LEGACY_RUN_ID_PREFIX = "ineq-phase1-"
+_RUN_PANEL_NOTE = "Default selection shows the published transfer-composite results set."
 
 
 def _dictionary_base_path() -> Path:
@@ -639,8 +635,6 @@ def publish_phase1_bundle_to_docs(
     if not source_dir.exists():
         raise FileNotFoundError(f"Phase-1 bundle directory not found: {source_dir}")
 
-    legacy_bundle = _load_legacy_phase1_bundle(docs_dir)
-
     docs_dir.mkdir(parents=True, exist_ok=True)
     file_names = [
         ".nojekyll",
@@ -667,36 +661,12 @@ def publish_phase1_bundle_to_docs(
             shutil.rmtree(target)
         shutil.copytree(source, target)
 
-    for relative_path, text in legacy_bundle["run_files"].items():
-        target = docs_dir / relative_path
-        target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text(text, encoding="utf-8")
-
     stale_export_report = docs_dir / "export_report.json"
     if stale_export_report.exists():
         stale_export_report.unlink()
 
     manifest = json.loads((source_dir / "manifest.json").read_text(encoding="utf-8"))
-    if legacy_bundle["runs"]:
-        manifest["runs"] = [*legacy_bundle["runs"], *manifest.get("runs", [])]
-        manifest["families"] = [*legacy_bundle["families"], *manifest.get("families", [])]
-        manifest["included_family_ids"] = [
-            *[family["family_id"] for family in legacy_bundle["families"]],
-            *manifest.get("included_family_ids", []),
-        ]
-        manifest["included_family_maturities"] = list(
-            dict.fromkeys(
-                [
-                    *[str(family.get("maturity", "")).strip() for family in legacy_bundle["families"] if str(family.get("maturity", "")).strip()],
-                    *[str(item).strip() for item in manifest.get("included_family_maturities", []) if str(item).strip()],
-                ]
-            )
-        )
-        manifest["run_panel_note"] = (
-            "Default selection shows the repaired transfer-composite bundle. "
-            "Legacy Phase-1 runs remain available below for comparison."
-        )
-        (docs_dir / "manifest.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    (docs_dir / "manifest.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return {
         "docs_dir": str(docs_dir),
         "source_dir": str(source_dir),
@@ -762,86 +732,6 @@ def _phase1_manifest_families(run_specs: list[dict[str, str]]) -> list[dict[str,
             }
         )
     return manifest_families
-
-
-def _git_show_text(repo_root: Path, git_path: str) -> str | None:
-    try:
-        return subprocess.check_output(
-            ["git", "show", f"HEAD:{git_path}"],
-            cwd=repo_root,
-            text=True,
-            stderr=subprocess.DEVNULL,
-        )
-    except Exception:
-        return None
-
-
-def _legacy_family_label(label: str) -> str:
-    return label if label.startswith("Legacy ") else f"Legacy {label}"
-
-
-def _legacy_family_id(family_id: str) -> str:
-    return family_id if family_id.startswith("legacy-") else f"legacy-{family_id}"
-
-
-def _legacy_group_label(group: str) -> str:
-    return group if group.startswith("Legacy ") else f"Legacy {group}"
-
-
-def _load_legacy_phase1_bundle(docs_dir: Path) -> dict[str, object]:
-    paths = repo_paths()
-    manifest_text = _git_show_text(paths.repo_root, "docs/manifest.json")
-    if not manifest_text:
-        return {"runs": [], "families": [], "run_files": {}}
-
-    manifest = json.loads(manifest_text)
-    legacy_runs = [dict(item) for item in manifest.get("runs", []) if str(item.get("run_id", "")).startswith(_LEGACY_RUN_ID_PREFIX)]
-    if not legacy_runs:
-        return {"runs": [], "families": [], "run_files": {}}
-
-    run_files: dict[str, str] = {}
-    family_run_ids: dict[str, list[str]] = {}
-    family_labels: dict[str, str] = {}
-    family_summaries: dict[str, str] = {}
-    family_maturities: dict[str, str] = {}
-    normalized_runs: list[dict[str, object]] = []
-
-    for run in legacy_runs:
-        data_path = str(run.get("data_path", "")).strip()
-        if not data_path:
-            continue
-        run_text = _git_show_text(paths.repo_root, f"docs/{data_path}")
-        if run_text is None:
-            continue
-        run_files[data_path] = run_text
-        family_id = _legacy_family_id(str(run.get("family_id", "legacy-phase1")))
-        family_label = _legacy_family_label(str(run.get("family_label", run.get("group", "Phase 1"))))
-        family_summary = str(run.get("summary", "")).strip()
-        family_maturity = "public-legacy"
-        normalized_run = {
-            **run,
-            "family_id": family_id,
-            "family_label": family_label,
-            "family_maturity": family_maturity,
-            "group": _legacy_group_label(str(run.get("group", "Phase 1"))),
-        }
-        normalized_runs.append(normalized_run)
-        family_run_ids.setdefault(family_id, []).append(str(run["run_id"]))
-        family_labels[family_id] = family_label
-        family_summaries[family_id] = family_summary
-        family_maturities[family_id] = family_maturity
-
-    families = [
-        {
-            "family_id": family_id,
-            "label": family_labels[family_id],
-            "summary": family_summaries[family_id],
-            "maturity": family_maturities[family_id],
-            "run_ids": run_ids,
-        }
-        for family_id, run_ids in family_run_ids.items()
-    ]
-    return {"runs": normalized_runs, "families": families, "run_files": run_files}
 
 
 def _visible_export_series(series: dict[str, list[float]]) -> list[str]:
