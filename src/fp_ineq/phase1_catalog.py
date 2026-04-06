@@ -121,7 +121,7 @@ PHASE1_SCENARIOS = (
         distribution_description="Higher UI generosity with integrated distribution identities.",
         group="UI",
         label="UI Medium",
-        summary="Solved matched UI ladder medium rung with integrated distribution outputs.",
+        summary="Shared modern branch; legacy split versus fp.exe. Solved matched UI ladder medium rung with integrated distribution outputs.",
     ),
     Phase1ScenarioSpec(
         variant_id="ui-shock",
@@ -133,7 +133,7 @@ PHASE1_SCENARIOS = (
         distribution_description="Lower UI generosity with integrated distribution identities.",
         group="UI",
         label="UI Shock",
-        summary="Solved UI transfer-channel probe with integrated distribution outputs.",
+        summary="Shared modern branch; legacy split versus fp.exe. Solved UI transfer-channel probe with integrated distribution outputs.",
     ),
     Phase1ScenarioSpec(
         variant_id="ui-small",
@@ -145,7 +145,7 @@ PHASE1_SCENARIOS = (
         distribution_description="Smaller matched UI ladder rung with integrated distribution identities.",
         group="UI",
         label="UI Small",
-        summary="Solved matched UI ladder rung with integrated distribution outputs.",
+        summary="Shared modern branch; legacy split versus fp.exe. Solved matched UI ladder rung with integrated distribution outputs.",
         include_in_transfer_core=False,
     ),
     Phase1ScenarioSpec(
@@ -173,7 +173,7 @@ PHASE1_SCENARIOS = (
         distribution_description="Larger matched UI ladder rung with integrated distribution identities.",
         group="UI",
         label="UI Large",
-        summary="Solved matched UI ladder rung with integrated distribution outputs.",
+        summary="Shared modern branch; legacy split versus fp.exe. Solved matched UI ladder rung with integrated distribution outputs.",
         include_in_transfer_core=False,
     ),
     Phase1ScenarioSpec(
@@ -236,7 +236,7 @@ PHASE1_SCENARIOS = (
         distribution_description="Combined transfer relief with offline-estimated in-model distribution identities.",
         group="Transfer Package",
         label="Transfer Package Relief",
-        summary="Solved combined transfer-channel probe with integrated distribution outputs.",
+        summary="Shared modern branch; legacy split versus fp.exe. Solved combined transfer-channel probe with integrated distribution outputs.",
     ),
     Phase1ScenarioSpec(
         variant_id="transfer-package-shock",
@@ -248,7 +248,7 @@ PHASE1_SCENARIOS = (
         distribution_description="Combined transfer shock with offline-estimated in-model distribution identities.",
         group="Transfer Package",
         label="Transfer Package Shock",
-        summary="Solved combined transfer-channel probe with integrated distribution outputs.",
+        summary="Shared modern branch; legacy split versus fp.exe. Solved combined transfer-channel probe with integrated distribution outputs.",
     ),
     Phase1ScenarioSpec(
         variant_id="transfer-composite-small",
@@ -262,7 +262,7 @@ PHASE1_SCENARIOS = (
         distribution_description="Small repaired transfer-composite package with integrated distribution identities.",
         group="Transfer Composite",
         label="Transfer Composite Small",
-        summary="Repaired transfer-composite small package with matched levers and financing shares.",
+        summary="Shared modern branch; legacy split versus fp.exe. Repaired transfer-composite small package with matched levers and financing shares.",
         include_in_transfer_core=False,
     ),
     Phase1ScenarioSpec(
@@ -277,7 +277,7 @@ PHASE1_SCENARIOS = (
         distribution_description="Medium repaired transfer-composite package with integrated distribution identities.",
         group="Transfer Composite",
         label="Transfer Composite Medium",
-        summary="Repaired transfer-composite medium package with matched levers and financing shares.",
+        summary="Shared modern branch; legacy split versus fp.exe. Repaired transfer-composite medium package with matched levers and financing shares.",
         include_in_transfer_core=False,
     ),
     Phase1ScenarioSpec(
@@ -292,7 +292,7 @@ PHASE1_SCENARIOS = (
         distribution_description="Large repaired transfer-composite package with integrated distribution identities.",
         group="Transfer Composite",
         label="Transfer Composite Large",
-        summary="Repaired transfer-composite large package with matched levers and financing shares.",
+        summary="Shared modern branch; legacy split versus fp.exe. Repaired transfer-composite large package with matched levers and financing shares.",
         include_in_transfer_core=False,
     ),
 )

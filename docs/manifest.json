@@ -461,9 +461,10 @@
   ],
   "default_run_ids": [
     "ineq-baseline-observed",
-    "ineq-transfer-composite-small",
-    "ineq-transfer-composite-medium",
-    "ineq-transfer-composite-large"
+    "ineq-federal-transfer-relief",
+    "ineq-federal-transfer-shock",
+    "ineq-state-local-transfer-relief",
+    "ineq-state-local-transfer-shock"
   ],
   "dictionary_path": "dictionary.json",
   "families": [
@@ -539,7 +540,7 @@
   "forecast_window_end": "2029.4",
   "forecast_window_note": "Exported series are limited to the forecast window. The integrated distribution block seeds history through 2025.4 and solves these series endogenously from 2026.1 onward.",
   "forecast_window_start": "2026.1",
-  "generated_at": "2026-04-06T16:23:35.464040+00:00",
+  "generated_at": "2026-04-06T22:21:55.519909+00:00",
   "history_seeded_through": "2025.4",
   "included_family_ids": [
     "baseline",
@@ -553,7 +554,7 @@
     "public"
   ],
   "presets_path": "presets.json",
-  "run_panel_note": "Default selection shows the published transfer-composite results set. Other published families remain available below for comparison.",
+  "run_panel_note": "Default selection shows the public-default-safe fp-r results set. Published legacy-split runs remain available below with explicit shared-modern labeling.",
   "runs": [
     {
       "data_path": "runs/ineq-baseline-observed.json",
@@ -584,7 +585,7 @@
       "label": "UI Medium",
       "run_id": "ineq-ui-relief",
       "scenario_name": "ineq_distribution_ui_relief",
-      "summary": "Solved matched UI ladder medium rung with integrated distribution outputs.",
+      "summary": "Shared modern branch; legacy split versus fp.exe. Solved matched UI ladder medium rung with integrated distribution outputs.",
       "timestamp": "20260406_131426"
     },
     {
@@ -600,7 +601,7 @@
       "label": "UI Shock",
       "run_id": "ineq-ui-shock",
       "scenario_name": "ineq_distribution_ui_shock",
-      "summary": "Solved UI transfer-channel probe with integrated distribution outputs.",
+      "summary": "Shared modern branch; legacy split versus fp.exe. Solved UI transfer-channel probe with integrated distribution outputs.",
       "timestamp": "20260406_131436"
     },
     {
@@ -616,7 +617,7 @@
       "label": "UI Small",
       "run_id": "ineq-ui-small",
       "scenario_name": "ineq_distribution_ui_small",
-      "summary": "Solved matched UI ladder rung with integrated distribution outputs.",
+      "summary": "Shared modern branch; legacy split versus fp.exe. Solved matched UI ladder rung with integrated distribution outputs.",
       "timestamp": "20260406_131446"
     },
     {
@@ -632,7 +633,7 @@
       "label": "UI Large",
       "run_id": "ineq-ui-large",
       "scenario_name": "ineq_distribution_ui_large",
-      "summary": "Solved matched UI ladder rung with integrated distribution outputs.",
+      "summary": "Shared modern branch; legacy split versus fp.exe. Solved matched UI ladder rung with integrated distribution outputs.",
       "timestamp": "20260406_131456"
     },
     {
@@ -712,7 +713,7 @@
       "label": "Transfer Package Relief",
       "run_id": "ineq-transfer-package-relief",
       "scenario_name": "ineq_distribution_transfer_package_relief",
-      "summary": "Solved combined transfer-channel probe with integrated distribution outputs.",
+      "summary": "Shared modern branch; legacy split versus fp.exe. Solved combined transfer-channel probe with integrated distribution outputs.",
       "timestamp": "20260406_131546"
     },
     {
@@ -728,7 +729,7 @@
       "label": "Transfer Package Shock",
       "run_id": "ineq-transfer-package-shock",
       "scenario_name": "ineq_distribution_transfer_package_shock",
-      "summary": "Solved combined transfer-channel probe with integrated distribution outputs.",
+      "summary": "Shared modern branch; legacy split versus fp.exe. Solved combined transfer-channel probe with integrated distribution outputs.",
       "timestamp": "20260406_131556"
     },
     {
@@ -744,7 +745,7 @@
       "label": "Transfer Composite Small",
       "run_id": "ineq-transfer-composite-small",
       "scenario_name": "ineq_distribution_transfer_composite_small",
-      "summary": "Repaired transfer-composite small package with matched levers and financing shares.",
+      "summary": "Shared modern branch; legacy split versus fp.exe. Repaired transfer-composite small package with matched levers and financing shares.",
       "timestamp": "20260406_131606"
     },
     {
@@ -760,7 +761,7 @@
       "label": "Transfer Composite Medium",
       "run_id": "ineq-transfer-composite-medium",
       "scenario_name": "ineq_distribution_transfer_composite_medium",
-      "summary": "Repaired transfer-composite medium package with matched levers and financing shares.",
+      "summary": "Shared modern branch; legacy split versus fp.exe. Repaired transfer-composite medium package with matched levers and financing shares.",
       "timestamp": "20260406_131616"
     },
     {
@@ -776,7 +777,7 @@
       "label": "Transfer Composite Large",
       "run_id": "ineq-transfer-composite-large",
       "scenario_name": "ineq_distribution_transfer_composite_large",
-      "summary": "Repaired transfer-composite large package with matched levers and financing shares.",
+      "summary": "Shared modern branch; legacy split versus fp.exe. Repaired transfer-composite large package with matched levers and financing shares.",
       "timestamp": "20260406_131626"
     }
   ],

@@ -289,16 +289,18 @@ def test_export_phase1_full_bundle_writes_broad_solved_payloads(
     manifest = json.loads((out_dir / "manifest.json").read_text(encoding="utf-8"))
     assert manifest["default_run_ids"] == [
         "ineq-baseline-observed",
-        "ineq-transfer-composite-small",
-        "ineq-transfer-composite-medium",
-        "ineq-transfer-composite-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
     ]
     assert manifest["default_preset_ids"] == ["headline-poverty-resources"]
     assert manifest["default_run_ids"] == [
         "ineq-baseline-observed",
-        "ineq-transfer-composite-small",
-        "ineq-transfer-composite-medium",
-        "ineq-transfer-composite-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
     ]
     assert manifest["included_family_maturities"] == ["public"]
     assert manifest["included_family_ids"] == [
@@ -309,7 +311,8 @@ def test_export_phase1_full_bundle_writes_broad_solved_payloads(
         "transfer-package",
         "transfer-composite",
     ]
-    assert "published transfer-composite results set" in manifest["run_panel_note"]
+    assert "public-default-safe fp-r results set" in manifest["run_panel_note"]
+    assert "shared-modern labeling" in manifest["run_panel_note"]
     assert manifest["forecast_window_start"] == "2026.1"
     assert manifest["forecast_window_end"] == "2029.4"
     assert manifest["history_seeded_through"] == "2025.4"
@@ -632,9 +635,10 @@ def test_checked_in_public_docs_match_repaired_default_bundle() -> None:
 
     assert manifest["default_run_ids"] == [
         "ineq-baseline-observed",
-        "ineq-transfer-composite-small",
-        "ineq-transfer-composite-medium",
-        "ineq-transfer-composite-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
     ]
     assert len(manifest["runs"]) == 14
     assert manifest["included_family_ids"] == [
@@ -655,6 +659,7 @@ def test_checked_in_public_docs_match_repaired_default_bundle() -> None:
     assert "legacy" not in lowered_methodology
     assert "phase-1" not in lowered_methodology
     assert "phase1" not in lowered_methodology
-    assert "legacy" not in manifest_text
+    assert "legacy split" in manifest_text
+    assert "shared modern" in manifest_text
     assert "phase-1" not in manifest_text
     assert "phase1" not in manifest_text

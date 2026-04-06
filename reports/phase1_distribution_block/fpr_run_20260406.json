@@ -1,0 +1,154 @@
+{
+  "run_date": "2026-04-06",
+  "backend": "fp-r",
+  "fp_home": "/Users/shanewray/malus/proj/fp-wraptr/FM",
+  "canonical_runtime_report": "runtime/phase1_distribution_block/reports/run_phase1_distribution_block.json",
+  "acceptance": {
+    "passes": true,
+    "passes_core": true,
+    "passes_health": true,
+    "passes_private_package_gates": true
+  },
+  "runs": [
+    {
+      "variant_id": "baseline-observed",
+      "success": true,
+      "return_code": 0,
+      "output_dir": "runtime/phase1_distribution_block/artifacts/ineq_phase1_distribution_baseline_observed_20260406_222815",
+      "loadformat_path": "runtime/phase1_distribution_block/artifacts/ineq_phase1_distribution_baseline_observed_20260406_222815/LOADFORMAT.DAT",
+      "solve_error_sol1": false,
+      "bridge_parse_errors": [],
+      "flat_tail_vars": []
+    },
+    {
+      "variant_id": "federal-transfer-relief",
+      "success": true,
+      "return_code": 0,
+      "output_dir": "runtime/phase1_distribution_block/artifacts/ineq_phase1_distribution_federal_transfer_relief_20260406_222908",
+      "loadformat_path": "runtime/phase1_distribution_block/artifacts/ineq_phase1_distribution_federal_transfer_relief_20260406_222908/LOADFORMAT.DAT",
+      "solve_error_sol1": false,
+      "bridge_parse_errors": [],
+      "flat_tail_vars": []
+    },
+    {
+      "variant_id": "federal-transfer-shock",
+      "success": true,
+      "return_code": 0,
+      "output_dir": "runtime/phase1_distribution_block/artifacts/ineq_phase1_distribution_federal_transfer_shock_20260406_222918",
+      "loadformat_path": "runtime/phase1_distribution_block/artifacts/ineq_phase1_distribution_federal_transfer_shock_20260406_222918/LOADFORMAT.DAT",
+      "solve_error_sol1": false,
+      "bridge_parse_errors": [],
+      "flat_tail_vars": []
+    },
+    {
+      "variant_id": "state-local-transfer-relief",
+      "success": true,
+      "return_code": 0,
+      "output_dir": "runtime/phase1_distribution_block/artifacts/ineq_phase1_distribution_state_local_transfer_relief_20260406_222927",
+      "loadformat_path": "runtime/phase1_distribution_block/artifacts/ineq_phase1_distribution_state_local_transfer_relief_20260406_222927/LOADFORMAT.DAT",
+      "solve_error_sol1": false,
+      "bridge_parse_errors": [],
+      "flat_tail_vars": []
+    },
+    {
+      "variant_id": "state-local-transfer-shock",
+      "success": true,
+      "return_code": 0,
+      "output_dir": "runtime/phase1_distribution_block/artifacts/ineq_phase1_distribution_state_local_transfer_shock_20260406_222937",
+      "loadformat_path": "runtime/phase1_distribution_block/artifacts/ineq_phase1_distribution_state_local_transfer_shock_20260406_222937/LOADFORMAT.DAT",
+      "solve_error_sol1": false,
+      "bridge_parse_errors": [],
+      "flat_tail_vars": []
+    },
+    {
+      "variant_id": "transfer-composite-large",
+      "success": true,
+      "return_code": 0,
+      "output_dir": "runtime/phase1_distribution_block/artifacts/ineq_phase1_distribution_transfer_composite_large_20260406_223027",
+      "loadformat_path": "runtime/phase1_distribution_block/artifacts/ineq_phase1_distribution_transfer_composite_large_20260406_223027/LOADFORMAT.DAT",
+      "solve_error_sol1": false,
+      "bridge_parse_errors": [],
+      "flat_tail_vars": []
+    },
+    {
+      "variant_id": "transfer-composite-medium",
+      "success": true,
+      "return_code": 0,
+      "output_dir": "runtime/phase1_distribution_block/artifacts/ineq_phase1_distribution_transfer_composite_medium_20260406_223017",
+      "loadformat_path": "runtime/phase1_distribution_block/artifacts/ineq_phase1_distribution_transfer_composite_medium_20260406_223017/LOADFORMAT.DAT",
+      "solve_error_sol1": false,
+      "bridge_parse_errors": [],
+      "flat_tail_vars": []
+    },
+    {
+      "variant_id": "transfer-composite-small",
+      "success": true,
+      "return_code": 0,
+      "output_dir": "runtime/phase1_distribution_block/artifacts/ineq_phase1_distribution_transfer_composite_small_20260406_223007",
+      "loadformat_path": "runtime/phase1_distribution_block/artifacts/ineq_phase1_distribution_transfer_composite_small_20260406_223007/LOADFORMAT.DAT",
+      "solve_error_sol1": false,
+      "bridge_parse_errors": [],
+      "flat_tail_vars": []
+    },
+    {
+      "variant_id": "transfer-package-relief",
+      "success": true,
+      "return_code": 0,
+      "output_dir": "runtime/phase1_distribution_block/artifacts/ineq_phase1_distribution_transfer_package_relief_20260406_222947",
+      "loadformat_path": "runtime/phase1_distribution_block/artifacts/ineq_phase1_distribution_transfer_package_relief_20260406_222947/LOADFORMAT.DAT",
+      "solve_error_sol1": false,
+      "bridge_parse_errors": [],
+      "flat_tail_vars": []
+    },
+    {
+      "variant_id": "transfer-package-shock",
+      "success": true,
+      "return_code": 0,
+      "output_dir": "runtime/phase1_distribution_block/artifacts/ineq_phase1_distribution_transfer_package_shock_20260406_222957",
+      "loadformat_path": "runtime/phase1_distribution_block/artifacts/ineq_phase1_distribution_transfer_package_shock_20260406_222957/LOADFORMAT.DAT",
+      "solve_error_sol1": false,
+      "bridge_parse_errors": [],
+      "flat_tail_vars": []
+    },
+    {
+      "variant_id": "ui-large",
+      "success": true,
+      "return_code": 0,
+      "output_dir": "runtime/phase1_distribution_block/artifacts/ineq_phase1_distribution_ui_large_20260406_222858",
+      "loadformat_path": "runtime/phase1_distribution_block/artifacts/ineq_phase1_distribution_ui_large_20260406_222858/LOADFORMAT.DAT",
+      "solve_error_sol1": false,
+      "bridge_parse_errors": [],
+      "flat_tail_vars": []
+    },
+    {
+      "variant_id": "ui-relief",
+      "success": true,
+      "return_code": 0,
+      "output_dir": "runtime/phase1_distribution_block/artifacts/ineq_phase1_distribution_ui_relief_20260406_222827",
+      "loadformat_path": "runtime/phase1_distribution_block/artifacts/ineq_phase1_distribution_ui_relief_20260406_222827/LOADFORMAT.DAT",
+      "solve_error_sol1": false,
+      "bridge_parse_errors": [],
+      "flat_tail_vars": []
+    },
+    {
+      "variant_id": "ui-shock",
+      "success": true,
+      "return_code": 0,
+      "output_dir": "runtime/phase1_distribution_block/artifacts/ineq_phase1_distribution_ui_shock_20260406_222838",
+      "loadformat_path": "runtime/phase1_distribution_block/artifacts/ineq_phase1_distribution_ui_shock_20260406_222838/LOADFORMAT.DAT",
+      "solve_error_sol1": false,
+      "bridge_parse_errors": [],
+      "flat_tail_vars": []
+    },
+    {
+      "variant_id": "ui-small",
+      "success": true,
+      "return_code": 0,
+      "output_dir": "runtime/phase1_distribution_block/artifacts/ineq_phase1_distribution_ui_small_20260406_222848",
+      "loadformat_path": "runtime/phase1_distribution_block/artifacts/ineq_phase1_distribution_ui_small_20260406_222848/LOADFORMAT.DAT",
+      "solve_error_sol1": false,
+      "bridge_parse_errors": [],
+      "flat_tail_vars": []
+    }
+  ]
+}

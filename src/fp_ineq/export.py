@@ -146,6 +146,13 @@ _PHASE1_FULL_PRESETS = [
 ]
 _PHASE1_DEFAULT_PRESET_IDS = ["headline-poverty-resources"]
 _PHASE1_DEFAULT_HEADLINE_FAMILY_ID = "transfer-composite"
+_PHASE1_PUBLIC_DEFAULT_RUN_IDS = (
+    "ineq-baseline-observed",
+    "ineq-federal-transfer-relief",
+    "ineq-federal-transfer-shock",
+    "ineq-state-local-transfer-relief",
+    "ineq-state-local-transfer-shock",
+)
 _BRIDGE_EXPORT_VERSION = "v1"
 _BRIDGE_EXPORT_HORIZONS = (2, 4, 8)
 _BRIDGE_DOSE_METRIC = "delta_trlowz"
@@ -182,8 +189,8 @@ _FORECAST_WINDOW_NOTE = (
     "The integrated distribution block seeds history through 2025.4 and solves these series endogenously from 2026.1 onward."
 )
 _RUN_PANEL_NOTE = (
-    "Default selection shows the published transfer-composite results set. "
-    "Other published families remain available below for comparison."
+    "Default selection shows the public-default-safe fp-r results set. "
+    "Published legacy-split runs remain available below with explicit shared-modern labeling."
 )
 
 
@@ -612,6 +619,17 @@ def _phase1_solved_dictionary(
 
 
 def _default_manifest_run_ids(manifest_runs: list[dict[str, object]]) -> list[str]:
+    available_run_ids = {
+        str(item.get("run_id", "") or "").strip()
+        for item in manifest_runs
+        if str(item.get("run_id", "") or "").strip()
+    }
+    preferred_defaults = [
+        run_id for run_id in _PHASE1_PUBLIC_DEFAULT_RUN_IDS if run_id in available_run_ids
+    ]
+    if preferred_defaults:
+        return preferred_defaults
+
     runs_by_family: dict[str, list[str]] = {}
     for item in manifest_runs:
         family_id = str(item.get("family_id", "") or "").strip()
