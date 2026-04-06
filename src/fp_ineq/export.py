@@ -551,7 +551,11 @@ def _phase1_solved_dictionary(
         }
     for name, record in merged_variables.items():
         record["source_runs"] = variable_run_ids.get(name, [])
-    merged_payload["variables"] = merged_variables
+    merged_payload["variables"] = {
+        name: record
+        for name, record in merged_variables.items()
+        if name not in _PHASE1_PUBLIC_SUPPRESSION
+    }
     return merged_payload
 
 

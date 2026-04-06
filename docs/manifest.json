@@ -444,8 +444,7 @@
     "D2",
     "D3",
     "T1",
-    "T2",
-    "BETA1"
+    "T2"
   ],
   "default_preset_ids": [
     "headline-poverty-resources"
@@ -521,7 +520,7 @@
       "summary": "Matched-bin composite ladder runs across UI, federal, and state/local transfer channels."
     }
   ],
-  "generated_at": "2026-04-05T13:03:39.514305+00:00",
+  "generated_at": "2026-04-06T09:50:14.236850+00:00",
   "included_family_ids": [
     "baseline",
     "ui",
@@ -547,7 +546,7 @@
       "run_id": "ineq-phase1-baseline-observed",
       "scenario_name": "ineq_phase1_distribution_baseline_observed",
       "summary": "Solved baseline path with integrated distribution outputs.",
-      "timestamp": "20260405_124256"
+      "timestamp": "20260405_154819"
     },
     {
       "data_path": "runs/ineq-phase1-ui-relief.json",
@@ -561,7 +560,7 @@
       "run_id": "ineq-phase1-ui-relief",
       "scenario_name": "ineq_phase1_distribution_ui_relief",
       "summary": "Solved matched UI ladder medium rung with integrated distribution outputs.",
-      "timestamp": "20260405_124307"
+      "timestamp": "20260405_154830"
     },
     {
       "data_path": "runs/ineq-phase1-ui-shock.json",
@@ -575,7 +574,7 @@
       "run_id": "ineq-phase1-ui-shock",
       "scenario_name": "ineq_phase1_distribution_ui_shock",
       "summary": "Solved UI transfer-channel probe with integrated distribution outputs.",
-      "timestamp": "20260405_124317"
+      "timestamp": "20260405_154840"
     },
     {
       "data_path": "runs/ineq-phase1-ui-small.json",
@@ -589,7 +588,7 @@
       "run_id": "ineq-phase1-ui-small",
       "scenario_name": "ineq_phase1_distribution_ui_small",
       "summary": "Solved matched UI ladder rung with integrated distribution outputs.",
-      "timestamp": "20260405_124327"
+      "timestamp": "20260405_154850"
     },
     {
       "data_path": "runs/ineq-phase1-ui-large.json",
@@ -603,7 +602,7 @@
       "run_id": "ineq-phase1-ui-large",
       "scenario_name": "ineq_phase1_distribution_ui_large",
       "summary": "Solved matched UI ladder rung with integrated distribution outputs.",
-      "timestamp": "20260405_124347"
+      "timestamp": "20260405_154900"
     },
     {
       "data_path": "runs/ineq-phase1-federal-transfer-relief.json",
@@ -617,7 +616,7 @@
       "run_id": "ineq-phase1-federal-transfer-relief",
       "scenario_name": "ineq_phase1_distribution_federal_transfer_relief",
       "summary": "Solved broad federal household-transfer probe with integrated distribution outputs.",
-      "timestamp": "20260405_124357"
+      "timestamp": "20260405_154910"
     },
     {
       "data_path": "runs/ineq-phase1-federal-transfer-shock.json",
@@ -631,7 +630,7 @@
       "run_id": "ineq-phase1-federal-transfer-shock",
       "scenario_name": "ineq_phase1_distribution_federal_transfer_shock",
       "summary": "Solved broad federal household-transfer probe with integrated distribution outputs.",
-      "timestamp": "20260405_124407"
+      "timestamp": "20260405_154919"
     },
     {
       "data_path": "runs/ineq-phase1-state-local-transfer-relief.json",
@@ -645,7 +644,7 @@
       "run_id": "ineq-phase1-state-local-transfer-relief",
       "scenario_name": "ineq_phase1_distribution_state_local_transfer_relief",
       "summary": "Solved state/local household-transfer probe with integrated distribution outputs.",
-      "timestamp": "20260405_124417"
+      "timestamp": "20260405_154929"
     },
     {
       "data_path": "runs/ineq-phase1-state-local-transfer-shock.json",
@@ -659,7 +658,7 @@
       "run_id": "ineq-phase1-state-local-transfer-shock",
       "scenario_name": "ineq_phase1_distribution_state_local_transfer_shock",
       "summary": "Solved state/local household-transfer probe with integrated distribution outputs.",
-      "timestamp": "20260405_124426"
+      "timestamp": "20260405_154938"
     },
     {
       "data_path": "runs/ineq-phase1-transfer-package-relief.json",
@@ -673,7 +672,7 @@
       "run_id": "ineq-phase1-transfer-package-relief",
       "scenario_name": "ineq_phase1_distribution_transfer_package_relief",
       "summary": "Solved combined transfer-channel probe with integrated distribution outputs.",
-      "timestamp": "20260405_124436"
+      "timestamp": "20260405_154948"
     },
     {
       "data_path": "runs/ineq-phase1-transfer-package-shock.json",
@@ -687,7 +686,7 @@
       "run_id": "ineq-phase1-transfer-package-shock",
       "scenario_name": "ineq_phase1_distribution_transfer_package_shock",
       "summary": "Solved combined transfer-channel probe with integrated distribution outputs.",
-      "timestamp": "20260405_124446"
+      "timestamp": "20260405_154958"
     },
     {
       "data_path": "runs/ineq-phase1-transfer-composite-small.json",
@@ -701,7 +700,7 @@
       "run_id": "ineq-phase1-transfer-composite-small",
       "scenario_name": "ineq_phase1_distribution_transfer_composite_small",
       "summary": "Solved matched transfer-composite ladder rung with integrated distribution outputs.",
-      "timestamp": "20260405_124456"
+      "timestamp": "20260405_155008"
     },
     {
       "data_path": "runs/ineq-phase1-transfer-composite-medium.json",
@@ -715,7 +714,7 @@
       "run_id": "ineq-phase1-transfer-composite-medium",
       "scenario_name": "ineq_phase1_distribution_transfer_composite_medium",
       "summary": "Solved matched transfer-composite ladder rung with integrated distribution outputs.",
-      "timestamp": "20260405_124506"
+      "timestamp": "20260405_155017"
     },
     {
       "data_path": "runs/ineq-phase1-transfer-composite-large.json",
@@ -729,7 +728,7 @@
       "run_id": "ineq-phase1-transfer-composite-large",
       "scenario_name": "ineq_phase1_distribution_transfer_composite_large",
       "summary": "Solved matched transfer-composite ladder rung with integrated distribution outputs.",
-      "timestamp": "20260405_124516"
+      "timestamp": "20260405_155027"
     }
   ],
   "schema_version": 1,

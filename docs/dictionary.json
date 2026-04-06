@@ -23131,22 +23131,7 @@
       "description": "Model series defined by CREATE BETA1: COEF(1,10)",
       "name": "BETA1",
       "short_name": "BETA1",
-      "source_runs": [
-        "ineq-phase1-baseline-observed",
-        "ineq-phase1-ui-relief",
-        "ineq-phase1-ui-shock",
-        "ineq-phase1-ui-small",
-        "ineq-phase1-ui-large",
-        "ineq-phase1-federal-transfer-relief",
-        "ineq-phase1-federal-transfer-shock",
-        "ineq-phase1-state-local-transfer-relief",
-        "ineq-phase1-state-local-transfer-shock",
-        "ineq-phase1-transfer-package-relief",
-        "ineq-phase1-transfer-package-shock",
-        "ineq-phase1-transfer-composite-small",
-        "ineq-phase1-transfer-composite-medium",
-        "ineq-phase1-transfer-composite-large"
-      ],
+      "source_runs": [],
       "used_in_equations": [
         "create:DELTA1:86a66c6700"
       ]
@@ -23873,16 +23858,11 @@
       "used_in_equations": []
     },
     "CNST2CS": {
-      "_provenance": {
-        "table": "A.2"
-      },
-      "category": "exogenous",
       "code": "CNST2CS",
-      "construction": "Time varying constant term. See text.",
       "defined_by_equation": "create:CNST2CS:285f9d690d",
-      "description": "Time varying constant term, 1974.1-1994.3.",
+      "description": "Model series defined by CREATE CNST2CS: D3+T1*D2/(T1-T2)-T*D2/(T1-T2)",
       "name": "CNST2CS",
-      "short_name": "Services Constant Shift",
+      "short_name": "CNST2CS",
       "source_runs": [
         "ineq-phase1-baseline-observed",
         "ineq-phase1-ui-relief",
@@ -23940,16 +23920,11 @@
       "used_in_equations": []
     },
     "CNST2L2": {
-      "_provenance": {
-        "table": "A.2"
-      },
-      "category": "exogenous",
       "code": "CNST2L2",
-      "construction": "Time varying constant term. See text.",
       "defined_by_equation": "create:CNST2L2:147015cf5e",
-      "description": "Time varying constant term, 1971.3-1989.4.",
+      "description": "Model series defined by CREATE CNST2L2: D3+T1*D2/(T1-T2)-T*D2/(T1-T2)",
       "name": "CNST2L2",
-      "short_name": "Female Labor Constant",
+      "short_name": "CNST2L2",
       "source_runs": [
         "ineq-phase1-baseline-observed",
         "ineq-phase1-ui-relief",
@@ -26720,17 +26695,6 @@
         122
       ]
     },
-    "GHSHDV": {
-      "code": "GHSHDV",
-      "defined_by_equation": 9,
-      "description": "Model series defined by Eq 9: UBZ = (UB-UBBAR)/UBSTD; TRGHZ = (TRGH-TRGHBAR)/TRGHSTD; TRSHZ = (TRSH-TRSHBAR)/TRSHSTD; UIDEV = UBZ - 0.5*(TRGHZ+TRSHZ); GHSHDV = TRGHZ - TRSHZ; LPOVALL = PV0 + PVU*UR + PVT*TRLOWZ + PVUI*UIDEV + PVGH*GHSHDV; IPOVALL = EXP(LPOVALL)/(1+EXP(LPOVALL))",
-      "name": "GHSHDV",
-      "short_name": "GHSHDV",
-      "source_runs": [],
-      "used_in_equations": [
-        19
-      ]
-    },
     "GN0": {
       "code": "GN0",
       "defined_by_equation": null,
@@ -27589,28 +27553,6 @@
         "identity:SS:481383485d"
       ]
     },
-    "ICRDCMP": {
-      "category": "overlay",
-      "code": "ICRDCMP",
-      "defined_by_equation": null,
-      "description": "Composite credit-conditions input for the inequality overlay. It summarizes credit-side pressure and support conditions in the scenario path.",
-      "name": "ICRDCMP",
-      "short_name": "Credit Composite",
-      "source_runs": [],
-      "units": "index",
-      "used_in_equations": []
-    },
-    "IFFUNDS": {
-      "category": "overlay",
-      "code": "IFFUNDS",
-      "defined_by_equation": null,
-      "description": "Federal funds rate input used by the inequality overlay as a monetary-policy sensitivity channel.",
-      "name": "IFFUNDS",
-      "short_name": "Fed Funds Rate",
-      "source_runs": [],
-      "units": "percent",
-      "used_in_equations": []
-    },
     "IGINIHH": {
       "category": "overlay",
       "code": "IGINIHH",
@@ -27809,17 +27751,6 @@
         "identity:XX:fa943349f3"
       ]
     },
-    "IHHNW": {
-      "category": "overlay",
-      "code": "IHHNW",
-      "defined_by_equation": null,
-      "description": "Household net worth input for the inequality overlay. It is mainly used to shape wealth-distribution outcomes in scenario comparisons.",
-      "name": "IHHNW",
-      "short_name": "Household Net Worth",
-      "source_runs": [],
-      "units": "index",
-      "used_in_equations": []
-    },
     "IHHZ": {
       "code": "IHHZ",
       "defined_by_equation": "genr:IHHZ:087a9220ee",
@@ -27846,17 +27777,6 @@
         "genr:LIHHZ:1d2a33e26b",
         "genr:LIHHZ:8df3b51852"
       ]
-    },
-    "IHOMEQ": {
-      "category": "overlay",
-      "code": "IHOMEQ",
-      "defined_by_equation": null,
-      "description": "Home equity input for the inequality overlay. It captures the housing-wealth channel used by the wealth-gap equations.",
-      "name": "IHOMEQ",
-      "short_name": "Home Equity",
-      "source_runs": [],
-      "units": "index",
-      "used_in_equations": []
     },
     "IKB": {
       "_provenance": {
@@ -28566,28 +28486,6 @@
       "units": "share",
       "used_in_equations": []
     },
-    "ISNAP": {
-      "category": "overlay",
-      "code": "ISNAP",
-      "defined_by_equation": null,
-      "description": "SNAP support input for the inequality overlay. Higher values represent stronger food-assistance support in the scenario path.",
-      "name": "ISNAP",
-      "short_name": "SNAP Support",
-      "source_runs": [],
-      "units": "index",
-      "used_in_equations": []
-    },
-    "ISSBEN": {
-      "category": "overlay",
-      "code": "ISSBEN",
-      "defined_by_equation": null,
-      "description": "Social Security benefits input for the inequality overlay. This series shifts the policy support path used in scenario comparisons.",
-      "name": "ISSBEN",
-      "short_name": "Social Security",
-      "source_runs": [],
-      "units": "index",
-      "used_in_equations": []
-    },
     "ISZ": {
       "_provenance": {
         "source": "construction/equations",
@@ -28654,28 +28552,6 @@
         159,
         "genr:ISZ:4687a5b287"
       ]
-    },
-    "ITRCOMP": {
-      "category": "overlay",
-      "code": "ITRCOMP",
-      "defined_by_equation": null,
-      "description": "Composite transfer-policy input used by the inequality overlay. It summarizes the net support signal from transfer-side policy channels.",
-      "name": "ITRCOMP",
-      "short_name": "Transfer Composite",
-      "source_runs": [],
-      "units": "index",
-      "used_in_equations": []
-    },
-    "IUIBEN": {
-      "category": "overlay",
-      "code": "IUIBEN",
-      "defined_by_equation": null,
-      "description": "Unemployment-insurance benefits input for the inequality overlay. Higher values indicate more generous UI support in the scenario path.",
-      "name": "IUIBEN",
-      "short_name": "UI Benefits",
-      "source_runs": [],
-      "units": "index",
-      "used_in_equations": []
     },
     "IVA": {
       "_provenance": {
@@ -28746,28 +28622,6 @@
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e"
       ]
-    },
-    "IWGAP1050": {
-      "category": "overlay",
-      "code": "IWGAP1050",
-      "defined_by_equation": null,
-      "description": "Estimated wealth-share gap between the top 10 percent and the bottom 50 percent. Higher values imply greater wealth concentration.",
-      "name": "IWGAP1050",
-      "short_name": "Top 10 / Bottom 50 Wealth Gap",
-      "source_runs": [],
-      "units": "ratio",
-      "used_in_equations": []
-    },
-    "IWGAP150": {
-      "category": "overlay",
-      "code": "IWGAP150",
-      "defined_by_equation": null,
-      "description": "Estimated wealth-share gap between the top 1 percent and the bottom 50 percent. Higher values imply greater wealth concentration at the top.",
-      "name": "IWGAP150",
-      "short_name": "Top 1 / Bottom 50 Wealth Gap",
-      "source_runs": [],
-      "units": "ratio",
-      "used_in_equations": []
     },
     "JCHC0": {
       "code": "JCHC0",
@@ -38422,15 +38276,6 @@
         9
       ]
     },
-    "TRGHZ": {
-      "code": "TRGHZ",
-      "defined_by_equation": 9,
-      "description": "Model series defined by Eq 9: UBZ = (UB-UBBAR)/UBSTD; TRGHZ = (TRGH-TRGHBAR)/TRGHSTD; TRSHZ = (TRSH-TRSHBAR)/TRSHSTD; UIDEV = UBZ - 0.5*(TRGHZ+TRSHZ); GHSHDV = TRGHZ - TRSHZ; LPOVALL = PV0 + PVU*UR + PVT*TRLOWZ + PVUI*UIDEV + PVGH*GHSHDV; IPOVALL = EXP(LPOVALL)/(1+EXP(LPOVALL))",
-      "name": "TRGHZ",
-      "short_name": "TRGHZ",
-      "source_runs": [],
-      "used_in_equations": []
-    },
     "TRGR": {
       "_provenance": {
         "table": "A.2"
@@ -38829,15 +38674,6 @@
         9
       ]
     },
-    "TRSHZ": {
-      "code": "TRSHZ",
-      "defined_by_equation": 9,
-      "description": "Model series defined by Eq 9: UBZ = (UB-UBBAR)/UBSTD; TRGHZ = (TRGH-TRGHBAR)/TRGHSTD; TRSHZ = (TRSH-TRSHBAR)/TRSHSTD; UIDEV = UBZ - 0.5*(TRGHZ+TRSHZ); GHSHDV = TRGHZ - TRSHZ; LPOVALL = PV0 + PVU*UR + PVT*TRLOWZ + PVUI*UIDEV + PVGH*GHSHDV; IPOVALL = EXP(LPOVALL)/(1+EXP(LPOVALL))",
-      "name": "TRSHZ",
-      "short_name": "TRSHZ",
-      "source_runs": [],
-      "used_in_equations": []
-    },
     "TTRRF": {
       "_provenance": {
         "source": "construction/equations",
@@ -39006,15 +38842,6 @@
         9
       ]
     },
-    "UBZ": {
-      "code": "UBZ",
-      "defined_by_equation": 9,
-      "description": "Model series defined by Eq 9: UBZ = (UB-UBBAR)/UBSTD; TRGHZ = (TRGH-TRGHBAR)/TRGHSTD; TRSHZ = (TRSH-TRSHBAR)/TRSHSTD; UIDEV = UBZ - 0.5*(TRGHZ+TRSHZ); GHSHDV = TRGHZ - TRSHZ; LPOVALL = PV0 + PVU*UR + PVT*TRLOWZ + PVUI*UIDEV + PVGH*GHSHDV; IPOVALL = EXP(LPOVALL)/(1+EXP(LPOVALL))",
-      "name": "UBZ",
-      "short_name": "UBZ",
-      "source_runs": [],
-      "used_in_equations": []
-    },
     "UBZ, TRGHZ, TRSHZ, UIDEV, GHSHDV, LPOVALL, IPOVALL": {
       "code": "UBZ, TRGHZ, TRSHZ, UIDEV, GHSHDV, LPOVALL, IPOVALL",
       "defined_by_equation": 9,
@@ -39033,17 +38860,6 @@
       "source_runs": [],
       "used_in_equations": [
         28
-      ]
-    },
-    "UIDEV": {
-      "code": "UIDEV",
-      "defined_by_equation": 9,
-      "description": "Model series defined by Eq 9: UBZ = (UB-UBBAR)/UBSTD; TRGHZ = (TRGH-TRGHBAR)/TRGHSTD; TRSHZ = (TRSH-TRSHBAR)/TRSHSTD; UIDEV = UBZ - 0.5*(TRGHZ+TRSHZ); GHSHDV = TRGHZ - TRSHZ; LPOVALL = PV0 + PVU*UR + PVT*TRLOWZ + PVUI*UIDEV + PVGH*GHSHDV; IPOVALL = EXP(LPOVALL)/(1+EXP(LPOVALL))",
-      "name": "UIDEV",
-      "short_name": "UIDEV",
-      "source_runs": [],
-      "used_in_equations": [
-        19
       ]
     },
     "UMM": {

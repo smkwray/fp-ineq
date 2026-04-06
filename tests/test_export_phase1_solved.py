@@ -333,6 +333,8 @@ def test_export_phase1_full_bundle_writes_broad_solved_payloads(
 
     dictionary = json.loads((out_dir / "dictionary.json").read_text(encoding="utf-8"))
     bundle_run_ids = [item["run_id"] for item in manifest["runs"]]
+    for hidden in ["IWGAP150", "LWGAP150", "UBZ", "TRGHZ", "TRSHZ", "UIDEV", "GHSHDV"]:
+        assert hidden not in dictionary["variables"]
     assert dictionary["variables"]["AS"]["short_name"] == "State Local Net Assets"
     assert dictionary["variables"]["GDPR"]["defined_by_equation"] == 83
     assert dictionary["variables"]["GDPR"]["source_runs"] == bundle_run_ids
@@ -343,7 +345,7 @@ def test_export_phase1_full_bundle_writes_broad_solved_payloads(
     assert dictionary["equations"][pcpf_eq_id]["source_runs"] == bundle_run_ids
     assert all("pse2025_" not in run_id for run_id in dictionary["equations"][pcpf_eq_id]["source_runs"])
     assert "83" in dictionary["equations"]
-    assert "ITRCOMP" in dictionary["variables"]
+    assert "ITRCOMP" not in dictionary["variables"]
 
 
 def test_export_phase1_full_bundle_supports_family_filtering(

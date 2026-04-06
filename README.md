@@ -70,8 +70,8 @@ When the commands are run locally, ignored runtime directories are generated for
 The checked-in `docs/` bundle contains the published results explorer:
 
 - 14 solved runs
-- 446 available solved series
-- 648 variable dictionary records
+- 445 available solved series
+- 633 variable dictionary records
 - 655 equation records
 - default preset: `headline-poverty-resources`
 - manifest-level family metadata with maturity tags for the published run families
@@ -286,8 +286,8 @@ Interpretation notes:
 - The current shared bins were verified privately against the stock FM path and are anchored to the observed `ui-relief` response: `0.5x`, `1.0x`, and `1.5x` of that first-year `ΔTRLOWZ`.
 - `ui-relief` is the published medium UI ladder rung, and the fresh integrated private distribution solve now uses that rung directly rather than carrying a separate `ui-medium` alias.
 - The private calibration reports live under `runtime/phase1_ui/ladder/reports/` and `runtime/phase1_transfer_core/ladder/reports/`.
-- The public 14-run UI family still has no dedicated adverse labor-supply or matching-offset block installed.
-- The private `ui-matching-offset` family should be read as a bounded sensitivity check on that asymmetry, not as part of the published release. The current two-point private envelope hits about 25% and 50% first-year `ΔUR` clawback while keeping first-year `ΔTRLOWZ` nearly unchanged, but neither stress lowers final `GDPR`.
+- The public 14-run UI family still does not include a dedicated labor-supply, labor-force-participation, or matching-offset block.
+- A private `ui-matching-offset` stress family exists as a bounded two-point sensitivity envelope: one run claws back about 25% of the medium UI rung's first-year `ΔUR` improvement and another claws back about 50%, while both keep first-year `ΔTRLOWZ` nearly unchanged. Neither private stress lowers final `GDPR`, so those runs remain interpretation checks rather than grounds for a new public UI family. The public UI results should therefore still be read as demand-dominant probes with a small private sensitivity envelope, not as a fully balanced policy package.
 - The descriptive contrary-channel audit shows endogenous rate counter-moves across all current public transfer families, so no additional synthetic contrary public families are added at this stage.
 
 <details>
@@ -474,7 +474,7 @@ The following areas are not part of the published model scope:
 
 - credit-condition scenario families
 - housing, home-equity, or wealth scenario families
-- revived transfer-composite publication
+- legacy `ITRCOMP` composite-index publication as a separate public scenario family
 - two-way feedback from the distribution block into the stock macro block
 - publication-grade interpretation of the household Gini coefficient (`IGINIHH`)
 - publication-grade interpretation of the median real income proxy (`IMEDRINC`)
