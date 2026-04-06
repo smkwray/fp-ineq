@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import csv
 import hashlib
 import json
 import re
@@ -145,6 +146,35 @@ _PHASE1_FULL_PRESETS = [
 ]
 _PHASE1_DEFAULT_PRESET_IDS = ["headline-poverty-resources"]
 _PHASE1_DEFAULT_HEADLINE_FAMILY_ID = "transfer-composite"
+_BRIDGE_EXPORT_VERSION = "v1"
+_BRIDGE_EXPORT_HORIZONS = (2, 4, 8)
+_BRIDGE_DOSE_METRIC = "delta_trlowz"
+_BRIDGE_CHANNELS_BY_FAMILY = {
+    "ui": "ui",
+    "federal-transfers": "broad_federal_transfers",
+    "transfer-composite": "transfer_composite",
+}
+_BRIDGE_HEADLINE_METRICS = ("TRLOWZ", "IPOVALL", "IPOVCH", "RYDPC")
+_BRIDGE_SECONDARY_METRICS = ("IGINIHH", "IMEDRINC")
+_BRIDGE_ROW_COLUMNS = [
+    "bridge_version",
+    "repo",
+    "scenario_id",
+    "scenario_label",
+    "channel",
+    "family",
+    "h",
+    "baseline_id",
+    "dose_metric",
+    "dose_value",
+    "delta_trlowz",
+    "delta_ipovall",
+    "delta_ipovch",
+    "delta_rydpc",
+    "delta_iginihh",
+    "delta_imedrinc",
+    "notes",
+]
 _EQUATION_FUNCTION_NAMES = {"ABS", "EXP", "LOG", "MAX", "MIN"}
 _FORECAST_ONLY_SERIES = ("IPOVALL", "IPOVCH", "IGINIHH", "IMEDRINC")
 _FORECAST_WINDOW_NOTE = (
@@ -647,6 +677,8 @@ def publish_phase1_bundle_to_docs(
         "manifest.json",
         "presets.json",
         "dictionary.json",
+        "bridge_results.csv",
+        "bridge_metadata.json",
     ]
     dir_names = ["assets", "runs"]
 
@@ -793,6 +825,122 @@ def _filter_public_series(series: dict[str, list[float]]) -> dict[str, list[floa
     }
 
 
+def _advance_quarter_period(period: str, quarters_ahead: int) -> str:
+    year, sub = _period_key(period)
+    offset = (year * 4) + (sub - 1) + quarters_ahead
+    return f"{offset // 4}.{(offset % 4) + 1}"
+
+
+def _bridge_notes_for_family(family_id: str) -> str:
+    notes = ["secondary_metrics_provisional"]
+    if family_id == "transfer-composite":
+        notes.append("financed_transfer_package")
+    return "; ".join(notes)
+
+
+def _bridge_metric_value(run_json: dict[str, object], metric: str, period: str) -> float:
+    periods = list(run_json.get("periods", []))
+    series = dict(run_json.get("series", {}))
+    if period not in periods:
+        raise ValueError(f"Bridge period {period} missing from run {run_json.get('run_id', '<unknown>')}")
+    if metric not in series:
+        raise ValueError(f"Bridge metric {metric} missing from run {run_json.get('run_id', '<unknown>')}")
+    index = periods.index(period)
+    values = list(series[metric])
+    return float(values[index])
+
+
+def _build_bridge_rows(
+    *,
+    manifest_runs: list[dict[str, object]],
+    run_payloads: dict[str, dict[str, object]],
+    forecast_start: str,
+) -> list[dict[str, object]]:
+    baseline_run = next((item for item in manifest_runs if str(item.get("family_id")) == "baseline"), None)
+    if baseline_run is None:
+        return []
+    baseline_id = str(baseline_run["run_id"])
+    baseline_payload = run_payloads.get(baseline_id)
+    if baseline_payload is None:
+        raise ValueError(f"Bridge baseline payload missing for {baseline_id}")
+
+    bridge_rows: list[dict[str, object]] = []
+    metrics = (*_BRIDGE_HEADLINE_METRICS, *_BRIDGE_SECONDARY_METRICS)
+    for run in manifest_runs:
+        family_id = str(run.get("family_id", ""))
+        channel = _BRIDGE_CHANNELS_BY_FAMILY.get(family_id)
+        if channel is None:
+            continue
+        run_id = str(run["run_id"])
+        run_payload = run_payloads.get(run_id)
+        if run_payload is None:
+            raise ValueError(f"Bridge payload missing for {run_id}")
+        for horizon in _BRIDGE_EXPORT_HORIZONS:
+            period = _advance_quarter_period(forecast_start, horizon)
+            deltas = {
+                metric: _bridge_metric_value(run_payload, metric, period)
+                - _bridge_metric_value(baseline_payload, metric, period)
+                for metric in metrics
+            }
+            bridge_rows.append(
+                {
+                    "bridge_version": _BRIDGE_EXPORT_VERSION,
+                    "repo": "fp",
+                    "scenario_id": run_id,
+                    "scenario_label": str(run.get("label", run_id)),
+                    "channel": channel,
+                    "family": family_id,
+                    "h": horizon,
+                    "baseline_id": baseline_id,
+                    "dose_metric": _BRIDGE_DOSE_METRIC,
+                    "dose_value": deltas["TRLOWZ"],
+                    "delta_trlowz": deltas["TRLOWZ"],
+                    "delta_ipovall": deltas["IPOVALL"],
+                    "delta_ipovch": deltas["IPOVCH"],
+                    "delta_rydpc": deltas["RYDPC"],
+                    "delta_iginihh": deltas["IGINIHH"],
+                    "delta_imedrinc": deltas["IMEDRINC"],
+                    "notes": _bridge_notes_for_family(family_id),
+                }
+            )
+    return bridge_rows
+
+
+def _write_bridge_export(
+    *,
+    out_dir: Path,
+    manifest_runs: list[dict[str, object]],
+    run_payloads: dict[str, dict[str, object]],
+    forecast_start: str,
+) -> tuple[str, str, int]:
+    rows = _build_bridge_rows(
+        manifest_runs=manifest_runs,
+        run_payloads=run_payloads,
+        forecast_start=forecast_start,
+    )
+    bridge_path = out_dir / "bridge_results.csv"
+    with bridge_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=_BRIDGE_ROW_COLUMNS)
+        writer.writeheader()
+        writer.writerows(rows)
+
+    metadata = {
+        "bridge_version": _BRIDGE_EXPORT_VERSION,
+        "repo": "fp",
+        "schema_columns": list(_BRIDGE_ROW_COLUMNS),
+        "channels_by_family": dict(_BRIDGE_CHANNELS_BY_FAMILY),
+        "horizons": list(_BRIDGE_EXPORT_HORIZONS),
+        "horizon_rule": "quarters_ahead_from_forecast_start",
+        "dose_metric": _BRIDGE_DOSE_METRIC,
+        "headline_metrics": list(_BRIDGE_HEADLINE_METRICS),
+        "secondary_metrics": list(_BRIDGE_SECONDARY_METRICS),
+        "row_count": len(rows),
+    }
+    metadata_path = out_dir / "bridge_metadata.json"
+    metadata_path.write_text(json.dumps(metadata, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    return bridge_path.name, metadata_path.name, len(rows)
+
+
 def export_phase1_full_bundle(
     *,
     report_path: Path | None = None,
@@ -842,6 +990,7 @@ def export_phase1_full_bundle(
     _copy_static_shell(out_dir)
 
     manifest_runs: list[dict[str, object]] = []
+    run_payloads: dict[str, dict[str, object]] = {}
     available_variables: list[str] = []
     seen_variables: set[str] = set()
     variable_run_ids: dict[str, list[str]] = {}
@@ -885,6 +1034,7 @@ def export_phase1_full_bundle(
         }
         run_path = out_dir / "runs" / f"{run_id}.json"
         run_path.write_text(json.dumps(run_json, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        run_payloads[run_id] = run_json
         manifest_runs.append(
             {
                 "data_path": f"runs/{run_id}.json",
@@ -903,6 +1053,13 @@ def export_phase1_full_bundle(
                 "timestamp": run_json["timestamp"],
             }
         )
+
+    bridge_results_path, bridge_metadata_path, bridge_row_count = _write_bridge_export(
+        out_dir=out_dir,
+        manifest_runs=manifest_runs,
+        run_payloads=run_payloads,
+        forecast_start=forecast_start,
+    )
 
     presets = [
         {
@@ -936,6 +1093,8 @@ def export_phase1_full_bundle(
             preset_id for preset_id in _PHASE1_DEFAULT_PRESET_IDS if any(p["id"] == preset_id for p in presets)
         ],
         "default_run_ids": _default_manifest_run_ids(manifest_runs),
+        "bridge_metadata_path": bridge_metadata_path,
+        "bridge_results_path": bridge_results_path,
         "dictionary_path": "dictionary.json",
         "families": _phase1_manifest_families(list(run_specs.values())),
         "forecast_only_series": list(_FORECAST_ONLY_SERIES),
@@ -960,6 +1119,9 @@ def export_phase1_full_bundle(
         "out_dir": str(out_dir),
         "manifest_path": str(manifest_path),
         "report_path": str(report_path),
+        "bridge_metadata_path": str(out_dir / bridge_metadata_path),
+        "bridge_results_path": str(out_dir / bridge_results_path),
+        "bridge_row_count": bridge_row_count,
         "run_count": len(manifest_runs),
         "variable_count": len(available_variables),
         "family_ids": [family["family_id"] for family in manifest["families"]],

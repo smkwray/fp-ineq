@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import csv
 import json
 from pathlib import Path
 from types import SimpleNamespace
@@ -227,7 +228,26 @@ def test_export_phase1_full_bundle_writes_broad_solved_payloads(
             "transfer_composite_large": 1.375,
         }
         delta = deltas[label]
-        periods = [forecast_start, "2026.2", forecast_end]
+        periods = [
+            "2026.1",
+            "2026.2",
+            "2026.3",
+            "2026.4",
+            "2027.1",
+            "2027.2",
+            "2027.3",
+            "2027.4",
+            "2028.1",
+            "2028.2",
+            "2028.3",
+            "2028.4",
+            "2029.1",
+            "2029.2",
+            "2029.3",
+            "2029.4",
+        ]
+        assert periods[0] == forecast_start
+        assert periods[-1] == forecast_end
         names = [
             "IPOVALL",
             "IPOVCH",
@@ -251,7 +271,7 @@ def test_export_phase1_full_bundle_writes_broad_solved_payloads(
             "LWGAP150",
         ]
         series = {
-            name: [10.0 + delta, 11.0 + delta, 12.0 + delta]
+            name: [10.0 + delta + idx for idx, _period in enumerate(periods)]
             for name in names
         }
         return periods, series
@@ -264,6 +284,7 @@ def test_export_phase1_full_bundle_writes_broad_solved_payloads(
 
     assert payload["run_count"] == 14
     assert payload["variable_count"] == 16
+    assert payload["bridge_row_count"] == 27
 
     manifest = json.loads((out_dir / "manifest.json").read_text(encoding="utf-8"))
     assert manifest["default_run_ids"] == [
@@ -294,6 +315,8 @@ def test_export_phase1_full_bundle_writes_broad_solved_payloads(
     assert manifest["history_seeded_through"] == "2025.4"
     assert manifest["forecast_only_series"] == ["IPOVALL", "IPOVCH", "IGINIHH", "IMEDRINC"]
     assert "seeds history through 2025.4" in manifest["forecast_window_note"]
+    assert manifest["bridge_results_path"] == "bridge_results.csv"
+    assert manifest["bridge_metadata_path"] == "bridge_metadata.json"
     assert [item["family_id"] for item in manifest["families"]] == manifest["included_family_ids"]
     ui_family = next(item for item in manifest["families"] if item["family_id"] == "ui")
     composite_family = next(item for item in manifest["families"] if item["family_id"] == "transfer-composite")
@@ -333,13 +356,62 @@ def test_export_phase1_full_bundle_writes_broad_solved_payloads(
     assert "IMEDRINC" in provisional["variables"]
 
     run_payload = json.loads((out_dir / "runs" / "ineq-transfer-composite-small.json").read_text(encoding="utf-8"))
-    assert run_payload["periods"] == ["2026.1", "2026.2", "2029.4"]
-    assert run_payload["series"]["IPOVALL"] == [11.125, 12.125, 13.125]
-    assert run_payload["series"]["AS"] == [11.125, 12.125, 13.125]
+    assert run_payload["periods"] == [
+        "2026.1",
+        "2026.2",
+        "2026.3",
+        "2026.4",
+        "2027.1",
+        "2027.2",
+        "2027.3",
+        "2027.4",
+        "2028.1",
+        "2028.2",
+        "2028.3",
+        "2028.4",
+        "2029.1",
+        "2029.2",
+        "2029.3",
+        "2029.4",
+    ]
+    assert run_payload["series"]["IPOVALL"][:3] == [11.125, 12.125, 13.125]
+    assert run_payload["series"]["AS"][:3] == [11.125, 12.125, 13.125]
     assert run_payload["history_seeded_through"] == "2025.4"
     assert run_payload["forecast_only_series"] == ["IPOVALL", "IPOVCH", "IGINIHH", "IMEDRINC"]
     assert "ITRCOMP" not in run_payload["series"]
     assert run_payload["timestamp"] == "20260404_150021"
+
+    bridge_metadata = json.loads((out_dir / "bridge_metadata.json").read_text(encoding="utf-8"))
+    assert bridge_metadata["bridge_version"] == "v1"
+    assert bridge_metadata["channels_by_family"] == {
+        "federal-transfers": "broad_federal_transfers",
+        "transfer-composite": "transfer_composite",
+        "ui": "ui",
+    }
+    assert bridge_metadata["horizons"] == [2, 4, 8]
+    assert bridge_metadata["headline_metrics"] == ["TRLOWZ", "IPOVALL", "IPOVCH", "RYDPC"]
+    assert bridge_metadata["secondary_metrics"] == ["IGINIHH", "IMEDRINC"]
+
+    with (out_dir / "bridge_results.csv").open(encoding="utf-8", newline="") as handle:
+        bridge_rows = list(csv.DictReader(handle))
+    assert len(bridge_rows) == 27
+    sample = next(
+        row
+        for row in bridge_rows
+        if row["scenario_id"] == "ineq-transfer-composite-medium" and row["h"] == "4"
+    )
+    assert sample["repo"] == "fp"
+    assert sample["channel"] == "transfer_composite"
+    assert sample["family"] == "transfer-composite"
+    assert sample["baseline_id"] == "ineq-baseline-observed"
+    assert sample["dose_metric"] == "delta_trlowz"
+    assert float(sample["dose_value"]) == pytest.approx(1.25)
+    assert float(sample["delta_ipovall"]) == pytest.approx(1.25)
+    assert float(sample["delta_ipovch"]) == pytest.approx(1.25)
+    assert float(sample["delta_rydpc"]) == pytest.approx(1.25)
+    assert float(sample["delta_iginihh"]) == pytest.approx(1.25)
+    assert float(sample["delta_imedrinc"]) == pytest.approx(1.25)
+    assert sample["notes"] == "secondary_metrics_provisional; financed_transfer_package"
 
     dictionary = json.loads((out_dir / "dictionary.json").read_text(encoding="utf-8"))
     bundle_run_ids = [item["run_id"] for item in manifest["runs"]]
@@ -446,6 +518,8 @@ def test_export_phase1_full_bundle_supports_family_filtering(
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large",
     ]
+    assert manifest["bridge_results_path"] == "bridge_results.csv"
+    assert payload["bridge_row_count"] == 0
 
 
 def test_export_phase1_full_bundle_rejects_unknown_family_filter(tmp_path: Path) -> None:
@@ -509,6 +583,8 @@ def test_publish_phase1_bundle_to_docs_replaces_existing_docs_bundle(tmp_path: P
     )
     (source_dir / "dictionary.json").write_text("{}", encoding="utf-8")
     (source_dir / "presets.json").write_text("{}", encoding="utf-8")
+    (source_dir / "bridge_results.csv").write_text("scenario_id,h\nineq-transfer-composite-small,2\n", encoding="utf-8")
+    (source_dir / "bridge_metadata.json").write_text('{"bridge_version":"v1"}', encoding="utf-8")
     (source_dir / "app.js").write_text("", encoding="utf-8")
     (source_dir / "index.html").write_text("", encoding="utf-8")
     (source_dir / "styles.css").write_text("", encoding="utf-8")
@@ -528,6 +604,8 @@ def test_publish_phase1_bundle_to_docs_replaces_existing_docs_bundle(tmp_path: P
         "ineq-baseline-observed",
         "ineq-transfer-composite-small",
     ]
+    assert (docs_dir / "bridge_results.csv").exists()
+    assert (docs_dir / "bridge_metadata.json").exists()
     assert not (docs_dir / "runs" / "ineq-old-comparison.json").exists()
 
 

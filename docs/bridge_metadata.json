@@ -1,0 +1,46 @@
+{
+  "bridge_version": "v1",
+  "channels_by_family": {
+    "federal-transfers": "broad_federal_transfers",
+    "transfer-composite": "transfer_composite",
+    "ui": "ui"
+  },
+  "dose_metric": "delta_trlowz",
+  "headline_metrics": [
+    "TRLOWZ",
+    "IPOVALL",
+    "IPOVCH",
+    "RYDPC"
+  ],
+  "horizon_rule": "quarters_ahead_from_forecast_start",
+  "horizons": [
+    2,
+    4,
+    8
+  ],
+  "repo": "fp",
+  "row_count": 27,
+  "schema_columns": [
+    "bridge_version",
+    "repo",
+    "scenario_id",
+    "scenario_label",
+    "channel",
+    "family",
+    "h",
+    "baseline_id",
+    "dose_metric",
+    "dose_value",
+    "delta_trlowz",
+    "delta_ipovall",
+    "delta_ipovch",
+    "delta_rydpc",
+    "delta_iginihh",
+    "delta_imedrinc",
+    "notes"
+  ],
+  "secondary_metrics": [
+    "IGINIHH",
+    "IMEDRINC"
+  ]
+}

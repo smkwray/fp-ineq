@@ -12,6 +12,7 @@ The repository is designed to be shareable without redistributing the stock Fair
 - checked-in public data snapshots and provenance reports under `data/`
 - the scenario definitions and solve/export code under `src/fp_ineq/`
 - the static results explorer bundle under `docs/`
+- the machine-readable bridge artifacts `docs/bridge_results.csv` and `docs/bridge_metadata.json`
 
 It does not publish stock Fair files or fully composed private decks.
 
@@ -83,6 +84,31 @@ The explorer is intentionally broader than the default 4-run repaired selection:
 - every variable in the bundle has a definition if one exists in the stock dictionary, the model-runs dictionary, or the local inequality overlay dictionary
 - every variable links to its relevant equations in the Equation Explorer
 - equation and variable records are built for the bundle so they point to the matching run family
+
+## Cross-Repo Bridge
+
+`fp-ineq` now publishes a compact bridge surface intended for cross-repo comparison with `ea-ineq`.
+
+Public bridge artifacts:
+
+- `docs/bridge_results.csv`
+- `docs/bridge_metadata.json`
+
+The bridge is intentionally narrower than the full explorer:
+
+- channels: `ui`, `broad_federal_transfers`, `transfer_composite`
+- horizons: `2`, `4`, `8`
+- bridge dose metric: `delta_trlowz`
+- headline bridge measures: `delta_trlowz`, `delta_ipovall`, `delta_ipovch`, `delta_rydpc`
+- secondary bridge measures: `delta_iginihh`, `delta_imedrinc`
+
+The intended comparison rule is channel-level, not literal program-name matching:
+
+- `ui` is the shared UI channel
+- `broad_federal_transfers` is the closest public channel-level match to broad federal household transfer support
+- `transfer_composite` is the preferred package-level comparison surface
+
+`ea-ineq` now packages the same channels and horizons, but it does not yet expose direct `TRLOWZ` or `RYDPC` analogs. That means `fp-ineq` is already normalized on `delta_trlowz`, while `ea-ineq` currently reports bridge rows per native treatment shock unit.
 
 <details>
 <summary>Developer rebuild notes</summary>
@@ -494,6 +520,7 @@ The published site reflects the run bundle and dictionary:
 
 - The published explorer contains 14 solved runs.
 - The default selection is one shared baseline plus three financed transfer-composite rungs.
+- The repo also publishes `docs/bridge_results.csv` as a public bridge surface for `ea-ineq`.
 - The main published results are overall poverty, child poverty, and real disposable income per person.
 - The site also includes equation links, variable definitions, and supporting distribution measures for readers who want the technical detail.
 - Provisional diagnostics: household Gini coefficient, median real income proxy
