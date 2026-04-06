@@ -12,7 +12,8 @@ The repository is designed to be shareable without redistributing the stock Fair
 - checked-in public data snapshots and provenance reports under `data/`
 - the scenario definitions and solve/export code under `src/fp_ineq/`
 - the static results explorer bundle under `docs/`
-- the machine-readable bridge artifacts `docs/bridge_results.csv` and `docs/bridge_metadata.json`
+- the machine-readable published bridge artifacts `docs/bridge_results.csv` and `docs/bridge_metadata.json`
+- the tracked runtime-derived bridge refresh under `reports/phase1_distribution_block/`
 
 It does not publish stock Fair files or fully composed private decks.
 
@@ -77,9 +78,9 @@ The checked-in `docs/` bundle contains the published results explorer:
 - default preset: `headline-poverty-resources`
 - manifest-level family metadata with maturity tags for the published run families
 
-The live site starts on the published transfer-composite results set: one shared baseline plus three financed `transfer-composite` rungs. UI, federal-transfer, state/local-transfer, and transfer-package runs remain available in the explorer for comparison. Local ignored `runtime/` directories may contain additional private calibration, audit, and smoke-test solves, but those caches are not part of the published model and can be deleted or rebuilt locally as needed.
+The live site now starts on the public-default-safe `fp-r` results set: one shared baseline plus the four direct federal-transfer and state/local-transfer runs. The broader 14-run explorer still includes UI, transfer-package, and transfer-composite runs, but those lanes are explicitly labeled as shared-modern versus `fp.exe` splits rather than being used as the default public comparison set. Local ignored `runtime/` directories may contain additional private calibration, audit, and smoke-test solves, but those caches are not part of the published model and can be deleted or rebuilt locally as needed.
 
-The explorer is intentionally broader than the default 4-run repaired selection:
+The explorer is intentionally broader than the default 5-run public-default-safe selection:
 
 - every variable in the bundle has a definition if one exists in the stock dictionary, the model-runs dictionary, or the local inequality overlay dictionary
 - every variable links to its relevant equations in the Equation Explorer
@@ -93,6 +94,8 @@ Public bridge artifacts:
 
 - `docs/bridge_results.csv`
 - `docs/bridge_metadata.json`
+
+Tracked runtime bridge artifacts from the latest local `fp-r` run can also be written under `reports/` without rebuilding the full site bundle.
 
 The bridge is intentionally narrower than the full explorer:
 
@@ -121,14 +124,15 @@ The internal rebuild flow follows the same sequence as the published surface:
 2. compose the stock transfer overlay
 3. run the transfer scenarios through stock Fair
 4. compose and solve the distribution block
-5. export the published bundle
-6. publish the static site
+5. export tracked bridge artifacts if needed
+6. export the published bundle
+7. publish the static site
 
 Environment notes:
 
 - stock Fair is supplied through `--fp-home` or the `FP_HOME` environment variable
 - `fp-wraptr` is discovered from a sibling checkout or the `FP_WRAPTR_ROOT` environment variable
-- the runtime backend is `fpexe`
+- the accepted runtime report can be regenerated from either supported backend path; the tracked bridge refresh is currently emitted directly from the latest `fp-r` runtime report
 
 </details>
 
@@ -285,32 +289,41 @@ Current private UI-offset status:
 
 ## Scenarios
 
-The published explorer contains 14 runs, but the default selected comparison set is 4 transfer-composite runs:
+The published explorer contains 14 runs, and the default selected comparison set is the 5-run public-default-safe subset:
 
 | Run ID | UI factor (`UIFAC`) | Federal-transfer increment (`SNAPDELTAQ`) | `TRSH` factor (`SSFAC`) | Interpretation |
 | --- | ---: | ---: | ---: | --- |
 | `baseline-observed` | `1.00` | `0.0` | `1.00` | Shared neutral baseline with the same installed mechanisms as every other run. |
-| `transfer-composite-small` | `1.0125839776982168` | `1.2583977698216835` | `1.0125839776982168` | Small matched transfer-composite ladder rung normalized to the shared first-year `ΔTRLOWZ` bin. |
-| `transfer-composite-medium` | `1.018637285379202` | `1.8637285379202133` | `1.018637285379202` | Medium matched transfer-composite ladder rung normalized to the shared first-year `ΔTRLOWZ` bin. |
-| `transfer-composite-large` | `1.0225154841560722` | `2.2515484156072145` | `1.0225154841560722` | Large matched transfer-composite ladder rung normalized to the shared first-year `ΔTRLOWZ` bin. |
+| `federal-transfer-relief` | `1.00` | `2.0` | `1.00` | Direct broad federal household-transfer relief probe on the shared baseline. |
+| `federal-transfer-shock` | `1.00` | `-2.0` | `1.00` | Direct broad federal household-transfer shock probe on the shared baseline. |
+| `state-local-transfer-relief` | `1.00` | `0.0` | `1.02` | Direct state/local household-transfer relief probe on the shared baseline. |
+| `state-local-transfer-shock` | `1.00` | `0.0` | `0.99` | Direct state/local household-transfer shock probe on the shared baseline. |
 
 Interpretation notes:
 
-- These are financed transfer-composite package probes built on a shared installed mechanism, not free-standing one-channel shocks.
-- Internal package QA checks gross package size, financing flows, package balance, and acceptable net package behavior before the repaired composite ladder is treated as publishable, but the full package evidence remains private.
+- The default public set is intentionally conservative. It keeps the shared baseline plus the direct federal-transfer and state/local-transfer lanes that are public-default-safe under the current `fp-r` publication contract.
+- UI, transfer-package, and transfer-composite runs are still published in the broader explorer, but they are labeled as shared-modern versus `fp.exe` splits and are not used as the default public comparison set.
+- Transfer-package and transfer-composite runs remain financed package probes built on a shared installed mechanism, not free-standing one-channel shocks. Internal package QA checks gross package size, financing flows, package balance, and acceptable net package behavior before those repaired package paths are treated as publishable, but the full package evidence remains private.
 - `TRGH` is interpreted publicly as a broad federal household-transfer channel, not as SNAP specifically.
 - `TRSH` is interpreted publicly as a state/local household-transfer channel. In the checked stock construction it is not treated as a clean Social Security-only series.
-- The matched ladders normalize on the mean first-year `ΔTRLOWZ` over `2026.1` to `2026.4`.
-- The current shared bins were verified privately against the stock FM path and remain anchored to matched first-year `ΔTRLOWZ` bins.
+- The matched transfer-composite ladders still normalize on the mean first-year `ΔTRLOWZ` over `2026.1` to `2026.4`, but those repaired package lanes now sit outside the default public set.
 - Public exports are forecast-window only. The distribution block seeds history through `2025.4` and solves `IPOVALL`, `IPOVCH`, `IGINIHH`, and `IMEDRINC` endogenously from `2026.1` onward.
 - Credit and private UI-offset families remain internal for audit or sensitivity work and are not part of the public bundle.
 - The descriptive contrary-channel audit and the private UI-offset envelope remain supporting internal diagnostics rather than separate public families.
-- The eventual `fp-r` / R-solver port is a later project phase. The current public site documents and publishes the working stock-Fair plus Python export path only; ongoing `fp-r` work is not part of this public release surface.
+- The current published contract already uses `fp-r` on the public-default-safe subset and keeps the broader shared-modern-versus-`fp.exe` split lanes explicitly labeled rather than silent.
+
+The broader published 14-run surface still includes the repaired transfer-composite ladder:
+
+| Run ID | UI factor (`UIFAC`) | Federal-transfer increment (`SNAPDELTAQ`) | `TRSH` factor (`SSFAC`) | Interpretation |
+| --- | ---: | ---: | ---: | --- |
+| `transfer-composite-small` | `1.0125839776982168` | `1.2583977698216835` | `1.0125839776982168` | Small matched transfer-composite ladder rung normalized to the shared first-year `ΔTRLOWZ` bin. Published with explicit shared-modern-versus-`fp.exe` labeling rather than as a default run. |
+| `transfer-composite-medium` | `1.018637285379202` | `1.8637285379202133` | `1.018637285379202` | Medium matched transfer-composite ladder rung normalized to the shared first-year `ΔTRLOWZ` bin. Published with explicit shared-modern-versus-`fp.exe` labeling rather than as a default run. |
+| `transfer-composite-large` | `1.0225154841560722` | `2.2515484156072145` | `1.0225154841560722` | Large matched transfer-composite ladder rung normalized to the shared first-year `ΔTRLOWZ` bin. Published with explicit shared-modern-versus-`fp.exe` labeling rather than as a default run. |
 
 <details>
-<summary>Why the default 4-run repaired bundle is compared to one baseline</summary>
+<summary>Why the default public-default-safe bundle is compared to one baseline</summary>
 
-The default 4-run repaired bundle shares one baseline. The shared baseline is valid because baseline and scenario runs all use:
+The default public-default-safe bundle shares one baseline. The shared baseline is valid because baseline and scenario runs all use:
 
 - the same composed stock deck
 - the same installed overlay files
@@ -521,8 +534,8 @@ The published site reflects the run bundle and dictionary:
 ## In Short
 
 - The published explorer contains 14 solved runs.
-- The default selection is one shared baseline plus three financed transfer-composite rungs.
-- The repo also publishes `docs/bridge_results.csv` as a public bridge surface for `ea-ineq`.
+- The default selection is one shared baseline plus the four public-default-safe federal-transfer and state/local-transfer runs.
+- The repo publishes the public bridge surface under `docs/` and keeps a tracked runtime-derived bridge refresh under `reports/`.
 - The main published results are overall poverty, child poverty, and real disposable income per person.
 - The site also includes equation links, variable definitions, and supporting distribution measures for readers who want the technical detail.
 - Provisional diagnostics: household Gini coefficient, median real income proxy

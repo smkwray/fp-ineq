@@ -138,9 +138,9 @@ The repaired transfer-composite ladder is a financed package path rather than a 
 
 The strongest outputs are:
 
-- baseline comparability across the published 4-run family
-- coherent macro and transfer-channel movement
-- directional poverty movement in response to the repaired matched-ladder scenarios
+- baseline comparability across the public-default-safe 5-run family
+- coherent macro and transfer-channel movement in the direct federal-transfer and state/local-transfer lanes
+- directional poverty movement in response to the broader published scenario set, with repaired matched-ladder scenarios kept available but explicitly labeled outside the default public contract
 
 The weaker outputs are:
 
