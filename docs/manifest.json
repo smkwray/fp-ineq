@@ -468,7 +468,7 @@
     {
       "family_id": "legacy-baseline",
       "label": "Legacy Phase-1 Baseline",
-      "maturity": "public",
+      "maturity": "public-legacy",
       "run_ids": [
         "ineq-phase1-baseline-observed"
       ],
@@ -477,7 +477,7 @@
     {
       "family_id": "legacy-ui",
       "label": "Legacy Phase-1 UI",
-      "maturity": "public",
+      "maturity": "public-legacy",
       "run_ids": [
         "ineq-phase1-ui-relief",
         "ineq-phase1-ui-shock",
@@ -489,7 +489,7 @@
     {
       "family_id": "legacy-federal-transfers",
       "label": "Legacy Phase-1 Federal Transfers",
-      "maturity": "public",
+      "maturity": "public-legacy",
       "run_ids": [
         "ineq-phase1-federal-transfer-relief",
         "ineq-phase1-federal-transfer-shock"
@@ -499,7 +499,7 @@
     {
       "family_id": "legacy-state-local-transfers",
       "label": "Legacy Phase-1 State/Local Transfers",
-      "maturity": "public",
+      "maturity": "public-legacy",
       "run_ids": [
         "ineq-phase1-state-local-transfer-relief",
         "ineq-phase1-state-local-transfer-shock"
@@ -509,7 +509,7 @@
     {
       "family_id": "legacy-transfer-package",
       "label": "Legacy Phase-1 Transfer Package",
-      "maturity": "public",
+      "maturity": "public-legacy",
       "run_ids": [
         "ineq-phase1-transfer-package-relief",
         "ineq-phase1-transfer-package-shock"
@@ -519,7 +519,7 @@
     {
       "family_id": "legacy-transfer-composite",
       "label": "Legacy Phase-1 Transfer Composite Ladder",
-      "maturity": "public",
+      "maturity": "public-legacy",
       "run_ids": [
         "ineq-phase1-transfer-composite-small",
         "ineq-phase1-transfer-composite-medium",
@@ -570,6 +570,7 @@
     "transfer-composite"
   ],
   "included_family_maturities": [
+    "public-legacy",
     "public"
   ],
   "presets_path": "presets.json",
@@ -579,7 +580,7 @@
       "data_path": "runs/ineq-phase1-baseline-observed.json",
       "family_id": "legacy-baseline",
       "family_label": "Legacy Phase-1 Baseline",
-      "family_maturity": "public",
+      "family_maturity": "public-legacy",
       "forecast_end": "2029.4",
       "forecast_start": "2026.1",
       "group": "Legacy Phase-1 Baseline",
@@ -593,7 +594,7 @@
       "data_path": "runs/ineq-phase1-ui-relief.json",
       "family_id": "legacy-ui",
       "family_label": "Legacy Phase-1 UI",
-      "family_maturity": "public",
+      "family_maturity": "public-legacy",
       "forecast_end": "2029.4",
       "forecast_start": "2026.1",
       "group": "Legacy Phase-1 UI Ladder",
@@ -607,7 +608,7 @@
       "data_path": "runs/ineq-phase1-ui-shock.json",
       "family_id": "legacy-ui",
       "family_label": "Legacy Phase-1 UI",
-      "family_maturity": "public",
+      "family_maturity": "public-legacy",
       "forecast_end": "2029.4",
       "forecast_start": "2026.1",
       "group": "Legacy Phase-1 UI",
@@ -621,7 +622,7 @@
       "data_path": "runs/ineq-phase1-ui-small.json",
       "family_id": "legacy-ui",
       "family_label": "Legacy Phase-1 UI",
-      "family_maturity": "public",
+      "family_maturity": "public-legacy",
       "forecast_end": "2029.4",
       "forecast_start": "2026.1",
       "group": "Legacy Phase-1 UI Ladder",
@@ -635,7 +636,7 @@
       "data_path": "runs/ineq-phase1-ui-large.json",
       "family_id": "legacy-ui",
       "family_label": "Legacy Phase-1 UI",
-      "family_maturity": "public",
+      "family_maturity": "public-legacy",
       "forecast_end": "2029.4",
       "forecast_start": "2026.1",
       "group": "Legacy Phase-1 UI Ladder",
@@ -649,7 +650,7 @@
       "data_path": "runs/ineq-phase1-federal-transfer-relief.json",
       "family_id": "legacy-federal-transfers",
       "family_label": "Legacy Phase-1 Federal Transfers",
-      "family_maturity": "public",
+      "family_maturity": "public-legacy",
       "forecast_end": "2029.4",
       "forecast_start": "2026.1",
       "group": "Legacy Phase-1 Federal Transfers",
@@ -663,7 +664,7 @@
       "data_path": "runs/ineq-phase1-federal-transfer-shock.json",
       "family_id": "legacy-federal-transfers",
       "family_label": "Legacy Phase-1 Federal Transfers",
-      "family_maturity": "public",
+      "family_maturity": "public-legacy",
       "forecast_end": "2029.4",
       "forecast_start": "2026.1",
       "group": "Legacy Phase-1 Federal Transfers",
@@ -677,7 +678,7 @@
       "data_path": "runs/ineq-phase1-state-local-transfer-relief.json",
       "family_id": "legacy-state-local-transfers",
       "family_label": "Legacy Phase-1 State/Local Transfers",
-      "family_maturity": "public",
+      "family_maturity": "public-legacy",
       "forecast_end": "2029.4",
       "forecast_start": "2026.1",
       "group": "Legacy Phase-1 State/Local Transfers",
@@ -691,7 +692,7 @@
       "data_path": "runs/ineq-phase1-state-local-transfer-shock.json",
       "family_id": "legacy-state-local-transfers",
       "family_label": "Legacy Phase-1 State/Local Transfers",
-      "family_maturity": "public",
+      "family_maturity": "public-legacy",
       "forecast_end": "2029.4",
       "forecast_start": "2026.1",
       "group": "Legacy Phase-1 State/Local Transfers",
@@ -705,7 +706,7 @@
       "data_path": "runs/ineq-phase1-transfer-package-relief.json",
       "family_id": "legacy-transfer-package",
       "family_label": "Legacy Phase-1 Transfer Package",
-      "family_maturity": "public",
+      "family_maturity": "public-legacy",
       "forecast_end": "2029.4",
       "forecast_start": "2026.1",
       "group": "Legacy Phase-1 Transfer Package",
@@ -719,7 +720,7 @@
       "data_path": "runs/ineq-phase1-transfer-package-shock.json",
       "family_id": "legacy-transfer-package",
       "family_label": "Legacy Phase-1 Transfer Package",
-      "family_maturity": "public",
+      "family_maturity": "public-legacy",
       "forecast_end": "2029.4",
       "forecast_start": "2026.1",
       "group": "Legacy Phase-1 Transfer Package",
@@ -733,7 +734,7 @@
       "data_path": "runs/ineq-phase1-transfer-composite-small.json",
       "family_id": "legacy-transfer-composite",
       "family_label": "Legacy Phase-1 Transfer Composite Ladder",
-      "family_maturity": "public",
+      "family_maturity": "public-legacy",
       "forecast_end": "2029.4",
       "forecast_start": "2026.1",
       "group": "Legacy Phase-1 Transfer Composite Ladder",
@@ -747,7 +748,7 @@
       "data_path": "runs/ineq-phase1-transfer-composite-medium.json",
       "family_id": "legacy-transfer-composite",
       "family_label": "Legacy Phase-1 Transfer Composite Ladder",
-      "family_maturity": "public",
+      "family_maturity": "public-legacy",
       "forecast_end": "2029.4",
       "forecast_start": "2026.1",
       "group": "Legacy Phase-1 Transfer Composite Ladder",
@@ -761,7 +762,7 @@
       "data_path": "runs/ineq-phase1-transfer-composite-large.json",
       "family_id": "legacy-transfer-composite",
       "family_label": "Legacy Phase-1 Transfer Composite Ladder",
-      "family_maturity": "public",
+      "family_maturity": "public-legacy",
       "forecast_end": "2029.4",
       "forecast_start": "2026.1",
       "group": "Legacy Phase-1 Transfer Composite Ladder",

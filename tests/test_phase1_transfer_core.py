@@ -147,9 +147,24 @@ def test_transfer_composite_ladder_specs_are_catalog_driven() -> None:
     specs = _transfer_composite_ladder_specs()
     assert [(spec.variant_id, spec.ui_factor, spec.trgh_delta_q, spec.trsh_factor) for spec in specs] == [
         ("baseline-observed", 1.0, 0.0, 1.0),
-        ("transfer-composite-small", pytest.approx(1.01), pytest.approx(1.0), pytest.approx(1.01)),
-        ("transfer-composite-medium", pytest.approx(1.02), pytest.approx(2.0), pytest.approx(1.02)),
-        ("transfer-composite-large", pytest.approx(1.03), pytest.approx(3.0), pytest.approx(1.03)),
+        (
+            "transfer-composite-small",
+            pytest.approx(1.0125839776982168),
+            pytest.approx(1.2583977698216835),
+            pytest.approx(1.0125839776982168),
+        ),
+        (
+            "transfer-composite-medium",
+            pytest.approx(1.018637285379202),
+            pytest.approx(1.8637285379202133),
+            pytest.approx(1.018637285379202),
+        ),
+        (
+            "transfer-composite-large",
+            pytest.approx(1.0225154841560722),
+            pytest.approx(2.2515484156072145),
+            pytest.approx(1.0225154841560722),
+        ),
     ]
     assert [(spec.variant_id, spec.trfin_fed_share, spec.trfin_sl_share) for spec in specs] == [
         ("baseline-observed", 0.0, 0.0),

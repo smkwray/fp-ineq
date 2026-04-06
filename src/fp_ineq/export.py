@@ -684,6 +684,14 @@ def publish_phase1_bundle_to_docs(
             *[family["family_id"] for family in legacy_bundle["families"]],
             *manifest.get("included_family_ids", []),
         ]
+        manifest["included_family_maturities"] = list(
+            dict.fromkeys(
+                [
+                    *[str(family.get("maturity", "")).strip() for family in legacy_bundle["families"] if str(family.get("maturity", "")).strip()],
+                    *[str(item).strip() for item in manifest.get("included_family_maturities", []) if str(item).strip()],
+                ]
+            )
+        )
         manifest["run_panel_note"] = (
             "Default selection shows the repaired transfer-composite bundle. "
             "Legacy Phase-1 runs remain available below for comparison."
@@ -809,7 +817,7 @@ def _load_legacy_phase1_bundle(docs_dir: Path) -> dict[str, object]:
         family_id = _legacy_family_id(str(run.get("family_id", "legacy-phase1")))
         family_label = _legacy_family_label(str(run.get("family_label", run.get("group", "Phase 1"))))
         family_summary = str(run.get("summary", "")).strip()
-        family_maturity = str(run.get("family_maturity", "public-legacy")).strip() or "public-legacy"
+        family_maturity = "public-legacy"
         normalized_run = {
             **run,
             "family_id": family_id,

@@ -27,30 +27,30 @@ The model has three main components:
 
 ## Published scenario scope
 
-The published solved bundle contains 14 runs:
+The published explorer currently exposes 18 solved runs.
+
+The default selected interpretation path is a repaired 4-run bundle:
 
 - `baseline-observed`
-- `ui-relief`
-- `ui-shock`
-- `ui-small`
-- `ui-large`
-- `federal-transfer-relief`
-- `federal-transfer-shock`
-- `state-local-transfer-relief`
-- `state-local-transfer-shock`
-- `transfer-package-relief`
-- `transfer-package-shock`
 - `transfer-composite-small`
 - `transfer-composite-medium`
 - `transfer-composite-large`
 
-These runs belong to one model system and are intended to be compared to a shared baseline.
+Legacy Phase-1 comparison families also remain visible in the explorer:
+
+- `ineq-phase1-baseline-observed`
+- `ineq-phase1-ui-relief`, `ineq-phase1-ui-shock`, `ineq-phase1-ui-small`, `ineq-phase1-ui-large`
+- `ineq-phase1-federal-transfer-relief`, `ineq-phase1-federal-transfer-shock`
+- `ineq-phase1-state-local-transfer-relief`, `ineq-phase1-state-local-transfer-shock`
+- `ineq-phase1-transfer-package-relief`, `ineq-phase1-transfer-package-shock`
+- `ineq-phase1-transfer-composite-small`, `ineq-phase1-transfer-composite-medium`, `ineq-phase1-transfer-composite-large`
+
+The repaired default bundle is the public interpretation path. Legacy Phase-1 families remain available as comparison-only runs rather than the main headline bundle.
 
 The published manifest is now family-aware:
 
 - each run is tagged with a `family_id` and `family_maturity`
-- the top-level manifest groups public runs into explicit family records
-- the current published maturity tier is `public`
+- the top-level manifest groups repaired runs into `public` families and legacy comparison runs into `public-legacy` families
 - private families such as the credit wedge probes and the shadow wealth block remain outside the published manifest
 
 ## Baseline comparability rule
@@ -124,13 +124,15 @@ These settings are intended to test whether the transmission channels move the s
 
 The matched-ladder normalization convention is the mean first-year `ΔTRLOWZ` over `2026.1` to `2026.4`.
 
-The published UI family still does **not** include a dedicated labor-supply, labor-force-participation, or matching-offset block. A private `ui-matching-offset` stress family now exists as a bounded two-point sensitivity envelope: one run claws back about 25% of the medium UI rung's first-year `ΔUR` improvement and another claws back about 50%, while both keep first-year `ΔTRLOWZ` nearly unchanged. Neither private stress lowers final `GDPR`, so those runs remain interpretation checks rather than grounds for a new public UI family. The public UI results should therefore still be read as demand-dominant probes with a small private sensitivity envelope, not as a fully balanced policy package.
+The legacy UI family still does **not** include a dedicated labor-supply, labor-force-participation, or matching-offset block. A private `ui-matching-offset` stress family now exists as a bounded two-point sensitivity envelope: one run claws back about 25% of the medium UI rung's first-year `ΔUR` improvement and another claws back about 50%, while both keep first-year `ΔTRLOWZ` nearly unchanged. Neither private stress lowers final `GDPR`, so those runs remain interpretation checks rather than grounds for a new public UI family. The legacy UI comparison runs should therefore still be read as demand-dominant probes with a small private sensitivity envelope, not as a fully balanced policy package.
 
-The new contrary-channel audit is descriptive rather than structural. It reads the integrated 14-run public family and flags endogenous countervailing movement already present in solved Fair outputs for `UR`, `GDPR`, `YD`, and rates. In the current release, the consistent countervailing signal is higher rates across the public transfer families, while the dedicated omitted-channel stress remains confined to the private UI offset family. That is why the project does not add extra synthetic contrary public scenarios at this stage.
+The new contrary-channel audit is descriptive rather than structural. It reads the public baseline plus repaired transfer-composite ladder and flags endogenous countervailing movement already present in solved Fair outputs for `UR`, `GDPR`, `YD`, and rates. In the current release, the consistent countervailing signal is higher rates across the repaired composite ladder, while the dedicated omitted-channel stress remains confined to the private UI offset family. That is why the project does not add extra synthetic contrary public scenarios at this stage.
 
 The current reassessment decision is to keep that wording in place rather than promote the private offset family into a public scenario family or stronger public interpretation.
 
-`IGINIHH` and `IMEDRINC` are solved outputs in all 14 published runs, but they remain provisional diagnostics rather than headline measures.
+The repaired transfer-composite ladder is a financed package path rather than a free-standing one-channel shock. Internal package QA checks gross package size, financing flows, package balance, and acceptable net package behavior before the ladder is treated as publishable, but those detailed package artifacts remain private.
+
+`IGINIHH` and `IMEDRINC` are solved outputs in the 18-run explorer bundle, but they remain provisional diagnostics rather than headline measures.
 
 - `IPOVALL` and `IPOVCH` keep the validated aggregate transfer bridge on `TRLOWZ` and add two shrunken internal transfer-mix deviation terms (`UIDEV`, `GHSHDV`) built from standardized `UB`, `TRGH`, and `TRSH`
 - `IGINIHH` is a reduced-form identity driven by `UR` and `TRLOWZ`
@@ -139,16 +141,16 @@ The current reassessment decision is to keep that wording in place rather than p
 
 The strongest outputs are:
 
-- baseline comparability across the 14-run published family
+- baseline comparability across the repaired 4-run default family
 - coherent macro and transfer-channel movement
-- directional poverty movement in response to transfer-side relief, shock, and matched-ladder scenarios
+- directional poverty movement in response to the repaired matched-ladder scenarios
 
 The weaker outputs are:
 
 - headline interpretation of `IGINIHH`
 - headline interpretation of `IMEDRINC`
 - final policy calibration of shock magnitudes
-- any public claim that the checked-in UI family already includes a dedicated adverse labor-market channel
+- any public claim that the checked-in legacy UI family already includes a dedicated adverse labor-market channel
 
 ## Calibration window
 

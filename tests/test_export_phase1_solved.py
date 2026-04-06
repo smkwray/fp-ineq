@@ -11,7 +11,9 @@ from fp_ineq.export import (
     _safe_dictionary_payload,
     _visible_export_series,
     export_phase1_full_bundle,
+    publish_phase1_bundle_to_docs,
 )
+from fp_ineq.phase1_catalog import phase1_scenario_by_variant
 
 
 def test_visible_export_series_filters_controls_and_duplicate_public_names() -> None:
@@ -451,3 +453,131 @@ def test_export_phase1_full_bundle_rejects_unknown_family_filter(tmp_path: Path)
             out_dir=tmp_path / "bundle",
             family_ids=("not-a-family",),
         )
+
+
+def test_publish_phase1_bundle_to_docs_marks_legacy_runs_public_legacy(
+    tmp_path: Path, monkeypatch
+) -> None:
+    source_dir = tmp_path / "source"
+    docs_dir = tmp_path / "docs"
+    source_dir.mkdir(parents=True, exist_ok=True)
+    docs_dir.mkdir(parents=True, exist_ok=True)
+    (source_dir / "manifest.json").write_text(
+        json.dumps(
+            {
+                "available_variables": ["IPOVALL"],
+                "default_run_ids": ["ineq-baseline-observed", "ineq-transfer-composite-small"],
+                "included_family_ids": ["baseline", "transfer-composite"],
+                "included_family_maturities": ["public"],
+                "runs": [
+                    {
+                        "run_id": "ineq-baseline-observed",
+                        "family_id": "baseline",
+                        "family_label": "Baseline",
+                        "family_maturity": "public",
+                        "data_path": "runs/ineq-baseline-observed.json",
+                    },
+                    {
+                        "run_id": "ineq-transfer-composite-small",
+                        "family_id": "transfer-composite",
+                        "family_label": "Transfer Composite",
+                        "family_maturity": "public",
+                        "data_path": "runs/ineq-transfer-composite-small.json",
+                    },
+                ],
+                "families": [
+                    {
+                        "family_id": "baseline",
+                        "label": "Baseline",
+                        "maturity": "public",
+                        "run_ids": ["ineq-baseline-observed"],
+                    },
+                    {
+                        "family_id": "transfer-composite",
+                        "label": "Transfer Composite",
+                        "maturity": "public",
+                        "run_ids": ["ineq-transfer-composite-small"],
+                    },
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    (source_dir / "dictionary.json").write_text("{}", encoding="utf-8")
+    (source_dir / "presets.json").write_text("{}", encoding="utf-8")
+    (source_dir / "app.js").write_text("", encoding="utf-8")
+    (source_dir / "index.html").write_text("", encoding="utf-8")
+    (source_dir / "styles.css").write_text("", encoding="utf-8")
+    (source_dir / ".nojekyll").write_text("", encoding="utf-8")
+    (source_dir / "runs").mkdir()
+    (source_dir / "runs" / "ineq-baseline-observed.json").write_text("{}", encoding="utf-8")
+    (source_dir / "runs" / "ineq-transfer-composite-small.json").write_text("{}", encoding="utf-8")
+
+    monkeypatch.setattr(
+        "fp_ineq.export._load_legacy_phase1_bundle",
+        lambda docs_dir: {
+            "runs": [
+                {
+                    "run_id": "ineq-phase1-ui-relief",
+                    "family_id": "legacy-ui",
+                    "family_label": "Legacy Phase-1 UI",
+                    "family_maturity": "public-legacy",
+                    "data_path": "runs/ineq-phase1-ui-relief.json",
+                    "group": "Legacy Phase-1 UI",
+                }
+            ],
+            "families": [
+                {
+                    "family_id": "legacy-ui",
+                    "label": "Legacy Phase-1 UI",
+                    "maturity": "public-legacy",
+                    "run_ids": ["ineq-phase1-ui-relief"],
+                }
+            ],
+            "run_files": {
+                "runs/ineq-phase1-ui-relief.json": "{}",
+            },
+        },
+    )
+
+    publish_phase1_bundle_to_docs(source_dir=source_dir, docs_dir=docs_dir)
+
+    manifest = json.loads((docs_dir / "manifest.json").read_text(encoding="utf-8"))
+    assert manifest["included_family_ids"] == ["legacy-ui", "baseline", "transfer-composite"]
+    assert manifest["included_family_maturities"] == ["public-legacy", "public"]
+    assert manifest["families"][0]["maturity"] == "public-legacy"
+    assert manifest["runs"][0]["family_maturity"] == "public-legacy"
+
+
+def test_checked_in_public_docs_match_repaired_default_bundle() -> None:
+    repo_root = Path(__file__).resolve().parents[1]
+    readme = (repo_root / "README.md").read_text(encoding="utf-8")
+    methodology = (repo_root / "reference" / "methodology.md").read_text(encoding="utf-8")
+    manifest = json.loads((repo_root / "docs" / "manifest.json").read_text(encoding="utf-8"))
+    scenarios = phase1_scenario_by_variant()
+
+    expected_levels = {
+        "transfer-composite-small": (1.0125839776982168, 1.2583977698216835, 1.0125839776982168),
+        "transfer-composite-medium": (1.018637285379202, 1.8637285379202133, 1.018637285379202),
+        "transfer-composite-large": (1.0225154841560722, 2.2515484156072145, 1.0225154841560722),
+    }
+    for variant_id, (ui_factor, trgh_delta_q, trsh_factor) in expected_levels.items():
+        spec = scenarios[variant_id]
+        assert spec.ui_factor == pytest.approx(ui_factor)
+        assert spec.trgh_delta_q == pytest.approx(trgh_delta_q)
+        assert spec.trsh_factor == pytest.approx(trsh_factor)
+        assert str(ui_factor) in readme
+        assert str(trgh_delta_q) in readme
+        assert str(trsh_factor) in readme
+
+    assert manifest["default_run_ids"] == [
+        "ineq-baseline-observed",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large",
+    ]
+    assert set(manifest["included_family_maturities"]) == {"public", "public-legacy"}
+    assert "14 public transfer-family runs" not in readme
+    assert "contains 14 runs" not in methodology
+    assert "14-run public family" not in methodology
+    assert "all 14 published runs" not in methodology

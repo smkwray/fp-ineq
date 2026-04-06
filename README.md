@@ -103,7 +103,7 @@ The explorer is intentionally broader than the default 4-run repaired selection:
 
 ```text
 fp-ineq export-phase1-full --family-maturity public
-fp-ineq export-phase1-full --family-id ui --family-id transfer-composite
+fp-ineq export-phase1-full --family-id baseline --family-id transfer-composite
 ```
 
 For the private UI ladder calibration workflow:
@@ -278,6 +278,7 @@ Other public families remain available in the live explorer:
 Interpretation notes:
 
 - These are financed transfer-composite package probes built on a shared installed mechanism, not free-standing one-channel shocks.
+- Internal package QA checks gross package size, financing flows, package balance, and acceptable net package behavior before the repaired composite ladder is treated as publishable, but the full package evidence remains private.
 - `TRGH` is interpreted publicly as a broad federal household-transfer channel, not as SNAP specifically.
 - `TRSH` is interpreted publicly as a state/local household-transfer channel. In the checked stock construction it is not treated as a clean Social Security-only series.
 - The matched ladders normalize on the mean first-year `ΔTRLOWZ` over `2026.1` to `2026.4`.
@@ -457,6 +458,8 @@ The household Gini coefficient (`IGINIHH`) and median real income proxy (`IMEDRI
 
 ## How To Read The Published Measures
 
+Read the output confidence ladder in descending order: poverty measures are the strongest public results, `RYDPC` and `TRLOWZ` are the main supporting resource bridges, and `IGINIHH` plus `IMEDRINC` remain provisional diagnostics.
+
 | Variable | Status | Reason |
 | --- | --- | --- |
 | Overall poverty rate (`IPOVALL`) | headline | Strongest overall poverty output. |
@@ -503,7 +506,8 @@ The published site reflects the run bundle and dictionary:
 
 ## In Short
 
-- The published bundle contains 14 public transfer-family runs backed by one shared baseline.
+- The published explorer contains 18 solved runs, but the default interpretation path is a repaired 4-run bundle: one shared baseline plus three financed transfer-composite rungs.
+- Legacy Phase-1 families remain in the explorer as comparison-only paths under separate legacy family metadata.
 - The main published results are overall poverty, child poverty, and real disposable income per person.
 - The site also includes equation links, variable definitions, and supporting distribution measures for readers who want the technical detail.
 - Provisional diagnostics: household Gini coefficient, median real income proxy
