@@ -50,20 +50,35 @@ _DISTRIBUTION_TRACK_VARIABLES = [
     "UB",
     "TRGH",
     "TRSH",
+    "GDPD",
     "YD",
     "GDPR",
     "UR",
     "PCY",
     "RS",
+    "THG",
+    "THS",
+    "RECG",
+    "RECS",
+    "SGP",
+    "SSP",
 ]
 _DISTRIBUTION_REQUIRED_MOVES = ("IPOVALL", "IPOVCH", "YD", "GDPR")
 _DISTRIBUTION_REQUIRED_SIGN_TRACKS = ("IPOVALL", "IPOVCH", "TRLOWZ", "RYDPC", "YD", "GDPR")
 _DISTRIBUTION_ONE_OF_MOVES = ("UR", "PCY")
 _DISTRIBUTION_FLAT_TAIL_CHECKS = ("IPOVALL", "IPOVCH", "YD", "GDPR", "UR")
+_PRIVATE_PACKAGE_EVIDENCE_TRACKS = ("THG", "THS", "RECG", "RECS", "SGP", "SSP", "PKGGROSS", "PKGFIN", "PKGNET")
+_PRIVATE_PACKAGE_BALANCE_TOLERANCE = 1e-9
+_DISTRIBUTION_FORECAST_START = "2026.1"
+_DISTRIBUTION_FORECAST_END = "2029.4"
+_DISTRIBUTION_HISTORY_SEEDED_THROUGH = "2025.4"
+_DISTRIBUTION_FORECAST_ONLY_SERIES = ("IPOVALL", "IPOVCH", "IGINIHH", "IMEDRINC")
+_DISTRIBUTION_FORECAST_NOTE = (
+    "The integrated distribution block seeds history through 2025.4 and solves these series endogenously from 2026.1 onward."
+)
 _RUNTIME_INCLUDE_NAMES = {
     "ipbase.txt": "ipbase.txt",
     "idist_phase1_block.txt": "idp1blk.txt",
-    "idist_phase2_wealth_block.txt": "idp2wblk.txt",
 }
 
 _TARGET_CSV_NAMES = {
@@ -192,8 +207,10 @@ def _required_signs_for_variant(variant_id: str) -> tuple[str, ...]:
         return (*_DISTRIBUTION_REQUIRED_SIGN_TRACKS, "TRGH")
     if variant_id.startswith("state-local-transfer-"):
         return (*_DISTRIBUTION_REQUIRED_SIGN_TRACKS, "TRSH")
-    if variant_id.startswith("transfer-package-") or variant_id.startswith("transfer-composite-"):
+    if variant_id.startswith("transfer-package-"):
         return (*_DISTRIBUTION_REQUIRED_SIGN_TRACKS, "UB", "TRGH", "TRSH")
+    if variant_id.startswith("transfer-composite-"):
+        return ("IPOVALL", "IPOVCH", "TRLOWZ", "RYDPC", "UB", "TRGH", "TRSH")
     raise ValueError(f"Unsupported distribution variant: {variant_id}")
 
 
@@ -205,6 +222,48 @@ def _expected_sign_for_variant(variant_id: str) -> float:
     if variant_id.startswith("ui-") or variant_id.startswith("transfer-composite-"):
         return 1.0
     raise ValueError(f"Unsupported distribution variant: {variant_id}")
+
+
+def _scenario_input_patches(spec) -> dict[str, str]:
+    input_patches: dict[str, str] = {}
+    if abs(spec.ui_factor - 1.0) > 1e-12:
+        input_patches["CREATE UIFAC=1;"] = f"CREATE UIFAC={spec.ui_factor:.12g};"
+    if abs(spec.trgh_delta_q) > 1e-12:
+        input_patches["CREATE SNAPDELTAQ=0;"] = f"CREATE SNAPDELTAQ={spec.trgh_delta_q:.12g};"
+    if abs(spec.trsh_factor - 1.0) > 1e-12:
+        input_patches["CREATE SSFAC=1;"] = f"CREATE SSFAC={spec.trsh_factor:.12g};"
+    trfin_fed_share = float(getattr(spec, "trfin_fed_share", 0.0))
+    trfin_sl_share = float(getattr(spec, "trfin_sl_share", 0.0))
+    if abs(trfin_fed_share) > 1e-12:
+        input_patches["CREATE TFEDSHR=0;"] = f"CREATE TFEDSHR={trfin_fed_share:.12g};"
+    if abs(trfin_sl_share) > 1e-12:
+        input_patches["CREATE TSLSHR=0;"] = f"CREATE TSLSHR={trfin_sl_share:.12g};"
+    return input_patches
+
+
+def _derive_private_package_levels(
+    levels: dict[str, float | None],
+    spec,
+) -> dict[str, float | None]:
+    ub = levels.get("UB")
+    trsh = levels.get("TRSH")
+    gdpd = levels.get("GDPD")
+
+    if ub is None or trsh is None or gdpd is None:
+        return {"PKGGROSS": None, "PKGFIN": None, "PKGNET": None}
+
+    ui_component = 0.0 if abs(spec.ui_factor - 1.0) <= 1e-12 else float(ub) - (float(ub) / float(spec.ui_factor))
+    federal_component = float(spec.trgh_delta_q) * float(gdpd)
+    state_local_component = (
+        0.0 if abs(spec.trsh_factor - 1.0) <= 1e-12 else float(trsh) - (float(trsh) / float(spec.trsh_factor))
+    )
+    gross = ui_component + federal_component + state_local_component
+    fin = float(spec.trfin_fed_share) * (ui_component + federal_component) + float(spec.trfin_sl_share) * state_local_component
+    return {
+        "PKGGROSS": gross,
+        "PKGFIN": fin,
+        "PKGNET": gross - fin,
+    }
 
 
 def _load_target_series(var: str) -> pd.Series:
@@ -536,6 +595,112 @@ def _load_distribution_coefficient_report() -> dict[str, object]:
     return json.loads(report_path.read_text(encoding="utf-8"))
 
 
+def _format_fp_number(value: float) -> str:
+    return f"{float(value):.12g}"
+
+
+def _format_fp_runtime_number(value: float) -> str:
+    return f"{float(value):.6g}"
+
+
+def _render_runtime_distribution_block(coefficient_report: dict[str, object]) -> str:
+    equations = dict(coefficient_report.get("equations", {}))
+    poverty = dict(dict(equations.get("IPOVALL", {})).get("coefficients", {}))
+    child_gap = dict(dict(equations.get("IPOVCH", {})).get("coefficients", {}))
+    gini = dict(dict(equations.get("IGINIHH", {})).get("coefficients", {}))
+    medinc = dict(dict(equations.get("IMEDRINC", {})).get("coefficients", {}))
+    basis = dict(dict(coefficient_report.get("deviation_basis", {})).get("standardization", {}))
+
+    trlowz = "(UB+TRGH+TRSH)/(POP*PH)"
+    ubz = f"(UB-({_format_fp_runtime_number(basis['UBBAR'])}))/({_format_fp_runtime_number(basis['UBSTD'])})"
+    trghz = (
+        f"(TRGH-({_format_fp_runtime_number(basis['TRGHBAR'])}))/({_format_fp_runtime_number(basis['TRGHSTD'])})"
+    )
+    trshz = (
+        f"(TRSH-({_format_fp_runtime_number(basis['TRSHBAR'])}))/({_format_fp_runtime_number(basis['TRSHSTD'])})"
+    )
+    uidev = f"UBZ-0.5*(({trghz})+({trshz}))".replace("UBZ", ubz)
+    ghshdv = f"({trghz})-({trshz})"
+
+    pov_state_core = (
+        f"({_format_fp_runtime_number(poverty['PV0'])})"
+        f"+({_format_fp_runtime_number(poverty['PVU'])})*UR"
+        f"+({_format_fp_runtime_number(poverty['PVT'])})*TRLOWZ"
+    )
+    pov_state_dev = (
+        f"({_format_fp_runtime_number(poverty['PVUI'])})*UIDEV"
+        f"+({_format_fp_runtime_number(poverty['PVGH'])})*GHSHDV"
+    )
+    child_gap_core = (
+        f"({_format_fp_runtime_number(child_gap['CG0'])})"
+        f"+({_format_fp_runtime_number(child_gap['CGU'])})*UR"
+        f"+({_format_fp_runtime_number(child_gap['CGT'])})*TRLOWZ"
+    )
+    child_gap_dev = (
+        f"({_format_fp_runtime_number(child_gap['CGUI'])})*UIDEV"
+        f"+({_format_fp_runtime_number(child_gap['CGGH'])})*GHSHDV"
+    )
+    gini_state = (
+        f"({_format_fp_runtime_number(gini['GN0'])})"
+        f"+({_format_fp_runtime_number(gini['GNU'])})*UR"
+        f"+({_format_fp_runtime_number(gini['GNT'])})*TRLOWZ"
+    )
+    medinc_state = (
+        f"({_format_fp_runtime_number(medinc['MD0'])})"
+        f"+({_format_fp_runtime_number(medinc['MDR'])})*LOG(RYDPC)"
+        f"+({_format_fp_runtime_number(medinc['MDU'])})*UR"
+    )
+
+    lines = [
+        "@ Runtime-trimmed phase-1 distribution block.",
+        "@ Coefficients are inlined to stay under the stock deck MAXY limit.",
+        "",
+        f"GENR TRLOWZ={trlowz};",
+        f"GENR UBZ={ubz};",
+        f"GENR TRGHZ={trghz};",
+        f"GENR TRSHZ={trshz};",
+        "GENR UIDEV=UBZ-0.5*(TRGHZ+TRSHZ);",
+        "GENR GHSHDV=TRGHZ-TRSHZ;",
+        "",
+        f"IDENT LPOVA={pov_state_core};",
+        f"IDENT LPOVB={pov_state_dev};",
+        "IDENT LPOVALL=LPOVA+LPOVB;",
+        f"IDENT LPOCA={child_gap_core};",
+        f"IDENT LPOCB={child_gap_dev};",
+        "IDENT LPOVCHGAP=LPOCA+LPOCB;",
+        "IDENT LPOVCHLVL=LPOVALL+LPOVCHGAP;",
+        f"IDENT LGINIHH={gini_state};",
+        f"IDENT LMEDINC={medinc_state};",
+        "IDENT IPOVALL=EXP(LPOVALL)/(1+EXP(LPOVALL));",
+        "IDENT IPOVCH=EXP(LPOVCHLVL)/(1+EXP(LPOVCHLVL));",
+        "IDENT IGINIHH=EXP(LGINIHH)/(1+EXP(LGINIHH));",
+        "IDENT IMEDRINC=EXP(LMEDINC);",
+        "",
+        "RETURN;",
+        "",
+    ]
+    return "\n".join(lines)
+
+
+def _distribution_bridge_parse_errors(fmout_text: str) -> list[str]:
+    lines = fmout_text.splitlines()
+    saw_distribution_block = False
+    errors: list[str] = []
+    for idx, line in enumerate(lines):
+        if "INPUT FILE=idp1blk.txt" in line:
+            saw_distribution_block = True
+            continue
+        if not saw_distribution_block or "UNRECOGNIZABLE VARIABLE" not in line:
+            continue
+        snippet = [line.strip()]
+        if idx + 1 < len(lines):
+            next_line = lines[idx + 1].strip()
+            if next_line:
+                snippet.append(next_line)
+        errors.append(" | ".join(snippet))
+    return errors
+
+
 def _distribution_regressors_from_levels(
     levels: dict[str, float | None],
     *,
@@ -706,6 +871,86 @@ def _distribution_decomposition(
     }
 
 
+def _private_package_gate_summary(
+    baseline_levels: dict[str, float | None],
+    scenario_levels: dict[str, float | None],
+    spec,
+) -> dict[str, object]:
+    selected_levels = {name: scenario_levels.get(name) for name in _PRIVATE_PACKAGE_EVIDENCE_TRACKS}
+    selected_deltas: dict[str, float | None] = {}
+    for name in _PRIVATE_PACKAGE_EVIDENCE_TRACKS:
+        baseline_value = baseline_levels.get(name)
+        scenario_value = scenario_levels.get(name)
+        if baseline_value is None or scenario_value is None:
+            selected_deltas[name] = None
+        else:
+            selected_deltas[name] = float(scenario_value - baseline_value)
+
+    has_all_private_evidence = all(value is not None for value in selected_levels.values())
+    has_private_flow_move = any(
+        value is not None and abs(float(value)) > _PRIVATE_PACKAGE_BALANCE_TOLERANCE
+        for name, value in selected_deltas.items()
+        if name in ("THG", "THS", "RECG", "RECS", "SGP", "SSP")
+    )
+    has_private_package_move = any(
+        value is not None and abs(float(value)) > _PRIVATE_PACKAGE_BALANCE_TOLERANCE
+        for name, value in selected_deltas.items()
+        if name in ("PKGGROSS", "PKGFIN", "PKGNET")
+    )
+    gross = selected_levels["PKGGROSS"]
+    fin = selected_levels["PKGFIN"]
+    net = selected_levels["PKGNET"]
+    balance_error: float | None = None
+    if gross is not None and fin is not None and net is not None:
+        balance_error = float((float(gross) - float(fin)) - float(net))
+    balance_ok = balance_error is not None and abs(balance_error) <= _PRIVATE_PACKAGE_BALANCE_TOLERANCE
+    gross_positive = gross is not None and float(gross) > _PRIVATE_PACKAGE_BALANCE_TOLERANCE
+    has_financing = abs(float(spec.trfin_fed_share)) > _PRIVATE_PACKAGE_BALANCE_TOLERANCE or abs(
+        float(spec.trfin_sl_share)
+    ) > _PRIVATE_PACKAGE_BALANCE_TOLERANCE
+    financing_ok = (
+        fin is not None
+        and (
+            abs(float(fin)) <= _PRIVATE_PACKAGE_BALANCE_TOLERANCE
+            if not has_financing
+            else float(fin) > _PRIVATE_PACKAGE_BALANCE_TOLERANCE
+        )
+    )
+    full_balancing = (
+        abs(float(spec.trfin_fed_share) - 1.0) <= _PRIVATE_PACKAGE_BALANCE_TOLERANCE
+        and abs(float(spec.trfin_sl_share) - 1.0) <= _PRIVATE_PACKAGE_BALANCE_TOLERANCE
+    )
+    net_ok = net is not None and (
+        abs(float(net)) <= _PRIVATE_PACKAGE_BALANCE_TOLERANCE
+        if full_balancing
+        else float(net) >= -_PRIVATE_PACKAGE_BALANCE_TOLERANCE
+    )
+    passes = bool(
+        has_all_private_evidence
+        and has_private_flow_move
+        and has_private_package_move
+        and gross_positive
+        and balance_ok
+        and financing_ok
+        and net_ok
+    )
+    return {
+        "selected_levels": {name: None if value is None else float(value) for name, value in selected_levels.items()},
+        "selected_deltas": selected_deltas,
+        "diagnostics": {
+            "has_all_private_evidence": has_all_private_evidence,
+            "has_private_flow_move": has_private_flow_move,
+            "has_private_package_move": has_private_package_move,
+            "gross_positive": gross_positive,
+            "financing_ok": financing_ok,
+            "package_balance_error": balance_error,
+            "package_balance_ok": balance_ok,
+            "package_net_ok": net_ok,
+        },
+        "passes": passes,
+    }
+
+
 def estimate_phase1_distribution_coefficients() -> dict[str, object]:
     paths = repo_paths()
     regressors_q = _load_baseline_regressors()
@@ -852,20 +1097,24 @@ def build_phase1_distribution_overlay(
     overlay_root = overlay_root or paths.runtime_distribution_overlay_root
     reports_root = reports_root or paths.runtime_distribution_reports_root
     estimate_payload = estimate_phase1_distribution_coefficients()
+    coefficient_report = _load_distribution_coefficient_report()
     compose_payload = compose_phase1_overlay(
         fp_home=fp_home,
         overlay_root=overlay_root,
-        extra_overlay_files=["ipbase.txt", "idist_phase1_block.txt", "idist_phase2_wealth_block.txt"],
+        extra_overlay_files=["ipbase.txt", "idist_phase1_block.txt"],
         runtime_name_overrides=_RUNTIME_INCLUDE_NAMES,
-        runtime_text_files={"idcoef.txt": str(estimate_payload["coeff_text"])},
+        runtime_text_files={
+            "idcoef.txt": "RETURN;\n",
+            "idp1blk.txt": _render_runtime_distribution_block(coefficient_report),
+        },
         post_patches=[
             {
                 "search": "INPUT FILE=idistid.txt;",
                 "replace": "INPUT FILE=idistid.txt;\nINPUT FILE=ipbase.txt;\nINPUT FILE=idcoef.txt;",
             },
             {
-                "search": "GENR LCUSTZ=LOG(CUST/(PIM*IM));",
-                "replace": "GENR LCUSTZ=LOG(CUST/(PIM*IM));\nINPUT FILE=idp1blk.txt;\nINPUT FILE=idp2wblk.txt;",
+                "search": "INPUT FILE=FMEXOG.TXT;",
+                "replace": "INPUT FILE=FMEXOG.TXT;\nINPUT FILE=idp1blk.txt;",
             },
         ],
         experimental_patch_ids=experimental_patch_ids,
@@ -898,13 +1147,6 @@ def write_phase1_distribution_scenarios(*, fp_home: Path) -> list[Path]:
     written: list[Path] = []
     overlay_dir = paths.runtime_distribution_overlay_root.resolve()
     for spec in _phase1_specs():
-        input_patches: dict[str, str] = {}
-        if abs(spec.ui_factor - 1.0) > 1e-12:
-            input_patches["CREATE UIFAC=1;"] = f"CREATE UIFAC={spec.ui_factor:.12g};"
-        if abs(spec.trgh_delta_q) > 1e-12:
-            input_patches["CREATE SNAPDELTAQ=0;"] = f"CREATE SNAPDELTAQ={spec.trgh_delta_q:.12g};"
-        if abs(spec.trsh_factor - 1.0) > 1e-12:
-            input_patches["CREATE SSFAC=1;"] = f"CREATE SSFAC={spec.trsh_factor:.12g};"
         config = ScenarioConfig(
             name=_scenario_name(spec.variant_id),
             description=spec.distribution_description,
@@ -915,7 +1157,7 @@ def write_phase1_distribution_scenarios(*, fp_home: Path) -> list[Path]:
             forecast_end="2029.4",
             backend="fpexe",
             track_variables=list(_DISTRIBUTION_TRACK_VARIABLES),
-            input_patches=input_patches,
+            input_patches=_scenario_input_patches(spec),
             artifacts_root=str(paths.runtime_distribution_artifacts_root),
         )
         path = paths.runtime_distribution_scenarios_root / f"{spec.variant_id}.yaml"
@@ -926,6 +1168,7 @@ def write_phase1_distribution_scenarios(*, fp_home: Path) -> list[Path]:
 
 def _movement_summary(results: dict[str, dict[str, float | None]]) -> dict[str, Any]:
     baseline = results.get("baseline-observed", {})
+    scenario_specs = {spec.variant_id: spec for spec in _phase1_specs()}
     tolerance = 1e-9
     comparisons: dict[str, dict[str, float | None]] = {}
     scenario_checks: dict[str, dict[str, Any]] = {}
@@ -935,6 +1178,7 @@ def _movement_summary(results: dict[str, dict[str, float | None]]) -> dict[str, 
         required = _required_moves_for_variant(variant_id)
         required_signs_expected = _required_signs_for_variant(variant_id)
         expected_sign = _expected_sign_for_variant(variant_id)
+        is_transfer_composite = variant_id.startswith("transfer-composite-")
         required_moves = {name: False for name in required}
         required_signs = {name: False for name in required_signs_expected}
         one_of_moves = {name: False for name in _DISTRIBUTION_ONE_OF_MOVES}
@@ -951,6 +1195,8 @@ def _movement_summary(results: dict[str, dict[str, float | None]]) -> dict[str, 
             if name in required_moves and abs(delta) > tolerance:
                 required_moves[name] = True
             if name in required_signs:
+                if is_transfer_composite and name in ("YD", "GDPR"):
+                    continue
                 signed_delta = -delta if name in ("IPOVALL", "IPOVCH") else delta
                 if (signed_delta * expected_sign) > tolerance:
                     required_signs[name] = True
@@ -973,6 +1219,12 @@ def _movement_summary(results: dict[str, dict[str, float | None]]) -> dict[str, 
                 and any(one_of_signs.values())
             ),
         }
+        if is_transfer_composite:
+            scenario_checks[variant_id]["private_package_gates"] = _private_package_gate_summary(
+                baseline,
+                values,
+                scenario_specs[variant_id],
+            )
     return {
         "comparisons": comparisons,
         "scenario_checks": scenario_checks,
@@ -987,6 +1239,7 @@ def run_phase1_distribution_block(*, fp_home: Path) -> dict[str, object]:
 
     paths = repo_paths()
     scenario_paths = write_phase1_distribution_scenarios(fp_home=fp_home)
+    scenario_specs = {spec.variant_id: spec for spec in _phase1_specs()}
     paths.runtime_distribution_artifacts_root.mkdir(parents=True, exist_ok=True)
     paths.runtime_distribution_reports_root.mkdir(parents=True, exist_ok=True)
 
@@ -1014,6 +1267,7 @@ def run_phase1_distribution_block(*, fp_home: Path) -> dict[str, object]:
             fmout_path = result.output_dir / "fmout.txt"
             fmout_text = fmout_path.read_text(encoding="utf-8", errors="replace") if fmout_path.exists() else ""
             solve_error_sol1 = "Solution error in SOL1." in fmout_text
+            bridge_parse_errors = _distribution_bridge_parse_errors(fmout_text)
             loadformat_path = result.output_dir / "LOADFORMAT.DAT"
             if loadformat_path.exists():
                 loadformat_series = _read_loadformat_series(loadformat_path)
@@ -1026,16 +1280,25 @@ def run_phase1_distribution_block(*, fp_home: Path) -> dict[str, object]:
                 first_levels = _extract_first_levels(result.parsed_output, _DISTRIBUTION_TRACK_VARIABLES)
                 variant_last_levels = _extract_last_levels(result.parsed_output, _DISTRIBUTION_TRACK_VARIABLES)
                 flat_tail_flags = {name: False for name in _DISTRIBUTION_FLAT_TAIL_CHECKS}
+            spec = scenario_specs[variant_id]
+            first_levels = {**first_levels, **_derive_private_package_levels(first_levels, spec)}
+            variant_last_levels = {**variant_last_levels, **_derive_private_package_levels(variant_last_levels, spec)}
             first_levels_map[variant_id] = first_levels
             last_levels[variant_id] = variant_last_levels
             run_payloads[variant_id] = {
                 "scenario_name": config.name,
                 "description": config.description,
+                "forecast_only_series": list(_DISTRIBUTION_FORECAST_ONLY_SERIES),
+                "forecast_window_end": _DISTRIBUTION_FORECAST_END,
+                "forecast_window_note": _DISTRIBUTION_FORECAST_NOTE,
+                "forecast_window_start": _DISTRIBUTION_FORECAST_START,
+                "history_seeded_through": _DISTRIBUTION_HISTORY_SEEDED_THROUGH,
                 "success": bool(result.success),
                 "output_dir": str(result.output_dir),
                 "loadformat_path": str(loadformat_path) if loadformat_path.exists() else None,
                 "return_code": int(result.run_result.return_code) if result.run_result is not None else None,
                 "solve_error_sol1": solve_error_sol1,
+                "bridge_parse_errors": bridge_parse_errors,
                 "flat_tail_flags": flat_tail_flags,
                 "first_levels": first_levels,
                 "last_levels": variant_last_levels,
@@ -1051,17 +1314,27 @@ def run_phase1_distribution_block(*, fp_home: Path) -> dict[str, object]:
     unhealthy = {
         variant_id: {
             "solve_error_sol1": bool(payload["solve_error_sol1"]),
+            "bridge_parse_errors": list(payload["bridge_parse_errors"]),
             "flat_tail_vars": [name for name, flagged in dict(payload["flat_tail_flags"]).items() if flagged],
         }
         for variant_id, payload in run_payloads.items()
         if variant_id != "baseline-observed"
     }
     passes_health = all(
-        (not detail["solve_error_sol1"]) and (not detail["flat_tail_vars"])
+        (not detail["solve_error_sol1"])
+        and (not detail["bridge_parse_errors"])
+        and (not detail["flat_tail_vars"])
         for detail in unhealthy.values()
     )
+    private_package_gates = {
+        variant_id: dict(dict(acceptance["scenario_checks"]).get(variant_id, {}).get("private_package_gates", {}))
+        for variant_id in last_levels
+        if variant_id.startswith("transfer-composite-")
+    }
     acceptance["scenario_health"] = unhealthy
     acceptance["passes_health"] = passes_health
+    acceptance["private_package_gates"] = private_package_gates
+    acceptance["passes_private_package_gates"] = all(bool(dict(detail).get("passes")) for detail in private_package_gates.values())
     acceptance["passes"] = bool(acceptance["passes_core"]) and passes_health
     payload = {
         "scenarios": run_payloads,
@@ -1071,6 +1344,11 @@ def run_phase1_distribution_block(*, fp_home: Path) -> dict[str, object]:
             "first_levels": decomposition_first["scenarios"],
             "last_levels": decomposition_last["scenarios"],
         },
+        "forecast_only_series": list(_DISTRIBUTION_FORECAST_ONLY_SERIES),
+        "forecast_window_end": _DISTRIBUTION_FORECAST_END,
+        "forecast_window_note": _DISTRIBUTION_FORECAST_NOTE,
+        "forecast_window_start": _DISTRIBUTION_FORECAST_START,
+        "history_seeded_through": _DISTRIBUTION_HISTORY_SEEDED_THROUGH,
         "track_variables": list(_DISTRIBUTION_TRACK_VARIABLES),
         "scenario_paths": [str(path) for path in scenario_paths],
     }

@@ -10,6 +10,7 @@ __all__ = ["assess_phase1_contrary_channels"]
 
 
 _AUDIT_VARIABLES = ("TRLOWZ", "UR", "GDPR", "YD", "RS", "IPOVALL", "IPOVCH")
+_AUDIT_FAMILY_IDS = ("baseline", "transfer-composite")
 
 
 def _expected_sign(variant_id: str) -> float:
@@ -43,13 +44,22 @@ def _scenario_audit_entry(
     *,
     variant_id: str,
     delta_map: dict[str, float | None],
+    private_package_gate: dict[str, object] | None = None,
 ) -> dict[str, object]:
     expected_sign = _expected_sign(variant_id)
-    return {
+    entry = {
         "expected_sign": expected_sign,
         "selected_deltas": {name: _float_or_none(delta_map.get(name)) for name in _AUDIT_VARIABLES},
         "countervailing_flags": _countervailing_flags(delta_map, expected_sign=expected_sign),
     }
+    if private_package_gate is not None:
+        entry["private_package_gate"] = {
+            "passes": bool(private_package_gate.get("passes")),
+            "diagnostics": dict(private_package_gate.get("diagnostics", {})),
+            "selected_levels": dict(private_package_gate.get("selected_levels", {})),
+            "selected_deltas": dict(private_package_gate.get("selected_deltas", {})),
+        }
+    return entry
 
 
 def _family_summary(entries: list[dict[str, object]]) -> dict[str, object]:
@@ -59,38 +69,44 @@ def _family_summary(entries: list[dict[str, object]]) -> dict[str, object]:
             "scenario_count": 0,
             "countervailing_counts": {},
             "has_any_countervailing_signal": False,
+            "private_package_gate_passes": 0,
         }
     keys = tuple(dict(entries[0]["countervailing_flags"]).keys())
     counts = {
         key: sum(1 for entry in entries if bool(dict(entry["countervailing_flags"]).get(key)))
         for key in keys
     }
+    private_package_gate_passes = sum(
+        1
+        for entry in entries
+        if bool(dict(entry).get("private_package_gate", {}).get("passes"))
+    )
     return {
         "scenario_count": count,
         "countervailing_counts": counts,
         "has_any_countervailing_signal": any(value > 0 for value in counts.values()),
+        "private_package_gate_passes": private_package_gate_passes,
     }
 
 
 def _recommendation(payload: dict[str, object]) -> dict[str, str]:
-    ui_summary = dict(dict(payload["families"]).get("ui", {}))
-    if bool(ui_summary.get("has_any_countervailing_signal")):
-        ui_recommendation = (
-            "Keep the public UI family framed as demand-dominant with the existing private offset caveat. "
-            "The public UI runs already show some endogenous countervailing signals, and the private matching-offset "
-            "family remains the bounded way to stress-test the missing dedicated adverse channel."
+    composite_summary = dict(dict(payload["families"]).get("transfer-composite", {}))
+    if bool(composite_summary.get("private_package_gate_passes", 0)):
+        public_recommendation = (
+            "Keep the public baseline plus transfer-composite ladder as the main contrary-channel readout. "
+            "The private package gates are satisfied, so the composite rungs can stay public while the package "
+            "evidence remains private."
         )
     else:
-        ui_recommendation = (
-            "UI still looks one-sided in the public runs; rely on the private matching-offset family rather than "
-            "inventing additional public contrary scenarios."
+        public_recommendation = (
+            "Keep the public baseline plus transfer-composite ladder as the main readout, but treat the composite "
+            "package gates as a private fallback check until the repaired package evidence is confirmed."
         )
     return {
-        "ui": ui_recommendation,
-        "non_ui": (
-            "Do not add synthetic contrary families for the other public transfer families yet. "
-            "Use the endogenous countervailing macro moves already visible in the solved Fair runs unless a specific "
-            "omitted mechanism and patch point is identified."
+        "public_ladder": public_recommendation,
+        "private_fallback": (
+            "Use the private fallback UI-offset or transfer-core worker context only if the composite package "
+            "gates fail; do not assume UI is public when presenting the audit."
         ),
     }
 
@@ -107,7 +123,7 @@ def _markdown_summary(payload: dict[str, object]) -> str:
     families = phase1_family_by_id()
     family_payloads = dict(payload["families"])
     seen_family_ids: set[str] = set()
-    for family_id in [spec.family_id for spec in phase1_public_bundle_specs()]:
+    for family_id in [spec.family_id for spec in phase1_public_bundle_specs(family_ids=_AUDIT_FAMILY_IDS)]:
         if family_id in seen_family_ids:
             continue
         seen_family_ids.add(family_id)
@@ -123,8 +139,8 @@ def _markdown_summary(payload: dict[str, object]) -> str:
             "",
             "## Recommendations",
             "",
-            f"- UI: {payload['recommendations']['ui']}",
-            f"- Non-UI: {payload['recommendations']['non_ui']}",
+            f"- Public ladder: {payload['recommendations']['public_ladder']}",
+            f"- Private fallback: {payload['recommendations']['private_fallback']}",
             "",
         ]
     )
@@ -146,12 +162,17 @@ def assess_phase1_contrary_channels(
 
     distribution_report = json.loads(report_path.read_text(encoding="utf-8"))
     comparisons = dict(dict(distribution_report["acceptance"]).get("comparisons", {}))
+    private_package_gates = dict(dict(distribution_report["acceptance"]).get("private_package_gates", {}))
     families = phase1_family_by_id()
     scenario_entries: dict[str, dict[str, object]] = {}
     family_entries: dict[str, list[dict[str, object]]] = {}
-    for spec in phase1_public_bundle_specs():
+    for spec in phase1_public_bundle_specs(family_ids=_AUDIT_FAMILY_IDS):
         delta_map = dict(comparisons.get(spec.variant_id, {}))
-        entry = _scenario_audit_entry(variant_id=spec.variant_id, delta_map=delta_map)
+        entry = _scenario_audit_entry(
+            variant_id=spec.variant_id,
+            delta_map=delta_map,
+            private_package_gate=dict(private_package_gates.get(spec.variant_id, {})) or None,
+        )
         scenario_entries[spec.variant_id] = entry
         family_entries.setdefault(spec.family_id, []).append(entry)
 
@@ -167,9 +188,9 @@ def assess_phase1_contrary_channels(
         "distribution_report_path": str(report_path),
         "ui_offset_report_path": str(ui_offset_report_path) if ui_offset_report_path.exists() else None,
         "summary": (
-            "Contrary-channel audit of the public transfer-family runs using solved Fair output comparisons. "
-            "This report is descriptive: it identifies endogenous countervailing macro signals already present in "
-            "the checked-in runs and keeps the dedicated omitted-channel stress test confined to the private UI offset family."
+            "Contrary-channel audit of the public baseline plus transfer-composite ladder using solved Fair output "
+            "comparisons. The report stays descriptive: it highlights observed countervailing macro signals, keeps "
+            "the repaired package evidence private, and treats any UI-offset context as fallback only."
         ),
         "scenarios": scenario_entries,
         "families": family_payloads,

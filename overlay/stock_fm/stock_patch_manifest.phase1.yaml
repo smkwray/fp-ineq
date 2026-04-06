@@ -30,6 +30,14 @@ patches:
     kind: literal_replace
     search: "GENR TRSH=TRSHQ*GDPD;"
     replace: "GENR TRSH=(TRSHQ*SSFAC)*GDPD;"
+  - id: federal_package_financing_into_thg
+    kind: literal_replace
+    search: "IDENT THG=D1G*YT;"
+    replace: "IDENT THG=D1G*YT+TFEDSHR*(UB-(UB/UIFAC)+SNAPDELTAQ*GDPD);"
+  - id: state_local_package_financing_into_ths
+    kind: literal_replace
+    search: "IDENT THS=D1S*YT;"
+    replace: "IDENT THS=D1S*YT+TSLSHR*(TRSH-(TRSH/SSFAC));"
 experimental_patches:
   - id: ui_matching_offset_on_private_employment
     kind: literal_replace

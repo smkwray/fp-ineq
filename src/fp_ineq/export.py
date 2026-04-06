@@ -4,6 +4,7 @@ import hashlib
 import json
 import re
 import shutil
+import subprocess
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -52,6 +53,8 @@ _SOLVED_EXPORT_DENYLIST = {
     "TRSHBAR",
     "TRSHSTD",
     "UIFAC",
+    "TFEDSHR",
+    "TSLSHR",
     "SNAPDELTAQ",
     "SSFAC",
     "CRWEDGE",
@@ -77,6 +80,16 @@ _PHASE1_PUBLIC_SUPPRESSION = {
     "TRSHZ",
     "UIDEV",
     "GHSHDV",
+    "UBPOL",
+    "TRGHPOL",
+    "TRSHPOL",
+    "TXPKGF",
+    "TXPKGS",
+    "PKGGROSS",
+    "PKGFIN",
+    "PKGNET",
+    "PKGGRZ",
+    "PKGNETZ",
 }
 _PHASE1_FULL_PRESETS = [
     {
@@ -133,6 +146,16 @@ _PHASE1_FULL_PRESETS = [
 _PHASE1_DEFAULT_PRESET_IDS = ["headline-poverty-resources"]
 _PHASE1_DEFAULT_HEADLINE_FAMILY_ID = "transfer-composite"
 _EQUATION_FUNCTION_NAMES = {"ABS", "EXP", "LOG", "MAX", "MIN"}
+_FORECAST_ONLY_SERIES = ("IPOVALL", "IPOVCH", "IGINIHH", "IMEDRINC")
+_FORECAST_WINDOW_NOTE = (
+    "Exported series are limited to the forecast window. "
+    "The integrated distribution block seeds history through 2025.4 and solves these series endogenously from 2026.1 onward."
+)
+_RUN_PANEL_NOTE = (
+    "Default selection shows the repaired transfer-composite bundle. "
+    "Other public families remain available below for comparison."
+)
+_LEGACY_RUN_ID_PREFIX = "ineq-phase1-"
 
 
 def _dictionary_base_path() -> Path:
@@ -616,6 +639,8 @@ def publish_phase1_bundle_to_docs(
     if not source_dir.exists():
         raise FileNotFoundError(f"Phase-1 bundle directory not found: {source_dir}")
 
+    legacy_bundle = _load_legacy_phase1_bundle(docs_dir)
+
     docs_dir.mkdir(parents=True, exist_ok=True)
     file_names = [
         ".nojekyll",
@@ -642,11 +667,28 @@ def publish_phase1_bundle_to_docs(
             shutil.rmtree(target)
         shutil.copytree(source, target)
 
+    for relative_path, text in legacy_bundle["run_files"].items():
+        target = docs_dir / relative_path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(text, encoding="utf-8")
+
     stale_export_report = docs_dir / "export_report.json"
     if stale_export_report.exists():
         stale_export_report.unlink()
 
     manifest = json.loads((source_dir / "manifest.json").read_text(encoding="utf-8"))
+    if legacy_bundle["runs"]:
+        manifest["runs"] = [*legacy_bundle["runs"], *manifest.get("runs", [])]
+        manifest["families"] = [*legacy_bundle["families"], *manifest.get("families", [])]
+        manifest["included_family_ids"] = [
+            *[family["family_id"] for family in legacy_bundle["families"]],
+            *manifest.get("included_family_ids", []),
+        ]
+        manifest["run_panel_note"] = (
+            "Default selection shows the repaired transfer-composite bundle. "
+            "Legacy Phase-1 runs remain available below for comparison."
+        )
+        (docs_dir / "manifest.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return {
         "docs_dir": str(docs_dir),
         "source_dir": str(source_dir),
@@ -664,7 +706,11 @@ def _artifact_timestamp(output_dir: str) -> str:
 
 
 def _run_id_for_variant(variant_id: str) -> str:
-    return f"ineq-phase1-{variant_id}"
+    return f"ineq-{variant_id}"
+
+
+def _public_scenario_name(variant_id: str) -> str:
+    return f"ineq_distribution_{variant_id.replace('-', '_')}"
 
 
 def _phase1_solved_runs() -> list[dict[str, str]]:
@@ -708,6 +754,86 @@ def _phase1_manifest_families(run_specs: list[dict[str, str]]) -> list[dict[str,
             }
         )
     return manifest_families
+
+
+def _git_show_text(repo_root: Path, git_path: str) -> str | None:
+    try:
+        return subprocess.check_output(
+            ["git", "show", f"HEAD:{git_path}"],
+            cwd=repo_root,
+            text=True,
+            stderr=subprocess.DEVNULL,
+        )
+    except Exception:
+        return None
+
+
+def _legacy_family_label(label: str) -> str:
+    return label if label.startswith("Legacy ") else f"Legacy {label}"
+
+
+def _legacy_family_id(family_id: str) -> str:
+    return family_id if family_id.startswith("legacy-") else f"legacy-{family_id}"
+
+
+def _legacy_group_label(group: str) -> str:
+    return group if group.startswith("Legacy ") else f"Legacy {group}"
+
+
+def _load_legacy_phase1_bundle(docs_dir: Path) -> dict[str, object]:
+    paths = repo_paths()
+    manifest_text = _git_show_text(paths.repo_root, "docs/manifest.json")
+    if not manifest_text:
+        return {"runs": [], "families": [], "run_files": {}}
+
+    manifest = json.loads(manifest_text)
+    legacy_runs = [dict(item) for item in manifest.get("runs", []) if str(item.get("run_id", "")).startswith(_LEGACY_RUN_ID_PREFIX)]
+    if not legacy_runs:
+        return {"runs": [], "families": [], "run_files": {}}
+
+    run_files: dict[str, str] = {}
+    family_run_ids: dict[str, list[str]] = {}
+    family_labels: dict[str, str] = {}
+    family_summaries: dict[str, str] = {}
+    family_maturities: dict[str, str] = {}
+    normalized_runs: list[dict[str, object]] = []
+
+    for run in legacy_runs:
+        data_path = str(run.get("data_path", "")).strip()
+        if not data_path:
+            continue
+        run_text = _git_show_text(paths.repo_root, f"docs/{data_path}")
+        if run_text is None:
+            continue
+        run_files[data_path] = run_text
+        family_id = _legacy_family_id(str(run.get("family_id", "legacy-phase1")))
+        family_label = _legacy_family_label(str(run.get("family_label", run.get("group", "Phase 1"))))
+        family_summary = str(run.get("summary", "")).strip()
+        family_maturity = str(run.get("family_maturity", "public-legacy")).strip() or "public-legacy"
+        normalized_run = {
+            **run,
+            "family_id": family_id,
+            "family_label": family_label,
+            "family_maturity": family_maturity,
+            "group": _legacy_group_label(str(run.get("group", "Phase 1"))),
+        }
+        normalized_runs.append(normalized_run)
+        family_run_ids.setdefault(family_id, []).append(str(run["run_id"]))
+        family_labels[family_id] = family_label
+        family_summaries[family_id] = family_summary
+        family_maturities[family_id] = family_maturity
+
+    families = [
+        {
+            "family_id": family_id,
+            "label": family_labels[family_id],
+            "summary": family_summaries[family_id],
+            "maturity": family_maturities[family_id],
+            "run_ids": run_ids,
+        }
+        for family_id, run_ids in family_run_ids.items()
+    ]
+    return {"runs": normalized_runs, "families": families, "run_files": run_files}
 
 
 def _visible_export_series(series: dict[str, list[float]]) -> list[str]:
@@ -846,9 +972,12 @@ def export_phase1_full_bundle(
         run_json = {
             "forecast_end": forecast_end,
             "forecast_start": forecast_start,
+            "forecast_window_note": _FORECAST_WINDOW_NOTE,
+            "forecast_only_series": [name for name in _FORECAST_ONLY_SERIES if name in public_series],
+            "history_seeded_through": "2025.4",
             "periods": periods,
             "run_id": run_id,
-            "scenario_name": str(scenario_payload.get("scenario_name", "")),
+            "scenario_name": _public_scenario_name(variant_id),
             "schema_version": 1,
             "series": public_series,
             "timestamp": _artifact_timestamp(str(scenario_payload.get("output_dir", ""))),
@@ -863,10 +992,12 @@ def export_phase1_full_bundle(
                 "family_id": str(run_spec["family_id"]),
                 "family_label": str(run_spec["family_label"]),
                 "family_maturity": str(run_spec["family_maturity"]),
+                "forecast_window_note": _FORECAST_WINDOW_NOTE,
                 "group": str(run_spec["group"]),
+                "history_seeded_through": "2025.4",
                 "label": str(run_spec["label"]),
                 "run_id": run_id,
-                "scenario_name": str(scenario_payload.get("scenario_name", "")),
+                "scenario_name": _public_scenario_name(variant_id),
                 "summary": str(run_spec["summary"]),
                 "timestamp": run_json["timestamp"],
             }
@@ -906,10 +1037,16 @@ def export_phase1_full_bundle(
         "default_run_ids": _default_manifest_run_ids(manifest_runs),
         "dictionary_path": "dictionary.json",
         "families": _phase1_manifest_families(list(run_specs.values())),
+        "forecast_only_series": list(_FORECAST_ONLY_SERIES),
+        "forecast_window_end": forecast_end,
+        "forecast_window_note": _FORECAST_WINDOW_NOTE,
+        "forecast_window_start": forecast_start,
         "generated_at": datetime.now(UTC).isoformat(),
+        "history_seeded_through": "2025.4",
         "included_family_ids": [family["family_id"] for family in _phase1_manifest_families(list(run_specs.values()))],
         "included_family_maturities": list(family_maturities),
         "presets_path": "presets.json",
+        "run_panel_note": _RUN_PANEL_NOTE,
         "runs": manifest_runs,
         "schema_version": 1,
         "site_subpath": "model-runs",
@@ -926,6 +1063,8 @@ def export_phase1_full_bundle(
         "variable_count": len(available_variables),
         "family_ids": [family["family_id"] for family in manifest["families"]],
         "family_maturities": list(family_maturities),
+        "forecast_only_series": list(_FORECAST_ONLY_SERIES),
+        "forecast_window_note": _FORECAST_WINDOW_NOTE,
         "run_ids": [item["run_id"] for item in manifest_runs],
     }
     (out_dir / "export_report.json").write_text(

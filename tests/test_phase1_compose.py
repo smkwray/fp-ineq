@@ -21,13 +21,15 @@ def test_apply_manifest_patches_supports_selected_experimental_patch_groups() ->
             }
         ],
     }
-    stock_text = "CREATE C=1;\nRSA\nRMA\n"
+    stock_text = "CREATE C=1;\nIDENT THG=D1G*YT;\nIDENT THS=D1S*YT;\nRSA\nRMA\n"
     composed = _apply_manifest_patches(
         stock_text,
         manifest,
         experimental_patch_ids=["credit_effective_rates"],
     )
     assert "INPUT X;" in composed
+    assert "IDENT THG=D1G*YT;" in composed
+    assert "IDENT THS=D1S*YT;" in composed
     assert "RSAEFF" in composed
     assert "RMAEFF" in composed
 

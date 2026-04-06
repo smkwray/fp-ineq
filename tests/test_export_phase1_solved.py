@@ -20,6 +20,8 @@ def test_visible_export_series_filters_controls_and_duplicate_public_names() -> 
             "IPOVALL": [0.1, 0.2],
             "PV0": [1.0, 1.0],
             "UIFAC": [1.0, 1.0],
+            "TFEDSHR": [1.0, 1.0],
+            "PKGGROSS": [2.0, 3.0],
             "ITRCOMP": [0.3, 0.4],
             "RSAEFF": [1.0, 1.0],
             "IWG1050": [1.2, 1.3],
@@ -31,7 +33,7 @@ def test_visible_export_series_filters_controls_and_duplicate_public_names() -> 
 
 
 def test_phase1_solved_dictionary_backfills_unknown_variable_metadata() -> None:
-    run_ids = ["ineq-phase1-baseline-observed", "ineq-phase1-ui-relief"]
+    run_ids = ["ineq-baseline-observed", "ineq-ui-relief"]
     payload = _phase1_solved_dictionary(
         ["GDPR", "TRLOWZ", "PCPF", "ZZZFAKE"],
         bundle_run_ids=run_ids,
@@ -264,40 +266,41 @@ def test_export_phase1_full_bundle_writes_broad_solved_payloads(
     out_dir = tmp_path / "bundle"
     payload = export_phase1_full_bundle(report_path=report_path, out_dir=out_dir)
 
-    assert payload["run_count"] == 14
+    assert payload["run_count"] == 4
     assert payload["variable_count"] == 16
 
     manifest = json.loads((out_dir / "manifest.json").read_text(encoding="utf-8"))
     assert manifest["default_run_ids"] == [
-        "ineq-phase1-baseline-observed",
-        "ineq-phase1-transfer-composite-small",
-        "ineq-phase1-transfer-composite-medium",
-        "ineq-phase1-transfer-composite-large",
+        "ineq-baseline-observed",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large",
     ]
     assert manifest["default_preset_ids"] == ["headline-poverty-resources"]
-    assert [item["run_id"] for item in manifest["runs"]] != manifest["default_run_ids"]
-    ui_relief_manifest = next(item for item in manifest["runs"] if item["run_id"] == "ineq-phase1-ui-relief")
-    assert ui_relief_manifest["group"] == "Phase-1 UI Ladder"
-    assert ui_relief_manifest["label"] == "UI Medium"
-    assert ui_relief_manifest["family_id"] == "ui"
-    assert ui_relief_manifest["family_maturity"] == "public"
+    assert manifest["default_run_ids"] == [
+        "ineq-baseline-observed",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large",
+    ]
     assert manifest["included_family_maturities"] == ["public"]
     assert manifest["included_family_ids"] == [
         "baseline",
-        "ui",
-        "federal-transfers",
-        "state-local-transfers",
-        "transfer-package",
         "transfer-composite",
     ]
+    assert "repaired transfer-composite bundle" in manifest["run_panel_note"]
+    assert manifest["forecast_window_start"] == "2026.1"
+    assert manifest["forecast_window_end"] == "2029.4"
+    assert manifest["history_seeded_through"] == "2025.4"
+    assert manifest["forecast_only_series"] == ["IPOVALL", "IPOVCH", "IGINIHH", "IMEDRINC"]
+    assert "seeds history through 2025.4" in manifest["forecast_window_note"]
     assert [item["family_id"] for item in manifest["families"]] == manifest["included_family_ids"]
-    ui_family = next(item for item in manifest["families"] if item["family_id"] == "ui")
-    assert ui_family["maturity"] == "public"
-    assert ui_family["run_ids"] == [
-        "ineq-phase1-ui-relief",
-        "ineq-phase1-ui-shock",
-        "ineq-phase1-ui-small",
-        "ineq-phase1-ui-large",
+    composite_family = next(item for item in manifest["families"] if item["family_id"] == "transfer-composite")
+    assert composite_family["maturity"] == "public"
+    assert composite_family["run_ids"] == [
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large",
     ]
     assert "AS" in manifest["available_variables"]
     assert "SGP" in manifest["available_variables"]
@@ -322,18 +325,38 @@ def test_export_phase1_full_bundle_writes_broad_solved_payloads(
     assert "IMEDRINC" not in household_resources["variables"]
     assert "IMEDRINC" in provisional["variables"]
 
-    run_payload = json.loads(
-        (out_dir / "runs" / "ineq-phase1-transfer-package-relief.json").read_text(encoding="utf-8")
-    )
+    run_payload = json.loads((out_dir / "runs" / "ineq-transfer-composite-small.json").read_text(encoding="utf-8"))
     assert run_payload["periods"] == ["2026.1", "2026.2", "2029.4"]
-    assert run_payload["series"]["IPOVALL"] == [11.0, 12.0, 13.0]
-    assert run_payload["series"]["AS"] == [11.0, 12.0, 13.0]
+    assert run_payload["series"]["IPOVALL"] == [11.125, 12.125, 13.125]
+    assert run_payload["series"]["AS"] == [11.125, 12.125, 13.125]
+    assert run_payload["history_seeded_through"] == "2025.4"
+    assert run_payload["forecast_only_series"] == ["IPOVALL", "IPOVCH", "IGINIHH", "IMEDRINC"]
     assert "ITRCOMP" not in run_payload["series"]
-    assert run_payload["timestamp"] == "20260404_150010"
+    assert run_payload["timestamp"] == "20260404_150021"
 
     dictionary = json.loads((out_dir / "dictionary.json").read_text(encoding="utf-8"))
     bundle_run_ids = [item["run_id"] for item in manifest["runs"]]
-    for hidden in ["IWGAP150", "LWGAP150", "UBZ", "TRGHZ", "TRSHZ", "UIDEV", "GHSHDV"]:
+    for hidden in [
+        "IWGAP150",
+        "LWGAP150",
+        "UBZ",
+        "TRGHZ",
+        "TRSHZ",
+        "UIDEV",
+        "GHSHDV",
+        "TFEDSHR",
+        "TSLSHR",
+        "PKGGROSS",
+        "PKGFIN",
+        "PKGNET",
+        "PKGGRZ",
+        "PKGNETZ",
+        "UBPOL",
+        "TRGHPOL",
+        "TRSHPOL",
+        "TXPKGF",
+        "TXPKGS",
+    ]:
         assert hidden not in dictionary["variables"]
     assert dictionary["variables"]["AS"]["short_name"] == "State Local Net Assets"
     assert dictionary["variables"]["GDPR"]["defined_by_equation"] == 83
@@ -361,25 +384,20 @@ def test_export_phase1_full_bundle_supports_family_filtering(
                         "output_dir": "/tmp/ineq_phase1_distribution_baseline_observed_20260404_150000",
                         "loadformat_path": "/tmp/baseline/LOADFORMAT.DAT",
                     },
-                    "ui-relief": {
-                        "scenario_name": "ineq_phase1_distribution_ui_relief",
-                        "output_dir": "/tmp/ineq_phase1_distribution_ui_relief_20260404_150005",
-                        "loadformat_path": "/tmp/ui_relief/LOADFORMAT.DAT",
+                    "transfer-composite-small": {
+                        "scenario_name": "ineq_phase1_distribution_transfer_composite_small",
+                        "output_dir": "/tmp/ineq_phase1_distribution_transfer_composite_small_20260404_150021",
+                        "loadformat_path": "/tmp/transfer_composite_small/LOADFORMAT.DAT",
                     },
-                    "ui-shock": {
-                        "scenario_name": "ineq_phase1_distribution_ui_shock",
-                        "output_dir": "/tmp/ineq_phase1_distribution_ui_shock_20260404_150007",
-                        "loadformat_path": "/tmp/ui_shock/LOADFORMAT.DAT",
+                    "transfer-composite-medium": {
+                        "scenario_name": "ineq_phase1_distribution_transfer_composite_medium",
+                        "output_dir": "/tmp/ineq_phase1_distribution_transfer_composite_medium_20260404_150022",
+                        "loadformat_path": "/tmp/transfer_composite_medium/LOADFORMAT.DAT",
                     },
-                    "ui-small": {
-                        "scenario_name": "ineq_phase1_distribution_ui_small",
-                        "output_dir": "/tmp/ineq_phase1_distribution_ui_small_20260404_150006",
-                        "loadformat_path": "/tmp/ui_small/LOADFORMAT.DAT",
-                    },
-                    "ui-large": {
-                        "scenario_name": "ineq_phase1_distribution_ui_large",
-                        "output_dir": "/tmp/ineq_phase1_distribution_ui_large_20260404_150006",
-                        "loadformat_path": "/tmp/ui_large/LOADFORMAT.DAT",
+                    "transfer-composite-large": {
+                        "scenario_name": "ineq_phase1_distribution_transfer_composite_large",
+                        "output_dir": "/tmp/ineq_phase1_distribution_transfer_composite_large_20260404_150023",
+                        "loadformat_path": "/tmp/transfer_composite_large/LOADFORMAT.DAT",
                     },
                 },
             }
@@ -404,23 +422,22 @@ def test_export_phase1_full_bundle_supports_family_filtering(
     payload = export_phase1_full_bundle(
         report_path=report_path,
         out_dir=out_dir,
-        family_ids=("ui",),
+        family_ids=("transfer-composite",),
     )
 
-    assert payload["family_ids"] == ["ui"]
+    assert payload["family_ids"] == ["transfer-composite"]
     manifest = json.loads((out_dir / "manifest.json").read_text(encoding="utf-8"))
-    assert manifest["included_family_ids"] == ["ui"]
+    assert manifest["included_family_ids"] == ["transfer-composite"]
+    assert manifest["history_seeded_through"] == "2025.4"
     assert manifest["default_run_ids"] == [
-        "ineq-phase1-ui-relief",
-        "ineq-phase1-ui-shock",
-        "ineq-phase1-ui-small",
-        "ineq-phase1-ui-large",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large",
     ]
     assert [item["run_id"] for item in manifest["runs"]] == [
-        "ineq-phase1-ui-relief",
-        "ineq-phase1-ui-shock",
-        "ineq-phase1-ui-small",
-        "ineq-phase1-ui-large",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large",
     ]
 
 

@@ -125,27 +125,14 @@ def run_phase1_transfer_core_cmd(
 @app.command("run-phase1-transfer-composite-ladder")
 def run_phase1_transfer_composite_ladder_cmd(
     fp_home: Path = typer.Option(..., "--fp-home", help="Path to private stock FM directory"),
-    prototype_report_path: Path = typer.Option(
-        None,
-        "--prototype-report-path",
-        help="Existing run_phase1_transfer_core.json report to calibrate the ladder from",
-    ),
-    ui_ladder_report_path: Path = typer.Option(
-        None,
-        "--ui-ladder-report-path",
-        help="Verified UI ladder report supplying the shared ΔTRLOWZ target bins",
-    ),
 ) -> None:
     payload = run_phase1_transfer_composite_ladder(
         fp_home=locate_fp_home(fp_home),
-        prototype_report_path=prototype_report_path,
-        ui_ladder_report_path=ui_ladder_report_path,
     )
     typer.echo(
         " ".join(
             [
                 f"passes={str(payload['passes']).lower()}",
-                f"passes_targets={str(payload['passes_targets']).lower()}",
                 f"report={payload['report_path']}",
                 f"artifacts={payload['artifacts_dir']}",
             ]

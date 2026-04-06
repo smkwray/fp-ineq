@@ -3,12 +3,11 @@ from __future__ import annotations
 import pytest
 
 from fp_ineq.phase1_transfer_core import (
+    TransferScenarioSpec,
     _acceptance_summary,
-    _collect_transfer_composite_points,
-    _interpolate_transfer_alpha_for_target,
-    _refined_transfer_composite_specs,
     _required_moves_for_variant,
-    _transfer_composite_specs_from_targets,
+    _transfer_composite_ladder_specs,
+    _transfer_input_patches,
 )
 
 
@@ -144,81 +143,37 @@ def test_acceptance_summary_rejects_wrong_direction() -> None:
     }
 
 
-def test_transfer_composite_specs_scale_trial_package() -> None:
-    specs, rungs = _transfer_composite_specs_from_targets(
-        targets={
-            "transfer-composite-small": 0.1,
-            "transfer-composite-medium": 0.2,
-            "transfer-composite-large": 0.3,
-        },
-        trial_delta=0.2,
-    )
+def test_transfer_composite_ladder_specs_are_catalog_driven() -> None:
+    specs = _transfer_composite_ladder_specs()
     assert [(spec.variant_id, spec.ui_factor, spec.trgh_delta_q, spec.trsh_factor) for spec in specs] == [
         ("baseline-observed", 1.0, 0.0, 1.0),
         ("transfer-composite-small", pytest.approx(1.01), pytest.approx(1.0), pytest.approx(1.01)),
         ("transfer-composite-medium", pytest.approx(1.02), pytest.approx(2.0), pytest.approx(1.02)),
         ("transfer-composite-large", pytest.approx(1.03), pytest.approx(3.0), pytest.approx(1.03)),
     ]
-    assert rungs["transfer-composite-medium"]["alpha"] == pytest.approx(1.0)
-
-
-def test_refined_transfer_composite_specs_interpolate_observed_points() -> None:
-    _specs, rungs = _transfer_composite_specs_from_targets(
-        targets={
-            "transfer-composite-small": 0.1,
-            "transfer-composite-medium": 0.2,
-            "transfer-composite-large": 0.3,
-        },
-        trial_delta=0.2,
-    )
-    calibration = {
-        "trial_mean_delta_trlowz": 0.2,
-        "rungs": rungs,
-    }
-    rung_results = {
-        "transfer-composite-small": {
-            "alpha": 0.5,
-            "achieved_mean_delta_trlowz": 0.07,
-            "target_mean_delta_trlowz": 0.1,
-            "relative_error": 0.3,
-            "passes_target": False,
-        },
-        "transfer-composite-medium": {
-            "alpha": 1.0,
-            "achieved_mean_delta_trlowz": 0.2,
-            "target_mean_delta_trlowz": 0.2,
-            "relative_error": 0.0,
-            "passes_target": True,
-        },
-        "transfer-composite-large": {
-            "alpha": 1.5,
-            "achieved_mean_delta_trlowz": 0.38,
-            "target_mean_delta_trlowz": 0.3,
-            "relative_error": 0.26,
-            "passes_target": False,
-        },
-    }
-    points = _collect_transfer_composite_points(calibration=calibration, rung_results=rung_results)
-    assert _interpolate_transfer_alpha_for_target(points=points, target_metric=0.1) == pytest.approx(0.6153846154)
-    assert _interpolate_transfer_alpha_for_target(points=points, target_metric=0.3) == pytest.approx(1.2777777778)
-    refined_specs, refined_calibration = _refined_transfer_composite_specs(
-        calibration=calibration,
-        rung_results=rung_results,
-    )
-    assert [(spec.variant_id, spec.ui_factor, spec.trgh_delta_q, spec.trsh_factor) for spec in refined_specs] == [
-        ("baseline-observed", 1.0, 0.0, 1.0),
-        (
-            "transfer-composite-small",
-            pytest.approx(1.0123076923),
-            pytest.approx(1.2307692308),
-            pytest.approx(1.0123076923),
-        ),
-        ("transfer-composite-medium", pytest.approx(1.02), pytest.approx(2.0), pytest.approx(1.02)),
-        (
-            "transfer-composite-large",
-            pytest.approx(1.0255555556),
-            pytest.approx(2.5555555556),
-            pytest.approx(1.0255555556),
-        ),
+    assert [(spec.variant_id, spec.trfin_fed_share, spec.trfin_sl_share) for spec in specs] == [
+        ("baseline-observed", 0.0, 0.0),
+        ("transfer-composite-small", 1.0, 1.0),
+        ("transfer-composite-medium", 1.0, 1.0),
+        ("transfer-composite-large", 1.0, 1.0),
     ]
-    assert refined_calibration["rungs"]["transfer-composite-large"]["alpha"] == pytest.approx(1.2777777778)
+
+
+def test_transfer_input_patches_inline_financing_formulas() -> None:
+    spec = TransferScenarioSpec(
+        variant_id="transfer-composite-medium",
+        ui_factor=1.02,
+        trgh_delta_q=2.0,
+        trsh_factor=1.02,
+        trfin_fed_share=1.0,
+        trfin_sl_share=1.0,
+        description="test",
+    )
+    patches = _transfer_input_patches(spec)
+    assert patches == {
+        "CREATE UIFAC=1;": "CREATE UIFAC=1.02;",
+        "CREATE SNAPDELTAQ=0;": "CREATE SNAPDELTAQ=2;",
+        "CREATE SSFAC=1;": "CREATE SSFAC=1.02;",
+        "CREATE TFEDSHR=0;": "CREATE TFEDSHR=1;",
+        "CREATE TSLSHR=0;": "CREATE TSLSHR=1;",
+    }

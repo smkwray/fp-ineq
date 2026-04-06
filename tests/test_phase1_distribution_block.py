@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from types import SimpleNamespace
 
 import numpy as np
 import pandas as pd
@@ -8,10 +9,14 @@ import pytest
 
 from fp_ineq.paths import RepoPaths
 from fp_ineq.phase1_distribution_block import (
+    _distribution_bridge_parse_errors,
+    _derive_private_package_levels,
     _distribution_decomposition,
     _expected_sign_for_variant,
     _latest_transfer_core_baseline_loadformat,
     _movement_summary,
+    _render_runtime_distribution_block,
+    _scenario_input_patches,
     estimate_phase1_distribution_coefficients,
 )
 
@@ -83,6 +88,15 @@ def test_distribution_movement_summary_requires_headline_and_macro_movement() ->
             "UR": 0.045,
             "PCY": 2.87,
             "RS": 4.55,
+            "THG": 2.0,
+            "THS": 1.5,
+            "RECG": 3.0,
+            "RECS": 1.0,
+            "SGP": 4.0,
+            "SSP": 1.8,
+            "PKGGROSS": 0.0,
+            "PKGFIN": 0.0,
+            "PKGNET": 0.0,
         },
         "ui-relief": {
             "IPOVALL": 0.108,
@@ -99,6 +113,15 @@ def test_distribution_movement_summary_requires_headline_and_macro_movement() ->
             "UR": 0.0438,
             "PCY": 2.89,
             "RS": 4.72,
+            "THG": 2.2,
+            "THS": 1.7,
+            "RECG": 3.2,
+            "RECS": 1.2,
+            "SGP": 4.3,
+            "SSP": 2.0,
+            "PKGGROSS": 0.0,
+            "PKGFIN": 0.0,
+            "PKGNET": 0.0,
         },
         "transfer-package-relief": {
             "IPOVALL": 0.105,
@@ -115,6 +138,15 @@ def test_distribution_movement_summary_requires_headline_and_macro_movement() ->
             "UR": 0.0435,
             "PCY": 2.90,
             "RS": 4.80,
+            "THG": 2.4,
+            "THS": 1.9,
+            "RECG": 3.4,
+            "RECS": 1.4,
+            "SGP": 4.5,
+            "SSP": 2.2,
+            "PKGGROSS": 21.5,
+            "PKGFIN": 0.0,
+            "PKGNET": 21.5,
         },
         "transfer-package-shock": {
             "IPOVALL": 0.113,
@@ -131,6 +163,40 @@ def test_distribution_movement_summary_requires_headline_and_macro_movement() ->
             "UR": 0.0454,
             "PCY": 2.86,
             "RS": 4.49,
+            "THG": 1.8,
+            "THS": 1.1,
+            "RECG": 2.6,
+            "RECS": 0.7,
+            "SGP": 3.6,
+            "SSP": 1.4,
+            "PKGGROSS": 18.9,
+            "PKGFIN": 0.0,
+            "PKGNET": 18.9,
+        },
+        "transfer-composite-small": {
+            "IPOVALL": 0.106,
+            "IPOVCH": 0.141,
+            "IGINIHH": 0.486,
+            "IMEDRINC": 67.7,
+            "TRLOWZ": 1.37,
+            "RYDPC": 66.4,
+            "UB": 58.0,
+            "TRGH": 1210.0,
+            "TRSH": 395.0,
+            "YD": 7092.0,
+            "GDPR": 6615.0,
+            "UR": 0.0432,
+            "PCY": 2.91,
+            "RS": 4.81,
+            "THG": 2.6,
+            "THS": 2.1,
+            "RECG": 3.6,
+            "RECS": 1.6,
+            "SGP": 4.7,
+            "SSP": 2.4,
+            "PKGGROSS": 22.0,
+            "PKGFIN": 22.0,
+            "PKGNET": 0.0,
         },
     }
     summary = _movement_summary(results)
@@ -163,6 +229,18 @@ def test_distribution_movement_summary_requires_headline_and_macro_movement() ->
     }
     assert summary["scenario_checks"]["transfer-package-shock"]["required_signs"]["IPOVALL"] is True
     assert summary["scenario_checks"]["transfer-package-shock"]["required_signs"]["TRLOWZ"] is True
+    assert summary["scenario_checks"]["transfer-composite-small"]["required_signs"] == {
+        "IPOVALL": True,
+        "IPOVCH": True,
+        "TRLOWZ": True,
+        "RYDPC": True,
+        "UB": True,
+        "TRGH": True,
+        "TRSH": True,
+    }
+    assert summary["scenario_checks"]["transfer-composite-small"]["private_package_gates"]["passes"] is True
+    assert summary["scenario_checks"]["transfer-composite-small"]["private_package_gates"]["diagnostics"]["gross_positive"] is True
+    assert summary["scenario_checks"]["transfer-composite-small"]["private_package_gates"]["diagnostics"]["package_net_ok"] is True
 
 
 def test_distribution_movement_summary_rejects_wrong_poverty_direction() -> None:
@@ -206,11 +284,97 @@ def test_distribution_movement_summary_rejects_wrong_poverty_direction() -> None
     assert summary["scenario_checks"]["ui-relief"]["required_signs"]["IPOVCH"] is False
 
 
+def test_distribution_scenario_input_patches_include_transfer_composite_package_shares() -> None:
+    spec = SimpleNamespace(
+        variant_id="transfer-composite-small",
+        ui_factor=1.0125839776982168,
+        trgh_delta_q=1.2583977698216835,
+        trsh_factor=1.0125839776982168,
+        trfin_fed_share=1.0,
+        trfin_sl_share=0.75,
+    )
+    patches = _scenario_input_patches(spec)
+    assert patches["CREATE UIFAC=1;"] == "CREATE UIFAC=1.0125839777;"
+    assert patches["CREATE SNAPDELTAQ=0;"] == "CREATE SNAPDELTAQ=1.25839776982;"
+    assert patches["CREATE SSFAC=1;"] == "CREATE SSFAC=1.0125839777;"
+    assert patches["CREATE TFEDSHR=0;"] == "CREATE TFEDSHR=1;"
+    assert patches["CREATE TSLSHR=0;"] == "CREATE TSLSHR=0.75;"
+
+
+def test_derive_private_package_levels_uses_scenario_levels_and_shares() -> None:
+    spec = SimpleNamespace(
+        variant_id="transfer-composite-medium",
+        ui_factor=1.02,
+        trgh_delta_q=2.0,
+        trsh_factor=1.02,
+        trfin_fed_share=1.0,
+        trfin_sl_share=1.0,
+    )
+
+    derived = _derive_private_package_levels(
+        {
+            "UB": 12.24,
+            "TRSH": 110.16,
+            "GDPD": 4.5,
+        },
+        spec,
+    )
+
+    assert derived["PKGGROSS"] == pytest.approx((12.24 - 12.24 / 1.02) + 9.0 + (110.16 - 110.16 / 1.02))
+    assert derived["PKGFIN"] == pytest.approx(derived["PKGGROSS"])
+    assert derived["PKGNET"] == pytest.approx(0.0)
+
+
 def test_distribution_expected_sign_supports_ladder_variants() -> None:
     assert _expected_sign_for_variant("ui-small") == 1.0
     assert _expected_sign_for_variant("ui-medium") == 1.0
     assert _expected_sign_for_variant("ui-large") == 1.0
     assert _expected_sign_for_variant("transfer-composite-small") == 1.0
+
+
+def test_distribution_bridge_parse_errors_only_collect_after_distribution_include() -> None:
+    fmout_text = "\n".join(
+        [
+            "UNRECOGNIZABLE VARIABLE",
+            "BEFORE",
+            "INPUT FILE=idp1blk.txt;",
+            "UNRECOGNIZABLE VARIABLE",
+            "LPOVCHGA",
+            "UNRECOGNIZABLE VARIABLE",
+            "0.0IDENT",
+        ]
+    )
+
+    assert _distribution_bridge_parse_errors(fmout_text) == [
+        "UNRECOGNIZABLE VARIABLE | LPOVCHGA",
+        "UNRECOGNIZABLE VARIABLE | 0.0IDENT",
+    ]
+
+
+def test_render_runtime_distribution_block_splits_child_logit_level() -> None:
+    coefficient_report = {
+        "deviation_basis": {
+            "standardization": {
+                "UBBAR": 10.0,
+                "UBSTD": 2.0,
+                "TRGHBAR": 20.0,
+                "TRGHSTD": 4.0,
+                "TRSHBAR": 5.0,
+                "TRSHSTD": 1.0,
+            }
+        },
+        "equations": {
+            "IPOVALL": {"coefficients": {"PV0": -2.0, "PVU": 3.0, "PVT": -0.5, "PVUI": -0.1, "PVGH": 0.05}},
+            "IPOVCH": {"coefficients": {"CG0": 0.4, "CGU": 1.2, "CGT": -0.3, "CGUI": -0.08, "CGGH": 0.02}},
+            "IGINIHH": {"coefficients": {"GN0": -0.2, "GNU": 0.9, "GNT": 0.04}},
+            "IMEDRINC": {"coefficients": {"MD0": 1.4, "MDR": 0.3, "MDU": -0.2}},
+        },
+    }
+
+    text = _render_runtime_distribution_block(coefficient_report)
+
+    assert "IDENT LPOVCHLVL=LPOVALL+LPOVCHGAP;" in text
+    assert "IDENT IPOVCH=EXP(LPOVCHLVL)/(1+EXP(LPOVCHLVL));" in text
 
 
 def test_latest_transfer_core_baseline_loadformat_reads_explicit_baseline_path(
