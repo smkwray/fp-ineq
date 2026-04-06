@@ -1075,6 +1075,15 @@ def export_phase1_bridge_artifacts(
     family_ids: tuple[str, ...] | None = None,
 ) -> dict[str, object]:
     paths = repo_paths()
+    repo_root = paths.repo_root.resolve()
+
+    def _display_path(path: Path) -> str:
+        resolved = path.resolve()
+        try:
+            return str(resolved.relative_to(repo_root))
+        except ValueError:
+            return str(resolved)
+
     report_path = report_path or (paths.runtime_distribution_reports_root / "run_phase1_distribution_block.json")
     out_dir = out_dir or (paths.repo_root / "reports" / "phase1_distribution_block")
     if not report_path.exists():
@@ -1101,10 +1110,10 @@ def export_phase1_bridge_artifacts(
     )
 
     bridge_export_report = {
-        "out_dir": str(out_dir),
-        "report_path": str(report_path),
-        "bridge_metadata_path": str(out_dir / bridge_metadata_path),
-        "bridge_results_path": str(out_dir / bridge_results_path),
+        "out_dir": _display_path(out_dir),
+        "report_path": _display_path(report_path),
+        "bridge_metadata_path": _display_path(out_dir / bridge_metadata_path),
+        "bridge_results_path": _display_path(out_dir / bridge_results_path),
         "bridge_row_count": bridge_row_count,
         "run_count": len(manifest_runs),
         "family_ids": sorted({str(item["family_id"]) for item in manifest_runs}),

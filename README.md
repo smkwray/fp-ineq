@@ -13,7 +13,7 @@ The repository is designed to be shareable without redistributing the stock Fair
 - the scenario definitions and solve/export code under `src/fp_ineq/`
 - the static results explorer bundle under `docs/`
 - the machine-readable published bridge artifacts `docs/bridge_results.csv` and `docs/bridge_metadata.json`
-- the tracked runtime-derived bridge refresh under `reports/phase1_distribution_block/`
+- the tracked runtime-derived bridge refresh under `reports/`
 
 It does not publish stock Fair files or fully composed private decks.
 
