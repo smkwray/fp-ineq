@@ -184,6 +184,20 @@ def _phase1_specs():
     return phase1_distribution_specs()
 
 
+def _tagged_runtime_dir(base: Path, runtime_tag: str | None = None) -> Path:
+    token = str(runtime_tag or "").strip()
+    if not token:
+        return base
+    return base.parent / f"{base.name}-{token}"
+
+
+def _tagged_report_path(base: Path, runtime_tag: str | None = None) -> Path:
+    token = str(runtime_tag or "").strip()
+    if not token:
+        return base
+    return base.with_name(f"{base.stem}.{token}{base.suffix}")
+
+
 def _scenario_name(variant_id: str) -> str:
     return f"ineq_phase1_distribution_{variant_id.replace('-', '_')}"
 
@@ -1135,14 +1149,22 @@ def build_phase1_distribution_overlay(
     return build_report
 
 
-def write_phase1_distribution_scenarios(*, fp_home: Path) -> list[Path]:
+def write_phase1_distribution_scenarios(
+    *,
+    fp_home: Path,
+    backend: str = "fpexe",
+    scenarios_root: Path | None = None,
+    artifacts_root: Path | None = None,
+) -> list[Path]:
     ensure_fp_wraptr_importable()
     from fp_wraptr.scenarios.config import ScenarioConfig
 
     paths = repo_paths()
     fp_home = locate_fp_home(fp_home)
     build_phase1_distribution_overlay(fp_home=fp_home)
-    paths.runtime_distribution_scenarios_root.mkdir(parents=True, exist_ok=True)
+    scenarios_root = scenarios_root or paths.runtime_distribution_scenarios_root
+    artifacts_root = artifacts_root or paths.runtime_distribution_artifacts_root
+    scenarios_root.mkdir(parents=True, exist_ok=True)
 
     written: list[Path] = []
     overlay_dir = paths.runtime_distribution_overlay_root.resolve()
@@ -1155,12 +1177,12 @@ def write_phase1_distribution_scenarios(*, fp_home: Path) -> list[Path]:
             input_file="fminput.txt",
             forecast_start="2026.1",
             forecast_end="2029.4",
-            backend="fpexe",
+            backend=backend,
             track_variables=list(_DISTRIBUTION_TRACK_VARIABLES),
             input_patches=_scenario_input_patches(spec),
-            artifacts_root=str(paths.runtime_distribution_artifacts_root),
+            artifacts_root=str(artifacts_root),
         )
-        path = paths.runtime_distribution_scenarios_root / f"{spec.variant_id}.yaml"
+        path = scenarios_root / f"{spec.variant_id}.yaml"
         config.to_yaml(path)
         written.append(path)
     return written
@@ -1232,16 +1254,31 @@ def _movement_summary(results: dict[str, dict[str, float | None]]) -> dict[str, 
     }
 
 
-def run_phase1_distribution_block(*, fp_home: Path) -> dict[str, object]:
+def run_phase1_distribution_block(
+    *,
+    fp_home: Path,
+    backend: str = "fpexe",
+    scenarios_root: Path | None = None,
+    artifacts_root: Path | None = None,
+    report_path: Path | None = None,
+) -> dict[str, object]:
     ensure_fp_wraptr_importable()
     from fp_wraptr.scenarios import runner as scenario_runner
     from fp_wraptr.scenarios.runner import load_scenario_config
 
     paths = repo_paths()
-    scenario_paths = write_phase1_distribution_scenarios(fp_home=fp_home)
+    scenarios_root = scenarios_root or paths.runtime_distribution_scenarios_root
+    artifacts_root = artifacts_root or paths.runtime_distribution_artifacts_root
+    report_path = report_path or (paths.runtime_distribution_reports_root / "run_phase1_distribution_block.json")
+    scenario_paths = write_phase1_distribution_scenarios(
+        fp_home=fp_home,
+        backend=backend,
+        scenarios_root=scenarios_root,
+        artifacts_root=artifacts_root,
+    )
     scenario_specs = {spec.variant_id: spec for spec in _phase1_specs()}
-    paths.runtime_distribution_artifacts_root.mkdir(parents=True, exist_ok=True)
-    paths.runtime_distribution_reports_root.mkdir(parents=True, exist_ok=True)
+    artifacts_root.mkdir(parents=True, exist_ok=True)
+    report_path.parent.mkdir(parents=True, exist_ok=True)
 
     run_payloads: dict[str, dict[str, object]] = {}
     first_levels_map: dict[str, dict[str, float | None]] = {}
@@ -1262,7 +1299,7 @@ def run_phase1_distribution_block(*, fp_home: Path) -> dict[str, object]:
             config = load_scenario_config(scenario_path)
             result = scenario_runner.run_scenario(
                 config=config,
-                output_dir=paths.runtime_distribution_artifacts_root,
+                output_dir=artifacts_root,
             )
             fmout_path = result.output_dir / "fmout.txt"
             fmout_text = fmout_path.read_text(encoding="utf-8", errors="replace") if fmout_path.exists() else ""
@@ -1288,6 +1325,7 @@ def run_phase1_distribution_block(*, fp_home: Path) -> dict[str, object]:
             run_payloads[variant_id] = {
                 "scenario_name": config.name,
                 "description": config.description,
+                "backend": str(config.backend),
                 "forecast_only_series": list(_DISTRIBUTION_FORECAST_ONLY_SERIES),
                 "forecast_window_end": _DISTRIBUTION_FORECAST_END,
                 "forecast_window_note": _DISTRIBUTION_FORECAST_NOTE,
@@ -1339,6 +1377,7 @@ def run_phase1_distribution_block(*, fp_home: Path) -> dict[str, object]:
     payload = {
         "scenarios": run_payloads,
         "acceptance": acceptance,
+        "execution_backend": str(backend),
         "decomposition": {
             "metadata": decomposition_last["metadata"],
             "first_levels": decomposition_first["scenarios"],
@@ -1352,12 +1391,12 @@ def run_phase1_distribution_block(*, fp_home: Path) -> dict[str, object]:
         "track_variables": list(_DISTRIBUTION_TRACK_VARIABLES),
         "scenario_paths": [str(path) for path in scenario_paths],
     }
-    report_path = paths.runtime_distribution_reports_root / "run_phase1_distribution_block.json"
     report_path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return {
         "report_path": str(report_path),
         "overlay_root": str(paths.runtime_distribution_overlay_root),
-        "scenarios_dir": str(paths.runtime_distribution_scenarios_root),
-        "artifacts_dir": str(paths.runtime_distribution_artifacts_root),
+        "scenarios_dir": str(scenarios_root),
+        "artifacts_dir": str(artifacts_root),
+        "backend": str(backend),
         "passes": bool(acceptance["passes"]),
     }

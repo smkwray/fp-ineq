@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 from types import SimpleNamespace
 
 import numpy as np
@@ -18,6 +19,7 @@ from fp_ineq.phase1_distribution_block import (
     _render_runtime_distribution_block,
     _scenario_input_patches,
     estimate_phase1_distribution_coefficients,
+    write_phase1_distribution_scenarios,
 )
 
 
@@ -430,6 +432,36 @@ def test_latest_transfer_core_baseline_loadformat_fails_when_report_is_missing(
 
     with pytest.raises(FileNotFoundError, match="Transfer-core report missing"):
         _latest_transfer_core_baseline_loadformat()
+
+
+def test_write_phase1_distribution_scenarios_supports_backend_specific_runtime_roots(
+    tmp_path, monkeypatch
+) -> None:
+    paths = _repo_paths_for_test(tmp_path)
+    fp_home = tmp_path / "FM"
+    fp_home.mkdir(parents=True, exist_ok=True)
+    scenarios_root = paths.runtime_distribution_root / "scenarios-fpr"
+    artifacts_root = paths.runtime_distribution_root / "artifacts-fpr"
+
+    monkeypatch.setattr("fp_ineq.phase1_distribution_block.repo_paths", lambda: paths)
+    monkeypatch.setattr("fp_ineq.phase1_distribution_block.locate_fp_home", lambda path: Path(path))
+    monkeypatch.setattr(
+        "fp_ineq.phase1_distribution_block.build_phase1_distribution_overlay",
+        lambda **_: {"overlay_root": str(paths.runtime_distribution_overlay_root)},
+    )
+
+    written = write_phase1_distribution_scenarios(
+        fp_home=fp_home,
+        backend="fp-r",
+        scenarios_root=scenarios_root,
+        artifacts_root=artifacts_root,
+    )
+
+    baseline_path = scenarios_root / "baseline-observed.yaml"
+    assert baseline_path in written
+    baseline_text = baseline_path.read_text(encoding="utf-8")
+    assert "backend: fp-r" in baseline_text
+    assert f"artifacts_root: {artifacts_root}" in baseline_text
 
 
 def test_estimate_distribution_coefficients_reports_benchmarks_and_loo(

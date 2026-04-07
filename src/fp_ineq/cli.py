@@ -7,8 +7,11 @@ import typer
 from .bridge import locate_fp_home
 from .data_pipeline import refresh_data
 from .export import export_phase1_bridge_artifacts, export_phase1_full_bundle, publish_phase1_bundle_to_docs
+from .paths import repo_paths
 from .phase1_contrary_audit import assess_phase1_contrary_channels
 from .phase1_distribution_block import (
+    _tagged_report_path,
+    _tagged_runtime_dir,
     build_phase1_distribution_overlay,
     run_phase1_distribution_block,
     write_phase1_distribution_scenarios,
@@ -152,11 +155,33 @@ def compose_phase1_distribution_block_cmd(
 @app.command("run-phase1-distribution-block")
 def run_phase1_distribution_block_cmd(
     fp_home: Path = typer.Option(..., "--fp-home", help="Path to private stock FM directory"),
+    backend: str = typer.Option(
+        "fpexe",
+        "--backend",
+        help="Execution backend for the 14-run distribution block (fpexe, fppy, fp-r, or both)",
+    ),
+    runtime_tag: str = typer.Option(
+        "",
+        "--runtime-tag",
+        help="Optional suffix for scenarios/artifacts/report paths, e.g. 'fpr'",
+    ),
 ) -> None:
-    payload = run_phase1_distribution_block(fp_home=locate_fp_home(fp_home))
+    paths = repo_paths()
+    tag = runtime_tag.strip() or None
+    payload = run_phase1_distribution_block(
+        fp_home=locate_fp_home(fp_home),
+        backend=backend,
+        scenarios_root=_tagged_runtime_dir(paths.runtime_distribution_scenarios_root, tag),
+        artifacts_root=_tagged_runtime_dir(paths.runtime_distribution_artifacts_root, tag),
+        report_path=_tagged_report_path(
+            paths.runtime_distribution_reports_root / "run_phase1_distribution_block.json",
+            tag,
+        ),
+    )
     typer.echo(
         " ".join(
             [
+                f"backend={payload['backend']}",
                 f"passes={str(payload['passes']).lower()}",
                 f"report={payload['report_path']}",
                 f"artifacts={payload['artifacts_dir']}",
