@@ -97,6 +97,8 @@ Public bridge artifacts:
 
 Tracked runtime bridge artifacts from the latest local `fp-r` run can also be written under `reports/` without rebuilding the full site bundle.
 
+The repo now also carries a separate tracked legacy bridge export under `reports/phase1_distribution_block_fpexe/`, so backend-sensitive comparisons can read both the modern `fp-r` and legacy `fpexe` bridge surfaces side by side.
+
 The bridge is intentionally narrower than the full explorer:
 
 - channels: `ui`, `broad_federal_transfers`, `transfer_composite`
