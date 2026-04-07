@@ -113,7 +113,7 @@ The intended comparison rule is channel-level, not literal program-name matching
 
 `ea-ineq` now packages the same channels and horizons, but it does not yet expose direct `TRLOWZ` or `RYDPC` analogs. That means `fp-ineq` is already normalized on `delta_trlowz`, while `ea-ineq` currently reports bridge rows per native treatment shock unit.
 
-The current bridge is therefore a public comparison scaffold, not a settled cross-repo validation result. Public interpretation should stay limited until `ea-ineq` completes its bridge polarity audit and the side-by-side compare moves beyond temporary representative `fp-ineq` anchor scenarios.
+The current bridge is therefore a public comparison scaffold, not a settled cross-repo validation result. `ea-ineq` now publishes a polarity audit that rules out a simple sign-convention flip, and its side-by-side compare now uses full `fp-ineq` channel envelopes rather than temporary anchor scenarios. Public interpretation should still stay limited because the deeper estimand mismatch remains unresolved.
 
 <details>
 <summary>Developer rebuild notes</summary>
