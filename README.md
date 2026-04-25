@@ -95,9 +95,7 @@ Public bridge artifacts:
 - `docs/bridge_results.csv`
 - `docs/bridge_metadata.json`
 
-Tracked runtime bridge artifacts from the latest local `fp-r` run can also be written under `reports/` without rebuilding the full site bundle.
-
-The repo now also carries a separate tracked legacy bridge export under `reports/phase1_distribution_block_fpexe/`, so backend-sensitive comparisons can read both the modern `fp-r` and legacy `fpexe` bridge surfaces side by side.
+Tracked bridge artifacts from the latest local `fp-r` run can also be written under `reports/` without rebuilding the full site bundle.
 
 The bridge is intentionally narrower than the full explorer:
 
@@ -135,11 +133,7 @@ Environment notes:
 - stock Fair is supplied through `--fp-home` or the `FP_HOME` environment variable
 - `fp-wraptr` is discovered from a sibling checkout or the `FP_WRAPTR_ROOT` environment variable
 - the accepted runtime report can be regenerated from either supported backend path; the tracked bridge refresh is currently emitted directly from the latest `fp-r` runtime report
-- backend-specific runtime roots can be kept separate with `--runtime-tag`, for example:
-
-```bash
-fp-ineq run-phase1-distribution-block --fp-home /path/to/FM --backend fp-r --runtime-tag fpr
-```
+- backend-specific runtime roots can be kept separate with `--runtime-tag`
 
 </details>
 

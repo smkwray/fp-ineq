@@ -3,6 +3,7 @@ from __future__ import annotations
 import csv
 import hashlib
 import json
+import math
 import re
 import shutil
 import subprocess
@@ -192,6 +193,69 @@ _RUN_PANEL_NOTE = (
     "Default selection shows the public-default-safe fp-r results set. "
     "Published legacy-split runs remain available below with explicit shared-modern labeling."
 )
+
+
+def _is_missing_export_value(value: float | None) -> bool:
+    if value is None:
+        return True
+    numeric = float(value)
+    if math.isnan(numeric):
+        return True
+    return abs(numeric + 99.0) <= 1e-9
+
+
+def _merge_missing_series_values(
+    primary: list[float] | None,
+    fallback: list[float] | None,
+) -> list[float] | None:
+    if not fallback:
+        return primary
+    if not primary:
+        return [float(value) for value in fallback]
+    merged = [float(value) for value in primary]
+    limit = min(len(merged), len(fallback))
+    for idx in range(limit):
+        if _is_missing_export_value(merged[idx]) and not _is_missing_export_value(fallback[idx]):
+            merged[idx] = float(fallback[idx])
+    return merged
+
+
+def _derive_trlowz_series_from_components(series: dict[str, list[float]]) -> list[float] | None:
+    required = ("UB", "TRGH", "TRSH", "POP", "PH")
+    if not all(name in series for name in required):
+        return None
+    ub = series["UB"]
+    trgh = series["TRGH"]
+    trsh = series["TRSH"]
+    pop = series["POP"]
+    ph = series["PH"]
+    n = min(len(ub), len(trgh), len(trsh), len(pop), len(ph))
+    trlowz: list[float] = []
+    for idx in range(n):
+        denom = float(pop[idx]) * float(ph[idx])
+        if abs(denom) <= 1e-12:
+            trlowz.append(float("nan"))
+        else:
+            trlowz.append((float(ub[idx]) + float(trgh[idx]) + float(trsh[idx])) / denom)
+    return trlowz
+
+
+def _derive_rydpc_series_from_components(series: dict[str, list[float]]) -> list[float] | None:
+    required = ("YD", "POP", "PH")
+    if not all(name in series for name in required):
+        return None
+    yd = series["YD"]
+    pop = series["POP"]
+    ph = series["PH"]
+    n = min(len(yd), len(pop), len(ph))
+    rydpc: list[float] = []
+    for idx in range(n):
+        denom = float(pop[idx]) * float(ph[idx])
+        if abs(denom) <= 1e-12:
+            rydpc.append(float("nan"))
+        else:
+            rydpc.append(float(yd[idx]) / denom)
+    return rydpc
 
 
 def _dictionary_base_path() -> Path:
@@ -818,6 +882,37 @@ def _loadformat_window(
 
     periods, series = read_loadformat(loadformat_path)
     series = add_derived_series(series)
+    fp_r_series_path = loadformat_path.parent / "fp_r_series.csv"
+    if fp_r_series_path.exists():
+        with fp_r_series_path.open("r", encoding="utf-8", newline="") as handle:
+            reader = csv.DictReader(handle)
+            fp_r_rows = list(reader)
+        if fp_r_rows:
+            csv_periods = [str(row.get("period", "")).strip() for row in fp_r_rows]
+            if csv_periods:
+                periods = csv_periods
+                for name in reader.fieldnames or []:
+                    token = str(name or "").strip()
+                    if not token or token == "period":
+                        continue
+                    values: list[float] = []
+                    for row in fp_r_rows:
+                        raw = str(row.get(token, "")).strip()
+                        if not raw:
+                            values.append(float("nan"))
+                            continue
+                        try:
+                            values.append(float(raw))
+                        except ValueError:
+                            values = []
+                            break
+                    series[token] = _merge_missing_series_values(series.get(token), values)
+    derived_trlowz = _derive_trlowz_series_from_components(series)
+    if derived_trlowz is not None:
+        series["TRLOWZ"] = _merge_missing_series_values(series.get("TRLOWZ"), derived_trlowz)
+    derived_rydpc = _derive_rydpc_series_from_components(series)
+    if derived_rydpc is not None:
+        series["RYDPC"] = _merge_missing_series_values(series.get("RYDPC"), derived_rydpc)
     window_periods = _periods_in_window(list(periods), start=forecast_start, end=forecast_end)
     if not window_periods:
         raise ValueError(f"No periods found in {loadformat_path} for window {forecast_start}..{forecast_end}")
@@ -1011,6 +1106,12 @@ def _phase1_export_inputs(
             forecast_start=forecast_start,
             forecast_end=forecast_end,
         )
+        _bridge_periods, bridge_series = _loadformat_window(
+            loadformat_path,
+            variables=list((*_BRIDGE_HEADLINE_METRICS, *_BRIDGE_SECONDARY_METRICS)),
+            forecast_start=forecast_start,
+            forecast_end=forecast_end,
+        )
         public_series = _filter_public_series(public_series)
         for name in public_series:
             if name not in seen_variables:
@@ -1033,7 +1134,7 @@ def _phase1_export_inputs(
             "run_id": run_id,
             "scenario_name": _public_scenario_name(variant_id),
             "schema_version": 1,
-            "series": public_series,
+            "series": {**public_series, **bridge_series},
             "timestamp": _artifact_timestamp(str(scenario_payload.get("output_dir", ""))),
         }
         run_payloads[run_id] = run_json

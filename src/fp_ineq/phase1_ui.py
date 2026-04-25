@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import math
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -184,11 +185,7 @@ def _extract_levels_from_loadformat(
     loadformat_path: Path,
     variables: list[str],
 ) -> tuple[dict[str, float | None], dict[str, float | None]]:
-    ensure_fp_wraptr_importable()
-    from fp_wraptr.io.loadformat import add_derived_series, read_loadformat
-
-    _periods, series = read_loadformat(loadformat_path)
-    series = add_derived_series(series)
+    _periods, series = _read_loadformat_payload(loadformat_path)
     first_levels: dict[str, float | None] = {}
     last_levels: dict[str, float | None] = {}
     for name in variables:
@@ -235,12 +232,48 @@ def _movement_summary(results: dict[str, dict[str, float | None]]) -> dict[str, 
     }
 
 
+def _is_missing_loadformat_value(value: float | None) -> bool:
+    if value is None:
+        return True
+    numeric = float(value)
+    if math.isnan(numeric):
+        return True
+    return abs(numeric + 99.0) <= 1e-9
+
+
+def _merge_missing_series_values(
+    primary: list[float] | None,
+    fallback: list[float] | None,
+) -> list[float] | None:
+    if not fallback:
+        return primary
+    if not primary:
+        return [float(value) for value in fallback]
+    merged = [float(value) for value in primary]
+    limit = min(len(merged), len(fallback))
+    for idx in range(limit):
+        if _is_missing_loadformat_value(merged[idx]) and not _is_missing_loadformat_value(fallback[idx]):
+            merged[idx] = float(fallback[idx])
+    return merged
+
+
+def _repair_loadformat_series(series: dict[str, list[float]]) -> dict[str, list[float]]:
+    repaired = {name: [float(value) for value in values] for name, values in series.items()}
+    derived_trlowz = _derive_trlowz_series(repaired)
+    if derived_trlowz is not None:
+        repaired["TRLOWZ"] = _merge_missing_series_values(repaired.get("TRLOWZ"), derived_trlowz)
+    derived_rydpc = _derive_rydpc_series(repaired)
+    if derived_rydpc is not None:
+        repaired["RYDPC"] = _merge_missing_series_values(repaired.get("RYDPC"), derived_rydpc)
+    return repaired
+
+
 def _read_loadformat_series(loadformat_path: Path) -> dict[str, list[float]]:
     ensure_fp_wraptr_importable()
     from fp_wraptr.io.loadformat import add_derived_series, read_loadformat
 
     _periods, series = read_loadformat(loadformat_path)
-    return add_derived_series(series)
+    return _repair_loadformat_series(add_derived_series(series))
 
 
 def _derive_trlowz_series(series: dict[str, list[float]]) -> list[float] | None:
@@ -262,17 +295,29 @@ def _derive_trlowz_series(series: dict[str, list[float]]) -> list[float] | None:
     return trlowz
 
 
+def _derive_rydpc_series(series: dict[str, list[float]]) -> list[float] | None:
+    required = ("YD", "POP", "PH")
+    if not all(name in series for name in required):
+        return None
+    yd = series["YD"]
+    pop = series["POP"]
+    ph = series["PH"]
+    n = min(len(yd), len(pop), len(ph))
+    rydpc: list[float] = []
+    for idx in range(n):
+        denom = float(pop[idx]) * float(ph[idx])
+        if abs(denom) <= 1e-12:
+            raise ValueError("Cannot derive RYDPC from LOADFORMAT output with zero POP*PH denominator")
+        rydpc.append(float(yd[idx]) / denom)
+    return rydpc
+
+
 def _read_loadformat_payload(loadformat_path: Path) -> tuple[list[str], dict[str, list[float]]]:
     ensure_fp_wraptr_importable()
     from fp_wraptr.io.loadformat import add_derived_series, read_loadformat
 
     periods, series = read_loadformat(loadformat_path)
-    series = add_derived_series(series)
-    if "TRLOWZ" not in series:
-        derived_trlowz = _derive_trlowz_series(series)
-        if derived_trlowz is not None:
-            series["TRLOWZ"] = derived_trlowz
-    return list(periods), series
+    return list(periods), _repair_loadformat_series(add_derived_series(series))
 
 
 def _trial_ui_factor() -> float:

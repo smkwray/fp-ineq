@@ -215,7 +215,8 @@ def test_export_phase1_full_bundle_writes_broad_solved_payloads(
         forecast_start: str,
         forecast_end: str,
     ) -> tuple[list[str], dict[str, list[float]]]:
-        assert variables is None
+        if variables is not None:
+            assert set(variables) <= {"TRLOWZ", "IPOVALL", "IPOVCH", "RYDPC", "IGINIHH", "IMEDRINC"}
         label = loadformat_path.parts[-2]
         deltas = {
             "baseline": 0.0,
@@ -281,6 +282,8 @@ def test_export_phase1_full_bundle_writes_broad_solved_payloads(
             name: [10.0 + delta + idx for idx, _period in enumerate(periods)]
             for name in names
         }
+        if variables is not None:
+            series = {name: series[name] for name in variables}
         return periods, series
 
     monkeypatch.setattr("fp_ineq.export._loadformat_window", fake_loadformat_window)
@@ -501,7 +504,8 @@ def test_export_phase1_full_bundle_supports_family_filtering(
         forecast_start: str,
         forecast_end: str,
     ) -> tuple[list[str], dict[str, list[float]]]:
-        assert variables is None
+        if variables is not None:
+            assert set(variables) <= {"TRLOWZ", "IPOVALL", "IPOVCH", "RYDPC", "IGINIHH", "IMEDRINC"}
         return [forecast_start, forecast_end], {"IPOVALL": [1.0, 2.0], "TRLOWZ": [3.0, 4.0]}
 
     monkeypatch.setattr("fp_ineq.export._loadformat_window", fake_loadformat_window)
@@ -573,7 +577,8 @@ def test_export_phase1_bridge_artifacts_writes_tracked_bridge_files(
         forecast_start: str,
         forecast_end: str,
     ) -> tuple[list[str], dict[str, list[float]]]:
-        assert variables is None
+        if variables is not None:
+            assert set(variables) <= {"TRLOWZ", "IPOVALL", "IPOVCH", "RYDPC", "IGINIHH", "IMEDRINC"}
         periods = [forecast_start]
         periods.extend(
             [

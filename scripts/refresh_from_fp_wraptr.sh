@@ -3,7 +3,7 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 FP_WRAPTR_ROOT="${FP_WRAPTR_ROOT:-$(cd "${REPO_ROOT}/../fp-wraptr" 2>/dev/null && pwd || true)}"
-PYTHON_BIN="${PYTHON_BIN:-/Users/shanewray/venvs/fp-wraptr/bin/python}"
+PYTHON_BIN="${PYTHON_BIN:-python}"
 
 if [[ -z "${FP_WRAPTR_ROOT}" || ! -d "${FP_WRAPTR_ROOT}" ]]; then
   echo "FP_WRAPTR_ROOT must point to a valid fp-wraptr checkout." >&2
