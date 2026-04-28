@@ -724,14 +724,49 @@ def _default_manifest_run_ids(manifest_runs: list[dict[str, object]]) -> list[st
     return [str(item["run_id"]) for item in manifest_runs]
 
 
+def _runs_explorer_static_root() -> Path:
+    fp_wraptr_root = locate_fp_wraptr_root()
+    static_root = fp_wraptr_root / "src" / "fp_wraptr" / "model_runs_static"
+    if not (static_root / "app.js").exists():
+        raise FileNotFoundError(f"FP Raptor runs explorer static shell not found: {static_root}")
+    return static_root
+
+
+def _apply_fp_ineq_static_branding(index_path: Path) -> None:
+    text = index_path.read_text(encoding="utf-8")
+    text = text.replace("<title>Raptr Runs Explorer</title>", "<title>FP Inequality Runs Explorer</title>")
+    text = text.replace(
+        '<a class="hero-inline-link" href="https://smkwray.github.io/fp-wraptr/">fp-wraptr home</a>',
+        '<a class="hero-inline-link" href="https://github.com/smkwray/fp-ineq">fp-ineq repository</a>',
+    )
+    text = text.replace("20260424-pf-equation-link", "fp-ineq-20260428")
+    index_path.write_text(text, encoding="utf-8")
+
+
+def _apply_fp_ineq_static_overrides(styles_path: Path) -> None:
+    text = styles_path.read_text(encoding="utf-8")
+    override = "\n[hidden] {\n  display: none !important;\n}\n\n.theme-toggle {\n  z-index: 2;\n}\n"
+    if "[hidden]" not in text:
+        text = text.rstrip() + override
+    elif ".theme-toggle {\n  z-index: 2;\n}" not in text:
+        text = text.rstrip() + "\n\n.theme-toggle {\n  z-index: 2;\n}\n"
+    styles_path.write_text(text, encoding="utf-8")
+
+
 def _copy_static_shell(out_dir: Path) -> None:
-    paths = repo_paths()
+    static_root = _runs_explorer_static_root()
     out_dir.mkdir(parents=True, exist_ok=True)
     for file_name in (".nojekyll", "index.html", "app.js", "styles.css"):
-        source = paths.docs_root / file_name
+        source = static_root / file_name
         if source.exists():
             shutil.copy2(source, out_dir / file_name)
-    assets_source = paths.docs_root / "assets"
+    index_path = out_dir / "index.html"
+    if index_path.exists():
+        _apply_fp_ineq_static_branding(index_path)
+    styles_path = out_dir / "styles.css"
+    if styles_path.exists():
+        _apply_fp_ineq_static_overrides(styles_path)
+    assets_source = static_root / "assets"
     assets_target = out_dir / "assets"
     if assets_source.exists():
         if assets_target.exists():

@@ -6748,39 +6748,10 @@
       ],
       "type": "create"
     },
-    "create:JGW:38ba1239f5": {
+    "create:JGW:9e5666f7a8": {
       "display_id": "CREATE JGW",
-      "formula": "0.015",
-      "id": "create:JGW:38ba1239f5",
-      "label": "CREATE JGW",
-      "lhs_expr": "JGW",
-      "lhs_variables": [
-        "JGW"
-      ],
-      "rhs_variables": [],
-      "sector_block": "scenario_input",
-      "source_runs": [
-        "ineq-baseline-observed",
-        "ineq-ui-relief",
-        "ineq-ui-shock",
-        "ineq-ui-small",
-        "ineq-ui-large",
-        "ineq-federal-transfer-relief",
-        "ineq-federal-transfer-shock",
-        "ineq-state-local-transfer-relief",
-        "ineq-state-local-transfer-shock",
-        "ineq-transfer-package-relief",
-        "ineq-transfer-package-shock",
-        "ineq-transfer-composite-small",
-        "ineq-transfer-composite-medium",
-        "ineq-transfer-composite-large"
-      ],
-      "type": "create"
-    },
-    "create:JGW:d594218545": {
-      "display_id": "CREATE JGW",
-      "formula": "0.02",
-      "id": "create:JGW:d594218545",
+      "formula": "0.020",
+      "id": "create:JGW:9e5666f7a8",
       "label": "CREATE JGW",
       "lhs_expr": "JGW",
       "lhs_variables": [
@@ -6835,10 +6806,10 @@
       ],
       "type": "create"
     },
-    "create:JHIA0:00471d7f73": {
+    "create:JHIA0:bc3adf6a66": {
       "display_id": "CREATE JHIA0",
-      "formula": "0.198907",
-      "id": "create:JHIA0:00471d7f73",
+      "formula": "0.219407",
+      "id": "create:JHIA0:bc3adf6a66",
       "label": "CREATE JHIA0",
       "lhs_expr": "JHIA0",
       "lhs_variables": [
@@ -6951,10 +6922,10 @@
       ],
       "type": "create"
     },
-    "create:JLOA0:d06a062ac9": {
+    "create:JLOA0:ab5ad388e9": {
       "display_id": "CREATE JLOA0",
-      "formula": "0.189759",
-      "id": "create:JLOA0:d06a062ac9",
+      "formula": "0.204159",
+      "id": "create:JLOA0:ab5ad388e9",
       "label": "CREATE JLOA0",
       "lhs_expr": "JLOA0",
       "lhs_variables": [
@@ -7241,10 +7212,10 @@
       ],
       "type": "create"
     },
-    "create:JUWUR:a6c7685705": {
+    "create:JUWUR:9ed02c112c": {
       "display_id": "CREATE JUWUR",
-      "formula": "0.8176",
-      "id": "create:JUWUR:a6c7685705",
+      "formula": "0.81760",
+      "id": "create:JUWUR:9ed02c112c",
       "label": "CREATE JUWUR",
       "lhs_expr": "JUWUR",
       "lhs_variables": [
@@ -7270,10 +7241,10 @@
       ],
       "type": "create"
     },
-    "create:MINWAGE:a8e256ad3a": {
+    "create:MINWAGE:db91a040c6": {
       "display_id": "CREATE MINWAGE",
-      "formula": "0.012",
-      "id": "create:MINWAGE:a8e256ad3a",
+      "formula": "0.00843",
+      "id": "create:MINWAGE:db91a040c6",
       "label": "CREATE MINWAGE",
       "lhs_expr": "MINWAGE",
       "lhs_variables": [
@@ -7336,6 +7307,64 @@
       "lhs_expr": "MWBEN",
       "lhs_variables": [
         "MWBEN"
+      ],
+      "rhs_variables": [],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "create"
+    },
+    "create:MWCOLA:ce233579b8": {
+      "display_id": "CREATE MWCOLA",
+      "formula": "0",
+      "id": "create:MWCOLA:ce233579b8",
+      "label": "CREATE MWCOLA",
+      "lhs_expr": "MWCOLA",
+      "lhs_variables": [
+        "MWCOLA"
+      ],
+      "rhs_variables": [],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "create"
+    },
+    "create:RSX:b75712b973": {
+      "display_id": "CREATE RSX",
+      "formula": "0",
+      "id": "create:RSX:b75712b973",
+      "label": "CREATE RSX",
+      "lhs_expr": "RSX",
+      "lhs_variables": [
+        "RSX"
       ],
       "rhs_variables": [],
       "sector_block": "scenario_input",
@@ -7591,10 +7620,10 @@
       ],
       "type": "create"
     },
-    "create:UBGH:b76aa2b8f0": {
+    "create:UBGH:88242c4406": {
       "display_id": "CREATE UBGH",
-      "formula": "0.5",
-      "id": "create:UBGH:b76aa2b8f0",
+      "formula": "1",
+      "id": "create:UBGH:88242c4406",
       "label": "CREATE UBGH",
       "lhs_expr": "UBGH",
       "lhs_variables": [
@@ -7619,6 +7648,1997 @@
         "ineq-transfer-composite-large"
       ],
       "type": "create"
+    },
+    "eq:10:FSR:93f3292d05": {
+      "display_id": "Eq 10",
+      "formula": "FSR LPF(-1) LWFD5(-1) C T LPIM(-1) ONEZUR(-1) UR(-1) LCOGSZ(-1) LTRGSZ(-1) LEXZ(-1) LPF(-2) LCUSTZ(-1) LCUSTZ(-2)",
+      "id": "eq:10:FSR:93f3292d05",
+      "label": "Eq 10",
+      "lhs_expr": "FSR",
+      "lhs_variables": [
+        "FSR"
+      ],
+      "model_eq_id": 10,
+      "rhs_variables": [
+        "LPF",
+        "LWFD5",
+        "LPIM",
+        "ONEZUR",
+        "UR",
+        "LCOGSZ",
+        "LTRGSZ",
+        "LEXZ",
+        "LCUSTZ"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:10:LPF:00b8f4606e": {
+      "display_id": "Eq 10",
+      "formula": "LPF LPF(-1) LWFD5 C T LPIM ONEZUR LCUSTZ RHO=1",
+      "id": "eq:10:LPF:00b8f4606e",
+      "label": "Eq 10",
+      "lhs_expr": "LPF",
+      "lhs_variables": [
+        "LPF LPF(-1) LWFD5 C T LPIM ONEZUR LCUSTZ RHO"
+      ],
+      "model_eq_id": 10,
+      "rhs_variables": [
+        "LPF",
+        "LWFD5",
+        "LPIM",
+        "ONEZUR",
+        "LCUSTZ",
+        "RHO"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:11:FSR:a46c5229c6": {
+      "display_id": "Eq 11",
+      "formula": "FSR C LY(-1) LV(-1) LY(-2) LY(-3) LY(-4) LV(-2) LV(-3) LV(-4) D593 D594 D601 D601(-1) D601(-2) D601(-3) LCOGSZ(-1) LTRGSZ(-1) LEXZ(-1)",
+      "id": "eq:11:FSR:a46c5229c6",
+      "label": "Eq 11",
+      "lhs_expr": "FSR",
+      "lhs_variables": [
+        "FSR"
+      ],
+      "model_eq_id": 11,
+      "rhs_variables": [
+        "LY",
+        "LV",
+        "D593",
+        "D594",
+        "D601",
+        "LCOGSZ",
+        "LTRGSZ",
+        "LEXZ"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:11:LY:7609bc2602": {
+      "display_id": "Eq 11",
+      "formula": "LY C LY(-1) LX LV(-1) D593 D594 D601 RHO=3",
+      "id": "eq:11:LY:7609bc2602",
+      "label": "Eq 11",
+      "lhs_expr": "LY",
+      "lhs_variables": [
+        "LY C LY(-1) LX LV(-1) D593 D594 D601 RHO"
+      ],
+      "model_eq_id": 11,
+      "rhs_variables": [
+        "LY",
+        "LX",
+        "LV",
+        "D593",
+        "D594",
+        "D601",
+        "RHO"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:12:FSR:6bc9014f77": {
+      "display_id": "Eq 12",
+      "formula": "FSR CNST2KK C LKK(-1) LKK(-2) LY(-1) LY(-2) LY(-3) LY(-4) LY(-5) CGZ3(-2) LEXKK(-1) LCOGSZ(-1) LTRGSZ(-1) LEXZ(-1) CNST2KK(-1) LEXKK(-2) LKK1(-2) LY1(-5) CGZ3(-3)",
+      "id": "eq:12:FSR:6bc9014f77",
+      "label": "Eq 12",
+      "lhs_expr": "FSR",
+      "lhs_variables": [
+        "FSR"
+      ],
+      "model_eq_id": 12,
+      "rhs_variables": [
+        "CNST2KK",
+        "LKK",
+        "LY",
+        "CGZ3",
+        "LEXKK",
+        "LCOGSZ",
+        "LTRGSZ",
+        "LEXZ",
+        "LKK1",
+        "LY1"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:12:LKK1:6293633ebb": {
+      "display_id": "Eq 12",
+      "formula": "LKK1 CNST2KK C LEXKK(-1) LKK1(-1) LY1 LY1(-1) LY1(-2) LY1(-3) LY1(-4) CGZ3(-2) RHO=1",
+      "id": "eq:12:LKK1:6293633ebb",
+      "label": "Eq 12",
+      "lhs_expr": "LKK1",
+      "lhs_variables": [
+        "LKK1 CNST2KK C LEXKK(-1) LKK1(-1) LY1 LY1(-1) LY1(-2) LY1(-3) LY1(-4) CGZ3(-2) RHO"
+      ],
+      "model_eq_id": 12,
+      "rhs_variables": [
+        "CNST2KK",
+        "LEXKK",
+        "LKK1",
+        "LY1",
+        "CGZ3",
+        "RHO"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:13:FSR:5ffaa756a1": {
+      "display_id": "Eq 13",
+      "formula": "FSR C LEXL(-1) LJF1(-1) LY1(-1) D593 LCOGSZ(-1) LTRGSZ(-1) LEXZ(-1)",
+      "id": "eq:13:FSR:5ffaa756a1",
+      "label": "Eq 13",
+      "lhs_expr": "FSR",
+      "lhs_variables": [
+        "FSR"
+      ],
+      "model_eq_id": 13,
+      "rhs_variables": [
+        "LEXL",
+        "LJF1",
+        "LY1",
+        "D593",
+        "LCOGSZ",
+        "LTRGSZ",
+        "LEXZ"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:13:LJF1:0bc8d70510": {
+      "display_id": "Eq 13",
+      "formula": "LJF1 C LEXL(-1) LJF1(-1) LY1 D593",
+      "id": "eq:13:LJF1:0bc8d70510",
+      "label": "Eq 13",
+      "lhs_expr": "LJF1",
+      "lhs_variables": [
+        "LJF1"
+      ],
+      "model_eq_id": 13,
+      "rhs_variables": [
+        "LEXL",
+        "LJF1",
+        "LY1",
+        "D593"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:14:FSR:2a6c39fa75": {
+      "display_id": "Eq 14",
+      "formula": "FSR C LHFL1A LEXL(-1) LY1(-1) T LCOGSZ(-1) LTRGSZ(-1) LEXZ(-1)",
+      "id": "eq:14:FSR:2a6c39fa75",
+      "label": "Eq 14",
+      "lhs_expr": "FSR",
+      "lhs_variables": [
+        "FSR"
+      ],
+      "model_eq_id": 14,
+      "rhs_variables": [
+        "LHFL1A",
+        "LEXL",
+        "LY1",
+        "LCOGSZ",
+        "LTRGSZ",
+        "LEXZ"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:14:LHF1:6051dc8c3a": {
+      "display_id": "Eq 14",
+      "formula": "LHF1 C LHFL1A LEXL(-1) LY1 T",
+      "id": "eq:14:LHF1:6051dc8c3a",
+      "label": "Eq 14",
+      "lhs_expr": "LHF1",
+      "lhs_variables": [
+        "LHF1"
+      ],
+      "model_eq_id": 14,
+      "rhs_variables": [
+        "LHFL1A",
+        "LEXL",
+        "LY1"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:15:LHO:79c05c5d69": {
+      "display_id": "Eq 15",
+      "formula": "LHO C HFF HFF(-1) RHO=1",
+      "id": "eq:15:LHO:79c05c5d69",
+      "label": "Eq 15",
+      "lhs_expr": "LHO",
+      "lhs_variables": [
+        "LHO C HFF HFF(-1) RHO"
+      ],
+      "model_eq_id": 15,
+      "rhs_variables": [
+        "HFF",
+        "RHO"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:16:FSR:2db1d57a77": {
+      "display_id": "Eq 16",
+      "formula": "FSR LWFQZPF(-1) LPF(-1) LPF(-2) C T LCOGSZ(-1) LTRGSZ(-1) LEXZ(-1) LPIM(-1) ONEZUR(-1) UR(-1)",
+      "id": "eq:16:FSR:2db1d57a77",
+      "label": "Eq 16",
+      "lhs_expr": "FSR",
+      "lhs_variables": [
+        "FSR"
+      ],
+      "model_eq_id": 16,
+      "rhs_variables": [
+        "LWFQZPF",
+        "LPF",
+        "LCOGSZ",
+        "LTRGSZ",
+        "LEXZ",
+        "LPIM",
+        "ONEZUR",
+        "UR"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:16:LWFQZ:050a1a2633": {
+      "display_id": "Eq 16",
+      "formula": "LWFQZ LWFQZPF(-1) LPFZ C",
+      "id": "eq:16:LWFQZ:050a1a2633",
+      "label": "Eq 16",
+      "lhs_expr": "LWFQZ",
+      "lhs_variables": [
+        "LWFQZ"
+      ],
+      "model_eq_id": 16,
+      "rhs_variables": [
+        "LWFQZPF",
+        "LPFZ"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:17:FSR:c01dd7d022": {
+      "display_id": "Eq 17",
+      "formula": "FSR C LMFZ(-1) LXMFA(-1) RSB(-1) LCOGSZ(-1) LTRGSZ(-1) LEXZ(-1) LMFL1Q(-1)",
+      "id": "eq:17:FSR:c01dd7d022",
+      "label": "Eq 17",
+      "lhs_expr": "FSR",
+      "lhs_variables": [
+        "FSR"
+      ],
+      "model_eq_id": 17,
+      "rhs_variables": [
+        "LMFZ",
+        "LXMFA",
+        "RSB",
+        "LCOGSZ",
+        "LTRGSZ",
+        "LEXZ",
+        "LMFL1Q"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:17:LMFZ:cae1071098": {
+      "display_id": "Eq 17",
+      "formula": "LMFZ C LMFZ(-1) LXMFA RSB",
+      "id": "eq:17:LMFZ:cae1071098",
+      "label": "Eq 17",
+      "lhs_expr": "LMFZ",
+      "lhs_variables": [
+        "LMFZ"
+      ],
+      "model_eq_id": 17,
+      "rhs_variables": [
+        "LMFZ",
+        "LXMFA",
+        "RSB"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:18:FSR:107c270cdf": {
+      "display_id": "Eq 18",
+      "formula": "FSR LPIEFAZ(-1) C LCOGSZ(-1) LTRGSZ(-1) LEXZ(-1)",
+      "id": "eq:18:FSR:107c270cdf",
+      "label": "Eq 18",
+      "lhs_expr": "FSR",
+      "lhs_variables": [
+        "FSR"
+      ],
+      "model_eq_id": 18,
+      "rhs_variables": [
+        "LPIEFAZ",
+        "LCOGSZ",
+        "LTRGSZ",
+        "LEXZ"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:18:LDF1:56744ee2ad": {
+      "display_id": "Eq 18",
+      "formula": "LDF1 LPIEFAZ",
+      "id": "eq:18:LDF1:56744ee2ad",
+      "label": "Eq 18",
+      "lhs_expr": "LDF1",
+      "lhs_variables": [
+        "LDF1"
+      ],
+      "model_eq_id": 18,
+      "rhs_variables": [
+        "LPIEFAZ"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:19:NONE19:ef9b6ad4ef": {
+      "display_id": "Eq 19",
+      "formula": "NONE19 C",
+      "id": "eq:19:NONE19:ef9b6ad4ef",
+      "label": "Eq 19",
+      "lhs_expr": "NONE19",
+      "lhs_variables": [
+        "NONE19"
+      ],
+      "model_eq_id": 19,
+      "rhs_variables": [
+        "C"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:1:FSR:290a7aef0a": {
+      "display_id": "Eq 1",
+      "formula": "FSR CNST2CS C AG1 AG2 AG3 LCSZ(-1) LAAZ(-3) RSA(-1) CNST2CS(-1) AG1(-1) AG2(-1) AG3(-1) LCSZ(-2) LCOGSZ(-1) LTRGSZ(-1) LEXZ(-1) LPOP LPOP(-1)",
+      "id": "eq:1:FSR:290a7aef0a",
+      "label": "Eq 1",
+      "lhs_expr": "FSR",
+      "lhs_variables": [
+        "FSR"
+      ],
+      "model_eq_id": 1,
+      "rhs_variables": [
+        "CNST2CS",
+        "AG1",
+        "AG2",
+        "AG3",
+        "LCSZ",
+        "LAAZ",
+        "RSA",
+        "LCOGSZ",
+        "LTRGSZ",
+        "LEXZ",
+        "LPOP"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:1:LCSZ:af7424db0e": {
+      "display_id": "Eq 1",
+      "formula": "LCSZ CNST2CS C AG1 AG2 AG3 LCSZ(-1) LYDZ RSA LAAZ(-1) RHO=1",
+      "id": "eq:1:LCSZ:af7424db0e",
+      "label": "Eq 1",
+      "lhs_expr": "LCSZ",
+      "lhs_variables": [
+        "LCSZ CNST2CS C AG1 AG2 AG3 LCSZ(-1) LYDZ RSA LAAZ(-1) RHO"
+      ],
+      "model_eq_id": 1,
+      "rhs_variables": [
+        "CNST2CS",
+        "AG1",
+        "AG2",
+        "AG3",
+        "LCSZ",
+        "LYDZ",
+        "RSA",
+        "LAAZ",
+        "RHO"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:20:NONE20:186cd27a17": {
+      "display_id": "Eq 20",
+      "formula": "NONE20 C",
+      "id": "eq:20:NONE20:186cd27a17",
+      "label": "Eq 20",
+      "lhs_expr": "NONE20",
+      "lhs_variables": [
+        "NONE20"
+      ],
+      "model_eq_id": 20,
+      "rhs_variables": [
+        "C"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:21:NONE21:87b8b25f4b": {
+      "display_id": "Eq 21",
+      "formula": "NONE21 C",
+      "id": "eq:21:NONE21:87b8b25f4b",
+      "label": "Eq 21",
+      "lhs_expr": "NONE21",
+      "lhs_variables": [
+        "NONE21"
+      ],
+      "model_eq_id": 21,
+      "rhs_variables": [
+        "C"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:22:NONE22:e0433f7386": {
+      "display_id": "Eq 22",
+      "formula": "NONE22 C",
+      "id": "eq:22:NONE22:e0433f7386",
+      "label": "Eq 22",
+      "lhs_expr": "NONE22",
+      "lhs_variables": [
+        "NONE22"
+      ],
+      "model_eq_id": 22,
+      "rhs_variables": [
+        "C"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:23:FSR:5b26a39f44": {
+      "display_id": "Eq 23",
+      "formula": "FSR C RB(-1) RB(-2) RS(-1) RS(-2) RS(-3) LCOGSZ(-1) LTRGSZ(-1) LEXZ(-1) PCPD(-1) UR(-1) T LPIMZ(-1)",
+      "id": "eq:23:FSR:5b26a39f44",
+      "label": "Eq 23",
+      "lhs_expr": "FSR",
+      "lhs_variables": [
+        "FSR"
+      ],
+      "model_eq_id": 23,
+      "rhs_variables": [
+        "RB",
+        "RS",
+        "LCOGSZ",
+        "LTRGSZ",
+        "LEXZ",
+        "PCPD",
+        "UR",
+        "LPIMZ"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:23:RBMRSL2:44c691ab75": {
+      "display_id": "Eq 23",
+      "formula": "RBMRSL2 C RBLMRSL2 RSMRSL2 RSLMRSL2 RHO=1",
+      "id": "eq:23:RBMRSL2:44c691ab75",
+      "label": "Eq 23",
+      "lhs_expr": "RBMRSL2",
+      "lhs_variables": [
+        "RBMRSL2 C RBLMRSL2 RSMRSL2 RSLMRSL2 RHO"
+      ],
+      "model_eq_id": 23,
+      "rhs_variables": [
+        "RBLMRSL2",
+        "RSMRSL2",
+        "RSLMRSL2",
+        "RHO"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:24:FSR:b7d6d7661c": {
+      "display_id": "Eq 24",
+      "formula": "FSR C RM(-1) RS(-1) RS(-2) LCOGSZ(-1) LTRGSZ(-1) LEXZ(-1) PCPD(-1) UR(-1) T LPIMZ(-1)",
+      "id": "eq:24:FSR:b7d6d7661c",
+      "label": "Eq 24",
+      "lhs_expr": "FSR",
+      "lhs_variables": [
+        "FSR"
+      ],
+      "model_eq_id": 24,
+      "rhs_variables": [
+        "RM",
+        "RS",
+        "LCOGSZ",
+        "LTRGSZ",
+        "LEXZ",
+        "PCPD",
+        "UR",
+        "LPIMZ"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:24:RMMRSL2:c429221d8d": {
+      "display_id": "Eq 24",
+      "formula": "RMMRSL2 C RMLMRSL2 RSMRSL2 RSLMRSL2",
+      "id": "eq:24:RMMRSL2:c429221d8d",
+      "label": "Eq 24",
+      "lhs_expr": "RMMRSL2",
+      "lhs_variables": [
+        "RMMRSL2"
+      ],
+      "model_eq_id": 24,
+      "rhs_variables": [
+        "RMLMRSL2",
+        "RSMRSL2",
+        "RSLMRSL2"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:25:NONE25:2faca138d0": {
+      "display_id": "Eq 25",
+      "formula": "NONE25 C",
+      "id": "eq:25:NONE25:2faca138d0",
+      "label": "Eq 25",
+      "lhs_expr": "NONE25",
+      "lhs_variables": [
+        "NONE25"
+      ],
+      "model_eq_id": 25,
+      "rhs_variables": [
+        "C"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:26:FSR:f420e3c987": {
+      "display_id": "Eq 26",
+      "formula": "FSR C LCURZ(-1) LXMFAZ(-1) RSA(-1) LCURL1Q(-1) LCOGSZ(-1) LTRGSZ(-1) LEXZ(-1)",
+      "id": "eq:26:FSR:f420e3c987",
+      "label": "Eq 26",
+      "lhs_expr": "FSR",
+      "lhs_variables": [
+        "FSR"
+      ],
+      "model_eq_id": 26,
+      "rhs_variables": [
+        "LCURZ",
+        "LXMFAZ",
+        "RSA",
+        "LCURL1Q",
+        "LCOGSZ",
+        "LTRGSZ",
+        "LEXZ"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:26:LCURZ:cfdb635928": {
+      "display_id": "Eq 26",
+      "formula": "LCURZ C LCURZ(-1) LXMFAZ RSA",
+      "id": "eq:26:LCURZ:cfdb635928",
+      "label": "Eq 26",
+      "lhs_expr": "LCURZ",
+      "lhs_variables": [
+        "LCURZ"
+      ],
+      "model_eq_id": 26,
+      "rhs_variables": [
+        "LCURZ",
+        "LXMFAZ",
+        "RSA"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:27:FSR:e49e721cac": {
+      "display_id": "Eq 27",
+      "formula": "FSR C LIMZ(-1) LYZ(-1) LPFZPIM(-1) D691 D692 D714 D721 AG1 AG2 AG3 LCOGSZ(-1) LTRGSZ(-1) LEXZ(-1) T LPOP LPOP(-1) LPIM(-1) LIMZ(-2)",
+      "id": "eq:27:FSR:e49e721cac",
+      "label": "Eq 27",
+      "lhs_expr": "FSR",
+      "lhs_variables": [
+        "FSR"
+      ],
+      "model_eq_id": 27,
+      "rhs_variables": [
+        "LIMZ",
+        "LYZ",
+        "LPFZPIM",
+        "D691",
+        "D692",
+        "D714",
+        "D721",
+        "AG1",
+        "AG2",
+        "AG3",
+        "LCOGSZ",
+        "LTRGSZ",
+        "LEXZ",
+        "LPOP",
+        "LPIM"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:27:LIMZ:7945aa18f0": {
+      "display_id": "Eq 27",
+      "formula": "LIMZ C AG1 AG2 AG3 LIMZ(-1) LYZ LPFZPIM T D691 D692 D714 D721 RHO=0",
+      "id": "eq:27:LIMZ:7945aa18f0",
+      "label": "Eq 27",
+      "lhs_expr": "LIMZ",
+      "lhs_variables": [
+        "LIMZ C AG1 AG2 AG3 LIMZ(-1) LYZ LPFZPIM T D691 D692 D714 D721 RHO"
+      ],
+      "model_eq_id": 27,
+      "rhs_variables": [
+        "AG1",
+        "AG2",
+        "AG3",
+        "LIMZ",
+        "LYZ",
+        "LPFZPIM",
+        "D691",
+        "D692",
+        "D714",
+        "D721",
+        "RHO"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:28:FSR:398a664e1b": {
+      "display_id": "Eq 28",
+      "formula": "FSR C LUB(-1) LU(-1) LWF(-1) LUB(-2) LCOGSZ(-1) LTRGSZ(-1) LEXZ(-1) LPIMZ(-1) PCPD(-1) T",
+      "id": "eq:28:FSR:398a664e1b",
+      "label": "Eq 28",
+      "lhs_expr": "FSR",
+      "lhs_variables": [
+        "FSR"
+      ],
+      "model_eq_id": 28,
+      "rhs_variables": [
+        "LUB",
+        "LU",
+        "LWF",
+        "LCOGSZ",
+        "LTRGSZ",
+        "LEXZ",
+        "LPIMZ",
+        "PCPD"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:28:LUB:009bff7974": {
+      "display_id": "Eq 28",
+      "formula": "LUB C LUB(-1) LU LWF RHO=1",
+      "id": "eq:28:LUB:009bff7974",
+      "label": "Eq 28",
+      "lhs_expr": "LUB",
+      "lhs_variables": [
+        "LUB C LUB(-1) LU LWF RHO"
+      ],
+      "model_eq_id": 28,
+      "rhs_variables": [
+        "LUB",
+        "LU",
+        "LWF",
+        "RHO"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:29:INTGZ:0d5f5dce20": {
+      "display_id": "Eq 29",
+      "formula": "INTGZ C INTGZ(-1) RQG RHO=1",
+      "id": "eq:29:INTGZ:0d5f5dce20",
+      "label": "Eq 29",
+      "lhs_expr": "INTGZ",
+      "lhs_variables": [
+        "INTGZ C INTGZ(-1) RQG RHO"
+      ],
+      "model_eq_id": 29,
+      "rhs_variables": [
+        "INTGZ",
+        "RQG",
+        "RHO"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:2:FSR:0641625b36": {
+      "display_id": "Eq 2",
+      "formula": "FSR C AG1 AG2 AG3 LCNZ(-1) LAAZ(-3) LYDZ(-1) RMA(-1) LCOGSZ(-1) LTRGSZ(-1) LEXZ(-1) AG1(-1) AG2(-1) AG3(-1) LCNZ(-2)",
+      "id": "eq:2:FSR:0641625b36",
+      "label": "Eq 2",
+      "lhs_expr": "FSR",
+      "lhs_variables": [
+        "FSR"
+      ],
+      "model_eq_id": 2,
+      "rhs_variables": [
+        "AG1",
+        "AG2",
+        "AG3",
+        "LCNZ",
+        "LAAZ",
+        "LYDZ",
+        "RMA",
+        "LCOGSZ",
+        "LTRGSZ",
+        "LEXZ"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:2:LCNZ:c3f43d74a8": {
+      "display_id": "Eq 2",
+      "formula": "LCNZ C AG1 AG2 AG3 LCNZ(-1) LAAZ(-1) LYDZ RMA RHO=1",
+      "id": "eq:2:LCNZ:c3f43d74a8",
+      "label": "Eq 2",
+      "lhs_expr": "LCNZ",
+      "lhs_variables": [
+        "LCNZ C AG1 AG2 AG3 LCNZ(-1) LAAZ(-1) LYDZ RMA RHO"
+      ],
+      "model_eq_id": 2,
+      "rhs_variables": [
+        "AG1",
+        "AG2",
+        "AG3",
+        "LCNZ",
+        "LAAZ",
+        "LYDZ",
+        "RMA",
+        "RHO"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:30:FSR:084152c76f": {
+      "display_id": "Eq 30",
+      "formula": "FSR C RSX(-1) PCPD(-1) UR(-1) UR1(-1) PCM1L1B PCM1L1A RS1(-1) RS1(-2) LCOGSZ(-1) LTRGSZ(-1) LEXZ(-1)",
+      "id": "eq:30:FSR:084152c76f",
+      "label": "Eq 30",
+      "lhs_expr": "FSR",
+      "lhs_variables": [
+        "FSR"
+      ],
+      "model_eq_id": 30,
+      "rhs_variables": [
+        "RSX",
+        "PCPD",
+        "UR",
+        "UR1",
+        "PCM1L1B",
+        "PCM1L1A",
+        "RS1",
+        "LCOGSZ",
+        "LTRGSZ",
+        "LEXZ"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:30:FSR:acb2f293e6": {
+      "display_id": "Eq 30",
+      "formula": "FSR C RS(-1) PCPD(-1) UR(-1) UR1(-1) PCM1L1B PCM1L1A RS1(-1) RS1(-2) LCOGSZ(-1) LTRGSZ(-1) LEXZ(-1)",
+      "id": "eq:30:FSR:acb2f293e6",
+      "label": "Eq 30",
+      "lhs_expr": "FSR",
+      "lhs_variables": [
+        "FSR"
+      ],
+      "model_eq_id": 30,
+      "rhs_variables": [
+        "RS",
+        "PCPD",
+        "UR",
+        "UR1",
+        "PCM1L1B",
+        "PCM1L1A",
+        "RS1",
+        "LCOGSZ",
+        "LTRGSZ",
+        "LEXZ"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:30:RS:cb885cd126": {
+      "display_id": "Eq 30",
+      "formula": "RS C RS(-1) PCPD UR UR1 PCM1L1B PCM1L1A RS1(-1) RS1(-2)",
+      "id": "eq:30:RS:cb885cd126",
+      "label": "Eq 30",
+      "lhs_expr": "RS",
+      "lhs_variables": [
+        "RS"
+      ],
+      "model_eq_id": 30,
+      "rhs_variables": [
+        "RS",
+        "PCPD",
+        "UR",
+        "UR1",
+        "PCM1L1B",
+        "PCM1L1A",
+        "RS1"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:30:RSX:5c9aa8b775": {
+      "display_id": "Eq 30",
+      "formula": "RSX C RSX(-1) PCPD UR UR1 PCM1L1B PCM1L1A RS1(-1) RS1(-2)",
+      "id": "eq:30:RSX:5c9aa8b775",
+      "label": "Eq 30",
+      "lhs_expr": "RSX",
+      "lhs_variables": [
+        "RSX"
+      ],
+      "model_eq_id": 30,
+      "rhs_variables": [
+        "RSX",
+        "PCPD",
+        "UR",
+        "UR1",
+        "PCM1L1B",
+        "PCM1L1A",
+        "RS1"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:3:FSR:8dca97d17a": {
+      "display_id": "Eq 3",
+      "formula": "FSR C AG1 AG2 AG3 LAAZ(-3) LYDZ(-1) RMA(-1) LCDZ(-1) LCOGSZ(-1) LTRGSZ(-1) LEXZ(-1) T",
+      "id": "eq:3:FSR:8dca97d17a",
+      "label": "Eq 3",
+      "lhs_expr": "FSR",
+      "lhs_variables": [
+        "FSR"
+      ],
+      "model_eq_id": 3,
+      "rhs_variables": [
+        "AG1",
+        "AG2",
+        "AG3",
+        "LAAZ",
+        "LYDZ",
+        "RMA",
+        "LCDZ",
+        "LCOGSZ",
+        "LTRGSZ",
+        "LEXZ"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:3:LCDZ:e6a44ef775": {
+      "display_id": "Eq 3",
+      "formula": "LCDZ C AG1 AG2 AG3 LCDZ(-1) LYDZ RMA",
+      "id": "eq:3:LCDZ:e6a44ef775",
+      "label": "Eq 3",
+      "lhs_expr": "LCDZ",
+      "lhs_variables": [
+        "LCDZ"
+      ],
+      "model_eq_id": 3,
+      "rhs_variables": [
+        "AG1",
+        "AG2",
+        "AG3",
+        "LCDZ",
+        "LYDZ",
+        "RMA"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:4:FSR:f1fd4577ff": {
+      "display_id": "Eq 4",
+      "formula": "FSR C RMA(-1) LYDZ(-1) AG1 AG2 AG3 LIHHZ(-1) LCOGSZ(-1) LTRGSZ(-1) LEXZ(-1) T AG1(-1) AG2(-1) AG3(-1) LIHHZ(-2) RMA(-2)",
+      "id": "eq:4:FSR:f1fd4577ff",
+      "label": "Eq 4",
+      "lhs_expr": "FSR",
+      "lhs_variables": [
+        "FSR"
+      ],
+      "model_eq_id": 4,
+      "rhs_variables": [
+        "RMA",
+        "LYDZ",
+        "AG1",
+        "AG2",
+        "AG3",
+        "LIHHZ",
+        "LCOGSZ",
+        "LTRGSZ",
+        "LEXZ"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:4:LIHHZ:ecf089957e": {
+      "display_id": "Eq 4",
+      "formula": "LIHHZ C AG1 AG2 AG3 LIHHZ(-1) LYDZ RMA(-1) RHO=1",
+      "id": "eq:4:LIHHZ:ecf089957e",
+      "label": "Eq 4",
+      "lhs_expr": "LIHHZ",
+      "lhs_variables": [
+        "LIHHZ C AG1 AG2 AG3 LIHHZ(-1) LYDZ RMA(-1) RHO"
+      ],
+      "model_eq_id": 4,
+      "rhs_variables": [
+        "AG1",
+        "AG2",
+        "AG3",
+        "LIHHZ",
+        "LYDZ",
+        "RMA",
+        "RHO"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:5:FSR:621ee7dd1e": {
+      "display_id": "Eq 5",
+      "formula": "FSR C LL1Z(-1) LAAZ(-3) UR(-1) LCOGSZ(-1) LTRGSZ(-1) LEXZ(-1)",
+      "id": "eq:5:FSR:621ee7dd1e",
+      "label": "Eq 5",
+      "lhs_expr": "FSR",
+      "lhs_variables": [
+        "FSR"
+      ],
+      "model_eq_id": 5,
+      "rhs_variables": [
+        "LL1Z",
+        "LAAZ",
+        "UR",
+        "LCOGSZ",
+        "LTRGSZ",
+        "LEXZ"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:5:LL1Z:9582b61872": {
+      "display_id": "Eq 5",
+      "formula": "LL1Z C LL1Z(-1) LAAZ(-1) UR",
+      "id": "eq:5:LL1Z:9582b61872",
+      "label": "Eq 5",
+      "lhs_expr": "LL1Z",
+      "lhs_variables": [
+        "LL1Z"
+      ],
+      "model_eq_id": 5,
+      "rhs_variables": [
+        "LL1Z",
+        "LAAZ",
+        "UR"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:6:FSR:8953fe90d0": {
+      "display_id": "Eq 6",
+      "formula": "FSR C CNST2L2 T TBL2 LL2Z(-1) LAAZ(-3) UR(-1) LCOGSZ(-1) LTRGSZ(-1) LEXZ(-1)",
+      "id": "eq:6:FSR:8953fe90d0",
+      "label": "Eq 6",
+      "lhs_expr": "FSR",
+      "lhs_variables": [
+        "FSR"
+      ],
+      "model_eq_id": 6,
+      "rhs_variables": [
+        "CNST2L2",
+        "TBL2",
+        "LL2Z",
+        "LAAZ",
+        "UR",
+        "LCOGSZ",
+        "LTRGSZ",
+        "LEXZ"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:6:LL2Z:ac4f5ced2d": {
+      "display_id": "Eq 6",
+      "formula": "LL2Z CNST2L2 C TBL2 T LL2Z(-1) LAAZ(-1) UR",
+      "id": "eq:6:LL2Z:ac4f5ced2d",
+      "label": "Eq 6",
+      "lhs_expr": "LL2Z",
+      "lhs_variables": [
+        "LL2Z"
+      ],
+      "model_eq_id": 6,
+      "rhs_variables": [
+        "CNST2L2",
+        "TBL2",
+        "LL2Z",
+        "LAAZ",
+        "UR"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:7:FSR:da8f7d29af": {
+      "display_id": "Eq 7",
+      "formula": "FSR C LL3Z(-1) LAAZ(-3) LWAZPH(-1) UR(-1) LCOGSZ(-1) LTRGSZ(-1) LEXZ(-1)",
+      "id": "eq:7:FSR:da8f7d29af",
+      "label": "Eq 7",
+      "lhs_expr": "FSR",
+      "lhs_variables": [
+        "FSR"
+      ],
+      "model_eq_id": 7,
+      "rhs_variables": [
+        "LL3Z",
+        "LAAZ",
+        "LWAZPH",
+        "UR",
+        "LCOGSZ",
+        "LTRGSZ",
+        "LEXZ"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:7:LL3Z:8fe3271c58": {
+      "display_id": "Eq 7",
+      "formula": "LL3Z C LL3Z(-1) LWAZPH LAAZ(-1) UR",
+      "id": "eq:7:LL3Z:8fe3271c58",
+      "label": "Eq 7",
+      "lhs_expr": "LL3Z",
+      "lhs_variables": [
+        "LL3Z"
+      ],
+      "model_eq_id": 7,
+      "rhs_variables": [
+        "LL3Z",
+        "LWAZPH",
+        "LAAZ",
+        "UR"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:8:FSR:26a054f0e9": {
+      "display_id": "Eq 8",
+      "formula": "FSR C LLMZ(-1) UR(-1) LCOGSZ(-1) LTRGSZ(-1) LEXZ(-1)",
+      "id": "eq:8:FSR:26a054f0e9",
+      "label": "Eq 8",
+      "lhs_expr": "FSR",
+      "lhs_variables": [
+        "FSR"
+      ],
+      "model_eq_id": 8,
+      "rhs_variables": [
+        "LLMZ",
+        "UR",
+        "LCOGSZ",
+        "LTRGSZ",
+        "LEXZ"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:8:LLMZ:fbf0058c1c": {
+      "display_id": "Eq 8",
+      "formula": "LLMZ C LLMZ(-1) UR",
+      "id": "eq:8:LLMZ:fbf0058c1c",
+      "label": "Eq 8",
+      "lhs_expr": "LLMZ",
+      "lhs_variables": [
+        "LLMZ"
+      ],
+      "model_eq_id": 8,
+      "rhs_variables": [
+        "LLMZ",
+        "UR"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "eq:9:NONE9:ffa86b4371": {
+      "display_id": "Eq 9",
+      "formula": "NONE9 C",
+      "id": "eq:9:NONE9:ffa86b4371",
+      "label": "Eq 9",
+      "lhs_expr": "NONE9",
+      "lhs_variables": [
+        "NONE9"
+      ],
+      "model_eq_id": 9,
+      "rhs_variables": [
+        "C"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
     },
     "genr:AA1Z:1c03b49444": {
       "display_id": "GENR AA1Z",
@@ -10937,40 +12957,6 @@
       "rhs_variables": [
         "HO"
       ],
-      "source_runs": [
-        "ineq-baseline-observed",
-        "ineq-ui-relief",
-        "ineq-ui-shock",
-        "ineq-ui-small",
-        "ineq-ui-large",
-        "ineq-federal-transfer-relief",
-        "ineq-federal-transfer-shock",
-        "ineq-state-local-transfer-relief",
-        "ineq-state-local-transfer-shock",
-        "ineq-transfer-package-relief",
-        "ineq-transfer-package-shock",
-        "ineq-transfer-composite-small",
-        "ineq-transfer-composite-medium",
-        "ineq-transfer-composite-large"
-      ],
-      "type": "genr"
-    },
-    "genr:LIBTZ:57706aa1b7": {
-      "display_id": "GENR LIBTZ",
-      "formula": "LOG((IBTG+IBTS)/XX)",
-      "id": "genr:LIBTZ:57706aa1b7",
-      "label": "GENR LIBTZ",
-      "lhs_expr": "LIBTZ",
-      "lhs_variables": [
-        "LIBTZ"
-      ],
-      "rhs_variables": [
-        "LOG",
-        "IBTG",
-        "IBTS",
-        "XX"
-      ],
-      "sector_block": "scenario_input",
       "source_runs": [
         "ineq-baseline-observed",
         "ineq-ui-relief",
@@ -18881,43 +20867,6 @@
       ],
       "type": "identity"
     },
-    "identity:JHPOP:043c32b100": {
-      "display_id": "IDENT JHPOP",
-      "formula": "(JF*HF+JG*HG+JS*HS)/POPP",
-      "id": "identity:JHPOP:043c32b100",
-      "label": "IDENT JHPOP",
-      "lhs_expr": "JHPOP",
-      "lhs_variables": [
-        "JHPOP"
-      ],
-      "rhs_variables": [
-        "JF",
-        "HF",
-        "JG",
-        "HG",
-        "JS",
-        "HS",
-        "POPP"
-      ],
-      "sector_block": "scenario_input",
-      "source_runs": [
-        "ineq-baseline-observed",
-        "ineq-ui-relief",
-        "ineq-ui-shock",
-        "ineq-ui-small",
-        "ineq-ui-large",
-        "ineq-federal-transfer-relief",
-        "ineq-federal-transfer-shock",
-        "ineq-state-local-transfer-relief",
-        "ineq-state-local-transfer-shock",
-        "ineq-transfer-package-relief",
-        "ineq-transfer-package-shock",
-        "ineq-transfer-composite-small",
-        "ineq-transfer-composite-medium",
-        "ineq-transfer-composite-large"
-      ],
-      "type": "identity"
-    },
     "identity:KD:939f88300e": {
       "display_id": "IDENT KD",
       "formula": "(1-DELD)*KD(-1)+CD",
@@ -18995,71 +20944,6 @@
       ],
       "rhs_variables": [
         "MUH"
-      ],
-      "sector_block": "scenario_input",
-      "source_runs": [
-        "ineq-baseline-observed",
-        "ineq-ui-relief",
-        "ineq-ui-shock",
-        "ineq-ui-small",
-        "ineq-ui-large",
-        "ineq-federal-transfer-relief",
-        "ineq-federal-transfer-shock",
-        "ineq-state-local-transfer-relief",
-        "ineq-state-local-transfer-shock",
-        "ineq-transfer-package-relief",
-        "ineq-transfer-package-shock",
-        "ineq-transfer-composite-small",
-        "ineq-transfer-composite-medium",
-        "ineq-transfer-composite-large"
-      ],
-      "type": "identity"
-    },
-    "identity:LFORCE:42e4306c22": {
-      "display_id": "IDENT LFORCE",
-      "formula": "L1+L2+L3",
-      "id": "identity:LFORCE:42e4306c22",
-      "label": "IDENT LFORCE",
-      "lhs_expr": "LFORCE",
-      "lhs_variables": [
-        "LFORCE"
-      ],
-      "rhs_variables": [
-        "L1",
-        "L2",
-        "L3"
-      ],
-      "sector_block": "scenario_input",
-      "source_runs": [
-        "ineq-baseline-observed",
-        "ineq-ui-relief",
-        "ineq-ui-shock",
-        "ineq-ui-small",
-        "ineq-ui-large",
-        "ineq-federal-transfer-relief",
-        "ineq-federal-transfer-shock",
-        "ineq-state-local-transfer-relief",
-        "ineq-state-local-transfer-shock",
-        "ineq-transfer-package-relief",
-        "ineq-transfer-package-shock",
-        "ineq-transfer-composite-small",
-        "ineq-transfer-composite-medium",
-        "ineq-transfer-composite-large"
-      ],
-      "type": "identity"
-    },
-    "identity:LFPOP:88e04ef115": {
-      "display_id": "IDENT LFPOP",
-      "formula": "LFORCE/POPP",
-      "id": "identity:LFPOP:88e04ef115",
-      "label": "IDENT LFPOP",
-      "lhs_expr": "LFPOP",
-      "lhs_variables": [
-        "LFPOP"
-      ],
-      "rhs_variables": [
-        "LFORCE",
-        "POPP"
       ],
       "sector_block": "scenario_input",
       "source_runs": [
@@ -19170,6 +21054,38 @@
         "MS",
         "CUR"
       ],
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "identity"
+    },
+    "identity:MINWAGE:a690b8106a": {
+      "display_id": "IDENT MINWAGE",
+      "formula": "MINWAGE(-1)*(1+MWCOLA)",
+      "id": "identity:MINWAGE:a690b8106a",
+      "label": "IDENT MINWAGE",
+      "lhs_expr": "MINWAGE",
+      "lhs_variables": [
+        "MINWAGE"
+      ],
+      "rhs_variables": [
+        "MINWAGE",
+        "MWCOLA"
+      ],
+      "sector_block": "scenario_input",
       "source_runs": [
         "ineq-baseline-observed",
         "ineq-ui-relief",
@@ -19579,74 +21495,6 @@
       ],
       "type": "identity"
     },
-    "identity:PIEF:0add76ed4f": {
-      "display_id": "IDENT PIEF",
-      "formula": "XX+PIV*IVF+SUBS+SUBG+USOTHER -WF*JF*(HN+1.5*HO)-RNT-INTZ-INTF-TRFH-NICD-CCH+CDH -TBS-TRFS-CCS-TRFR-DB-GSB-CTGB -GSMA-GSCA-TBG-TRFG-CCG -SIFG-SIFS -GSNN-IVA-CCF1-STAT +TTRRF -IBTG-IBTS",
-      "id": "identity:PIEF:0add76ed4f",
-      "label": "IDENT PIEF",
-      "lhs_expr": "PIEF",
-      "lhs_variables": [
-        "PIEF"
-      ],
-      "rhs_variables": [
-        "XX",
-        "PIV",
-        "IVF",
-        "SUBS",
-        "SUBG",
-        "USOTHER",
-        "WF",
-        "JF",
-        "HN",
-        "HO",
-        "RNT",
-        "INTZ",
-        "INTF",
-        "TRFH",
-        "NICD",
-        "CCH",
-        "CDH",
-        "TBS",
-        "TRFS",
-        "CCS",
-        "TRFR",
-        "DB",
-        "GSB",
-        "CTGB",
-        "GSMA",
-        "GSCA",
-        "TBG",
-        "TRFG",
-        "CCG",
-        "SIFG",
-        "SIFS",
-        "GSNN",
-        "IVA",
-        "CCF1",
-        "STAT",
-        "TTRRF",
-        "IBTG",
-        "IBTS"
-      ],
-      "sector_block": "scenario_input",
-      "source_runs": [
-        "ineq-baseline-observed",
-        "ineq-ui-relief",
-        "ineq-ui-shock",
-        "ineq-ui-small",
-        "ineq-ui-large",
-        "ineq-federal-transfer-relief",
-        "ineq-federal-transfer-shock",
-        "ineq-state-local-transfer-relief",
-        "ineq-state-local-transfer-shock",
-        "ineq-transfer-package-relief",
-        "ineq-transfer-package-shock",
-        "ineq-transfer-composite-small",
-        "ineq-transfer-composite-medium",
-        "ineq-transfer-composite-large"
-      ],
-      "type": "identity"
-    },
     "identity:PIEF:3d33e76e5b": {
       "display_id": "IDENTITY PIEF",
       "formula": "XX+PIV*IVF+SUBS+SUBG+USOTHER -WF*JF*(HN+1.5*HO)-RNT-INTZ-INTF-TRFH-NICD-CCH+CDH -TBS-TRFS-CCS-TRFR-DB-GSB-CTGB -GSMA-GSCA-TBG-TRFG-CCG -SIFG-SIFS -GSNN-IVA-CCF1-STAT +TTRRF -IBTG-CUST-IBTS",
@@ -19977,39 +21825,6 @@
       ],
       "type": "identity"
     },
-    "identity:POPP:bfea99b96e": {
-      "display_id": "IDENT POPP",
-      "formula": "POP1+POP2+POP3",
-      "id": "identity:POPP:bfea99b96e",
-      "label": "IDENT POPP",
-      "lhs_expr": "POPP",
-      "lhs_variables": [
-        "POPP"
-      ],
-      "rhs_variables": [
-        "POP1",
-        "POP2",
-        "POP3"
-      ],
-      "sector_block": "scenario_input",
-      "source_runs": [
-        "ineq-baseline-observed",
-        "ineq-ui-relief",
-        "ineq-ui-shock",
-        "ineq-ui-small",
-        "ineq-ui-large",
-        "ineq-federal-transfer-relief",
-        "ineq-federal-transfer-shock",
-        "ineq-state-local-transfer-relief",
-        "ineq-state-local-transfer-shock",
-        "ineq-transfer-package-relief",
-        "ineq-transfer-package-shock",
-        "ineq-transfer-composite-small",
-        "ineq-transfer-composite-medium",
-        "ineq-transfer-composite-large"
-      ],
-      "type": "identity"
-    },
     "identity:PROD:7bb52d36e3": {
       "display_id": "IDENT PROD",
       "formula": "Y/(JF*HF)",
@@ -20258,42 +22073,6 @@
       ],
       "type": "identity"
     },
-    "identity:RECG:342c83988b": {
-      "display_id": "IDENT RECG",
-      "formula": "THG+TCG+IBTG+SIG+TRFG-DG",
-      "id": "identity:RECG:342c83988b",
-      "label": "IDENT RECG",
-      "lhs_expr": "RECG",
-      "lhs_variables": [
-        "RECG"
-      ],
-      "rhs_variables": [
-        "THG",
-        "TCG",
-        "IBTG",
-        "SIG",
-        "TRFG",
-        "DG"
-      ],
-      "sector_block": "scenario_input",
-      "source_runs": [
-        "ineq-baseline-observed",
-        "ineq-ui-relief",
-        "ineq-ui-shock",
-        "ineq-ui-small",
-        "ineq-ui-large",
-        "ineq-federal-transfer-relief",
-        "ineq-federal-transfer-shock",
-        "ineq-state-local-transfer-relief",
-        "ineq-state-local-transfer-shock",
-        "ineq-transfer-package-relief",
-        "ineq-transfer-package-shock",
-        "ineq-transfer-composite-small",
-        "ineq-transfer-composite-medium",
-        "ineq-transfer-composite-large"
-      ],
-      "type": "identity"
-    },
     "identity:RECS:8d04aed555": {
       "display_id": "IDENT RECS",
       "formula": "THS+TCS+IBTS+SIS+TRGS+TRFS-DS",
@@ -20344,6 +22123,37 @@
         "RM",
         "D1G",
         "D1S"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "identity"
+    },
+    "identity:RS:18b2abc081": {
+      "display_id": "IDENT RS",
+      "formula": "RSX",
+      "id": "identity:RS:18b2abc081",
+      "label": "IDENT RS",
+      "lhs_expr": "RS",
+      "lhs_variables": [
+        "RS"
+      ],
+      "rhs_variables": [
+        "RSX"
       ],
       "sector_block": "scenario_input",
       "source_runs": [
@@ -20505,83 +22315,10 @@
       ],
       "type": "identity"
     },
-    "identity:SF:6b4bd31452": {
-      "display_id": "IDENT SF",
-      "formula": "XX+SUBS+SUBG+USOTHER+PIEFRET -WF*JF*(HN+1.5*HO)-RNT-INTZ-INTF-TRFH-NICD-CCH+CDH -TBS-TRFS-CCS -TRFR -DB-GSB-CTGB -GSMA-GSCA-TBG-TRFG-CCG -SIFG-SIFS -STAT -DF-TF1 -PIK*IKF-PIH*IHF-NNF-CTF1-CTNN +TTRRF -IBTG-IBTS",
-      "id": "identity:SF:6b4bd31452",
-      "label": "IDENT SF",
-      "lhs_expr": "SF",
-      "lhs_variables": [
-        "SF"
-      ],
-      "rhs_variables": [
-        "XX",
-        "SUBS",
-        "SUBG",
-        "USOTHER",
-        "PIEFRET",
-        "WF",
-        "JF",
-        "HN",
-        "HO",
-        "RNT",
-        "INTZ",
-        "INTF",
-        "TRFH",
-        "NICD",
-        "CCH",
-        "CDH",
-        "TBS",
-        "TRFS",
-        "CCS",
-        "TRFR",
-        "DB",
-        "GSB",
-        "CTGB",
-        "GSMA",
-        "GSCA",
-        "TBG",
-        "TRFG",
-        "CCG",
-        "SIFG",
-        "SIFS",
-        "STAT",
-        "DF",
-        "TF1",
-        "PIK",
-        "IKF",
-        "PIH",
-        "IHF",
-        "NNF",
-        "CTF1",
-        "CTNN",
-        "TTRRF",
-        "IBTG",
-        "IBTS"
-      ],
-      "sector_block": "scenario_input",
-      "source_runs": [
-        "ineq-baseline-observed",
-        "ineq-ui-relief",
-        "ineq-ui-shock",
-        "ineq-ui-small",
-        "ineq-ui-large",
-        "ineq-federal-transfer-relief",
-        "ineq-federal-transfer-shock",
-        "ineq-state-local-transfer-relief",
-        "ineq-state-local-transfer-shock",
-        "ineq-transfer-package-relief",
-        "ineq-transfer-package-shock",
-        "ineq-transfer-composite-small",
-        "ineq-transfer-composite-medium",
-        "ineq-transfer-composite-large"
-      ],
-      "type": "identity"
-    },
-    "identity:SG:55a5f7c4c2": {
+    "identity:SG:0c9a012063": {
       "display_id": "IDENT SG",
-      "formula": "GSMA+GSCA+THG+IBTG+TBG+TFG+SIHG+SIFG-DG+TRFG -PG*COG-WG*JG*HG-WM*JM*HM -TRGH-TRGR-TRGS-JGINTG-SUBG-UBGH*UB*(1-JGUB*JGPHASE) +CCG-INS-CTGMB-NNG-PIK*IKG+SIGG +CTGB -JGSPEND+JGMEDICG*JGBENF+JGEITCG*JGBENH",
-      "id": "identity:SG:55a5f7c4c2",
+      "formula": "GSMA+GSCA+THG+IBTG+CUST+TBG+TFG+SIHG+SIFG-DG+TRFG -PG*COG-WG*JG*HG-WM*JM*HM -TRGH-TRGR-TRGS-JGINTG-SUBG-UBGH*UB*(1-JGUB*JGPHASE) +CCG-INS-CTGMB-NNG-PIK*IKG+SIGG +CTGB -JGSPEND+JGMEDICG*JGBENF+JGEITCG*JGBENH",
+      "id": "identity:SG:0c9a012063",
       "label": "IDENT SG",
       "lhs_expr": "SG",
       "lhs_variables": [
@@ -20592,6 +22329,7 @@
         "GSCA",
         "THG",
         "IBTG",
+        "CUST",
         "TBG",
         "TFG",
         "SIHG",
@@ -22312,37 +24050,6 @@
       ],
       "type": "identity"
     },
-    "identity:YPOP:420d073368": {
-      "display_id": "IDENT YPOP",
-      "formula": "Y/POPP",
-      "id": "identity:YPOP:420d073368",
-      "label": "IDENT YPOP",
-      "lhs_expr": "YPOP",
-      "lhs_variables": [
-        "YPOP"
-      ],
-      "rhs_variables": [
-        "POPP"
-      ],
-      "sector_block": "scenario_input",
-      "source_runs": [
-        "ineq-baseline-observed",
-        "ineq-ui-relief",
-        "ineq-ui-shock",
-        "ineq-ui-small",
-        "ineq-ui-large",
-        "ineq-federal-transfer-relief",
-        "ineq-federal-transfer-shock",
-        "ineq-state-local-transfer-relief",
-        "ineq-state-local-transfer-shock",
-        "ineq-transfer-package-relief",
-        "ineq-transfer-package-shock",
-        "ineq-transfer-composite-small",
-        "ineq-transfer-composite-medium",
-        "ineq-transfer-composite-large"
-      ],
-      "type": "identity"
-    },
     "identity:YT:137337217f": {
       "display_id": "IDENT YT",
       "formula": "WF*JF*(HN+1.5*HO)+WG*JG*HG+WM*JM*HM+WS*JS*HS +RNT+INTZ+INTF+INTG-INTGR+INTS+DF+DB+DR+DG+DS+TRFH-TRHR-SIGG-SISS",
@@ -22462,6 +24169,887 @@
         "ineq-transfer-composite-large"
       ],
       "type": "identity"
+    },
+    "lhs:10:PF:065b82a4ce": {
+      "display_id": "Eq 10 LHS",
+      "formula": "EXP(LPF)",
+      "id": "lhs:10:PF:065b82a4ce",
+      "label": "Eq 10 LHS",
+      "lhs_expr": "PF",
+      "lhs_variables": [
+        "PF"
+      ],
+      "model_eq_id": 10,
+      "rhs_variables": [
+        "EXP",
+        "LPF"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "lhs:11:Y:6cbf8f9aac": {
+      "display_id": "Eq 11 LHS",
+      "formula": "EXP(LY)",
+      "id": "lhs:11:Y:6cbf8f9aac",
+      "label": "Eq 11 LHS",
+      "lhs_expr": "Y",
+      "lhs_variables": [
+        "Y"
+      ],
+      "model_eq_id": 11,
+      "rhs_variables": [
+        "EXP",
+        "LY"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "lhs:12:KK:704b0ccda3": {
+      "display_id": "Eq 12 LHS",
+      "formula": "EXP(LKK1)*KK(-1)",
+      "id": "lhs:12:KK:704b0ccda3",
+      "label": "Eq 12 LHS",
+      "lhs_expr": "KK",
+      "lhs_variables": [
+        "KK"
+      ],
+      "model_eq_id": 12,
+      "rhs_variables": [
+        "EXP",
+        "LKK1",
+        "KK"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "lhs:13:JF:7acbffbbad": {
+      "display_id": "Eq 13 LHS",
+      "formula": "EXP(LJF1)*JF(-1)",
+      "id": "lhs:13:JF:7acbffbbad",
+      "label": "Eq 13 LHS",
+      "lhs_expr": "JF",
+      "lhs_variables": [
+        "JF"
+      ],
+      "model_eq_id": 13,
+      "rhs_variables": [
+        "EXP",
+        "LJF1",
+        "JF"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "lhs:14:HF:ea28941587": {
+      "display_id": "Eq 14 LHS",
+      "formula": "EXP(LHF1)*HF(-1)",
+      "id": "lhs:14:HF:ea28941587",
+      "label": "Eq 14 LHS",
+      "lhs_expr": "HF",
+      "lhs_variables": [
+        "HF"
+      ],
+      "model_eq_id": 14,
+      "rhs_variables": [
+        "EXP",
+        "LHF1",
+        "HF"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "lhs:15:HO:5328ae146c": {
+      "display_id": "Eq 15 LHS",
+      "formula": "EXP(LHO)",
+      "id": "lhs:15:HO:5328ae146c",
+      "label": "Eq 15 LHS",
+      "lhs_expr": "HO",
+      "lhs_variables": [
+        "HO"
+      ],
+      "model_eq_id": 15,
+      "rhs_variables": [
+        "EXP",
+        "LHO"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "lhs:16:WF:91f4bc91b3": {
+      "display_id": "Eq 16 LHS",
+      "formula": "EXP(LWFQZ+DELTA1*LPF(-1))*LAM",
+      "id": "lhs:16:WF:91f4bc91b3",
+      "label": "Eq 16 LHS",
+      "lhs_expr": "WF",
+      "lhs_variables": [
+        "WF"
+      ],
+      "model_eq_id": 16,
+      "rhs_variables": [
+        "EXP",
+        "LWFQZ",
+        "DELTA1",
+        "LPF",
+        "LAM"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "lhs:16:WF:f066bbb393": {
+      "display_id": "Eq 16 LHS",
+      "formula": "EXP(LWFQZ+DELTA1*LPF(-1))*LAM*(1+JGWFADJ)",
+      "id": "lhs:16:WF:f066bbb393",
+      "label": "Eq 16 LHS",
+      "lhs_expr": "WF",
+      "lhs_variables": [
+        "WF"
+      ],
+      "model_eq_id": 16,
+      "rhs_variables": [
+        "EXP",
+        "LWFQZ",
+        "DELTA1",
+        "LPF",
+        "LAM",
+        "JGWFADJ"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "lhs:17:MF:8ea2c372db": {
+      "display_id": "Eq 17 LHS",
+      "formula": "EXP(LMFZ)*PF",
+      "id": "lhs:17:MF:8ea2c372db",
+      "label": "Eq 17 LHS",
+      "lhs_expr": "MF",
+      "lhs_variables": [
+        "MF"
+      ],
+      "model_eq_id": 17,
+      "rhs_variables": [
+        "EXP",
+        "LMFZ",
+        "PF"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "lhs:18:DF:ba32955c66": {
+      "display_id": "Eq 18 LHS",
+      "formula": "EXP(LDF1)*(DF(-1))",
+      "id": "lhs:18:DF:ba32955c66",
+      "label": "Eq 18 LHS",
+      "lhs_expr": "DF",
+      "lhs_variables": [
+        "DF"
+      ],
+      "model_eq_id": 18,
+      "rhs_variables": [
+        "EXP",
+        "LDF1",
+        "DF"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "lhs:1:CS:474d38ed3f": {
+      "display_id": "Eq 1 LHS",
+      "formula": "EXP(LCSZ)*POP",
+      "id": "lhs:1:CS:474d38ed3f",
+      "label": "Eq 1 LHS",
+      "lhs_expr": "CS",
+      "lhs_variables": [
+        "CS"
+      ],
+      "model_eq_id": 1,
+      "rhs_variables": [
+        "EXP",
+        "LCSZ",
+        "POP"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "lhs:23:RB:6be12bd76b": {
+      "display_id": "Eq 23 LHS",
+      "formula": "RBMRSL2+RS(-2)",
+      "id": "lhs:23:RB:6be12bd76b",
+      "label": "Eq 23 LHS",
+      "lhs_expr": "RB",
+      "lhs_variables": [
+        "RB"
+      ],
+      "model_eq_id": 23,
+      "rhs_variables": [
+        "RBMRSL2",
+        "RS"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "lhs:24:RM:25c73750f8": {
+      "display_id": "Eq 24 LHS",
+      "formula": "RMMRSL2+RS(-2)",
+      "id": "lhs:24:RM:25c73750f8",
+      "label": "Eq 24 LHS",
+      "lhs_expr": "RM",
+      "lhs_variables": [
+        "RM"
+      ],
+      "model_eq_id": 24,
+      "rhs_variables": [
+        "RMMRSL2",
+        "RS"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "lhs:26:CUR:80330f8a08": {
+      "display_id": "Eq 26 LHS",
+      "formula": "EXP(LCURZ)*(POP*PF)",
+      "id": "lhs:26:CUR:80330f8a08",
+      "label": "Eq 26 LHS",
+      "lhs_expr": "CUR",
+      "lhs_variables": [
+        "CUR"
+      ],
+      "model_eq_id": 26,
+      "rhs_variables": [
+        "EXP",
+        "LCURZ",
+        "POP",
+        "PF"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "lhs:27:IM:8afeb5590b": {
+      "display_id": "Eq 27 LHS",
+      "formula": "EXP(LIMZ)*POP",
+      "id": "lhs:27:IM:8afeb5590b",
+      "label": "Eq 27 LHS",
+      "lhs_expr": "IM",
+      "lhs_variables": [
+        "IM"
+      ],
+      "model_eq_id": 27,
+      "rhs_variables": [
+        "EXP",
+        "LIMZ",
+        "POP"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "lhs:28:UB:b67bc69f72": {
+      "display_id": "Eq 28 LHS",
+      "formula": "EXP(LUB)",
+      "id": "lhs:28:UB:b67bc69f72",
+      "label": "Eq 28 LHS",
+      "lhs_expr": "UB",
+      "lhs_variables": [
+        "UB"
+      ],
+      "model_eq_id": 28,
+      "rhs_variables": [
+        "EXP",
+        "LUB"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "lhs:29:INTG:1e8a692a23": {
+      "display_id": "Eq 29 LHS",
+      "formula": "(INTGZ)*AAG*1.0",
+      "id": "lhs:29:INTG:1e8a692a23",
+      "label": "Eq 29 LHS",
+      "lhs_expr": "INTG",
+      "lhs_variables": [
+        "INTG"
+      ],
+      "model_eq_id": 29,
+      "rhs_variables": [
+        "INTGZ",
+        "AAG"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "lhs:2:CN:763b4e42f3": {
+      "display_id": "Eq 2 LHS",
+      "formula": "EXP(LCNZ)*POP",
+      "id": "lhs:2:CN:763b4e42f3",
+      "label": "Eq 2 LHS",
+      "lhs_expr": "CN",
+      "lhs_variables": [
+        "CN"
+      ],
+      "model_eq_id": 2,
+      "rhs_variables": [
+        "EXP",
+        "LCNZ",
+        "POP"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "lhs:30:RS:69251eaa97": {
+      "display_id": "Eq 30 LHS",
+      "formula": "(ABS(RS-.0)+RS-.0)/2.+.0",
+      "id": "lhs:30:RS:69251eaa97",
+      "label": "Eq 30 LHS",
+      "lhs_expr": "RS",
+      "lhs_variables": [
+        "RS"
+      ],
+      "model_eq_id": 30,
+      "rhs_variables": [
+        "ABS",
+        "RS"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "lhs:30:RSX:99ccc1d585": {
+      "display_id": "Eq 30 LHS",
+      "formula": "(ABS(RSX-.0)+RSX-.0)/2.+.0",
+      "id": "lhs:30:RSX:99ccc1d585",
+      "label": "Eq 30 LHS",
+      "lhs_expr": "RSX",
+      "lhs_variables": [
+        "RSX"
+      ],
+      "model_eq_id": 30,
+      "rhs_variables": [
+        "ABS",
+        "RSX"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "lhs:3:CD:d80dcb7b80": {
+      "display_id": "Eq 3 LHS",
+      "formula": "EXP(LCDZ)*POP",
+      "id": "lhs:3:CD:d80dcb7b80",
+      "label": "Eq 3 LHS",
+      "lhs_expr": "CD",
+      "lhs_variables": [
+        "CD"
+      ],
+      "model_eq_id": 3,
+      "rhs_variables": [
+        "EXP",
+        "LCDZ",
+        "POP"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "lhs:4:IHH:0348513703": {
+      "display_id": "Eq 4 LHS",
+      "formula": "EXP(LIHHZ)*POP",
+      "id": "lhs:4:IHH:0348513703",
+      "label": "Eq 4 LHS",
+      "lhs_expr": "IHH",
+      "lhs_variables": [
+        "IHH"
+      ],
+      "model_eq_id": 4,
+      "rhs_variables": [
+        "EXP",
+        "LIHHZ",
+        "POP"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "lhs:5:L1:93a39e1f8d": {
+      "display_id": "Eq 5 LHS",
+      "formula": "EXP(LL1Z)*POP1",
+      "id": "lhs:5:L1:93a39e1f8d",
+      "label": "Eq 5 LHS",
+      "lhs_expr": "L1",
+      "lhs_variables": [
+        "L1"
+      ],
+      "model_eq_id": 5,
+      "rhs_variables": [
+        "EXP",
+        "LL1Z",
+        "POP1"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "lhs:6:L2:882da31cab": {
+      "display_id": "Eq 6 LHS",
+      "formula": "EXP(LL2Z)*POP2",
+      "id": "lhs:6:L2:882da31cab",
+      "label": "Eq 6 LHS",
+      "lhs_expr": "L2",
+      "lhs_variables": [
+        "L2"
+      ],
+      "model_eq_id": 6,
+      "rhs_variables": [
+        "EXP",
+        "LL2Z",
+        "POP2"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "lhs:7:L3:5af4433373": {
+      "display_id": "Eq 7 LHS",
+      "formula": "EXP(LL3Z)*POP3",
+      "id": "lhs:7:L3:5af4433373",
+      "label": "Eq 7 LHS",
+      "lhs_expr": "L3",
+      "lhs_variables": [
+        "L3"
+      ],
+      "model_eq_id": 7,
+      "rhs_variables": [
+        "EXP",
+        "LL3Z",
+        "POP3"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
+    },
+    "lhs:8:LM:cc9e787283": {
+      "display_id": "Eq 8 LHS",
+      "formula": "EXP(LLMZ)*POP",
+      "id": "lhs:8:LM:cc9e787283",
+      "label": "Eq 8 LHS",
+      "lhs_expr": "LM",
+      "lhs_variables": [
+        "LM"
+      ],
+      "model_eq_id": 8,
+      "rhs_variables": [
+        "EXP",
+        "LLMZ",
+        "POP"
+      ],
+      "sector_block": "scenario_input",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "type": "scenario_equation"
     }
   },
   "schema_version": 1,
@@ -22686,7 +25274,8 @@
       ],
       "used_in_equations": [
         "genr:INTGZ:a7171f8868",
-        "genr:INTGZ:bb125f69b1"
+        "genr:INTGZ:bb125f69b1",
+        "lhs:29:INTG:1e8a692a23"
       ]
     },
     "AAZ": {
@@ -22759,7 +25348,9 @@
       "source_runs": [],
       "used_in_equations": [
         "genr:PIEFAMM:11b55aeeca",
-        "genr:UMM:84f3460d95"
+        "genr:UMM:84f3460d95",
+        "lhs:30:RS:69251eaa97",
+        "lhs:30:RSX:99ccc1d585"
       ]
     },
     "AF": {
@@ -22901,7 +25492,17 @@
         2,
         3,
         4,
-        27
+        27,
+        "eq:1:FSR:290a7aef0a",
+        "eq:1:LCSZ:af7424db0e",
+        "eq:27:FSR:e49e721cac",
+        "eq:27:LIMZ:7945aa18f0",
+        "eq:2:FSR:0641625b36",
+        "eq:2:LCNZ:c3f43d74a8",
+        "eq:3:FSR:8dca97d17a",
+        "eq:3:LCDZ:e6a44ef775",
+        "eq:4:FSR:f1fd4577ff",
+        "eq:4:LIHHZ:ecf089957e"
       ]
     },
     "AG2": {
@@ -22935,7 +25536,17 @@
         2,
         3,
         4,
-        27
+        27,
+        "eq:1:FSR:290a7aef0a",
+        "eq:1:LCSZ:af7424db0e",
+        "eq:27:FSR:e49e721cac",
+        "eq:27:LIMZ:7945aa18f0",
+        "eq:2:FSR:0641625b36",
+        "eq:2:LCNZ:c3f43d74a8",
+        "eq:3:FSR:8dca97d17a",
+        "eq:3:LCDZ:e6a44ef775",
+        "eq:4:FSR:f1fd4577ff",
+        "eq:4:LIHHZ:ecf089957e"
       ]
     },
     "AG3": {
@@ -22969,7 +25580,17 @@
         2,
         3,
         4,
-        27
+        27,
+        "eq:1:FSR:290a7aef0a",
+        "eq:1:LCSZ:af7424db0e",
+        "eq:27:FSR:e49e721cac",
+        "eq:27:LIMZ:7945aa18f0",
+        "eq:2:FSR:0641625b36",
+        "eq:2:LCNZ:c3f43d74a8",
+        "eq:3:FSR:8dca97d17a",
+        "eq:3:LCDZ:e6a44ef775",
+        "eq:4:FSR:f1fd4577ff",
+        "eq:4:LIHHZ:ecf089957e"
       ]
     },
     "AGZGDP": {
@@ -23273,7 +25894,14 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:19:NONE19:ef9b6ad4ef",
+        "eq:20:NONE20:186cd27a17",
+        "eq:21:NONE21:87b8b25f4b",
+        "eq:22:NONE22:e0433f7386",
+        "eq:25:NONE25:2faca138d0",
+        "eq:9:NONE9:ffa86b4371"
+      ]
     },
     "CCF1": {
       "_provenance": {
@@ -23305,7 +25933,6 @@
       "units": "B$",
       "used_in_equations": [
         68,
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e"
       ]
@@ -23347,12 +25974,10 @@
         68,
         69,
         76,
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a"
       ]
     },
@@ -23423,11 +26048,9 @@
         65,
         68,
         69,
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
         "identity:SH:1c5f9bbd98",
         "identity:SH:e26dbfc63a"
       ]
@@ -23499,11 +26122,9 @@
         68,
         69,
         78,
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
         "identity:SS:1791370a9b",
         "identity:SS:481383485d"
       ]
@@ -23637,11 +26258,9 @@
         65,
         68,
         69,
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
         "identity:SH:1c5f9bbd98",
         "identity:SH:e26dbfc63a"
       ]
@@ -23787,7 +26406,10 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:12:FSR:6bc9014f77",
+        "eq:12:LKK1:6293633ebb"
+      ]
     },
     "CN": {
       "_provenance": {
@@ -23888,78 +26510,11 @@
       "used_in_equations": []
     },
     "CNST2CS": {
-      "_provenance": {
-        "table": "A.2"
-      },
-      "category": "exogenous",
       "code": "CNST2CS",
-      "construction": "Time varying constant term. See text.",
       "defined_by_equation": "create:CNST2CS:285f9d690d",
-      "description": "Time varying constant term, 1974.1-1994.3.",
+      "description": "Model series defined by CREATE CNST2CS: D3+T1*D2/(T1-T2)-T*D2/(T1-T2)",
       "name": "CNST2CS",
-      "short_name": "Services Constant Shift",
-      "source_runs": [
-        "ineq-baseline-observed",
-        "ineq-ui-relief",
-        "ineq-ui-shock",
-        "ineq-ui-small",
-        "ineq-ui-large",
-        "ineq-federal-transfer-relief",
-        "ineq-federal-transfer-shock",
-        "ineq-state-local-transfer-relief",
-        "ineq-state-local-transfer-shock",
-        "ineq-transfer-package-relief",
-        "ineq-transfer-package-shock",
-        "ineq-transfer-composite-small",
-        "ineq-transfer-composite-medium",
-        "ineq-transfer-composite-large"
-      ],
-      "used_in_equations": []
-    },
-    "CNST2CS, CNST, AG1, AG2, AG3, LOG(CS/POP)\u22121, LOG[YD/(POP \u00b7 PH)], RSA, LOG(AA/POP)\u22121, D202013, D202014, RHO": {
-      "code": "CNST2CS, CNST, AG1, AG2, AG3, LOG(CS/POP)\u22121, LOG[YD/(POP \u00b7 PH)], RSA, LOG(AA/POP)\u22121, D202013, D202014, RHO",
-      "defined_by_equation": 1,
-      "description": "Model series defined by Eq 1: cnst2cs, cnst, AG1, AG2, AG3, log(CS/POP)\u22121, log[YD/(POP \u00b7 PH)], RSA, log(AA/POP)\u22121, D202013, D202014, RHO = 1",
-      "name": "CNST2CS, CNST, AG1, AG2, AG3, LOG(CS/POP)\u22121, LOG[YD/(POP \u00b7 PH)], RSA, LOG(AA/POP)\u22121, D202013, D202014, RHO",
-      "short_name": "CNST2CS, CNST, AG1, AG2, AG3, LOG(CS/POP)\u22121, LOG[YD/(POP \u00b7 PH)], RSA, LOG(AA/POP)\u22121, D202013, D202014, RHO",
-      "source_runs": [],
-      "used_in_equations": []
-    },
-    "CNST2KK": {
-      "_provenance": {
-        "table": "A.2"
-      },
-      "category": "exogenous",
-      "code": "CNST2KK",
-      "construction": "Time varying constant term. See text.",
-      "defined_by_equation": "create:CNST2KK:2abb622000",
-      "description": "Time varying constant term, 1981.3-1986.2.",
-      "name": "CNST2KK",
-      "short_name": "Capital Constant Shift",
-      "source_runs": [
-        "ineq-baseline-observed",
-        "ineq-ui-relief",
-        "ineq-ui-shock",
-        "ineq-ui-small",
-        "ineq-ui-large",
-        "ineq-federal-transfer-relief",
-        "ineq-federal-transfer-shock",
-        "ineq-state-local-transfer-relief",
-        "ineq-state-local-transfer-shock",
-        "ineq-transfer-package-relief",
-        "ineq-transfer-package-shock",
-        "ineq-transfer-composite-small",
-        "ineq-transfer-composite-medium",
-        "ineq-transfer-composite-large"
-      ],
-      "used_in_equations": []
-    },
-    "CNST2L2": {
-      "code": "CNST2L2",
-      "defined_by_equation": "create:CNST2L2:147015cf5e",
-      "description": "Model series defined by CREATE CNST2L2: D3+T1*D2/(T1-T2)-T*D2/(T1-T2)",
-      "name": "CNST2L2",
-      "short_name": "CNST2L2",
+      "short_name": "CNST2CS",
       "source_runs": [
         "ineq-baseline-observed",
         "ineq-ui-relief",
@@ -23977,7 +26532,77 @@
         "ineq-transfer-composite-large"
       ],
       "used_in_equations": [
-        "create:TBL2:2b92d6109e"
+        "eq:1:FSR:290a7aef0a",
+        "eq:1:LCSZ:af7424db0e"
+      ]
+    },
+    "CNST2CS, CNST, AG1, AG2, AG3, LOG(CS/POP)\u22121, LOG[YD/(POP \u00b7 PH)], RSA, LOG(AA/POP)\u22121, D202013, D202014, RHO": {
+      "code": "CNST2CS, CNST, AG1, AG2, AG3, LOG(CS/POP)\u22121, LOG[YD/(POP \u00b7 PH)], RSA, LOG(AA/POP)\u22121, D202013, D202014, RHO",
+      "defined_by_equation": 1,
+      "description": "Model series defined by Eq 1: cnst2cs, cnst, AG1, AG2, AG3, log(CS/POP)\u22121, log[YD/(POP \u00b7 PH)], RSA, log(AA/POP)\u22121, D202013, D202014, RHO = 1",
+      "name": "CNST2CS, CNST, AG1, AG2, AG3, LOG(CS/POP)\u22121, LOG[YD/(POP \u00b7 PH)], RSA, LOG(AA/POP)\u22121, D202013, D202014, RHO",
+      "short_name": "CNST2CS, CNST, AG1, AG2, AG3, LOG(CS/POP)\u22121, LOG[YD/(POP \u00b7 PH)], RSA, LOG(AA/POP)\u22121, D202013, D202014, RHO",
+      "source_runs": [],
+      "used_in_equations": []
+    },
+    "CNST2KK": {
+      "code": "CNST2KK",
+      "defined_by_equation": "create:CNST2KK:2abb622000",
+      "description": "Model series defined by CREATE CNST2KK: 1",
+      "name": "CNST2KK",
+      "short_name": "CNST2KK",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "used_in_equations": [
+        "eq:12:FSR:6bc9014f77",
+        "eq:12:LKK1:6293633ebb"
+      ]
+    },
+    "CNST2L2": {
+      "_provenance": {
+        "table": "A.2"
+      },
+      "category": "exogenous",
+      "code": "CNST2L2",
+      "construction": "Time varying constant term. See text.",
+      "defined_by_equation": "create:CNST2L2:147015cf5e",
+      "description": "Time varying constant term, 1971.3-1989.4.",
+      "name": "CNST2L2",
+      "short_name": "Female Labor Constant",
+      "source_runs": [
+        "ineq-baseline-observed",
+        "ineq-ui-relief",
+        "ineq-ui-shock",
+        "ineq-ui-small",
+        "ineq-ui-large",
+        "ineq-federal-transfer-relief",
+        "ineq-federal-transfer-shock",
+        "ineq-state-local-transfer-relief",
+        "ineq-state-local-transfer-shock",
+        "ineq-transfer-package-relief",
+        "ineq-transfer-package-shock",
+        "ineq-transfer-composite-small",
+        "ineq-transfer-composite-medium",
+        "ineq-transfer-composite-large"
+      ],
+      "used_in_equations": [
+        "create:TBL2:2b92d6109e",
+        "eq:6:FSR:8953fe90d0",
+        "eq:6:LL2Z:ac4f5ced2d"
       ]
     },
     "CNZ": {
@@ -24057,7 +26682,7 @@
         "genr:COGS:fb37be33d1",
         "identity:PUG:26176cad40",
         "identity:PUG:39ab232ca9",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a",
         "identity:X:33d01ad040",
         "identity:X:9419caf650",
@@ -24282,8 +26907,7 @@
       "units": "B$",
       "used_in_equations": [
         69,
-        "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452"
+        "identity:SF:1d7769146a"
       ]
     },
     "CTGB": {
@@ -24317,12 +26941,10 @@
       "used_in_equations": [
         76,
         134,
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a"
       ]
     },
@@ -24357,7 +26979,7 @@
       "units": "B$",
       "used_in_equations": [
         76,
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a"
       ]
     },
@@ -24431,8 +27053,7 @@
       ],
       "used_in_equations": [
         69,
-        "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452"
+        "identity:SF:1d7769146a"
       ]
     },
     "CTR": {
@@ -24510,8 +27131,8 @@
       "category": "exogenous",
       "code": "CUR",
       "construction": "Sum of NILCMA. Base Period=1971.4, Value=53.521",
-      "defined_by_equation": null,
-      "description": "Model variable constructed as Sum of NILCMA. Base Period=1971.4, Value=53.521.",
+      "defined_by_equation": "lhs:26:CUR:80330f8a08",
+      "description": "Model series defined by Eq 26 LHS: EXP(LCURZ)*(POP*PF)",
       "name": "CUR",
       "short_name": "CUR",
       "source_runs": [
@@ -24572,6 +27193,7 @@
         "identity:PIEF:694c6a730e",
         "identity:RECG:2cee7e5fcf",
         "identity:SF:1d7769146a",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a"
       ]
     },
@@ -25369,7 +27991,11 @@
       ],
       "used_in_equations": [
         11,
-        13
+        13,
+        "eq:11:FSR:a46c5229c6",
+        "eq:11:LY:7609bc2602",
+        "eq:13:FSR:5ffaa756a1",
+        "eq:13:LJF1:0bc8d70510"
       ]
     },
     "D594": {
@@ -25399,7 +28025,9 @@
         "ineq-transfer-composite-large"
       ],
       "used_in_equations": [
-        11
+        11,
+        "eq:11:FSR:a46c5229c6",
+        "eq:11:LY:7609bc2602"
       ]
     },
     "D5G": {
@@ -25465,7 +28093,9 @@
         "ineq-transfer-composite-large"
       ],
       "used_in_equations": [
-        11
+        11,
+        "eq:11:FSR:a46c5229c6",
+        "eq:11:LY:7609bc2602"
       ]
     },
     "D691": {
@@ -25495,7 +28125,9 @@
         "ineq-transfer-composite-large"
       ],
       "used_in_equations": [
-        27
+        27,
+        "eq:27:FSR:e49e721cac",
+        "eq:27:LIMZ:7945aa18f0"
       ]
     },
     "D692": {
@@ -25525,7 +28157,9 @@
         "ineq-transfer-composite-large"
       ],
       "used_in_equations": [
-        27
+        27,
+        "eq:27:FSR:e49e721cac",
+        "eq:27:LIMZ:7945aa18f0"
       ]
     },
     "D6G": {
@@ -25587,7 +28221,9 @@
         "ineq-transfer-composite-large"
       ],
       "used_in_equations": [
-        27
+        27,
+        "eq:27:FSR:e49e721cac",
+        "eq:27:LIMZ:7945aa18f0"
       ]
     },
     "D721": {
@@ -25617,7 +28253,9 @@
         "ineq-transfer-composite-large"
       ],
       "used_in_equations": [
-        27
+        27,
+        "eq:27:FSR:e49e721cac",
+        "eq:27:LIMZ:7945aa18f0"
       ]
     },
     "D794823": {
@@ -25685,11 +28323,9 @@
         64,
         115,
         134,
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
         "identity:YD:5abd299919",
         "identity:YD:7920517574",
         "identity:YT:137337217f",
@@ -25855,7 +28491,9 @@
         "genr:LPFZ:0f73906c75",
         "genr:LPFZ:80e4e1c0b4",
         "genr:LWFQZ:e089c9f2c6",
-        "genr:LWFQZ:f79d1f71f5"
+        "genr:LWFQZ:f79d1f71f5",
+        "lhs:16:WF:91f4bc91b3",
+        "lhs:16:WF:f066bbb393"
       ]
     },
     "DF": {
@@ -25866,8 +28504,8 @@
       "category": "exogenous",
       "code": "DF",
       "construction": "DCBN",
-      "defined_by_equation": null,
-      "description": "Model variable constructed as DCBN.",
+      "defined_by_equation": "lhs:18:DF:ba32955c66",
+      "description": "Model series defined by Eq 18 LHS: EXP(LDF1)*(DF(-1))",
       "name": "DF",
       "short_name": "DF",
       "source_runs": [
@@ -25897,11 +28535,11 @@
         "genr:LPIEFAZ:4fa918f3a3",
         "genr:LPIEFAZ:e97a13f51d",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
         "identity:YD:5abd299919",
         "identity:YD:7920517574",
         "identity:YT:137337217f",
-        "identity:YT:f9274da25d"
+        "identity:YT:f9274da25d",
+        "lhs:18:DF:ba32955c66"
       ]
     },
     "DG": {
@@ -25939,8 +28577,7 @@
         105,
         115,
         "identity:RECG:2cee7e5fcf",
-        "identity:RECG:342c83988b",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a",
         "identity:YD:5abd299919",
         "identity:YD:7920517574",
@@ -26393,6 +29030,37 @@
       ],
       "used_in_equations": []
     },
+    "EXP": {
+      "code": "EXP",
+      "defined_by_equation": null,
+      "description": "Model variable exposed through the public dictionary.",
+      "name": "EXP",
+      "short_name": "EXP",
+      "source_runs": [],
+      "used_in_equations": [
+        "lhs:10:PF:065b82a4ce",
+        "lhs:11:Y:6cbf8f9aac",
+        "lhs:12:KK:704b0ccda3",
+        "lhs:13:JF:7acbffbbad",
+        "lhs:14:HF:ea28941587",
+        "lhs:15:HO:5328ae146c",
+        "lhs:16:WF:91f4bc91b3",
+        "lhs:16:WF:f066bbb393",
+        "lhs:17:MF:8ea2c372db",
+        "lhs:18:DF:ba32955c66",
+        "lhs:1:CS:474d38ed3f",
+        "lhs:26:CUR:80330f8a08",
+        "lhs:27:IM:8afeb5590b",
+        "lhs:28:UB:b67bc69f72",
+        "lhs:2:CN:763b4e42f3",
+        "lhs:3:CD:d80dcb7b80",
+        "lhs:4:IHH:0348513703",
+        "lhs:5:L1:93a39e1f8d",
+        "lhs:6:L2:882da31cab",
+        "lhs:7:L3:5af4433373",
+        "lhs:8:LM:cc9e787283"
+      ]
+    },
     "EXPG": {
       "_provenance": {
         "source": "construction/equations",
@@ -26526,6 +29194,15 @@
         "genr:XMFAZ:e99521beea",
         "identity:PX:41be91297c"
       ]
+    },
+    "FSR": {
+      "code": "FSR",
+      "defined_by_equation": "eq:10:FSR:93f3292d05",
+      "description": "Model series defined by Eq 10: FSR LPF(-1) LWFD5(-1) C T LPIM(-1) ONEZUR(-1) UR(-1) LCOGSZ(-1) LTRGSZ(-1) LEXZ(-1) LPF(-2) LCUSTZ(-1) LCUSTZ(-2)",
+      "name": "FSR",
+      "short_name": "FSR",
+      "source_runs": [],
+      "used_in_equations": []
     },
     "GAP": {
       "code": "GAP",
@@ -26915,12 +29592,10 @@
       "used_in_equations": [
         72,
         134,
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:SB:2d8b456279",
-        "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452"
+        "identity:SF:1d7769146a"
       ]
     },
     "GSBQ": {
@@ -26989,12 +29664,10 @@
       "units": "B$",
       "used_in_equations": [
         76,
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a"
       ]
     },
@@ -27042,12 +29715,10 @@
         68,
         69,
         76,
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a"
       ]
     },
@@ -27084,7 +29755,6 @@
       "units": "B$",
       "used_in_equations": [
         68,
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e"
       ]
@@ -27165,8 +29835,8 @@
         "genr:LHFL1A:668b3234c6",
         "identity:HFF:f30b0cf971",
         "identity:HN:5de191ee0c",
-        "identity:JHPOP:043c32b100",
-        "identity:PROD:7bb52d36e3"
+        "identity:PROD:7bb52d36e3",
+        "lhs:14:HF:ea28941587"
       ]
     },
     "HFF": {
@@ -27196,7 +29866,9 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:15:LHO:79c05c5d69"
+      ]
     },
     "HFS": {
       "_provenance": {
@@ -27281,10 +29953,9 @@
         "identity:GDP:93f11320a1",
         "identity:GDPR:6448415c8d",
         "identity:GDPR:70d8349dcf",
-        "identity:JHPOP:043c32b100",
         "identity:PUG:26176cad40",
         "identity:PUG:39ab232ca9",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a",
         "identity:WA:e7d25823ec",
         "identity:WH:38fce10e03",
@@ -27338,7 +30009,7 @@
         "identity:GDPR:70d8349dcf",
         "identity:PUG:26176cad40",
         "identity:PUG:39ab232ca9",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a",
         "identity:WA:e7d25823ec",
         "identity:WH:38fce10e03",
@@ -27384,11 +30055,9 @@
         115,
         121,
         126,
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
         "identity:SHRPIE:df496c8634",
         "identity:SIFG:cbd43d0012",
         "identity:SIHG:075ad2b654",
@@ -27408,7 +30077,7 @@
       "category": "endogenous",
       "code": "HO",
       "construction": "13-HO. Constructed values for 1952.1-1955.4.",
-      "defined_by_equation": null,
+      "defined_by_equation": "lhs:15:HO:5328ae146c",
       "description": "Average number of overtime hours paid per job, f, hours per quarter.",
       "name": "HO",
       "sector": "firm",
@@ -27435,11 +30104,9 @@
         "genr:LHO:72dcf24e25",
         "genr:LHO:e4d811d969",
         "identity:HN:5de191ee0c",
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
         "identity:SHRPIE:df496c8634",
         "identity:SIFG:cbd43d0012",
         "identity:SIHG:075ad2b654",
@@ -27495,7 +30162,6 @@
         "identity:GDP:93f11320a1",
         "identity:GDPR:6448415c8d",
         "identity:GDPR:70d8349dcf",
-        "identity:JHPOP:043c32b100",
         "identity:PUS:4bdf6bf3d3",
         "identity:SS:1791370a9b",
         "identity:SS:481383485d",
@@ -27552,15 +30218,11 @@
         68,
         69,
         105,
-        "genr:LIBTZ:57706aa1b7",
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:RECG:2cee7e5fcf",
-        "identity:RECG:342c83988b",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a"
       ]
     },
@@ -27592,13 +30254,10 @@
         69,
         78,
         112,
-        "genr:LIBTZ:57706aa1b7",
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:RECS:8d04aed555",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
         "identity:SS:1791370a9b",
         "identity:SS:481383485d"
       ]
@@ -27733,7 +30392,6 @@
         "genr:LXXXZ:01b7af2dec",
         "genr:LXXXZ:21b510b972",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
         "identity:X:33d01ad040",
         "identity:X:9419caf650",
         "identity:XX:36405496d0",
@@ -27907,7 +30565,6 @@
         "genr:LXXXZ:21b510b972",
         "identity:CCF1:2fc64f7a6d",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
         "identity:X:33d01ad040",
         "identity:X:9419caf650",
         "identity:XX:36405496d0",
@@ -27947,7 +30604,7 @@
         60,
         61,
         76,
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a",
         "identity:X:33d01ad040",
         "identity:X:9419caf650",
@@ -28131,7 +30788,7 @@
       "used_in_equations": [
         65,
         76,
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a",
         "identity:SH:1c5f9bbd98",
         "identity:SH:e26dbfc63a"
@@ -28173,11 +30830,9 @@
         115,
         "genr:INTFZ:0d153474cd",
         "genr:INTFZ:59d3837eff",
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
         "identity:YD:5abd299919",
         "identity:YD:7920517574",
         "identity:YT:137337217f",
@@ -28216,8 +30871,8 @@
       "category": "exogenous",
       "code": "INTG",
       "construction": "PAYINTG-RECINTG",
-      "defined_by_equation": null,
-      "description": "Model variable constructed as PAYINTG-RECINTG.",
+      "defined_by_equation": "lhs:29:INTG:1e8a692a23",
+      "description": "Model series defined by Eq 29 LHS: (INTGZ)*AAG*1.0",
       "name": "INTG",
       "short_name": "INTG",
       "source_runs": [
@@ -28318,8 +30973,8 @@
     },
     "INTGZ": {
       "code": "INTGZ",
-      "defined_by_equation": "genr:INTGZ:bb125f69b1",
-      "description": "Model series defined by GENR INTGZ: INTG/AAG",
+      "defined_by_equation": "eq:29:INTGZ:0d5f5dce20",
+      "description": "Model series defined by Eq 29: INTGZ C INTGZ(-1) RQG RHO=1",
       "name": "INTGZ",
       "short_name": "INTGZ",
       "source_runs": [
@@ -28338,6 +30993,18 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
+      "used_in_equations": [
+        "eq:29:INTGZ:0d5f5dce20",
+        "lhs:29:INTG:1e8a692a23"
+      ]
+    },
+    "INTGZ C INTGZ(-1) RQG RHO": {
+      "code": "INTGZ C INTGZ(-1) RQG RHO",
+      "defined_by_equation": "eq:29:INTGZ:0d5f5dce20",
+      "description": "Model series defined by Eq 29: INTGZ C INTGZ(-1) RQG RHO=1",
+      "name": "INTGZ C INTGZ(-1) RQG RHO",
+      "short_name": "INTGZ C INTGZ(-1) RQG RHO",
+      "source_runs": [],
       "used_in_equations": []
     },
     "INTGZGDP": {
@@ -28440,11 +31107,9 @@
         68,
         69,
         115,
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
         "identity:YD:5abd299919",
         "identity:YD:7920517574",
         "identity:YT:137337217f",
@@ -28633,7 +31298,6 @@
       ],
       "used_in_equations": [
         68,
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e"
       ]
@@ -28668,7 +31332,6 @@
       ],
       "used_in_equations": [
         68,
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e"
       ]
@@ -28725,7 +31388,7 @@
       "category": "exogenous",
       "code": "JF",
       "construction": "JT-JG-JS-JM",
-      "defined_by_equation": null,
+      "defined_by_equation": "lhs:13:JF:7acbffbbad",
       "description": "Number of jobs in the firm sector.",
       "name": "JF",
       "short_name": "Firm Sector Jobs",
@@ -28765,13 +31428,10 @@
         "genr:LJF1:cd1f79f67f",
         "identity:E:c6e1e1df54",
         "identity:JGPT:f6f17771bb",
-        "identity:JHPOP:043c32b100",
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:PROD:7bb52d36e3",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
         "identity:SHRPIE:df496c8634",
         "identity:SIFG:cbd43d0012",
         "identity:SIHG:075ad2b654",
@@ -28781,7 +31441,8 @@
         "identity:YD:5abd299919",
         "identity:YD:7920517574",
         "identity:YT:137337217f",
-        "identity:YT:f9274da25d"
+        "identity:YT:f9274da25d",
+        "lhs:13:JF:7acbffbbad"
       ]
     },
     "JG": {
@@ -28828,10 +31489,9 @@
         "identity:GDP:93f11320a1",
         "identity:GDPR:6448415c8d",
         "identity:GDPR:70d8349dcf",
-        "identity:JHPOP:043c32b100",
         "identity:PUG:26176cad40",
         "identity:PUG:39ab232ca9",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a",
         "identity:WA:e7d25823ec",
         "identity:WH:38fce10e03",
@@ -28864,7 +31524,7 @@
       "source_runs": [],
       "used_in_equations": [
         "identity:PUG:39ab232ca9",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SS:481383485d",
         "identity:X:9419caf650",
         "identity:XX:fa943349f3"
@@ -28880,7 +31540,7 @@
       "used_in_equations": [
         "identity:EXPG:4646cff167",
         "identity:EXPS:01814dc77a",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SH:1c5f9bbd98",
         "identity:SS:481383485d",
         "identity:YD:5abd299919",
@@ -28930,7 +31590,7 @@
       "source_runs": [],
       "used_in_equations": [
         "identity:EXPG:4646cff167",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SH:1c5f9bbd98",
         "identity:YD:5abd299919"
       ]
@@ -29025,7 +31685,7 @@
       "used_in_equations": [
         "identity:EXPG:4646cff167",
         "identity:INTGR:65ec4c4386",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:YD:5abd299919",
         "identity:YT:f9274da25d"
       ]
@@ -29067,7 +31727,7 @@
       "source_runs": [],
       "used_in_equations": [
         "identity:PUG:39ab232ca9",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:X:9419caf650",
         "identity:XX:fa943349f3"
       ]
@@ -29169,7 +31829,7 @@
         "identity:JGPART:7dbe4426c6",
         "identity:JGU:1dadee5668",
         "identity:JGWFADJ:1492ec88f1",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SH:1c5f9bbd98",
         "identity:SS:481383485d",
         "identity:YD:5abd299919"
@@ -29217,7 +31877,7 @@
       "short_name": "JGSPEND",
       "source_runs": [],
       "used_in_equations": [
-        "identity:SG:55a5f7c4c2"
+        "identity:SG:0c9a012063"
       ]
     },
     "JGSUPER": {
@@ -29286,7 +31946,7 @@
       "used_in_equations": [
         "identity:EXPG:4646cff167",
         "identity:EXPS:01814dc77a",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SH:1c5f9bbd98",
         "identity:SS:481383485d",
         "identity:YD:5abd299919"
@@ -29352,8 +32012,8 @@
     },
     "JGW": {
       "code": "JGW",
-      "defined_by_equation": "create:JGW:38ba1239f5",
-      "description": "Model series defined by CREATE JGW: 0.015",
+      "defined_by_equation": "create:JGW:9e5666f7a8",
+      "description": "Model series defined by CREATE JGW: 0.020",
       "name": "JGW",
       "short_name": "JGW",
       "source_runs": [],
@@ -29419,7 +32079,9 @@
       "name": "JGWFADJ",
       "short_name": "JGWFADJ",
       "source_runs": [],
-      "used_in_equations": []
+      "used_in_equations": [
+        "lhs:16:WF:f066bbb393"
+      ]
     },
     "JGWFPASS": {
       "code": "JGWFPASS",
@@ -29461,8 +32123,8 @@
     },
     "JHIA0": {
       "code": "JHIA0",
-      "defined_by_equation": "create:JHIA0:00471d7f73",
-      "description": "Model series defined by CREATE JHIA0: 0.198907",
+      "defined_by_equation": "create:JHIA0:bc3adf6a66",
+      "description": "Model series defined by CREATE JHIA0: 0.219407",
       "name": "JHIA0",
       "short_name": "JHIA0",
       "source_runs": [],
@@ -29557,8 +32219,8 @@
     },
     "JLOA0": {
       "code": "JLOA0",
-      "defined_by_equation": "create:JLOA0:d06a062ac9",
-      "description": "Model series defined by CREATE JLOA0: 0.189759",
+      "defined_by_equation": "create:JLOA0:ab5ad388e9",
+      "description": "Model series defined by CREATE JLOA0: 0.204159",
       "name": "JLOA0",
       "short_name": "JLOA0",
       "source_runs": [],
@@ -29644,7 +32306,7 @@
         "identity:GDPR:70d8349dcf",
         "identity:PUG:26176cad40",
         "identity:PUG:39ab232ca9",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a",
         "identity:WA:e7d25823ec",
         "identity:WH:38fce10e03",
@@ -29734,7 +32396,6 @@
         "identity:GDP:93f11320a1",
         "identity:GDPR:6448415c8d",
         "identity:GDPR:70d8349dcf",
-        "identity:JHPOP:043c32b100",
         "identity:PUS:4bdf6bf3d3",
         "identity:SS:1791370a9b",
         "identity:SS:481383485d",
@@ -29781,8 +32442,8 @@
     },
     "JUWUR": {
       "code": "JUWUR",
-      "defined_by_equation": "create:JUWUR:a6c7685705",
-      "description": "Model series defined by CREATE JUWUR: 0.8176",
+      "defined_by_equation": "create:JUWUR:9ed02c112c",
+      "description": "Model series defined by CREATE JUWUR: 0.81760",
       "name": "JUWUR",
       "short_name": "JUWUR",
       "source_runs": [],
@@ -29955,7 +32616,8 @@
         "genr:LEXKK:b21d74c801",
         "genr:LKK:21f9b85a36",
         "genr:LKK:67ecaa3a0c",
-        "identity:IKF:0c64b4de73"
+        "identity:IKF:0c64b4de73",
+        "lhs:12:KK:704b0ccda3"
       ]
     },
     "KKM": {
@@ -30045,7 +32707,6 @@
         "genr:LFORCE:9872c7b019",
         "genr:LTOTAL:1f9858c251",
         "genr:LTOTAL:a946b05962",
-        "identity:LFORCE:42e4306c22",
         "identity:U:c1bc881ef8",
         "identity:UR:9474a7b223"
       ]
@@ -30114,7 +32775,6 @@
         "genr:LFORCE:9872c7b019",
         "genr:LTOTAL:1f9858c251",
         "genr:LTOTAL:a946b05962",
-        "identity:LFORCE:42e4306c22",
         "identity:U:c1bc881ef8",
         "identity:UR:9474a7b223"
       ]
@@ -30183,7 +32843,6 @@
         "genr:LFORCE:9872c7b019",
         "genr:LTOTAL:1f9858c251",
         "genr:LTOTAL:a946b05962",
-        "identity:LFORCE:42e4306c22",
         "identity:U:c1bc881ef8",
         "identity:UR:9474a7b223"
       ]
@@ -30237,7 +32896,19 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:1:FSR:290a7aef0a",
+        "eq:1:LCSZ:af7424db0e",
+        "eq:2:FSR:0641625b36",
+        "eq:2:LCNZ:c3f43d74a8",
+        "eq:3:FSR:8dca97d17a",
+        "eq:5:FSR:621ee7dd1e",
+        "eq:5:LL1Z:9582b61872",
+        "eq:6:FSR:8953fe90d0",
+        "eq:6:LL2Z:ac4f5ced2d",
+        "eq:7:FSR:da8f7d29af",
+        "eq:7:LL3Z:8fe3271c58"
+      ]
     },
     "LAM": {
       "_provenance": {
@@ -30274,13 +32945,15 @@
         "genr:LWFQ:4af30f4182",
         "genr:LWFQ:ce66762b52",
         "identity:GDPR:6448415c8d",
-        "identity:JHMIN:7cf9da953b"
+        "identity:JHMIN:7cf9da953b",
+        "lhs:16:WF:91f4bc91b3",
+        "lhs:16:WF:f066bbb393"
       ]
     },
     "LCDZ": {
       "code": "LCDZ",
-      "defined_by_equation": "genr:LCDZ:a5999a9c50",
-      "description": "Model series defined by GENR LCDZ: LOG(CDZ)",
+      "defined_by_equation": "eq:3:LCDZ:e6a44ef775",
+      "description": "Model series defined by Eq 3: LCDZ C AG1 AG2 AG3 LCDZ(-1) LYDZ RMA",
       "name": "LCDZ",
       "short_name": "LCDZ",
       "source_runs": [
@@ -30299,12 +32972,16 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:3:FSR:8dca97d17a",
+        "eq:3:LCDZ:e6a44ef775",
+        "lhs:3:CD:d80dcb7b80"
+      ]
     },
     "LCNZ": {
       "code": "LCNZ",
-      "defined_by_equation": "genr:LCNZ:1304b7ae6f",
-      "description": "Model series defined by GENR LCNZ: LOG(CNZ)",
+      "defined_by_equation": "eq:2:LCNZ:c3f43d74a8",
+      "description": "Model series defined by Eq 2: LCNZ C AG1 AG2 AG3 LCNZ(-1) LAAZ(-1) LYDZ RMA RHO=1",
       "name": "LCNZ",
       "short_name": "LCNZ",
       "source_runs": [
@@ -30323,6 +33000,19 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
+      "used_in_equations": [
+        "eq:2:FSR:0641625b36",
+        "eq:2:LCNZ:c3f43d74a8",
+        "lhs:2:CN:763b4e42f3"
+      ]
+    },
+    "LCNZ C AG1 AG2 AG3 LCNZ(-1) LAAZ(-1) LYDZ RMA RHO": {
+      "code": "LCNZ C AG1 AG2 AG3 LCNZ(-1) LAAZ(-1) LYDZ RMA RHO",
+      "defined_by_equation": "eq:2:LCNZ:c3f43d74a8",
+      "description": "Model series defined by Eq 2: LCNZ C AG1 AG2 AG3 LCNZ(-1) LAAZ(-1) LYDZ RMA RHO=1",
+      "name": "LCNZ C AG1 AG2 AG3 LCNZ(-1) LAAZ(-1) LYDZ RMA RHO",
+      "short_name": "LCNZ C AG1 AG2 AG3 LCNZ(-1) LAAZ(-1) LYDZ RMA RHO",
+      "source_runs": [],
       "used_in_equations": []
     },
     "LCOGSZ": {
@@ -30347,12 +33037,36 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:10:FSR:93f3292d05",
+        "eq:11:FSR:a46c5229c6",
+        "eq:12:FSR:6bc9014f77",
+        "eq:13:FSR:5ffaa756a1",
+        "eq:14:FSR:2a6c39fa75",
+        "eq:16:FSR:2db1d57a77",
+        "eq:17:FSR:c01dd7d022",
+        "eq:18:FSR:107c270cdf",
+        "eq:1:FSR:290a7aef0a",
+        "eq:23:FSR:5b26a39f44",
+        "eq:24:FSR:b7d6d7661c",
+        "eq:26:FSR:f420e3c987",
+        "eq:27:FSR:e49e721cac",
+        "eq:28:FSR:398a664e1b",
+        "eq:2:FSR:0641625b36",
+        "eq:30:FSR:084152c76f",
+        "eq:30:FSR:acb2f293e6",
+        "eq:3:FSR:8dca97d17a",
+        "eq:4:FSR:f1fd4577ff",
+        "eq:5:FSR:621ee7dd1e",
+        "eq:6:FSR:8953fe90d0",
+        "eq:7:FSR:da8f7d29af",
+        "eq:8:FSR:26a054f0e9"
+      ]
     },
     "LCSZ": {
       "code": "LCSZ",
-      "defined_by_equation": "genr:LCSZ:6c64586a72",
-      "description": "Model series defined by GENR LCSZ: LOG(CSZ)",
+      "defined_by_equation": "eq:1:LCSZ:af7424db0e",
+      "description": "Model series defined by Eq 1: LCSZ CNST2CS C AG1 AG2 AG3 LCSZ(-1) LYDZ RSA LAAZ(-1) RHO=1",
       "name": "LCSZ",
       "short_name": "LCSZ",
       "source_runs": [
@@ -30371,6 +33085,19 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
+      "used_in_equations": [
+        "eq:1:FSR:290a7aef0a",
+        "eq:1:LCSZ:af7424db0e",
+        "lhs:1:CS:474d38ed3f"
+      ]
+    },
+    "LCSZ CNST2CS C AG1 AG2 AG3 LCSZ(-1) LYDZ RSA LAAZ(-1) RHO": {
+      "code": "LCSZ CNST2CS C AG1 AG2 AG3 LCSZ(-1) LYDZ RSA LAAZ(-1) RHO",
+      "defined_by_equation": "eq:1:LCSZ:af7424db0e",
+      "description": "Model series defined by Eq 1: LCSZ CNST2CS C AG1 AG2 AG3 LCSZ(-1) LYDZ RSA LAAZ(-1) RHO=1",
+      "name": "LCSZ CNST2CS C AG1 AG2 AG3 LCSZ(-1) LYDZ RSA LAAZ(-1) RHO",
+      "short_name": "LCSZ CNST2CS C AG1 AG2 AG3 LCSZ(-1) LYDZ RSA LAAZ(-1) RHO",
+      "source_runs": [],
       "used_in_equations": []
     },
     "LCURL1Q": {
@@ -30395,12 +33122,14 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:26:FSR:f420e3c987"
+      ]
     },
     "LCURZ": {
       "code": "LCURZ",
-      "defined_by_equation": "genr:LCURZ:25e612263d",
-      "description": "Model series defined by GENR LCURZ: LOG(CUR/(POP*PF))",
+      "defined_by_equation": "eq:26:LCURZ:cfdb635928",
+      "description": "Model series defined by Eq 26: LCURZ C LCURZ(-1) LXMFAZ RSA",
       "name": "LCURZ",
       "short_name": "LCURZ",
       "source_runs": [
@@ -30419,7 +33148,11 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:26:FSR:f420e3c987",
+        "eq:26:LCURZ:cfdb635928",
+        "lhs:26:CUR:80330f8a08"
+      ]
     },
     "LCUSTZ": {
       "code": "LCUSTZ",
@@ -30443,7 +33176,10 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:10:FSR:93f3292d05",
+        "eq:10:LPF:00b8f4606e"
+      ]
     },
     "LDF": {
       "code": "LDF",
@@ -30471,8 +33207,8 @@
     },
     "LDF1": {
       "code": "LDF1",
-      "defined_by_equation": "genr:LDF1:31ae9a1778",
-      "description": "Model series defined by GENR LDF1: LOG((DF)/(DF(-1)))",
+      "defined_by_equation": "eq:18:LDF1:56744ee2ad",
+      "description": "Model series defined by Eq 18: LDF1 LPIEFAZ",
       "name": "LDF1",
       "short_name": "LDF1",
       "source_runs": [
@@ -30491,7 +33227,9 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "lhs:18:DF:ba32955c66"
+      ]
     },
     "LEX": {
       "code": "LEX",
@@ -30539,7 +33277,10 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:12:FSR:6bc9014f77",
+        "eq:12:LKK1:6293633ebb"
+      ]
     },
     "LEXL": {
       "code": "LEXL",
@@ -30563,7 +33304,12 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:13:FSR:5ffaa756a1",
+        "eq:13:LJF1:0bc8d70510",
+        "eq:14:FSR:2a6c39fa75",
+        "eq:14:LHF1:6051dc8c3a"
+      ]
     },
     "LEXZ": {
       "code": "LEXZ",
@@ -30587,7 +33333,31 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:10:FSR:93f3292d05",
+        "eq:11:FSR:a46c5229c6",
+        "eq:12:FSR:6bc9014f77",
+        "eq:13:FSR:5ffaa756a1",
+        "eq:14:FSR:2a6c39fa75",
+        "eq:16:FSR:2db1d57a77",
+        "eq:17:FSR:c01dd7d022",
+        "eq:18:FSR:107c270cdf",
+        "eq:1:FSR:290a7aef0a",
+        "eq:23:FSR:5b26a39f44",
+        "eq:24:FSR:b7d6d7661c",
+        "eq:26:FSR:f420e3c987",
+        "eq:27:FSR:e49e721cac",
+        "eq:28:FSR:398a664e1b",
+        "eq:2:FSR:0641625b36",
+        "eq:30:FSR:084152c76f",
+        "eq:30:FSR:acb2f293e6",
+        "eq:3:FSR:8dca97d17a",
+        "eq:4:FSR:f1fd4577ff",
+        "eq:5:FSR:621ee7dd1e",
+        "eq:6:FSR:8953fe90d0",
+        "eq:7:FSR:da8f7d29af",
+        "eq:8:FSR:26a054f0e9"
+      ]
     },
     "LFORCE": {
       "code": "LFORCE",
@@ -30601,8 +33371,7 @@
         "identity:JGULLOT:3bafd0cbb9",
         "identity:JGUUWKS:dd7e3e4187",
         "identity:JGWAJHI:774ab23314",
-        "identity:JGWAJLO:ba347e9762",
-        "identity:LFPOP:88e04ef115"
+        "identity:JGWAJLO:ba347e9762"
       ]
     },
     "LFPOP": {
@@ -30689,8 +33458,8 @@
     },
     "LHF1": {
       "code": "LHF1",
-      "defined_by_equation": "genr:LHF1:2943e60a89",
-      "description": "Model series defined by GENR LHF1: LOG(HF/HF(-1))",
+      "defined_by_equation": "eq:14:LHF1:6051dc8c3a",
+      "description": "Model series defined by Eq 14: LHF1 C LHFL1A LEXL(-1) LY1 T",
       "name": "LHF1",
       "short_name": "LHF1",
       "source_runs": [
@@ -30709,7 +33478,9 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "lhs:14:HF:ea28941587"
+      ]
     },
     "LHFL1A": {
       "code": "LHFL1A",
@@ -30733,12 +33504,15 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:14:FSR:2a6c39fa75",
+        "eq:14:LHF1:6051dc8c3a"
+      ]
     },
     "LHO": {
       "code": "LHO",
-      "defined_by_equation": "genr:LHO:72dcf24e25",
-      "description": "Model series defined by GENR LHO: LOG(HO)",
+      "defined_by_equation": "eq:15:LHO:79c05c5d69",
+      "description": "Model series defined by Eq 15: LHO C HFF HFF(-1) RHO=1",
       "name": "LHO",
       "short_name": "LHO",
       "source_runs": [
@@ -30757,21 +33531,23 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "lhs:15:HO:5328ae146c"
+      ]
     },
-    "LIBTZ": {
-      "code": "LIBTZ",
-      "defined_by_equation": "genr:LIBTZ:57706aa1b7",
-      "description": "Model series defined by GENR LIBTZ: LOG((IBTG+IBTS)/XX)",
-      "name": "LIBTZ",
-      "short_name": "LIBTZ",
+    "LHO C HFF HFF(-1) RHO": {
+      "code": "LHO C HFF HFF(-1) RHO",
+      "defined_by_equation": "eq:15:LHO:79c05c5d69",
+      "description": "Model series defined by Eq 15: LHO C HFF HFF(-1) RHO=1",
+      "name": "LHO C HFF HFF(-1) RHO",
+      "short_name": "LHO C HFF HFF(-1) RHO",
       "source_runs": [],
       "used_in_equations": []
     },
     "LIHHZ": {
       "code": "LIHHZ",
-      "defined_by_equation": "genr:LIHHZ:1d2a33e26b",
-      "description": "Model series defined by GENR LIHHZ: LOG(IHHZ)",
+      "defined_by_equation": "eq:4:LIHHZ:ecf089957e",
+      "description": "Model series defined by Eq 4: LIHHZ C AG1 AG2 AG3 LIHHZ(-1) LYDZ RMA(-1) RHO=1",
       "name": "LIHHZ",
       "short_name": "LIHHZ",
       "source_runs": [
@@ -30790,12 +33566,25 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
+      "used_in_equations": [
+        "eq:4:FSR:f1fd4577ff",
+        "eq:4:LIHHZ:ecf089957e",
+        "lhs:4:IHH:0348513703"
+      ]
+    },
+    "LIHHZ C AG1 AG2 AG3 LIHHZ(-1) LYDZ RMA(-1) RHO": {
+      "code": "LIHHZ C AG1 AG2 AG3 LIHHZ(-1) LYDZ RMA(-1) RHO",
+      "defined_by_equation": "eq:4:LIHHZ:ecf089957e",
+      "description": "Model series defined by Eq 4: LIHHZ C AG1 AG2 AG3 LIHHZ(-1) LYDZ RMA(-1) RHO=1",
+      "name": "LIHHZ C AG1 AG2 AG3 LIHHZ(-1) LYDZ RMA(-1) RHO",
+      "short_name": "LIHHZ C AG1 AG2 AG3 LIHHZ(-1) LYDZ RMA(-1) RHO",
+      "source_runs": [],
       "used_in_equations": []
     },
     "LIMZ": {
       "code": "LIMZ",
-      "defined_by_equation": "genr:LIMZ:876c9a922c",
-      "description": "Model series defined by GENR LIMZ: LOG(IMZ)",
+      "defined_by_equation": "eq:27:LIMZ:7945aa18f0",
+      "description": "Model series defined by Eq 27: LIMZ C AG1 AG2 AG3 LIMZ(-1) LYZ LPFZPIM T D691 D692 D714 D721 RHO=0",
       "name": "LIMZ",
       "short_name": "LIMZ",
       "source_runs": [
@@ -30814,12 +33603,25 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
+      "used_in_equations": [
+        "eq:27:FSR:e49e721cac",
+        "eq:27:LIMZ:7945aa18f0",
+        "lhs:27:IM:8afeb5590b"
+      ]
+    },
+    "LIMZ C AG1 AG2 AG3 LIMZ(-1) LYZ LPFZPIM T D691 D692 D714 D721 RHO": {
+      "code": "LIMZ C AG1 AG2 AG3 LIMZ(-1) LYZ LPFZPIM T D691 D692 D714 D721 RHO",
+      "defined_by_equation": "eq:27:LIMZ:7945aa18f0",
+      "description": "Model series defined by Eq 27: LIMZ C AG1 AG2 AG3 LIMZ(-1) LYZ LPFZPIM T D691 D692 D714 D721 RHO=0",
+      "name": "LIMZ C AG1 AG2 AG3 LIMZ(-1) LYZ LPFZPIM T D691 D692 D714 D721 RHO",
+      "short_name": "LIMZ C AG1 AG2 AG3 LIMZ(-1) LYZ LPFZPIM T D691 D692 D714 D721 RHO",
+      "source_runs": [],
       "used_in_equations": []
     },
     "LJF1": {
       "code": "LJF1",
-      "defined_by_equation": "genr:LJF1:097b9ddfb8",
-      "description": "Model series defined by GENR LJF1: LOG(JF/JF(-1))",
+      "defined_by_equation": "eq:13:LJF1:0bc8d70510",
+      "description": "Model series defined by Eq 13: LJF1 C LEXL(-1) LJF1(-1) LY1 D593",
       "name": "LJF1",
       "short_name": "LJF1",
       "source_runs": [
@@ -30838,7 +33640,11 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:13:FSR:5ffaa756a1",
+        "eq:13:LJF1:0bc8d70510",
+        "lhs:13:JF:7acbffbbad"
+      ]
     },
     "LJHGSZ": {
       "code": "LJHGSZ",
@@ -30935,14 +33741,15 @@
         "ineq-transfer-composite-large"
       ],
       "used_in_equations": [
+        "eq:12:FSR:6bc9014f77",
         "genr:LKK1:5d152d3479",
         "genr:LKK1:a8a2a7b81d"
       ]
     },
     "LKK1": {
       "code": "LKK1",
-      "defined_by_equation": "genr:LKK1:a8a2a7b81d",
-      "description": "Model series defined by GENR LKK1: LKK-LKK(-1)",
+      "defined_by_equation": "eq:12:LKK1:6293633ebb",
+      "description": "Model series defined by Eq 12: LKK1 CNST2KK C LEXKK(-1) LKK1(-1) LY1 LY1(-1) LY1(-2) LY1(-3) LY1(-4) CGZ3(-2) RHO=1",
       "name": "LKK1",
       "short_name": "LKK1",
       "source_runs": [
@@ -30961,12 +33768,25 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
+      "used_in_equations": [
+        "eq:12:FSR:6bc9014f77",
+        "eq:12:LKK1:6293633ebb",
+        "lhs:12:KK:704b0ccda3"
+      ]
+    },
+    "LKK1 CNST2KK C LEXKK(-1) LKK1(-1) LY1 LY1(-1) LY1(-2) LY1(-3) LY1(-4) CGZ3(-2) RHO": {
+      "code": "LKK1 CNST2KK C LEXKK(-1) LKK1(-1) LY1 LY1(-1) LY1(-2) LY1(-3) LY1(-4) CGZ3(-2) RHO",
+      "defined_by_equation": "eq:12:LKK1:6293633ebb",
+      "description": "Model series defined by Eq 12: LKK1 CNST2KK C LEXKK(-1) LKK1(-1) LY1 LY1(-1) LY1(-2) LY1(-3) LY1(-4) CGZ3(-2) RHO=1",
+      "name": "LKK1 CNST2KK C LEXKK(-1) LKK1(-1) LY1 LY1(-1) LY1(-2) LY1(-3) LY1(-4) CGZ3(-2) RHO",
+      "short_name": "LKK1 CNST2KK C LEXKK(-1) LKK1(-1) LY1 LY1(-1) LY1(-2) LY1(-3) LY1(-4) CGZ3(-2) RHO",
+      "source_runs": [],
       "used_in_equations": []
     },
     "LL1Z": {
       "code": "LL1Z",
-      "defined_by_equation": "genr:LL1Z:843df43c90",
-      "description": "Model series defined by GENR LL1Z: LOG(L1Z)",
+      "defined_by_equation": "eq:5:LL1Z:9582b61872",
+      "description": "Model series defined by Eq 5: LL1Z C LL1Z(-1) LAAZ(-1) UR",
       "name": "LL1Z",
       "short_name": "LL1Z",
       "source_runs": [
@@ -30985,12 +33805,16 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:5:FSR:621ee7dd1e",
+        "eq:5:LL1Z:9582b61872",
+        "lhs:5:L1:93a39e1f8d"
+      ]
     },
     "LL2Z": {
       "code": "LL2Z",
-      "defined_by_equation": "genr:LL2Z:936e7ca6b0",
-      "description": "Model series defined by GENR LL2Z: LOG(L2Z)",
+      "defined_by_equation": "eq:6:LL2Z:ac4f5ced2d",
+      "description": "Model series defined by Eq 6: LL2Z CNST2L2 C TBL2 T LL2Z(-1) LAAZ(-1) UR",
       "name": "LL2Z",
       "short_name": "LL2Z",
       "source_runs": [
@@ -31009,12 +33833,16 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:6:FSR:8953fe90d0",
+        "eq:6:LL2Z:ac4f5ced2d",
+        "lhs:6:L2:882da31cab"
+      ]
     },
     "LL3Z": {
       "code": "LL3Z",
-      "defined_by_equation": "genr:LL3Z:bca712be5b",
-      "description": "Model series defined by GENR LL3Z: LOG(L3Z)",
+      "defined_by_equation": "eq:7:LL3Z:8fe3271c58",
+      "description": "Model series defined by Eq 7: LL3Z C LL3Z(-1) LWAZPH LAAZ(-1) UR",
       "name": "LL3Z",
       "short_name": "LL3Z",
       "source_runs": [
@@ -31033,12 +33861,16 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:7:FSR:da8f7d29af",
+        "eq:7:LL3Z:8fe3271c58",
+        "lhs:7:L3:5af4433373"
+      ]
     },
     "LLMZ": {
       "code": "LLMZ",
-      "defined_by_equation": "genr:LLMZ:31224f1394",
-      "description": "Model series defined by GENR LLMZ: LOG(LMZ)",
+      "defined_by_equation": "eq:8:LLMZ:fbf0058c1c",
+      "description": "Model series defined by Eq 8: LLMZ C LLMZ(-1) UR",
       "name": "LLMZ",
       "short_name": "LLMZ",
       "source_runs": [
@@ -31057,7 +33889,11 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:8:FSR:26a054f0e9",
+        "eq:8:LLMZ:fbf0058c1c",
+        "lhs:8:LM:cc9e787283"
+      ]
     },
     "LM": {
       "_provenance": {
@@ -31143,12 +33979,14 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:17:FSR:c01dd7d022"
+      ]
     },
     "LMFZ": {
       "code": "LMFZ",
-      "defined_by_equation": "genr:LMFZ:68e2ffb6db",
-      "description": "Model series defined by GENR LMFZ: LOG(MF/PF)",
+      "defined_by_equation": "eq:17:LMFZ:cae1071098",
+      "description": "Model series defined by Eq 17: LMFZ C LMFZ(-1) LXMFA RSB",
       "name": "LMFZ",
       "short_name": "LMFZ",
       "source_runs": [
@@ -31167,7 +34005,11 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:17:FSR:c01dd7d022",
+        "eq:17:LMFZ:cae1071098",
+        "lhs:17:MF:8ea2c372db"
+      ]
     },
     "LMZ": {
       "code": "LMZ",
@@ -31222,7 +34064,6 @@
         "genr:LHF:be40ecf405",
         "genr:LHFL1A:668b3234c6",
         "genr:LHO:72dcf24e25",
-        "genr:LIBTZ:57706aa1b7",
         "genr:LIHHZ:1d2a33e26b",
         "genr:LIMZ:876c9a922c",
         "genr:LJF1:097b9ddfb8",
@@ -31362,8 +34203,8 @@
     },
     "LPF": {
       "code": "LPF",
-      "defined_by_equation": "genr:LPF:cff97e6892",
-      "description": "Model series defined by GENR LPF: LOG(PF)",
+      "defined_by_equation": "eq:10:LPF:00b8f4606e",
+      "description": "Model series defined by Eq 10: LPF LPF(-1) LWFD5 C T LPIM ONEZUR LCUSTZ RHO=1",
       "name": "LPF",
       "short_name": "LPF",
       "source_runs": [
@@ -31383,6 +34224,9 @@
         "ineq-transfer-composite-large"
       ],
       "used_in_equations": [
+        "eq:10:FSR:93f3292d05",
+        "eq:10:LPF:00b8f4606e",
+        "eq:16:FSR:2db1d57a77",
         "genr:LPFZ:0f73906c75",
         "genr:LPFZ:80e4e1c0b4",
         "genr:LWFQZ:e089c9f2c6",
@@ -31390,8 +34234,20 @@
         "genr:LWFQZPF:169796119e",
         "genr:LWFQZPF:b2d0df95db",
         "genr:LWFZPF:a2c59ce0e2",
-        "genr:LWFZPF:d08564bc63"
+        "genr:LWFZPF:d08564bc63",
+        "lhs:10:PF:065b82a4ce",
+        "lhs:16:WF:91f4bc91b3",
+        "lhs:16:WF:f066bbb393"
       ]
+    },
+    "LPF LPF(-1) LWFD5 C T LPIM ONEZUR LCUSTZ RHO": {
+      "code": "LPF LPF(-1) LWFD5 C T LPIM ONEZUR LCUSTZ RHO",
+      "defined_by_equation": "eq:10:LPF:00b8f4606e",
+      "description": "Model series defined by Eq 10: LPF LPF(-1) LWFD5 C T LPIM ONEZUR LCUSTZ RHO=1",
+      "name": "LPF LPF(-1) LWFD5 C T LPIM ONEZUR LCUSTZ RHO",
+      "short_name": "LPF LPF(-1) LWFD5 C T LPIM ONEZUR LCUSTZ RHO",
+      "source_runs": [],
+      "used_in_equations": []
     },
     "LPFZ": {
       "code": "LPFZ",
@@ -31415,7 +34271,9 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:16:LWFQZ:050a1a2633"
+      ]
     },
     "LPFZPIM": {
       "code": "LPFZPIM",
@@ -31439,7 +34297,10 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:27:FSR:e49e721cac",
+        "eq:27:LIMZ:7945aa18f0"
+      ]
     },
     "LPH": {
       "code": "LPH",
@@ -31487,7 +34348,10 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:18:FSR:107c270cdf",
+        "eq:18:LDF1:56744ee2ad"
+      ]
     },
     "LPIM": {
       "code": "LPIM",
@@ -31511,7 +34375,12 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:10:FSR:93f3292d05",
+        "eq:10:LPF:00b8f4606e",
+        "eq:16:FSR:2db1d57a77",
+        "eq:27:FSR:e49e721cac"
+      ]
     },
     "LPIMZ": {
       "code": "LPIMZ",
@@ -31535,7 +34404,11 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:23:FSR:5b26a39f44",
+        "eq:24:FSR:b7d6d7661c",
+        "eq:28:FSR:398a664e1b"
+      ]
     },
     "LPOCA": {
       "category": "model",
@@ -31611,7 +34484,10 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:1:FSR:290a7aef0a",
+        "eq:27:FSR:e49e721cac"
+      ]
     },
     "LPOVA": {
       "category": "model",
@@ -31831,7 +34707,31 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:10:FSR:93f3292d05",
+        "eq:11:FSR:a46c5229c6",
+        "eq:12:FSR:6bc9014f77",
+        "eq:13:FSR:5ffaa756a1",
+        "eq:14:FSR:2a6c39fa75",
+        "eq:16:FSR:2db1d57a77",
+        "eq:17:FSR:c01dd7d022",
+        "eq:18:FSR:107c270cdf",
+        "eq:1:FSR:290a7aef0a",
+        "eq:23:FSR:5b26a39f44",
+        "eq:24:FSR:b7d6d7661c",
+        "eq:26:FSR:f420e3c987",
+        "eq:27:FSR:e49e721cac",
+        "eq:28:FSR:398a664e1b",
+        "eq:2:FSR:0641625b36",
+        "eq:30:FSR:084152c76f",
+        "eq:30:FSR:acb2f293e6",
+        "eq:3:FSR:8dca97d17a",
+        "eq:4:FSR:f1fd4577ff",
+        "eq:5:FSR:621ee7dd1e",
+        "eq:6:FSR:8953fe90d0",
+        "eq:7:FSR:da8f7d29af",
+        "eq:8:FSR:26a054f0e9"
+      ]
     },
     "LU": {
       "code": "LU",
@@ -31855,12 +34755,15 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:28:FSR:398a664e1b",
+        "eq:28:LUB:009bff7974"
+      ]
     },
     "LUB": {
       "code": "LUB",
-      "defined_by_equation": "genr:LUB:ab2fa74b0a",
-      "description": "Model series defined by GENR LUB: LOG(UB)",
+      "defined_by_equation": "eq:28:LUB:009bff7974",
+      "description": "Model series defined by Eq 28: LUB C LUB(-1) LU LWF RHO=1",
       "name": "LUB",
       "short_name": "LUB",
       "source_runs": [
@@ -31879,6 +34782,19 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
+      "used_in_equations": [
+        "eq:28:FSR:398a664e1b",
+        "eq:28:LUB:009bff7974",
+        "lhs:28:UB:b67bc69f72"
+      ]
+    },
+    "LUB C LUB(-1) LU LWF RHO": {
+      "code": "LUB C LUB(-1) LU LWF RHO",
+      "defined_by_equation": "eq:28:LUB:009bff7974",
+      "description": "Model series defined by Eq 28: LUB C LUB(-1) LU LWF RHO=1",
+      "name": "LUB C LUB(-1) LU LWF RHO",
+      "short_name": "LUB C LUB(-1) LU LWF RHO",
+      "source_runs": [],
       "used_in_equations": []
     },
     "LV": {
@@ -31903,7 +34819,10 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:11:FSR:a46c5229c6",
+        "eq:11:LY:7609bc2602"
+      ]
     },
     "LVZ": {
       "code": "LVZ",
@@ -31951,7 +34870,10 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:7:FSR:da8f7d29af",
+        "eq:7:LL3Z:8fe3271c58"
+      ]
     },
     "LWF": {
       "code": "LWF",
@@ -31976,6 +34898,8 @@
         "ineq-transfer-composite-large"
       ],
       "used_in_equations": [
+        "eq:28:FSR:398a664e1b",
+        "eq:28:LUB:009bff7974",
         "genr:LWFZPF:a2c59ce0e2",
         "genr:LWFZPF:d08564bc63"
       ]
@@ -32002,7 +34926,10 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:10:FSR:93f3292d05",
+        "eq:10:LPF:00b8f4606e"
+      ]
     },
     "LWFQ": {
       "code": "LWFQ",
@@ -32035,8 +34962,8 @@
     },
     "LWFQZ": {
       "code": "LWFQZ",
-      "defined_by_equation": "genr:LWFQZ:e089c9f2c6",
-      "description": "Model series defined by GENR LWFQZ: LWFQ-DELTA1*LPF(-1)",
+      "defined_by_equation": "eq:16:LWFQZ:050a1a2633",
+      "description": "Model series defined by Eq 16: LWFQZ LWFQZPF(-1) LPFZ C",
       "name": "LWFQZ",
       "short_name": "LWFQZ",
       "source_runs": [
@@ -32055,7 +34982,10 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "lhs:16:WF:91f4bc91b3",
+        "lhs:16:WF:f066bbb393"
+      ]
     },
     "LWFQZPF": {
       "code": "LWFQZPF",
@@ -32079,7 +35009,10 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:16:FSR:2db1d57a77",
+        "eq:16:LWFQZ:050a1a2633"
+      ]
     },
     "LWFZPF": {
       "code": "LWFZPF",
@@ -32127,7 +35060,9 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:11:LY:7609bc2602"
+      ]
     },
     "LXMFA": {
       "code": "LXMFA",
@@ -32151,7 +35086,10 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:17:FSR:c01dd7d022",
+        "eq:17:LMFZ:cae1071098"
+      ]
     },
     "LXMFAZ": {
       "code": "LXMFAZ",
@@ -32175,7 +35113,10 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:26:FSR:f420e3c987",
+        "eq:26:LCURZ:cfdb635928"
+      ]
     },
     "LXXXZ": {
       "code": "LXXXZ",
@@ -32203,8 +35144,8 @@
     },
     "LY": {
       "code": "LY",
-      "defined_by_equation": "genr:LY:91d44e7679",
-      "description": "Model series defined by GENR LY: LOG(Y)",
+      "defined_by_equation": "eq:11:LY:7609bc2602",
+      "description": "Model series defined by Eq 11: LY C LY(-1) LX LV(-1) D593 D594 D601 RHO=3",
       "name": "LY",
       "short_name": "LY",
       "source_runs": [
@@ -32223,6 +35164,20 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
+      "used_in_equations": [
+        "eq:11:FSR:a46c5229c6",
+        "eq:11:LY:7609bc2602",
+        "eq:12:FSR:6bc9014f77",
+        "lhs:11:Y:6cbf8f9aac"
+      ]
+    },
+    "LY C LY(-1) LX LV(-1) D593 D594 D601 RHO": {
+      "code": "LY C LY(-1) LX LV(-1) D593 D594 D601 RHO",
+      "defined_by_equation": "eq:11:LY:7609bc2602",
+      "description": "Model series defined by Eq 11: LY C LY(-1) LX LV(-1) D593 D594 D601 RHO=3",
+      "name": "LY C LY(-1) LX LV(-1) D593 D594 D601 RHO",
+      "short_name": "LY C LY(-1) LX LV(-1) D593 D594 D601 RHO",
+      "source_runs": [],
       "used_in_equations": []
     },
     "LY1": {
@@ -32247,7 +35202,14 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:12:FSR:6bc9014f77",
+        "eq:12:LKK1:6293633ebb",
+        "eq:13:FSR:5ffaa756a1",
+        "eq:13:LJF1:0bc8d70510",
+        "eq:14:FSR:2a6c39fa75",
+        "eq:14:LHF1:6051dc8c3a"
+      ]
     },
     "LYDZ": {
       "code": "LYDZ",
@@ -32271,7 +35233,15 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:1:LCSZ:af7424db0e",
+        "eq:2:FSR:0641625b36",
+        "eq:2:LCNZ:c3f43d74a8",
+        "eq:3:FSR:8dca97d17a",
+        "eq:3:LCDZ:e6a44ef775",
+        "eq:4:FSR:f1fd4577ff",
+        "eq:4:LIHHZ:ecf089957e"
+      ]
     },
     "LYZ": {
       "code": "LYZ",
@@ -32295,7 +35265,10 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:27:FSR:e49e721cac",
+        "eq:27:LIMZ:7945aa18f0"
+      ]
     },
     "M1": {
       "_provenance": {
@@ -32453,7 +35426,7 @@
       "category": "endogenous",
       "code": "MF",
       "construction": "Sum of CDDCF+MAILFLT1+MAILFLT2+CDDCN+MAILFLT3, Base Period=1971.4, Value=84.075",
-      "defined_by_equation": null,
+      "defined_by_equation": "lhs:17:MF:8ea2c372db",
       "description": "Demand deposits and currency, f, B$.",
       "name": "MF",
       "sector": "firm",
@@ -32640,13 +35613,14 @@
     },
     "MINWAGE": {
       "code": "MINWAGE",
-      "defined_by_equation": "create:MINWAGE:a8e256ad3a",
-      "description": "Model series defined by CREATE MINWAGE: 0.012",
+      "defined_by_equation": "create:MINWAGE:db91a040c6",
+      "description": "Model series defined by CREATE MINWAGE: 0.00843",
       "name": "MINWAGE",
       "short_name": "MINWAGE",
       "source_runs": [],
       "used_in_equations": [
-        "identity:JGWFADJ:1492ec88f1"
+        "identity:JGWFADJ:1492ec88f1",
+        "identity:MINWAGE:a690b8106a"
       ]
     },
     "MR": {
@@ -32851,6 +35825,17 @@
         "identity:JGWFADJ:1492ec88f1"
       ]
     },
+    "MWCOLA": {
+      "code": "MWCOLA",
+      "defined_by_equation": "create:MWCOLA:ce233579b8",
+      "description": "Model series defined by CREATE MWCOLA: 0",
+      "name": "MWCOLA",
+      "short_name": "MWCOLA",
+      "source_runs": [],
+      "used_in_equations": [
+        "identity:MINWAGE:a690b8106a"
+      ]
+    },
     "NICD": {
       "_provenance": {
         "table": "A.2"
@@ -32884,11 +35869,9 @@
         65,
         68,
         69,
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
         "identity:SH:1c5f9bbd98",
         "identity:SH:e26dbfc63a"
       ]
@@ -32924,8 +35907,7 @@
       "units": "B$",
       "used_in_equations": [
         69,
-        "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452"
+        "identity:SF:1d7769146a"
       ]
     },
     "NNG": {
@@ -32959,7 +35941,7 @@
       "units": "B$",
       "used_in_equations": [
         76,
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a"
       ]
     },
@@ -33072,8 +36054,8 @@
     },
     "NONE19": {
       "code": "NONE19",
-      "defined_by_equation": null,
-      "description": "Model variable exposed through the public dictionary.",
+      "defined_by_equation": "eq:19:NONE19:ef9b6ad4ef",
+      "description": "Model series defined by Eq 19: NONE19 C",
       "name": "NONE19",
       "short_name": "NONE19",
       "source_runs": [],
@@ -33081,8 +36063,8 @@
     },
     "NONE20": {
       "code": "NONE20",
-      "defined_by_equation": null,
-      "description": "Model variable exposed through the public dictionary.",
+      "defined_by_equation": "eq:20:NONE20:186cd27a17",
+      "description": "Model series defined by Eq 20: NONE20 C",
       "name": "NONE20",
       "short_name": "NONE20",
       "source_runs": [],
@@ -33090,8 +36072,8 @@
     },
     "NONE21": {
       "code": "NONE21",
-      "defined_by_equation": null,
-      "description": "Model variable exposed through the public dictionary.",
+      "defined_by_equation": "eq:21:NONE21:87b8b25f4b",
+      "description": "Model series defined by Eq 21: NONE21 C",
       "name": "NONE21",
       "short_name": "NONE21",
       "source_runs": [],
@@ -33099,8 +36081,8 @@
     },
     "NONE22": {
       "code": "NONE22",
-      "defined_by_equation": null,
-      "description": "Model variable exposed through the public dictionary.",
+      "defined_by_equation": "eq:22:NONE22:e0433f7386",
+      "description": "Model series defined by Eq 22: NONE22 C",
       "name": "NONE22",
       "short_name": "NONE22",
       "source_runs": [],
@@ -33108,8 +36090,8 @@
     },
     "NONE25": {
       "code": "NONE25",
-      "defined_by_equation": null,
-      "description": "Model variable exposed through the public dictionary.",
+      "defined_by_equation": "eq:25:NONE25:2faca138d0",
+      "description": "Model series defined by Eq 25: NONE25 C",
       "name": "NONE25",
       "short_name": "NONE25",
       "source_runs": [],
@@ -33117,8 +36099,8 @@
     },
     "NONE9": {
       "code": "NONE9",
-      "defined_by_equation": null,
-      "description": "Model variable exposed through the public dictionary.",
+      "defined_by_equation": "eq:9:NONE9:ffa86b4371",
+      "description": "Model series defined by Eq 9: NONE9 C",
       "name": "NONE9",
       "short_name": "NONE9",
       "source_runs": [],
@@ -33170,7 +36152,11 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:10:FSR:93f3292d05",
+        "eq:10:LPF:00b8f4606e",
+        "eq:16:FSR:2db1d57a77"
+      ]
     },
     "PCD": {
       "_provenance": {
@@ -33409,7 +36395,12 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:30:FSR:084152c76f",
+        "eq:30:FSR:acb2f293e6",
+        "eq:30:RS:cb885cd126",
+        "eq:30:RSX:5c9aa8b775"
+      ]
     },
     "PCM1L1B": {
       "code": "PCM1L1B",
@@ -33433,7 +36424,12 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:30:FSR:084152c76f",
+        "eq:30:FSR:acb2f293e6",
+        "eq:30:RS:cb885cd126",
+        "eq:30:RSX:5c9aa8b775"
+      ]
     },
     "PCM1_": {
       "code": "PCM1_",
@@ -33508,7 +36504,15 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:23:FSR:5b26a39f44",
+        "eq:24:FSR:b7d6d7661c",
+        "eq:28:FSR:398a664e1b",
+        "eq:30:FSR:084152c76f",
+        "eq:30:FSR:acb2f293e6",
+        "eq:30:RS:cb885cd126",
+        "eq:30:RSX:5c9aa8b775"
+      ]
     },
     "PCPD4": {
       "code": "PCPD4",
@@ -33878,7 +36882,9 @@
         "genr:PCPF:d8434b3275",
         "genr:PCPF:da31a0c28e",
         "identity:PX:41be91297c",
-        "identity:WR:cb6cf64e4b"
+        "identity:WR:cb6cf64e4b",
+        "lhs:17:MF:8ea2c372db",
+        "lhs:26:CUR:80330f8a08"
       ]
     },
     "PF LOG PF\u22121, LOG[WF(1 + D5G)/LAM], CNST, T, LOG PIM, 1/UR, LOG[(IBTG + IBTS)/XX], D202014, D202020, D202023, D202024, D202011, D202012, D202013, D202014, RHO": {
@@ -33956,7 +36962,7 @@
         104,
         "identity:PUG:26176cad40",
         "identity:PUG:39ab232ca9",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a",
         "identity:X:9419caf650",
         "identity:XX:36405496d0",
@@ -34197,7 +37203,6 @@
       "used_in_equations": [
         57,
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
         "identity:USROW:488665d9cb"
       ]
     },
@@ -34236,7 +37241,6 @@
         69,
         "identity:PH:4bb9b7b3db",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
         "identity:SH:1c5f9bbd98",
         "identity:SH:e26dbfc63a",
         "identity:XX:36405496d0",
@@ -34281,8 +37285,7 @@
         "identity:CCF1:2fc64f7a6d",
         "identity:SB:2d8b456279",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a",
         "identity:SH:1c5f9bbd98",
         "identity:SH:e26dbfc63a",
@@ -34371,7 +37374,6 @@
         82,
         "identity:GDP:3604a8a528",
         "identity:GDP:93f11320a1",
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e"
       ]
@@ -34492,7 +37494,14 @@
         "genr:XMFAZ:512d61c21a",
         "genr:XMFAZ:e99521beea",
         "genr:YDZ:27180f161b",
-        "genr:YDZ:f5b92ef61f"
+        "genr:YDZ:f5b92ef61f",
+        "lhs:1:CS:474d38ed3f",
+        "lhs:26:CUR:80330f8a08",
+        "lhs:27:IM:8afeb5590b",
+        "lhs:2:CN:763b4e42f3",
+        "lhs:3:CD:d80dcb7b80",
+        "lhs:4:IHH:0348513703",
+        "lhs:8:LM:cc9e787283"
       ]
     },
     "POP1": {
@@ -34530,7 +37539,7 @@
         "genr:L1Z:97922f0d0f",
         "genr:POPP:21fb4a1ebe",
         "identity:POP:7be8ebd0be",
-        "identity:POPP:bfea99b96e"
+        "lhs:5:L1:93a39e1f8d"
       ]
     },
     "POP2": {
@@ -34568,7 +37577,7 @@
         "genr:L2Z:67210adac1",
         "genr:POPP:21fb4a1ebe",
         "identity:POP:7be8ebd0be",
-        "identity:POPP:bfea99b96e"
+        "lhs:6:L2:882da31cab"
       ]
     },
     "POP3": {
@@ -34606,7 +37615,7 @@
         "genr:L3Z:b5257e5499",
         "genr:POPP:21fb4a1ebe",
         "identity:POP:7be8ebd0be",
-        "identity:POPP:bfea99b96e"
+        "lhs:7:L3:5af4433373"
       ]
     },
     "POPP": {
@@ -34619,10 +37628,7 @@
       "used_in_equations": [
         "genr:JHPOP:0215c60e16",
         "genr:LFPOP:8515780462",
-        "genr:YPOP:da84372c71",
-        "identity:JHPOP:043c32b100",
-        "identity:LFPOP:88e04ef115",
-        "identity:YPOP:420d073368"
+        "genr:YPOP:da84372c71"
       ]
     },
     "PROD": {
@@ -35663,6 +38669,7 @@
       ],
       "units": "percentage points",
       "used_in_equations": [
+        "eq:23:FSR:5b26a39f44",
         "genr:RB1:35b60bf5a4",
         "genr:RB1:dcbed07a66",
         "genr:RBA:b3a0935fc9",
@@ -35781,12 +38788,14 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:23:RBMRSL2:44c691ab75"
+      ]
     },
     "RBMRSL2": {
       "code": "RBMRSL2",
-      "defined_by_equation": "genr:RBMRSL2:d0f73ea4de",
-      "description": "Model series defined by GENR RBMRSL2: RB-RS(-2)",
+      "defined_by_equation": "eq:23:RBMRSL2:44c691ab75",
+      "description": "Model series defined by Eq 23: RBMRSL2 C RBLMRSL2 RSMRSL2 RSLMRSL2 RHO=1",
       "name": "RBMRSL2",
       "short_name": "RBMRSL2",
       "source_runs": [
@@ -35805,6 +38814,17 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
+      "used_in_equations": [
+        "lhs:23:RB:6be12bd76b"
+      ]
+    },
+    "RBMRSL2 C RBLMRSL2 RSMRSL2 RSLMRSL2 RHO": {
+      "code": "RBMRSL2 C RBLMRSL2 RSMRSL2 RSLMRSL2 RHO",
+      "defined_by_equation": "eq:23:RBMRSL2:44c691ab75",
+      "description": "Model series defined by Eq 23: RBMRSL2 C RBLMRSL2 RSMRSL2 RSLMRSL2 RHO=1",
+      "name": "RBMRSL2 C RBLMRSL2 RSMRSL2 RSLMRSL2 RHO",
+      "short_name": "RBMRSL2 C RBLMRSL2 RSMRSL2 RSLMRSL2 RHO",
+      "source_runs": [],
       "used_in_equations": []
     },
     "RB_": {
@@ -35912,6 +38932,27 @@
         "identity:SSP:2157dd7f48"
       ]
     },
+    "RHO": {
+      "code": "RHO",
+      "defined_by_equation": null,
+      "description": "Model variable exposed through the public dictionary.",
+      "name": "RHO",
+      "short_name": "RHO",
+      "source_runs": [],
+      "used_in_equations": [
+        "eq:10:LPF:00b8f4606e",
+        "eq:11:LY:7609bc2602",
+        "eq:12:LKK1:6293633ebb",
+        "eq:15:LHO:79c05c5d69",
+        "eq:1:LCSZ:af7424db0e",
+        "eq:23:RBMRSL2:44c691ab75",
+        "eq:27:LIMZ:7945aa18f0",
+        "eq:28:LUB:009bff7974",
+        "eq:29:INTGZ:0d5f5dce20",
+        "eq:2:LCNZ:c3f43d74a8",
+        "eq:4:LIHHZ:ecf089957e"
+      ]
+    },
     "RM": {
       "_provenance": {
         "table": "A.2"
@@ -35945,6 +38986,7 @@
       "units": "percentage points",
       "used_in_equations": [
         128,
+        "eq:24:FSR:b7d6d7661c",
         "genr:RMLMRSL2:d06fff5339",
         "genr:RMLMRSL2:deb866fed0",
         "genr:RMMRSL2:7104e7f20d",
@@ -35993,6 +39035,12 @@
         2,
         3,
         4,
+        "eq:2:FSR:0641625b36",
+        "eq:2:LCNZ:c3f43d74a8",
+        "eq:3:FSR:8dca97d17a",
+        "eq:3:LCDZ:e6a44ef775",
+        "eq:4:FSR:f1fd4577ff",
+        "eq:4:LIHHZ:ecf089957e",
         "genr:RMACDZ:791d2a4a0f",
         "genr:RMACDZ:d3cda7c2d0",
         "genr:RMALIHHZ:08940969aa",
@@ -36069,12 +39117,14 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:24:RMMRSL2:c429221d8d"
+      ]
     },
     "RMMRSL2": {
       "code": "RMMRSL2",
-      "defined_by_equation": "genr:RMMRSL2:7104e7f20d",
-      "description": "Model series defined by GENR RMMRSL2: RM-RS(-2)",
+      "defined_by_equation": "eq:24:RMMRSL2:c429221d8d",
+      "description": "Model series defined by Eq 24: RMMRSL2 C RMLMRSL2 RSMRSL2 RSLMRSL2",
       "name": "RMMRSL2",
       "short_name": "RMMRSL2",
       "source_runs": [
@@ -36093,7 +39143,9 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "lhs:24:RM:25c73750f8"
+      ]
     },
     "RM_": {
       "code": "RM_",
@@ -36140,11 +39192,9 @@
         68,
         69,
         115,
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
         "identity:YD:5abd299919",
         "identity:YD:7920517574",
         "identity:YT:137337217f",
@@ -36206,7 +39256,9 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:29:INTGZ:0d5f5dce20"
+      ]
     },
     "RS": {
       "_provenance": {
@@ -36239,6 +39291,10 @@
         23,
         24,
         127,
+        "eq:23:FSR:5b26a39f44",
+        "eq:24:FSR:b7d6d7661c",
+        "eq:30:FSR:acb2f293e6",
+        "eq:30:RS:cb885cd126",
         "genr:RBLMRSL2:0afb6d480e",
         "genr:RBLMRSL2:75bb776346",
         "genr:RBMRSL2:80b368d08f",
@@ -36257,7 +39313,10 @@
         "genr:RSLMRSL2:d991f948d4",
         "genr:RSMRSL2:861a589c39",
         "genr:RSMRSL2:aa95470685",
-        "identity:RSA:d2b632d4b3"
+        "identity:RSA:d2b632d4b3",
+        "lhs:23:RB:6be12bd76b",
+        "lhs:24:RM:25c73750f8",
+        "lhs:30:RS:69251eaa97"
       ]
     },
     "RS1": {
@@ -36282,7 +39341,12 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:30:FSR:084152c76f",
+        "eq:30:FSR:acb2f293e6",
+        "eq:30:RS:cb885cd126",
+        "eq:30:RSX:5c9aa8b775"
+      ]
     },
     "RSA": {
       "_provenance": {
@@ -36314,7 +39378,11 @@
       "units": "percentage points",
       "used_in_equations": [
         1,
-        26
+        26,
+        "eq:1:FSR:290a7aef0a",
+        "eq:1:LCSZ:af7424db0e",
+        "eq:26:FSR:f420e3c987",
+        "eq:26:LCURZ:cfdb635928"
       ]
     },
     "RSB": {
@@ -36339,7 +39407,10 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:17:FSR:c01dd7d022",
+        "eq:17:LMFZ:cae1071098"
+      ]
     },
     "RSLMRSL2": {
       "code": "RSLMRSL2",
@@ -36363,7 +39434,10 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:23:RBMRSL2:44c691ab75",
+        "eq:24:RMMRSL2:c429221d8d"
+      ]
     },
     "RSMRSL2": {
       "code": "RSMRSL2",
@@ -36387,7 +39461,24 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:23:RBMRSL2:44c691ab75",
+        "eq:24:RMMRSL2:c429221d8d"
+      ]
+    },
+    "RSX": {
+      "code": "RSX",
+      "defined_by_equation": "create:RSX:b75712b973",
+      "description": "Model series defined by CREATE RSX: 0",
+      "name": "RSX",
+      "short_name": "RSX",
+      "source_runs": [],
+      "used_in_equations": [
+        "eq:30:FSR:084152c76f",
+        "eq:30:RSX:5c9aa8b775",
+        "identity:RS:18b2abc081",
+        "lhs:30:RSX:99ccc1d585"
+      ]
     },
     "RS_": {
       "code": "RS_",
@@ -36718,12 +39809,10 @@
         69,
         76,
         103,
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a",
         "identity:SIG:0e55cbce79"
       ]
@@ -36762,11 +39851,9 @@
         69,
         78,
         109,
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
         "identity:SIS:7f8e15d785",
         "identity:SS:1791370a9b",
         "identity:SS:481383485d"
@@ -36805,8 +39892,7 @@
       ],
       "used_in_equations": [
         105,
-        "identity:RECG:2cee7e5fcf",
-        "identity:RECG:342c83988b"
+        "identity:RECG:2cee7e5fcf"
       ]
     },
     "SIGG": {
@@ -36842,7 +39928,7 @@
         76,
         103,
         115,
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a",
         "identity:SIG:0e55cbce79",
         "identity:WA:e7d25823ec",
@@ -36899,7 +39985,7 @@
         76,
         103,
         115,
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a",
         "identity:SH:1c5f9bbd98",
         "identity:SH:e26dbfc63a",
@@ -37260,11 +40346,9 @@
         68,
         69,
         80,
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
         "identity:TESTZERO:d080b66538",
         "identity:TESTZERO:fbf7a5bc9a"
       ]
@@ -37339,12 +40423,10 @@
         106,
         "identity:EXPG:4646cff167",
         "identity:EXPG:6a81c263c3",
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a"
       ]
     },
@@ -37387,11 +40469,9 @@
         113,
         "identity:EXPS:01814dc77a",
         "identity:EXPS:7a924cfc8c",
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
         "identity:SS:1791370a9b",
         "identity:SS:481383485d"
       ]
@@ -37528,12 +40608,10 @@
         76,
         102,
         134,
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a",
         "identity:TCG:fddcfbdbd1"
       ]
@@ -37600,7 +40678,9 @@
         "ineq-transfer-composite-large"
       ],
       "used_in_equations": [
-        6
+        6,
+        "eq:6:FSR:8953fe90d0",
+        "eq:6:LL2Z:ac4f5ced2d"
       ]
     },
     "TBS": {
@@ -37635,11 +40715,9 @@
       "used_in_equations": [
         78,
         108,
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
         "identity:SS:1791370a9b",
         "identity:SS:481383485d",
         "identity:TCS:a862eda818"
@@ -37679,8 +40757,7 @@
       "units": "B$",
       "used_in_equations": [
         105,
-        "identity:RECG:2cee7e5fcf",
-        "identity:RECG:342c83988b"
+        "identity:RECG:2cee7e5fcf"
       ]
     },
     "TCS": {
@@ -37771,8 +40848,7 @@
       "units": "B$",
       "used_in_equations": [
         69,
-        "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452"
+        "identity:SF:1d7769146a"
       ]
     },
     "TFG": {
@@ -37812,7 +40888,7 @@
         "genr:PIEFA:e03fe3ac83",
         "genr:TFGS:33e7cf86b3",
         "genr:TFGS:bf4ec9e957",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a",
         "identity:TCG:fddcfbdbd1",
         "identity:TF1:4e016018df"
@@ -38096,8 +41172,7 @@
         105,
         115,
         "identity:RECG:2cee7e5fcf",
-        "identity:RECG:342c83988b",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a",
         "identity:SH:1c5f9bbd98",
         "identity:SH:e26dbfc63a",
@@ -38188,14 +41263,11 @@
         69,
         76,
         105,
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:RECG:2cee7e5fcf",
-        "identity:RECG:342c83988b",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a"
       ]
     },
@@ -38233,11 +41305,9 @@
         68,
         69,
         115,
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
         "identity:YD:5abd299919",
         "identity:YD:7920517574",
         "identity:YT:137337217f",
@@ -38280,11 +41350,9 @@
         68,
         69,
         74,
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
         "identity:SR:7e6b7a56cf"
       ]
     },
@@ -38325,12 +41393,10 @@
         69,
         78,
         112,
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:RECS:8d04aed555",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
         "identity:SS:1791370a9b",
         "identity:SS:481383485d"
       ]
@@ -38392,7 +41458,7 @@
         "genr:TRGSZ:f3b95341f5",
         "identity:EXPG:4646cff167",
         "identity:EXPG:6a81c263c3",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a",
         "identity:SH:1c5f9bbd98",
         "identity:SH:e26dbfc63a",
@@ -38491,7 +41557,7 @@
         106,
         "identity:EXPG:4646cff167",
         "identity:EXPG:6a81c263c3",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a",
         "identity:SR:7e6b7a56cf"
       ]
@@ -38536,7 +41602,7 @@
         "identity:EXPG:4646cff167",
         "identity:EXPG:6a81c263c3",
         "identity:RECS:8d04aed555",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a",
         "identity:SS:1791370a9b",
         "identity:SS:481383485d"
@@ -38886,11 +41952,9 @@
         68,
         69,
         74,
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
         "identity:SR:7e6b7a56cf"
       ]
     },
@@ -38934,7 +41998,7 @@
       "category": "policy",
       "code": "UB",
       "construction": "UB",
-      "defined_by_equation": null,
+      "defined_by_equation": "lhs:28:UB:b67bc69f72",
       "description": "Stock Fair unemployment-benefit transfer flow used as the UI transmission channel in phase-1 runs.",
       "name": "UB",
       "short_name": "Unemployment Benefits",
@@ -38966,7 +42030,7 @@
         "identity:EXPG:4646cff167",
         "identity:EXPG:6a81c263c3",
         "identity:EXPS:01814dc77a",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a",
         "identity:SH:1c5f9bbd98",
         "identity:SH:e26dbfc63a",
@@ -38988,14 +42052,14 @@
     },
     "UBGH": {
       "code": "UBGH",
-      "defined_by_equation": "create:UBGH:b76aa2b8f0",
-      "description": "Model series defined by CREATE UBGH: 0.5",
+      "defined_by_equation": "create:UBGH:88242c4406",
+      "description": "Model series defined by CREATE UBGH: 1",
       "name": "UBGH",
       "short_name": "UBGH",
       "source_runs": [],
       "used_in_equations": [
         "identity:EXPG:4646cff167",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:UBSH:b2dba33490"
       ]
     },
@@ -39109,6 +42173,22 @@
         20,
         21,
         30,
+        "eq:10:FSR:93f3292d05",
+        "eq:16:FSR:2db1d57a77",
+        "eq:23:FSR:5b26a39f44",
+        "eq:24:FSR:b7d6d7661c",
+        "eq:30:FSR:084152c76f",
+        "eq:30:FSR:acb2f293e6",
+        "eq:30:RS:cb885cd126",
+        "eq:30:RSX:5c9aa8b775",
+        "eq:5:FSR:621ee7dd1e",
+        "eq:5:LL1Z:9582b61872",
+        "eq:6:FSR:8953fe90d0",
+        "eq:6:LL2Z:ac4f5ced2d",
+        "eq:7:FSR:da8f7d29af",
+        "eq:7:LL3Z:8fe3271c58",
+        "eq:8:FSR:26a054f0e9",
+        "eq:8:LLMZ:fbf0058c1c",
         "genr:ONEZUR:313ef7e9f1",
         "genr:ONEZUR:9b9c47c2c1",
         "genr:UR1:0c80db731b",
@@ -39141,7 +42221,12 @@
         "ineq-transfer-composite-medium",
         "ineq-transfer-composite-large"
       ],
-      "used_in_equations": []
+      "used_in_equations": [
+        "eq:30:FSR:084152c76f",
+        "eq:30:FSR:acb2f293e6",
+        "eq:30:RS:cb885cd126",
+        "eq:30:RSX:5c9aa8b775"
+      ]
     },
     "USOTHER": {
       "_provenance": {
@@ -39175,11 +42260,9 @@
         57,
         68,
         69,
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
         "identity:USROW:488665d9cb"
       ]
     },
@@ -39332,7 +42415,7 @@
       "category": "endogenous",
       "code": "WF",
       "construction": "WF=[COMPT-PROGZ-PROSZ-(SIT-SIGG-SISS)+PRI]/[(JT-JG-JS-JM)((JTH-JGH-JSH-JMH)/(JT-JG-JS-JM))*(1000/4)+5H0]",
-      "defined_by_equation": null,
+      "defined_by_equation": "lhs:16:WF:91f4bc91b3",
       "description": "Average hourly earnings excluding overtime of workers in f. (Includes supplements to wages and salaries except employer contributions for social insurance.)",
       "name": "WF",
       "short_name": "Firm Hourly Earnings",
@@ -39373,11 +42456,9 @@
         "genr:LWFQ:ce66762b52",
         "genr:PCWF:1035b105c5",
         "genr:PCWF:9e4c787319",
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
         "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452",
         "identity:SHRPIE:df496c8634",
         "identity:SIFG:cbd43d0012",
         "identity:SIHG:075ad2b654",
@@ -39432,7 +42513,7 @@
         "identity:GDP:93f11320a1",
         "identity:PUG:26176cad40",
         "identity:PUG:39ab232ca9",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a",
         "identity:WA:e7d25823ec",
         "identity:WH:38fce10e03",
@@ -39508,7 +42589,7 @@
         "identity:GDP:93f11320a1",
         "identity:PUG:26176cad40",
         "identity:PUG:39ab232ca9",
-        "identity:SG:55a5f7c4c2",
+        "identity:SG:0c9a012063",
         "identity:SG:621dac0f5a",
         "identity:WA:e7d25823ec",
         "identity:WH:38fce10e03",
@@ -39689,14 +42770,11 @@
         68,
         69,
         82,
-        "genr:LIBTZ:57706aa1b7",
         "identity:GDP:3604a8a528",
         "identity:GDP:93f11320a1",
-        "identity:PIEF:0add76ed4f",
         "identity:PIEF:3d33e76e5b",
         "identity:PIEF:694c6a730e",
-        "identity:SF:1d7769146a",
-        "identity:SF:6b4bd31452"
+        "identity:SF:1d7769146a"
       ]
     },
     "Y": {

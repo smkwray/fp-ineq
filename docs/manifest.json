@@ -540,7 +540,7 @@
   "forecast_window_end": "2029.4",
   "forecast_window_note": "Exported series are limited to the forecast window. The integrated distribution block seeds history through 2025.4 and solves these series endogenously from 2026.1 onward.",
   "forecast_window_start": "2026.1",
-  "generated_at": "2026-04-06T22:21:55.519909+00:00",
+  "generated_at": "2026-04-28T12:40:49.689684+00:00",
   "history_seeded_through": "2025.4",
   "included_family_ids": [
     "baseline",
@@ -570,7 +570,7 @@
       "run_id": "ineq-baseline-observed",
       "scenario_name": "ineq_distribution_baseline_observed",
       "summary": "Solved baseline path with integrated distribution outputs.",
-      "timestamp": "20260406_131416"
+      "timestamp": "20260406_222815"
     },
     {
       "data_path": "runs/ineq-ui-relief.json",
@@ -586,7 +586,7 @@
       "run_id": "ineq-ui-relief",
       "scenario_name": "ineq_distribution_ui_relief",
       "summary": "Shared modern branch; legacy split versus fp.exe. Solved matched UI ladder medium rung with integrated distribution outputs.",
-      "timestamp": "20260406_131426"
+      "timestamp": "20260406_222827"
     },
     {
       "data_path": "runs/ineq-ui-shock.json",
@@ -602,7 +602,7 @@
       "run_id": "ineq-ui-shock",
       "scenario_name": "ineq_distribution_ui_shock",
       "summary": "Shared modern branch; legacy split versus fp.exe. Solved UI transfer-channel probe with integrated distribution outputs.",
-      "timestamp": "20260406_131436"
+      "timestamp": "20260406_222838"
     },
     {
       "data_path": "runs/ineq-ui-small.json",
@@ -618,7 +618,7 @@
       "run_id": "ineq-ui-small",
       "scenario_name": "ineq_distribution_ui_small",
       "summary": "Shared modern branch; legacy split versus fp.exe. Solved matched UI ladder rung with integrated distribution outputs.",
-      "timestamp": "20260406_131446"
+      "timestamp": "20260406_222848"
     },
     {
       "data_path": "runs/ineq-ui-large.json",
@@ -634,7 +634,7 @@
       "run_id": "ineq-ui-large",
       "scenario_name": "ineq_distribution_ui_large",
       "summary": "Shared modern branch; legacy split versus fp.exe. Solved matched UI ladder rung with integrated distribution outputs.",
-      "timestamp": "20260406_131456"
+      "timestamp": "20260406_222858"
     },
     {
       "data_path": "runs/ineq-federal-transfer-relief.json",
@@ -650,7 +650,7 @@
       "run_id": "ineq-federal-transfer-relief",
       "scenario_name": "ineq_distribution_federal_transfer_relief",
       "summary": "Solved broad federal household-transfer probe with integrated distribution outputs.",
-      "timestamp": "20260406_131506"
+      "timestamp": "20260406_222908"
     },
     {
       "data_path": "runs/ineq-federal-transfer-shock.json",
@@ -666,7 +666,7 @@
       "run_id": "ineq-federal-transfer-shock",
       "scenario_name": "ineq_distribution_federal_transfer_shock",
       "summary": "Solved broad federal household-transfer probe with integrated distribution outputs.",
-      "timestamp": "20260406_131516"
+      "timestamp": "20260406_222918"
     },
     {
       "data_path": "runs/ineq-state-local-transfer-relief.json",
@@ -682,7 +682,7 @@
       "run_id": "ineq-state-local-transfer-relief",
       "scenario_name": "ineq_distribution_state_local_transfer_relief",
       "summary": "Solved state/local household-transfer probe with integrated distribution outputs.",
-      "timestamp": "20260406_131526"
+      "timestamp": "20260406_222927"
     },
     {
       "data_path": "runs/ineq-state-local-transfer-shock.json",
@@ -698,7 +698,7 @@
       "run_id": "ineq-state-local-transfer-shock",
       "scenario_name": "ineq_distribution_state_local_transfer_shock",
       "summary": "Solved state/local household-transfer probe with integrated distribution outputs.",
-      "timestamp": "20260406_131536"
+      "timestamp": "20260406_222937"
     },
     {
       "data_path": "runs/ineq-transfer-package-relief.json",
@@ -714,7 +714,7 @@
       "run_id": "ineq-transfer-package-relief",
       "scenario_name": "ineq_distribution_transfer_package_relief",
       "summary": "Shared modern branch; legacy split versus fp.exe. Solved combined transfer-channel probe with integrated distribution outputs.",
-      "timestamp": "20260406_131546"
+      "timestamp": "20260406_222947"
     },
     {
       "data_path": "runs/ineq-transfer-package-shock.json",
@@ -730,7 +730,7 @@
       "run_id": "ineq-transfer-package-shock",
       "scenario_name": "ineq_distribution_transfer_package_shock",
       "summary": "Shared modern branch; legacy split versus fp.exe. Solved combined transfer-channel probe with integrated distribution outputs.",
-      "timestamp": "20260406_131556"
+      "timestamp": "20260406_222957"
     },
     {
       "data_path": "runs/ineq-transfer-composite-small.json",
@@ -746,7 +746,7 @@
       "run_id": "ineq-transfer-composite-small",
       "scenario_name": "ineq_distribution_transfer_composite_small",
       "summary": "Shared modern branch; legacy split versus fp.exe. Repaired transfer-composite small package with matched levers and financing shares.",
-      "timestamp": "20260406_131606"
+      "timestamp": "20260406_223007"
     },
     {
       "data_path": "runs/ineq-transfer-composite-medium.json",
@@ -762,7 +762,7 @@
       "run_id": "ineq-transfer-composite-medium",
       "scenario_name": "ineq_distribution_transfer_composite_medium",
       "summary": "Shared modern branch; legacy split versus fp.exe. Repaired transfer-composite medium package with matched levers and financing shares.",
-      "timestamp": "20260406_131616"
+      "timestamp": "20260406_223017"
     },
     {
       "data_path": "runs/ineq-transfer-composite-large.json",
@@ -778,7 +778,7 @@
       "run_id": "ineq-transfer-composite-large",
       "scenario_name": "ineq_distribution_transfer_composite_large",
       "summary": "Shared modern branch; legacy split versus fp.exe. Repaired transfer-composite large package with matched levers and financing shares.",
-      "timestamp": "20260406_131626"
+      "timestamp": "20260406_223027"
     }
   ],
   "schema_version": 1,
