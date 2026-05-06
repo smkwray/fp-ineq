@@ -54,7 +54,7 @@ A shared baseline is valid only when the baseline already contains the same inst
 
 For the published transfer family, that means:
 
-- `UIFAC`, `SNAPDELTAQ`, and `SSFAC` are present in the baseline with neutral settings
+- `UIFAC`, `SNAPDELT`, and `SSFAC` are present in the baseline with neutral settings
 - the same stock patch manifest is applied in the baseline and in every shocked run
 - the same distribution identity block is installed in the baseline and in every shocked run
 
